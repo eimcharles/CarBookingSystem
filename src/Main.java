@@ -6,6 +6,7 @@
 *      TODO: Implement Driver Class
 * */
 
+import Booking.BookingDAO;
 import Car.Car;
 import Car.CarDAO;
 import Car.CarService;
@@ -20,10 +21,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        CarDAO carDAO = new CarDAO();
-        CarService carService = new CarService(carDAO);
+        BookingDAO bookingDAO = new BookingDAO();
 
-        System.out.println(Arrays.toString(carService.getElectricCars()));
+        // Empty array with no bookings
+        System.out.println(Arrays.toString(BookingDAO.getBookingsDao()));
 
     }
 }
