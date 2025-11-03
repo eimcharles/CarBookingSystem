@@ -5,12 +5,14 @@ This is a **Car Booking system** designed for a car company admin.
 
 This project focuses on core Java OOP concepts and introduces advanced tools or frameworks through iterative development.
 
+Each constraint was part of a structured learning framework designed to reinforce core Java principles and promote the development of robust, maintainable systems.
+
 ---
 
 ## Requirements & Constraints
 
-- ✅ Uses **arrays** for storing data (lists and other features below will be introduced through iterative development)
-- ✅ Uses **dependency injection**  
+- ✅ Uses **arrays** for storing data 
+- ✅ Uses **dependency injection**
 - 🚫 **No interfaces**  
 - 🚫 **No streams**  
 - 🚫 **No Maven**  
