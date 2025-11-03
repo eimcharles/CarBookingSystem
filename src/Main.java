@@ -23,16 +23,7 @@ public class Main {
         CarDAO carDAO = new CarDAO();
         CarService carService = new CarService(carDAO);
 
-        // Getting a car by registration number
-        Car testCar = carService.getCarsByIdFromDAO("1231");
-        System.out.println(testCar);
-
-        UserDAO userDAO = new UserDAO();
-        UserService userService = new UserService(userDAO);
-
-        User testUser1 = userService.getUsersByIdFromDAO(UUID.fromString("1234"));
-        System.out.println(testUser1);
-
+        System.out.println(Arrays.toString(carService.getElectricCars()));
 
     }
 }
