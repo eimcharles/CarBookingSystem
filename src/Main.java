@@ -1,5 +1,5 @@
 
-/*
+/**
 *      Driver class for Car Booking System CLI
 *
 *      TODO: Write comment for driver class

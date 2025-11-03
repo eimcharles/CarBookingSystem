@@ -1,6 +1,6 @@
 package Booking;
 
-/*
+/**
  *      Domain class for Booking Object
  * */
 

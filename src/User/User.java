@@ -1,6 +1,6 @@
 package User;
 
-/*
+/**
  *      Domain class for User Object
  * */
 
