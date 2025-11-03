@@ -1,7 +1,7 @@
-# Car Booking System (CLI)
+# Car Booking System
 
 ## Overview
-This is a simple **Car Booking Command-Line Interface (CLI) system** designed for a car company admin.  
+This is a **Car Booking system** designed for a car company admin.  
 
 This project focuses on core Java OOP concepts and introduces advanced tools or frameworks through iterative development.
 
