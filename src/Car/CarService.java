@@ -30,6 +30,7 @@ public class CarService {
 
         int electricCarCount = 0;
 
+        // Get all cars
         Car[] cars = getCarsDAO();
 
         // If cars is null or empty, return empty array
@@ -37,28 +38,28 @@ public class CarService {
             return new Car[0];
         }
 
-        // Counts electric cars
+        // Count the electric cars in cars array
         for (Car car : cars) {
             if (car.isElectric()){
                 electricCarCount++;
             }
         }
 
-        // If no electric cars found, return empty array
+        // If no electric cars are found, return empty array
         if (electricCarCount == 0){
             return new Car[0];
         }
 
-        // Holds the number of electric cars
+        // Create a new array with the electricCarCount for size
         Car[] electricCars = new Car[electricCarCount];
 
         // Avoids null gaps, skipped slots
         int index = 0;
 
-        // Copies all electric from carsDAO
+        // Look through all the cars
         for (int i = 0; i < cars.length; i++) {
 
-            // Only increments if isElectric
+            // if the car at an index isElectric, add it to electricCars and move to the next index
             if (cars[i].isElectric()){
                 electricCars[index++] = cars[i];
 
