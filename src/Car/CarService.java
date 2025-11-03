@@ -33,7 +33,7 @@ public class CarService {
         Car[] cars = getCarsDAO();
 
         // If cars is null or empty, return empty array
-        if (cars != null && cars.length == 0){
+        if (cars == null && cars.length == 0){
             return new Car[0];
         }
 

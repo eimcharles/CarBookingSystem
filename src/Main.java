@@ -21,10 +21,5 @@ public class Main {
 
     public static void main(String[] args) {
 
-        BookingDAO bookingDAO = new BookingDAO();
-
-        // Empty array with no bookings
-        System.out.println(Arrays.toString(BookingDAO.getBookingsDao()));
-
     }
 }
