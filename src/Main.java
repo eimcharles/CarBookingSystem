@@ -6,21 +6,23 @@
 *      TODO: Implement Driver Class
 * */
 
-import User.User;
+import Car.Car;
 
-import java.util.UUID;
+import java.math.BigDecimal;
+import Car.Brand;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        User testUser1 = new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "Charles", "Eimer");
-        User testUser2 = new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "Charles", "Eimer");
-        User testUser3 = new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Larry", "Eimer");
+        Car testCar1 = new Car("1234", new BigDecimal("89.00"), Brand.BMW, false);
+        Car testCar2 = new Car("1234", new BigDecimal("89.00"), Brand.BMW, true);
+        Car testCar3 = new Car("1235", new BigDecimal("79.00"), Brand.BMW, true);
 
-        System.out.println(testUser1);
-        System.out.println(testUser1.equals(testUser2));
-        System.out.println(testUser1.equals(testUser3));
+        System.out.println(testCar1);
+        System.out.println(testCar2);
+        System.out.println(testCar1.equals(testCar2));
+        System.out.println(testCar1.equals(testCar3));
 
     }
 }
