@@ -10,7 +10,7 @@ This project focuses on core Java OOP concepts and avoids advanced tools or fram
 
 ## Requirements & Constraints
 
-- ✅ Uses **arrays** for storing data (lists will be introduced later)  
+- ✅ Uses **arrays** for storing data (lists and other features below will be introduced through iterative development)
 - 🚫 **No dependency injection**  
 - 🚫 **No interfaces**  
 - 🚫 **No streams**  
