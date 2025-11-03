@@ -21,13 +21,13 @@ public class CarService {
         return CarDAO.getCarDAO();
     }
 
-    public Car getCarsByIdFromDAO(String registrationNumber){
+    public Car getCarsByIdFromDAO(String registrationNumber) {
         for (Car car: getCarDAO()){
             if (car.getRegistrationNumber().equals(registrationNumber)){
                 return car;
             }
         }
-        return null;
+        throw new IllegalStateException(String.format("Car with registration number %s not found", registrationNumber));
     }
 
 }

@@ -9,8 +9,12 @@
 import Car.Car;
 import Car.CarDAO;
 import Car.CarService;
+import User.User;
+import User.UserDAO;
+import User.UserService;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 public class Main {
 
@@ -20,11 +24,15 @@ public class Main {
         CarService carService = new CarService(carDAO);
 
         // Getting a car by registration number
-        Car testCar = carService.getCarsByIdFromDAO("123_1");
+        Car testCar = carService.getCarsByIdFromDAO("1231");
         System.out.println(testCar);
 
-        // Getting the list of cars in DAO
-        System.out.println(Arrays.toString(carService.getCarDAO()));
+        UserDAO userDAO = new UserDAO();
+        UserService userService = new UserService(userDAO);
+
+        User testUser1 = userService.getUsersByIdFromDAO(UUID.fromString("1234"));
+        System.out.println(testUser1);
+
 
     }
 }

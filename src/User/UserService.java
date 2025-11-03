@@ -19,12 +19,12 @@ public class UserService {
         return UserDAO.getUserDAO();
     }
 
-    public User getUsersByIdFromDAO(UUID id){
+    public User getUsersByIdFromDAO(UUID id) {
         for (User user: getUserDAO()){
             if (user.getUserId().equals(id)){
                 return user;
             }
         }
-        return null;
+        throw new IllegalStateException(String.format("User with id %s not found", id));
     }
 }
