@@ -15,12 +15,12 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public User[] getUserDAO() {
+    public User[] getUsersDAO() {
         return UserDAO.getUserDAO();
     }
 
     public User getUsersByIdFromDAO(UUID id) {
-        for (User user: getUserDAO()){
+        for (User user: getUsersDAO()){
             if (user.getUserId().equals(id)){
                 return user;
             }

@@ -1,9 +1,5 @@
 package Car;
 
-import User.User;
-
-import java.util.UUID;
-
 /**
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
@@ -17,12 +13,12 @@ public class CarService {
         this.carDAO = carDAO;
     }
 
-    public Car[] getCarDAO() {
+    public Car[] getCarsDAO() {
         return CarDAO.getCarDAO();
     }
 
     public Car getCarsByIdFromDAO(String registrationNumber) {
-        for (Car car: getCarDAO()){
+        for (Car car: getCarsDAO()){
             if (car.getRegistrationNumber().equals(registrationNumber)){
                 return car;
             }
