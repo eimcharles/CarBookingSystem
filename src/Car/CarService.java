@@ -53,7 +53,7 @@ public class CarService {
         // Create a new array with the electricCarCount for size
         Car[] electricCars = new Car[electricCarCount];
 
-        // Avoids null gaps, skipped slots
+        // Avoids null gaps, skipped indexes
         int index = 0;
 
         // Look through all the cars
