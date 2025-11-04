@@ -21,8 +21,6 @@ Each constraint was part of a structured learning framework designed to reinforc
 ---
 
 ### Features
-- Add users
-- Add cars
 - Book a car for a user
 - View all bookings
 - View all user booked Cars
