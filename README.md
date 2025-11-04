@@ -12,7 +12,7 @@ Each constraint was part of a structured learning framework designed to reinforc
 ## Requirements & Iteration Constraints
 
 ✅ **Requirements** — implemented and completed features in the current release.<br>
-🚫 **Constraints** — features intentionally left for future iterations to reinforce learning object
+🚫 **Constraints** — features intentionally left for future iterations to reinforce learning objectives
 
 #### Release 1: 
 - ✅ Uses **arrays** for storing data 
