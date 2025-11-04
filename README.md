@@ -26,10 +26,14 @@ Each constraint was part of a structured learning framework designed to reinforc
 > I would like to have a system to **book cars** and **view users**.
 
 ### Features
-- Add and view users  
-- Add and view available cars  
-- Book a car for a user  
-- View all bookings  
+- Add users
+- Add cars
+- Book a car for a user
+- View all bookings
+- View all user booked Cars
+- View all users  
+- View all available cars
+- View all available electric cars  
 
 ---
 
