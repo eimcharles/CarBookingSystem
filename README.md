@@ -10,7 +10,6 @@ Each constraint was part of a structured learning framework designed to reinforc
 ---
 
 ## Requirements & Constraints
-
 - ✅ Uses **arrays** for storing data 
 - ✅ Uses **dependency injection**
 - 🚫 **No interfaces**  
@@ -20,10 +19,6 @@ Each constraint was part of a structured learning framework designed to reinforc
 - 🚫 **No Spring Boot**
 
 ---
-
-**User Story:**  
-> As an admin for a car company,  
-> I would like to have a system to **book cars** and **view users**.
 
 ### Features
 - Add users
