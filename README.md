@@ -9,18 +9,26 @@ Each constraint was part of a structured learning framework designed to reinforc
 
 ---
 
-## Requirements & Constraints
+## Requirements & Iteration Constraints
+
+✅ **Requirements** — implemented and completed features in the current release.<br>
+🚫 **Constraints** — features intentionally left for future iterations to reinforce learning object
+
+#### Release 1: 
 - ✅ Uses **arrays** for storing data 
 - ✅ Uses **dependency injection**
-- 🚫 **No interfaces**  
-- 🚫 **No streams**  
-- 🚫 **No Maven**  
-- 🚫 **No unit testing**  
-- 🚫 **No Spring Boot**
-
+- 🚫 **Implement interfaces , Abstraction or Polymorphism**  
+#### Release 2: 
+- 🚫 **Implement streams**  
+- 🚫 **Implement Maven**
+#### Release 3:   
+- 🚫 **Implement unit testing**  
+- 🚫 **Implement Spring Boot Server**
+#### Release 4: 
+- 🚫 **Implement Angular Client**
 ---
 
-### Features
+### Features in Development
 - Book a car for a user
 - View all bookings
 - View all user booked Cars
@@ -28,6 +36,10 @@ Each constraint was part of a structured learning framework designed to reinforc
 - View all available cars
 - View all available electric cars  
 
+---
+
+### Future iterations / Learning Goals 
+- Iteration-Based Learning: Each release introduces new tools or techniques while reinforcing core Java principles from previous iterations.
 ---
 
 ## How to Run
