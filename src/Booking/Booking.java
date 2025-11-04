@@ -7,7 +7,6 @@ package Booking;
 import Car.Car;
 import User.User;
 
-import java.awt.print.Book;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -29,6 +28,7 @@ public class Booking {
         this.isBookingCancelled = isBookingCancelled;
     }
 
+    // For Active Bookings
     public Booking(UUID userBookingID, User user, Car car, LocalDateTime bookingTime){
         this(userBookingID ,user, car, bookingTime, false);
     }
