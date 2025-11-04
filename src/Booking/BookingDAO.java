@@ -13,7 +13,7 @@ public class BookingDAO {
 
     static {
 
-        // Maximum bookings available
+        // Maximum available bookings
         bookingsDao = new Booking[10];
 
     }
