@@ -1,5 +1,6 @@
 package User;
 
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 /**
@@ -15,16 +16,16 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public User[] getUsersDAO() {
-        return UserDAO.getUserDAO();
+    public User[] getAllUsers() {
+        return this.userDAO.getUserDAO();
     }
 
-    public User getUsersByIdFromDAO(UUID id) {
-        for (User user: getUsersDAO()){
+    public User getUsersById(UUID id) {
+        for (User user: getAllUsers()){
             if (user.getUserId().equals(id)){
                 return user;
             }
         }
-        throw new IllegalStateException(String.format("User with id %s not found", id));
+        throw new NoSuchElementException(String.format("User with id %s not found", id));
     }
 }
