@@ -1,6 +1,7 @@
 package Car;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 /**
  *      Data Access Object (DAO) class for managing Car objects.
@@ -25,7 +26,7 @@ public class CarDAO {
     }
 
     public static Car[] getCarsFromDAO() {
-        return carDAO;
+        return Arrays.copyOf(carDAO, carDAO.length);
     }
 
 }

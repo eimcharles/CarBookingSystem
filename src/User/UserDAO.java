@@ -1,5 +1,6 @@
 package User;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -22,6 +23,6 @@ public class UserDAO {
     }
 
     public static User[] getUserDAO() {
-        return userDAO;
+        return Arrays.copyOf(userDAO, userDAO.length);
     }
 }
