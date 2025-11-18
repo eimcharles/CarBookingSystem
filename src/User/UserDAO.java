@@ -23,6 +23,7 @@ public class UserDAO {
     }
 
     public static User[] getUserDAO() {
+        // Copy of User objects returned from userDAO
         return Arrays.copyOf(userDAO, userDAO.length);
     }
 }

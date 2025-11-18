@@ -15,10 +15,6 @@ public class CarService {
         this.carDAO = carDAO;
     }
 
-    public Car[] getAllCars() {
-        return this.carDAO.getCarsFromDAO();
-    }
-
     public Car getCarByRegistrationNumber(String registrationNumber) {
         for (Car car: getAllCars()){
             if (car.getRegistrationNumber().equals(registrationNumber)){
@@ -67,6 +63,11 @@ public class CarService {
         }
 
         return filteredCars;
+    }
+
+    public Car[] getAllCars() {
+        // Passing the copy of Car objects returned from DAO layer
+        return this.carDAO.getCarsFromDAO();
     }
 
     public Car[] getElectricCars() {

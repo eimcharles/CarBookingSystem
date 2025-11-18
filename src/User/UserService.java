@@ -18,9 +18,8 @@ public class UserService {
     }
 
     public User[] getAllUsers() {
-        // Users returned from DAO layer
-        User[] daoResult = this.userDAO.getUserDAO();
-        return Arrays.copyOf(daoResult, daoResult.length);
+        // Passing the copy of User objects returned from DAO layer
+        return this.userDAO.getUserDAO();
     }
 
     public User getUsersById(UUID id) {

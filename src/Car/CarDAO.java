@@ -26,6 +26,7 @@ public class CarDAO {
     }
 
     public static Car[] getCarsFromDAO() {
+        // Copy of Car objects returned from carDAO
         return Arrays.copyOf(carDAO, carDAO.length);
     }
 
