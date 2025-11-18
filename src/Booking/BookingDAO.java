@@ -41,6 +41,7 @@ public class BookingDAO {
     }
 
     public static Booking[] getBookingDao() {
+        // Copy of bookingsDao returned from BookingDAO
         return Arrays.copyOf(bookingsDao, bookingsDao.length);
     }
 
