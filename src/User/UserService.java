@@ -1,5 +1,6 @@
 package User;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -17,7 +18,9 @@ public class UserService {
     }
 
     public User[] getAllUsers() {
-        return this.userDAO.getUserDAO();
+        // Users returned from DAO layer
+        User[] daoResult = this.userDAO.getUserDAO();
+        return Arrays.copyOf(daoResult, daoResult.length);
     }
 
     public User getUsersById(UUID id) {
