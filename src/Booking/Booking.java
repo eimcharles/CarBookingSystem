@@ -13,79 +13,58 @@ import java.util.UUID;
 
 public class Booking {
 
-    private UUID userBookingID;
-    private User user;
-    private Car car;
-    private LocalDateTime bookingTime;
-
+    private final UUID userBookingID;
+    private final User user;
+    private final Car car;
+    private final LocalDateTime bookingTime;
     private boolean isBookingCancelled;
 
-    public Booking(UUID userBookingID, User user, Car car, LocalDateTime bookingTime, boolean isBookingCancelled) {
+    public Booking(UUID userBookingID, User user, Car car, LocalDateTime bookingTime) {
         this.userBookingID = userBookingID;
         this.user = user;
         this.car = car;
         this.bookingTime = bookingTime;
-        this.isBookingCancelled = isBookingCancelled;
-    }
-
-    // For Active Bookings
-    public Booking(UUID userBookingID, User user, Car car, LocalDateTime bookingTime){
-        this(userBookingID ,user, car, bookingTime, false);
+        this.isBookingCancelled = false;
     }
 
     public UUID getUserBookingID() {
         return userBookingID;
     }
 
-    public void setUserBookingID(UUID userBookingID) {
-        this.userBookingID = userBookingID;
-    }
-
     public User getUser() {
         return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Car getCar() {
         return car;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
     public LocalDateTime getBookingTime() {
         return bookingTime;
-    }
-
-    public void setBookingTime(LocalDateTime bookingTime) {
-        this.bookingTime = bookingTime;
     }
 
     public boolean isBookingCancelled() {
         return isBookingCancelled;
     }
 
-    public void setBookingCancelled(boolean bookingCancelled) {
-        isBookingCancelled = bookingCancelled;
+    public void cancelBooking() {
+        this.isBookingCancelled = true;
     }
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return isBookingCancelled == booking.isBookingCancelled &&
-                Objects.equals(userBookingID, booking.userBookingID) &&
-                Objects.equals(user, booking.user) && Objects.equals(car, booking.car) &&
-                Objects.equals(bookingTime, booking.bookingTime);
+
+        // Compares the unique, immutable ID
+        return Objects.equals(userBookingID, booking.userBookingID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userBookingID, user, car, bookingTime, isBookingCancelled);
+        return Objects.hash(userBookingID);
     }
 
     @Override
