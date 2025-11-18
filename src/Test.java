@@ -1,11 +1,3 @@
-
-/**
-*      Driver class for Car Booking System CLI
-*
-*      TODO: Write comment for driver class
-*      TODO: Implement Driver Class
-* */
-
 import Booking.Booking;
 import Booking.BookingDAO;
 import Car.Car;
@@ -18,6 +10,10 @@ import User.UserDAO;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.UUID;
+
+/**
+ *      Test class for Car Booking System CLI
+ * */
 
 public class Test {
 

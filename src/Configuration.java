@@ -5,6 +5,18 @@ import Car.CarService;
 import User.UserDAO;
 import User.UserService;
 
+/**
+ *      The Configuration class is a factory class
+ *      responsible for initializing and wiring all
+ *      application services (Dependency Injection).
+ *
+ *      It instantiates the Data Access Objects (DAOs)
+ *      and injects them into their corresponding
+ *      Service layer components, providing a central
+ *      source of configured services to the application entry point.
+ *
+ * */
+
 public class Configuration {
 
     // Final Attributes to hold the instantiated and wired services
