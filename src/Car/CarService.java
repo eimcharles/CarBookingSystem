@@ -1,5 +1,7 @@
 package Car;
 
+import java.util.NoSuchElementException;
+
 /**
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
@@ -17,13 +19,13 @@ public class CarService {
         return this.carDAO.getCarsFromDAO();
     }
 
-    public Car getCarsById(String registrationNumber) {
+    public Car getCarByRegistrationNumber(String registrationNumber) {
         for (Car car: getAllCars()){
             if (car.getRegistrationNumber().equals(registrationNumber)){
                 return car;
             }
         }
-        throw new IllegalStateException(String.format("Car with registration number %s not found", registrationNumber));
+        throw new NoSuchElementException(String.format("Car with registration number %s not found", registrationNumber));
     }
 
     public Car[] getCarsByFuelType(FuelType fuelType){
