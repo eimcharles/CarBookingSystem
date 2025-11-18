@@ -12,14 +12,13 @@ public class Car {
     private String registrationNumber;
     private BigDecimal rentalPricePerDay;
     private Brand manufacturer;
+    private FuelType fuelType;
 
-    private boolean isElectric;
-
-    public Car(String registrationNumber, BigDecimal rentalPricePerDay, Brand manufacturer, boolean isElectric) {
+    public Car(String registrationNumber, BigDecimal rentalPricePerDay, Brand manufacturer, FuelType fuelType) {
         this.registrationNumber = registrationNumber;
         this.rentalPricePerDay = rentalPricePerDay;
         this.manufacturer = manufacturer;
-        this.isElectric = isElectric;
+        this.fuelType = fuelType;
     }
 
     public String getRegistrationNumber() {
@@ -46,31 +45,36 @@ public class Car {
         this.manufacturer = manufacturer;
     }
 
-    public boolean isElectric() {
-        return isElectric;
+    public FuelType getFuelType() {
+        return fuelType;
     }
 
-    public void setElectric(boolean electric) {
-        isElectric = electric;
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
     }
+
+    public boolean isElectric() { return this.fuelType == FuelType.ELECTRIC; }
+
+    public boolean isGasoline() { return this.fuelType == FuelType.GASOLINE; }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return isElectric == car.isElectric &&
+        return fuelType == car.fuelType &&
                 Objects.equals(registrationNumber, car.registrationNumber) &&
                 Objects.equals(rentalPricePerDay, car.rentalPricePerDay) && manufacturer == car.manufacturer;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNumber, rentalPricePerDay, manufacturer, isElectric);
+        return Objects.hash(registrationNumber, rentalPricePerDay, manufacturer, fuelType);
     }
 
     @Override
     public String toString() {
-        return "Car { registrationNumber = '%s' , rentalPricePerDay = %s , manufacturer = %s, isElectric = %s }".formatted(registrationNumber, rentalPricePerDay, manufacturer, isElectric);
+        return "Car { registrationNumber = '%s' , rentalPricePerDay = %s , manufacturer = %s, fuelType = %s }".formatted(registrationNumber, rentalPricePerDay, manufacturer, fuelType);
     }
 }

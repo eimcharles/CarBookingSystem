@@ -13,12 +13,12 @@ public class CarService {
         this.carDAO = carDAO;
     }
 
-    public Car[] getCarsDAO() {
-        return CarDAO.getCarDAO();
+    public Car[] getAllCars() {
+        return this.carDAO.getCarsFromDAO();
     }
 
-    public Car getCarsByIdFromDAO(String registrationNumber) {
-        for (Car car: getCarsDAO()){
+    public Car getCarsById(String registrationNumber) {
+        for (Car car: getAllCars()){
             if (car.getRegistrationNumber().equals(registrationNumber)){
                 return car;
             }
@@ -26,47 +26,53 @@ public class CarService {
         throw new IllegalStateException(String.format("Car with registration number %s not found", registrationNumber));
     }
 
-    public Car[] getElectricCars(){
+    public Car[] getCarsByFuelType(FuelType fuelType){
 
-        int electricCarCount = 0;
+        int carCount = 0;
 
         // Get all cars
-        Car[] cars = getCarsDAO();
+        Car[] cars = getAllCars();
 
         // If cars is null or empty, return empty array
         if (cars == null || cars.length == 0){
             return new Car[0];
         }
 
-        // Count the electric cars in cars array
+        // Count the cars based on fuel type in cars array
         for (Car car : cars) {
-            if (car.isElectric()){
-                electricCarCount++;
+            if (car.getFuelType() == fuelType){
+                carCount++;
             }
         }
 
-        // If no electric cars are found, return empty array
-        if (electricCarCount == 0){
-            return new Car[0];
-        }
+        // Create a new array with the carCount for size
+        Car[] filteredCars = new Car[carCount];
 
-        // Create a new array with the electricCarCount for size
-        Car[] electricCars = new Car[electricCarCount];
-
-        // Avoids null gaps, skipped indexes
+        // Index for the new array, avoids null gaps,
         int index = 0;
 
         // Look through all the cars
         for (int i = 0; i < cars.length; i++) {
 
-            // if the car at an index isElectric, add it to electricCars and move to the next index
-            if (cars[i].isElectric()){
-                electricCars[index++] = cars[i];
+            // Use the car at the current index of the source array
+            Car currentCar = cars[i];
+
+            // if the car at an index matches the passed fuelType, add it to filteredCars
+            if (currentCar.getFuelType() == fuelType){
+                filteredCars[index++] = currentCar;
 
             }
         }
 
-        return electricCars;
+        return filteredCars;
+    }
+
+    public Car[] getElectricCars() {
+        return getCarsByFuelType(FuelType.ELECTRIC);
+    }
+
+    public Car[] getGasolineCars() {
+        return getCarsByFuelType(FuelType.GASOLINE);
     }
 
 }
