@@ -1,5 +1,6 @@
 import Booking.Booking;
 import Booking.BookingDAO;
+import Booking.BookingService;
 import Car.Car;
 import Car.CarService;
 import Car.CarDAO;
@@ -27,7 +28,7 @@ public class Test {
         // Get the car from the car DAO
         CarDAO carDAO = new CarDAO();
         CarService carService = new CarService(carDAO);
-        Car testCar = carService.getCarsById("123_1");
+        Car testCar = carService.getCarByRegistrationNumber("123_1");
         System.out.println(Arrays.toString(carService.getElectricCars()));
         System.out.println(Arrays.toString(carService.getGasolineCars()));
 
@@ -38,15 +39,22 @@ public class Test {
 
 
         BookingDAO bookingDAO = new BookingDAO();
+        BookingService bookingService = new BookingService(bookingDAO,carService);
 
-        // Add the booking to the bookingDAO
-        bookingDAO.addBooking(testBooking);
-        bookingDAO.addBooking(testBooking);
-        bookingDAO.addBooking(testBooking);
+        bookingService.addCarBooking(testUser, "123_1");
+        bookingService.addCarBooking(testUser, "123_1");
+
+        Booking[] booked = bookingService.getAllBookings();
+
+        for (Booking booking : booked) {
+            System.out.println(booking);
+        }
 
 
-        // Display the whole list of bookings in the booking DAO
-        System.out.println(Arrays.toString(BookingDAO.getBookingsDao()));
+
+
+
+
 
     }
 }
