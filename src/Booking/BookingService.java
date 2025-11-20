@@ -5,7 +5,6 @@ import Car.CarService;
 import User.User;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -172,6 +171,25 @@ public class BookingService {
         }
 
         return userCarsBooked;
+
+    }
+
+    public Car[] getAllAvailableCars(){
+        return getAvailableCars(carService.getAllCars());
+    }
+
+    public Car[] getAvailableGasCars(){
+        return getAvailableCars(carService.getGasolineCars());
+    }
+
+    public Car[] getAvailableElectricCars(){
+        return getAvailableCars(carService.getElectricCars());
+    }
+
+    public Car[] getAvailableCars(Car[] allCars) {
+
+        /// TODO implement method
+        return null;
 
     }
 
