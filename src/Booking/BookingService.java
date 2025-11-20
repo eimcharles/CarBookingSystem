@@ -126,10 +126,10 @@ public class BookingService {
 
         int numberOfUserCarsBooked = 0;
 
-        // Booking returned from DAO layer
+        // Bookings returned from DAO layer
         Booking[] bookings = this.bookingDAO.getBookingDao();
 
-        // If bookings is null or empty, return empty array
+        // If bookings are null or empty, return empty array
         if (bookings == null || bookings.length == 0) {
             return new Car[0];
         }
@@ -156,14 +156,16 @@ public class BookingService {
         // Index for the new array, avoids null gaps,
         int index = 0;
 
-        // Look through all bookings
+        // Look through bookings
         for (int i = 0; i < bookings.length; i++) {
 
             // Use the activeBooking at the current index of the source array
             Booking activeBooking = bookings[i];
 
-            // If the active booking, user exists and the userID matches the passed userId, add the associated car
-            if (activeBooking != null && activeBooking.getUser() != null && activeBooking.getUser().getUserId().equals(userId)){
+            // If the active booking and user exists, and the userID matches the passed userId, add the associated car.
+            if (activeBooking != null &&
+                    activeBooking.getUser() != null &&
+                    activeBooking.getUser().getUserId().equals(userId)){
                 userCarsBooked[index++] = activeBooking.getCar();
 
             }
