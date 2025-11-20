@@ -120,4 +120,56 @@ public class BookingService {
         return filteredBookings;
 
     }
+
+    public Car[] getUserBookedCarsByUserId(UUID userId) {
+
+        int numberOfUserCarsBooked = 0;
+
+        // Booking returned from DAO layer
+        Booking[] bookings = this.bookingDAO.getBookingDao();
+
+        // If bookings is null or empty, return empty array
+        if (bookings == null || bookings.length == 0) {
+            return new Car[0];
+        }
+
+        // Count the bookings associated to the passed userId
+        for (Booking activeBooking : bookings) {
+
+            // If the booking and user exists - check that the activeBooking userId matches the passed userId
+            if (activeBooking != null &&
+                    activeBooking.getUser() != null &&
+                    activeBooking.getUser().getUserId().equals(userId)){
+                numberOfUserCarsBooked++;
+            }
+        }
+
+        // If there are no cars found for the passed userId
+        if (numberOfUserCarsBooked == 0) {
+            return new Car[0];
+        }
+
+        // Create a new array with the numberOfUserCarsBooked for size
+        Car[] userCarsBooked = new Car[numberOfUserCarsBooked];
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through all bookings
+        for (int i = 0; i < bookings.length; i++) {
+
+            // Use the activeBooking at the current index of the source array
+            Booking activeBooking = bookings[i];
+
+            // If the active booking, user exists and the userID matches the passed userId, add the associated car
+            if (activeBooking != null && activeBooking.getUser() != null && activeBooking.getUser().getUserId().equals(userId)){
+                userCarsBooked[index++] = activeBooking.getCar();
+
+            }
+        }
+
+        return userCarsBooked;
+
+    }
+
 }
