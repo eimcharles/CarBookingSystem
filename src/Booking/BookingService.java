@@ -77,8 +77,6 @@ public class BookingService {
 
     public Booking[] getAllBookings() {
 
-        int allActiveBookingsCount = 0;
-
         // Booking returned from DAO layer
         Booking[] bookings = this.bookingDAO.getBookingDao();
 
@@ -87,12 +85,8 @@ public class BookingService {
             return new Booking[0];
         }
 
-        // Count the active bookings
-        for (Booking booking : bookings) {
-            if (booking != null){
-                allActiveBookingsCount++;
-            }
-        }
+        // Number of active bookings
+        int allActiveBookingsCount = countActiveBookings(bookings);
 
         // If no active bookings are found
         if (allActiveBookingsCount == 0) {
@@ -102,20 +96,8 @@ public class BookingService {
         // Create a new array with the allActiveBookingsCount for size
         Booking[] filteredBookings = new Booking[allActiveBookingsCount];
 
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through all the bookings
-        for (int i = 0; i < bookings.length; i++) {
-
-            // Use the activeBooking at the current index of the source array
-            Booking activeBooking = bookings[i];
-
-            if (activeBooking != null){
-                filteredBookings[index++] = activeBooking;
-            }
-
-        }
+        // Populates the pre-sized array with active bookings
+        populateBookingsArray(bookings, filteredBookings);
 
         return filteredBookings;
 
@@ -287,6 +269,39 @@ public class BookingService {
                 // Add the car to the availableCars
                 availableCars[index++] = car;
             }
+        }
+    }
+
+    private int countActiveBookings(Booking[] bookings){
+
+        int allActiveBookingsCount = 0;
+
+        // Count the active bookings
+        for (Booking booking : bookings) {
+            if (booking != null){
+                allActiveBookingsCount++;
+            }
+        }
+
+        return allActiveBookingsCount;
+
+    }
+
+    private void populateBookingsArray(Booking[] bookings, Booking[] filteredBookings){
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through all the bookings
+        for (int i = 0; i < bookings.length; i++) {
+
+            // Use the activeBooking at the current index of the source array
+            Booking activeBooking = bookings[i];
+
+            if (activeBooking != null){
+                filteredBookings[index++] = activeBooking;
+            }
+
         }
     }
 
