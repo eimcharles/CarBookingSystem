@@ -83,7 +83,7 @@ public class BookingService {
         // Booking returned from DAO layer
         Booking[] bookings = this.bookingDAO.getBookingDao();
 
-        // If bookings is null or empty, return empty array
+        // If bookings are null or empty, return empty array
         if (bookings == null || bookings.length == 0){
             return new Booking[0];
         }
