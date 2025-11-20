@@ -20,41 +20,40 @@ public class Test {
 
     public static void main(String[] args) {
 
-        // Get the user from the user DAO
+        // Dependencies
         UserDAO userDAO = new UserDAO();
         UserService userService = new UserService(userDAO);
-        User testUser = userService.getUsersById(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"));
-
-        // Get the car from the car DAO
+        // Dependencies
         CarDAO carDAO = new CarDAO();
         CarService carService = new CarService(carDAO);
-        Car testCar = carService.getCarByRegistrationNumber("123_1");
-        System.out.println(Arrays.toString(carService.getElectricCars()));
-        System.out.println(Arrays.toString(carService.getGasolineCars()));
-
-
-        // Create a new booking Object with the test user and car
-        Booking testBooking = new Booking(UUID.fromString("9d818235-ce3b-40e8-b74a-3674985c6bcd"), testUser, testCar, LocalDateTime.now());
-        Booking testBooking2 = new Booking(UUID.fromString("9d818235-ce3b-40e8-b74a-3674985c6bcd"), testUser, testCar, LocalDateTime.now());
-
-
+        // Dependencies
         BookingDAO bookingDAO = new BookingDAO();
         BookingService bookingService = new BookingService(bookingDAO,carService);
 
-        bookingService.addCarBooking(testUser, "123_1");
-        bookingService.addCarBooking(testUser, "123_1");
+        // Test user to create a new car booking with booking UUID
+        String userId = "8ca51d2b-aaaf-4bf2-834a-e02964e10fc3";
+        User testUser = userService.getUsersById(UUID.fromString(userId));
+        System.out.println(testUser);
 
+        // Adding a booking by user and car registration number
+        String registrationNumber = "123_1";
+        bookingService.addCarBooking(testUser, registrationNumber);
+
+        // Getting all active bookings
         Booking[] booked = bookingService.getAllBookings();
 
+        // Displaying bookings
         for (Booking booking : booked) {
             System.out.println(booking);
         }
 
+        // Getting all cars that are associated to a userID
+        Car[] userBookedCars = bookingService.getUserBookedCarsByUserId(UUID.fromString(userId));
 
-
-
-
-
+        // Displaying all cars that are associated to a userID
+        for (Car userBookedCar : userBookedCars) {
+            System.out.println(userBookedCar);
+        }
 
     }
 }
