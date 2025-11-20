@@ -188,9 +188,106 @@ public class BookingService {
 
     public Car[] getAvailableCars(Car[] allCars) {
 
-        /// TODO implement method
-        return null;
+        // No cars in the system
+        if (allCars == null || allCars.length == 0) {
+            return new Car[0];
+        }
 
+        // Booking returned from DAO layer
+        Booking[] bookings = bookingDAO.getBookingDao();
+
+        // If bookings are null or empty, return allCars
+        if (bookings == null || bookings.length == 0) {
+            return allCars;
+        }
+
+        // Number of cars that are not associated with any active booking
+        int availableCarsCount = countAvailableCars(allCars,bookings);
+
+        // If availableCarsCount is 0, return an empty Car array
+        if (availableCarsCount == 0) {
+            return new Car[0];
+        }
+
+        // Create a new array with the allActiveBookingsCount for size
+        Car[] availableCars = new Car[availableCarsCount];
+
+        // Populates the pre-sized array with cars that are NOT booked.
+        populateAvailableCarsArray(allCars, bookings, availableCars);
+
+        return availableCars;
+
+    }
+
+    private int countAvailableCars(Car[] allCars, Booking[] bookings){
+
+        int availableCarsCount = 0;
+
+        // Check if a car is associated to any booking
+        for (Car car : allCars) {
+
+            // Assume the car is not booked initially
+            boolean isCarAssociatedToBooking = false;
+
+            // Check the current car against every existing booking.
+            for (Booking booking : bookings) {
+
+                // Ensure the booking and its car exist, then check for a registration match.
+                if (booking != null &&
+                        booking.getCar() != null &&
+                        booking.getCar().equals(car)) {
+
+                    // The car is booked
+                    isCarAssociatedToBooking = true;
+
+                    // Stop checking this car against other bookings
+                    break;
+                }
+            }
+
+            // the car was NOT booked, it is available.
+            if (!isCarAssociatedToBooking) {
+                availableCarsCount++;
+            }
+        }
+
+        return availableCarsCount;
+    }
+
+    private void populateAvailableCarsArray(Car[] allCars, Booking[] bookings, Car[] availableCars){
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Check if a car is associated to any booking
+        for (Car car : allCars) {
+
+            // Assume the car is not booked initially
+            boolean isCarAssociatedToBooking = false;
+
+            // Check the current car against every existing booking.
+            for (Booking booking : bookings) {
+
+                // Ensure the booking and its car exist, then check for a registration match.
+                if (booking != null &&
+                        booking.getCar() != null &&
+                        booking.getCar().equals(car)) {
+
+                    // The car is booked
+                    isCarAssociatedToBooking = true;
+
+                    // Stop checking this car against other bookings
+                    break;
+                }
+            }
+
+            // the car was NOT booked, it is available.
+            if (!isCarAssociatedToBooking) {
+
+                // Add the car to the availableCars
+                availableCars[index++] = car;
+            }
+        }
     }
 
 }
