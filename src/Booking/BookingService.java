@@ -54,25 +54,25 @@ public class BookingService {
 
     private boolean isCarCurrentlyBooked(String registrationNumber) {
 
-        // Gets all current bookings
-        Booking[] allBookings = getAllBookings();
+        // Get bookings
+        Booking[] bookings = getAllBookings();
 
-        // Go through current bookings
-        for (Booking booking : allBookings) {
+        // Go through bookings
+        for (Booking booking : bookings) {
 
-            // Only executes for active (uncancelled) bookings.
+            // Make sure the booking is still active
             if (!booking.isBookingCancelled()) {
 
                 // Check if the car's registration matches the requested one
                 if (booking.getCar().getRegistrationNumber().equals(registrationNumber)) {
 
-                    // The booking is active AND the registration numbers match
+                    // Match found: the car is currently booked
                     return true;
                 }
             }
         }
 
-        // did not find an active booking matching the requested registration number.
+        // No Match found: the car is not currently booked
         return false;
     }
 
