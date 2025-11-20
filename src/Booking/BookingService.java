@@ -5,6 +5,7 @@ import Car.CarService;
 import User.User;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -26,15 +27,15 @@ public class BookingService {
 
     public UUID addCarBooking(User user, String registrationNumber) {
 
-        // Finds car based on registration number
-        Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
-
-        // Check Availability - is it already booked ?
+        // Check Car Availability
         if (isCarCurrentlyBooked(registrationNumber)) {
             throw new IllegalStateException(String.format("Car with registration number %s is currently booked.", registrationNumber));
         }
 
-        // if car is not booked and available - create a new bookingId
+        //  Get available car based on registration number
+        Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
+
+        // Car is not booked and available - create a new bookingId
         UUID bookingId = UUID.randomUUID();
 
         // Create and Save Booking in bookingDAO
