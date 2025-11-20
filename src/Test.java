@@ -8,8 +8,6 @@ import User.User;
 import User.UserService;
 import User.UserDAO;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -33,11 +31,19 @@ public class Test {
         // Test user to create a new car booking with booking UUID
         String userId = "8ca51d2b-aaaf-4bf2-834a-e02964e10fc3";
         User testUser = userService.getUsersById(UUID.fromString(userId));
-        System.out.println(testUser);
+        System.out.println(testUser.getUserId());
+        System.out.println();
 
         // Adding a booking by user and car registration number
         String registrationNumber = "123_1";
         bookingService.addCarBooking(testUser, registrationNumber);
+
+        // Get the list of user booked cars by user id
+        Car[] userBookedCars = bookingService.getUserBookedCarsByUserId(UUID.fromString(userId));
+        for (Car userBookedCar : userBookedCars) {
+            System.out.println(userBookedCar);
+        }
+        System.out.println();
 
         // Getting all active bookings
         Booking[] booked = bookingService.getAllBookings();
@@ -47,13 +53,29 @@ public class Test {
             System.out.println(booking);
         }
 
-        // Getting all cars that are associated to a userID
-        Car[] userBookedCars = bookingService.getUserBookedCarsByUserId(UUID.fromString(userId));
+        // All gas cars
+        Car[] availableGasCars = bookingService.getAvailableGasCars();
 
-        // Displaying all cars that are associated to a userID
-        for (Car userBookedCar : userBookedCars) {
-            System.out.println(userBookedCar);
+        for (Car availableGasCar : availableGasCars) {
+            System.out.println(availableGasCar);
         }
+        System.out.println();
+
+        // All electric cars
+        Car[] availableElectricCars = bookingService.getAvailableElectricCars();
+
+        for (Car availableElectricCar : availableElectricCars) {
+            System.out.println(availableElectricCar);
+        }
+        System.out.println();
+
+        // All cars
+        Car[] allAvailableCars = bookingService.getAllAvailableCars();
+
+        for (Car availableCar : allAvailableCars) {
+            System.out.println(availableCar);
+        }
+        System.out.println();
 
     }
 }
