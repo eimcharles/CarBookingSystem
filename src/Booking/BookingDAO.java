@@ -38,6 +38,7 @@ public class BookingDAO {
 
         // Moves the index to point to the following slot
         nextAvailableIndex++;
+
     }
 
     public static Booking[] getBookingDao() {

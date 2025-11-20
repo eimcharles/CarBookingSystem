@@ -21,7 +21,9 @@ public class CarService {
                 return car;
             }
         }
+
         throw new NoSuchElementException(String.format("Car with registration number %s not found", registrationNumber));
+
     }
 
     public Car[] getCarsByFuelType(FuelType fuelType){
@@ -44,6 +46,7 @@ public class CarService {
         populateCarsByFuelType(cars, fuelType, filteredCars);
 
         return filteredCars;
+
     }
 
     public Car[] getAllCars() {
@@ -71,6 +74,7 @@ public class CarService {
         }
 
         return carCount;
+
     }
 
     private void populateCarsByFuelType(Car[] cars, FuelType fuelType, Car[] filteredCars){
@@ -90,7 +94,6 @@ public class CarService {
 
             }
         }
-
     }
 
 }

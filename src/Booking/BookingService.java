@@ -28,7 +28,9 @@ public class BookingService {
 
         // Check Car Availability
         if (isCarCurrentlyBooked(registrationNumber)) {
+
             throw new IllegalStateException(String.format("Car with registration number %s is currently booked.", registrationNumber));
+
         }
 
         //  Get available car based on registration number
@@ -39,16 +41,19 @@ public class BookingService {
 
         // Create and Save Booking in bookingDAO
         this.bookingDAO.addBooking(
+
                 new Booking(
                         bookingId,
                         user,
                         carToBook,
                         LocalDateTime.now()
+
                 )
         );
 
         // return the booking id
         return bookingId;
+
     }
 
     private boolean isCarCurrentlyBooked(String registrationNumber) {
@@ -67,12 +72,14 @@ public class BookingService {
 
                     // Match found: the car is currently booked
                     return true;
+
                 }
             }
         }
 
         // No Match found: the car is not currently booked
         return false;
+
     }
 
     public Booking[] getAllBookings() {
@@ -209,6 +216,7 @@ public class BookingService {
         }
 
         return availableCarsCount;
+
     }
 
     private void populateAvailableCarsArray(Car[] allCars, Booking[] bookings, Car[] availableCars){
@@ -235,6 +243,7 @@ public class BookingService {
 
                     // Stop checking this car against other bookings
                     break;
+
                 }
             }
 
@@ -243,6 +252,7 @@ public class BookingService {
 
                 // Add the car to the availableCars
                 availableCars[index++] = car;
+
             }
         }
     }
@@ -275,8 +285,8 @@ public class BookingService {
 
             if (activeBooking != null){
                 filteredBookings[index++] = activeBooking;
-            }
 
+            }
         }
     }
 
@@ -291,7 +301,9 @@ public class BookingService {
             if (activeBooking != null &&
                     activeBooking.getUser() != null &&
                     activeBooking.getUser().getUserId().equals(userId)){
+
                 numberOfUserCarsBooked++;
+
             }
         }
 
@@ -314,11 +326,11 @@ public class BookingService {
             if (activeBooking != null &&
                     activeBooking.getUser() != null &&
                     activeBooking.getUser().getUserId().equals(userId)){
+
                 userCarsBooked[index++] = activeBooking.getCar();
 
             }
         }
-
     }
 
 }

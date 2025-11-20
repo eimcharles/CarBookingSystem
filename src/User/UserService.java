@@ -28,6 +28,8 @@ public class UserService {
                 return user;
             }
         }
+
         throw new NoSuchElementException(String.format("User with id %s not found", id));
+
     }
 }
