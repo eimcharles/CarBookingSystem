@@ -32,7 +32,7 @@ public class Configuration {
 
         this.carService = new CarService(carDAO);
         this.userService = new UserService(userDAO);
-        this.bookingService = new BookingService(bookingDAO);
+        this.bookingService = new BookingService(bookingDAO, this.carService);
     }
 
     public CarService getCarService() {
