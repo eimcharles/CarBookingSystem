@@ -1,3 +1,5 @@
+package Configuration;
+
 import Booking.BookingDAO;
 import Booking.BookingService;
 import Car.CarDAO;
@@ -6,7 +8,7 @@ import User.UserDAO;
 import User.UserService;
 
 /**
- *      The Configuration class is a factory class
+ *      The Configuration.Configuration class is a factory class
  *      responsible for initializing and wiring all
  *      application services (Dependency Injection).
  *
