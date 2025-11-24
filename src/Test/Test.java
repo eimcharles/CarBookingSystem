@@ -16,9 +16,8 @@ public class Test {
         Configuration configuration = new Configuration();
         Scanner scanner = new Scanner(System.in);
 
-//        System.out.println("Display all users feature");
-//        CarBookingCLI.displayAllUsers(configuration.getUserService());
-//        System.out.println();
+        CarBookingCLI.displayAllUsers(configuration.getUserService());
+        System.out.println();
 
 //        System.out.println("Display all available cars feature: ");
 //        CarBookingCLI.displayAllAvailableCars(configuration.getBookingService());
@@ -32,8 +31,8 @@ public class Test {
 //        CarBookingCLI.displayAllAvailableGasCars(configuration.getBookingService());
 //        System.out.println();
 
-        CarBookingCLI.displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
-        System.out.println();
+//        CarBookingCLI.displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
+//        System.out.println();
 
 //        System.out.println("Display all active bookings feature (No current bookings): ");
 //        CarBookingCLI.displayAllBooking(configuration.getBookingService());
