@@ -16,12 +16,10 @@ public class Test {
         Configuration configuration = new Configuration();
         Scanner scanner = new Scanner(System.in);
 
+        // Done
         CarBookingCLI.displayAllUsers(configuration.getUserService());
-        System.out.println();
 
-//        System.out.println("Display all available cars feature: ");
-//        CarBookingCLI.displayAllAvailableCars(configuration.getBookingService());
-//        System.out.println();
+        CarBookingCLI.displayAllAvailableCars(configuration.getBookingService());
 
 //        System.out.println("Display all available electric cars feature: ");
 //        CarBookingCLI.displayAllAvailableElectricCars(configuration.getBookingService());
