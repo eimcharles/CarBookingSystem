@@ -19,11 +19,11 @@ public class Test {
         // Done
         CarBookingCLI.displayAllUsers(configuration.getUserService());
 
+        // Done
         CarBookingCLI.displayAllAvailableCars(configuration.getBookingService());
 
-//        System.out.println("Display all available electric cars feature: ");
-//        CarBookingCLI.displayAllAvailableElectricCars(configuration.getBookingService());
-//        System.out.println();
+        // Done
+        CarBookingCLI.displayAllAvailableElectricCars(configuration.getBookingService());
 
 //        System.out.println("Display all available gas cars feature: ");
 //        CarBookingCLI.displayAllAvailableGasCars(configuration.getBookingService());
