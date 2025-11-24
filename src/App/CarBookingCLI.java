@@ -65,10 +65,10 @@ public class CarBookingCLI {
         do {
 
             // Prompt user for input
-            System.out.println("\n============================================================================================");
+            System.out.println("\n================================================================================================================");
             System.out.print("➡️ Please enter the User ID (e.g., 'U1001') to view user booked cars: ");
             userIdInput = scanner.nextLine().trim();
-            System.out.println("============================================================================================\n");
+            System.out.println("================================================================================================================\n");
 
             // Check 1: Handle empty input
             if (userIdInput.isEmpty()) {
