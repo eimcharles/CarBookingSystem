@@ -25,9 +25,7 @@ public class Test {
         // Done
         CarBookingCLI.displayAllAvailableElectricCars(configuration.getBookingService());
 
-//        System.out.println("Display all available gas cars feature: ");
-//        CarBookingCLI.displayAllAvailableGasCars(configuration.getBookingService());
-//        System.out.println();
+        CarBookingCLI.displayAllAvailableGasCars(configuration.getBookingService());
 
 //        CarBookingCLI.displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
 //        System.out.println();
