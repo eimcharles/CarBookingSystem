@@ -267,12 +267,21 @@ public class CarBookingCLI {
         User[] users = userService.getAllUsers();
 
         if (users == null || users.length == 0){
+
+            System.out.println("\n=================================  USERS  ==================================================");
             System.out.println("❌ No users currently registered in the system");
+            System.out.println("============================================================================================\n");
             return;
+
         }
+
+        System.out.println("\n=================================  USERS  ==================================================");
 
         for (User user : users) {
             System.out.println(user);
         }
+
+        System.out.println("============================================================================================\n");
+
     }
 }
