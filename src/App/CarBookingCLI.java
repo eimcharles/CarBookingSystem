@@ -146,13 +146,18 @@ public class CarBookingCLI {
         Car[] availableGasCars = bookingService.getAvailableGasCars();
 
         if (availableGasCars == null || availableGasCars.length == 0) {
+            System.out.println("\n==========================================  AVAILABLE GAS CARS  ================================================");
             System.out.println("❌ No gas cars currently available for booking");
             return;
         }
 
+        System.out.println("\n==========================================  AVAILABLE GAS CARS  ================================================");
         for (Car availableGasCar : availableGasCars) {
             System.out.println(availableGasCar);
         }
+
+        System.out.println("================================================================================================================\n");
+
     }
 
     /**
