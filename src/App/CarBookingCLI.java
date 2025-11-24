@@ -254,13 +254,19 @@ public class CarBookingCLI {
         Booking[] allBookings = bookingService.getAllBookings();
 
         if (allBookings == null || allBookings.length == 0){
+            System.out.println("\n==========================================  ACTIVE BOOKINGS  ===================================================");
             System.out.println("❌ No bookings currently registered in the system");
+            System.out.println("================================================================================================================\n");
             return;
         }
 
+        System.out.println("\n==========================================  ACTIVE BOOKINGS  ==================================================");
         for (Booking allBooking : allBookings) {
             System.out.println(allBooking);
         }
+
+        System.out.println("================================================================================================================\n");
+
     }
 
     /**
