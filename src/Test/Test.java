@@ -25,10 +25,10 @@ public class Test {
         // Done
         CarBookingCLI.displayAllAvailableElectricCars(configuration.getBookingService());
 
+        // Done
         CarBookingCLI.displayAllAvailableGasCars(configuration.getBookingService());
 
-//        CarBookingCLI.displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
-//        System.out.println();
+        CarBookingCLI.displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
 
 //        System.out.println("Display all active bookings feature (No current bookings): ");
 //        CarBookingCLI.displayAllBooking(configuration.getBookingService());
