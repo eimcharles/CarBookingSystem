@@ -177,13 +177,19 @@ public class CarBookingCLI {
         Car[] availableElectricCars = bookingService.getAvailableElectricCars();
 
         if (availableElectricCars == null || availableElectricCars.length == 0) {
+            System.out.println("\n==========================================  AVAILABLE ELECTRIC CARS  ============================================");
             System.out.println("❌ No electric cars currently available for booking");
+            System.out.println("=================================================================================================================\n");
             return;
         }
 
+        System.out.println("\n==========================================  AVAILABLE ELECTRIC CARS  ============================================");
         for (Car availableEelectricCar : availableElectricCars) {
             System.out.println(availableEelectricCar);
         }
+
+        System.out.println("=================================================================================================================\n");
+
     }
 
     /**
