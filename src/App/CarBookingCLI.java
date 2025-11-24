@@ -60,16 +60,13 @@ public class CarBookingCLI {
         boolean isValidInput = false;
 
         // Display Feature Header and list all available users for the user to pick an ID from.
-        System.out.println("\n=================================  USERS  ================================================");
         displayAllUsers(userService);
-        System.out.println("============================================================================================\n");
-
 
         do {
 
             // Prompt user for input
-            System.out.println("============================================================================================");
-            System.out.print("➡️ Enter the User ID (e.g., 'U1001') to view user booked cars: ");
+            System.out.println("\n============================================================================================");
+            System.out.print("➡️ Please enter the User ID (e.g., 'U1001') to view user booked cars: ");
             userIdInput = scanner.nextLine().trim();
             System.out.println("============================================================================================\n");
 
@@ -91,7 +88,7 @@ public class CarBookingCLI {
             } catch (IllegalArgumentException e){
 
                 // If conversion fails, print error message and loop continues (isValidInput remains false)
-                System.out.println("============================================================================================");
+                System.out.println("\n============================================================================================");
                 System.out.println("❌ Invalid User ID format: '" + userIdInput + "'. Please enter a valid UUID string.");
                 System.out.println("============================================================================================\n");
 
@@ -101,7 +98,7 @@ public class CarBookingCLI {
         } while (!isValidInput);
 
         // --- Fetch and Display Results (only executed once valid UUID is guaranteed) ---
-        System.out.println("===============================  RESULTS  ==================================================");
+        System.out.println("\n===============================  RESULTS  ==================================================");
 
         Car[] bookedCars = bookingService.getUserBookedCarsByUserId(userId);
 
