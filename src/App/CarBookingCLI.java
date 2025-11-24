@@ -231,7 +231,6 @@ public class CarBookingCLI {
         }
 
         System.out.println("\n==========================================  AVAILABLE CARS  =====================================================");
-
         for (Car availableCar : availableCars) {
             System.out.println(availableCar);
         }
@@ -304,7 +303,6 @@ public class CarBookingCLI {
         }
 
         System.out.println("\n=================================  USERS  ==================================================");
-
         for (User user : users) {
             System.out.println(user);
         }
