@@ -3,8 +3,12 @@ package App;
 import Booking.Booking;
 import Booking.BookingService;
 import Car.Car;
+import Car.CarService;
 import User.User;
 import User.UserService;
+
+import java.util.Scanner;
+import java.util.UUID;
 
 /**
  *      Driver class for Car Booking System CLI
@@ -15,19 +19,109 @@ import User.UserService;
 public class CarBookingCLI {
 
 
-    public static void makeACarBooking(BookingService bookingService){
+    public static void makeACarBooking(BookingService bookingService, CarService carService, Scanner scanner){
 
         displayAllAvailableCars(bookingService);
         ///  TODO implement logic
-
     }
 
+    /**
+     *      Guides the user to input a specific User ID,
+     *      validating the input format as a UUID.
+     *
+     *       It then retrieves all cars currently booked
+     *      by that validated user from the BookingService
+     *      and prints them to the console.
+     *
+     *      If the user has no active bookings, a
+     *      corresponding message is displayed.
+     *
+     *      @param userService
+     *
+     *      The UserService instance used to display
+     *      available user IDs.
+     *
+     *      @param bookingService
+     *
+     *      The BookingService instance used to fetch
+     *      the user's booked car data.
+     *
+     *      @param scanner
+     *
+     *      The Scanner instance used to handle
+     *      user input for the User ID.
+     */
 
-    public static void displayUserBookedCars(UserService userService){
+    public static void displayUserBookedCars(UserService userService, BookingService bookingService, Scanner scanner){
 
+        String userIdInput;
+        UUID userId = null;
+        // Set the user input to invalid first
+        boolean isValidInput = false;
+
+        // Display Feature Header and list all available users for the user to pick an ID from.
+        System.out.println("\n=================================  USERS  ================================================");
         displayAllUsers(userService);
-        ///  TODO implement logic
+        System.out.println("============================================================================================\n");
 
+
+        do {
+
+            // Prompt user for input
+            System.out.println("============================================================================================");
+            System.out.print("➡️ Enter the User ID (e.g., 'U1001') to view user booked cars: ");
+            userIdInput = scanner.nextLine().trim();
+            System.out.println("============================================================================================\n");
+
+            // Check 1: Handle empty input
+            if (userIdInput.isEmpty()) {
+                System.out.println("⚠️ User ID cannot be empty. Please try again.");
+                continue;
+            }
+
+
+            try {
+
+                // Check 2: Attempt to convert the input string to a UUID object.
+                userId = UUID.fromString(userIdInput);
+
+                // If the conversion succeeds, set flag to true to exit loop
+                isValidInput = true;
+
+            } catch (IllegalArgumentException e){
+
+                // If conversion fails, print error message and loop continues (isValidInput remains false)
+                System.out.println("============================================================================================");
+                System.out.println("❌ Invalid User ID format: '" + userIdInput + "'. Please enter a valid UUID string.");
+                System.out.println("============================================================================================\n");
+
+
+            }
+
+        } while (!isValidInput);
+
+        // --- Fetch and Display Results (only executed once valid UUID is guaranteed) ---
+        System.out.println("===============================  RESULTS  ==================================================");
+
+        Car[] bookedCars = bookingService.getUserBookedCarsByUserId(userId);
+
+        if (bookedCars == null || bookedCars.length == 0){
+
+            System.out.println("❌ User ID '" + userIdInput + "' has no active car bookings.");
+            System.out.println("============================================================================================\n");
+
+        } else {
+
+            System.out.println("\n===============================  RESULTS  =================================================");
+
+            // Booked cars were found
+            for (Car bookedCar : bookedCars) {
+                System.out.println(bookedCar);
+            }
+
+            System.out.println("============================================================================================\n");
+
+        }
     }
 
     /**
