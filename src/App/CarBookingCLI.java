@@ -209,13 +209,21 @@ public class CarBookingCLI {
         Car[] availableCars = bookingService.getAllAvailableCars();
 
         if (availableCars == null || availableCars.length == 0) {
+            System.out.println("\n==========================================  AVAILABLE CARS  =====================================================");
             System.out.println("❌ No cars currently available for booking");
+            System.out.println("=================================================================================================================\n");
+
             return;
         }
+
+        System.out.println("\n==========================================  AVAILABLE CARS  =====================================================");
 
         for (Car availableCar : availableCars) {
             System.out.println(availableCar);
         }
+
+        System.out.println("=================================================================================================================\n");
+
     }
 
     /**
