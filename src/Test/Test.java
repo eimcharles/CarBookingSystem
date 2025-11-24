@@ -31,8 +31,8 @@ public class Test {
         // Done
         CarBookingCLI.displayAllBooking(configuration.getBookingService());
 
-        // Done
-//      CarBookingCLI.displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
+
+        CarBookingCLI.displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
 
 //        System.out.println("Make a car booking feature TO DO : ");
 //        CarBookingCLI.makeACarBooking(configuration.getBookingService(), null, null);

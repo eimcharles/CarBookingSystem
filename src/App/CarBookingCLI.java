@@ -72,7 +72,11 @@ public class CarBookingCLI {
 
             // Check 1: Handle empty input
             if (userIdInput.isEmpty()) {
+                System.out.println("\n============================================================================================");
                 System.out.println("⚠️ User ID cannot be empty. Please try again.");
+                System.out.println("============================================================================================\n");
+
+                // Skips the rest of the current loop body
                 continue;
             }
 
@@ -92,26 +96,28 @@ public class CarBookingCLI {
                 System.out.println("❌ Invalid User ID format: '" + userIdInput + "'. Please enter a valid UUID string.");
                 System.out.println("============================================================================================\n");
 
+                // List all available users for the user to pick an ID from again.
+                displayAllUsers(userService);
 
             }
 
         } while (!isValidInput);
 
-        // --- Fetch and Display Results (only executed once valid UUID is guaranteed) ---
-        System.out.println("\n===============================  RESULTS  ==================================================");
+
 
         Car[] bookedCars = bookingService.getUserBookedCarsByUserId(userId);
 
         if (bookedCars == null || bookedCars.length == 0){
 
+            // Fetch and Display Results (only executed once valid UUID is guaranteed) ---
+            System.out.println("\n===============================  RESULTS  ==================================================");
             System.out.println("❌ User ID '" + userIdInput + "' has no active car bookings.");
             System.out.println("============================================================================================\n");
 
         } else {
 
-            System.out.println("\n===============================  RESULTS  =================================================");
-
             // Booked cars were found
+            System.out.println("\n===============================  RESULTS  =================================================");
             for (Car bookedCar : bookedCars) {
                 System.out.println(bookedCar);
             }
