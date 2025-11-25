@@ -108,20 +108,20 @@ public class CarBookingCLI {
     }
 
     /**
-     *      Retrieves all currently available
-     *      cars that run on gasoline from the
+     *      Retrieves all currently available gas cars from the
      *      BookingService and prints them to the console.
      *
-     *      Availability means the gas car is
-     *      not tied to any active booking.
+     *      Availability means the gas car is not tied to any active booking.
      *
-     *       If no gas cars are available, a
-     *      corresponding message is displayed.
+     *      If no gas cars are available, a corresponding message
+     *      is displayed using `displayIndentedMessage` method.
+     *
+     *      The results are presented under the menu title
+     *       defined by `TITLE_GAS_CARS`.
      *
      *      @param bookingService
      *
-     *      The BookingService instance
-     *      used to fetch the filtered availability data.
+     *      The BookingService instance used to fetch the filtered availability data.
      */
 
     public static void displayAllAvailableGasCars(BookingService bookingService) {
