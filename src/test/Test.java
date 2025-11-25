@@ -1,9 +1,7 @@
 package test;
 
 import booking.Booking;
-import car.Brand;
-import car.Car;
-import car.FuelType;
+import car.*;
 import user.User;
 
 import java.math.BigDecimal;
@@ -22,17 +20,12 @@ public class Test {
 
 //        Configuration configuration = new Configuration();
 //        Scanner scanner = new Scanner(System.in);
-
-        displayResultsMenu(TITLE_ALL_BOOKINGS);
-
-        displayBookingDetailsFormatted(
-                new Booking(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"),
-                new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "Charles", "Eimer"),
-                        new Car("123_1", new BigDecimal("89.00"), Brand.BMW, FuelType.ELECTRIC),
-                        LocalDateTime.now()
-                ));
-
 //        CarBookingCLI.makeACarBooking(configuration.getUserService(), configuration.getBookingService(), scanner);
+
+        CarDAO carDAO = new CarDAO();
+        CarService carService = new CarService(carDAO);
+
+        carService.getCarByRegistrationNumber("123_9");
 
     }
 }
