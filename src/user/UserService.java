@@ -1,5 +1,7 @@
 package user;
 
+import exception.UserNotFoundException;
+
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -28,7 +30,7 @@ public class UserService {
             }
         }
 
-        throw new NoSuchElementException(String.format("User with id %s not found", id));
+        throw new UserNotFoundException(id);
 
     }
 }
