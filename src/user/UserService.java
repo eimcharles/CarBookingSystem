@@ -1,6 +1,5 @@
-package User;
+package user;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 

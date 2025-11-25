@@ -1,8 +1,8 @@
-package Booking;
+package booking;
 
-import Car.Car;
-import Car.CarService;
-import User.User;
+import car.Car;
+import car.CarService;
+import user.User;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

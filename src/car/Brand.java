@@ -1,4 +1,4 @@
-package Car;
+package car;
 
 /**
  *      The Brand enum represents a list of supported car manufacturers.

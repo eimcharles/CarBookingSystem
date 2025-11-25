@@ -1,7 +1,7 @@
-package Utility;
+package utility;
 
-import User.User;
-import Car.Car;
+import user.User;
+import car.Car;
 
 public class CLIFormatUtility {
 

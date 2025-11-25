@@ -1,4 +1,4 @@
-package Car;
+package car;
 
 /**
  *      Domain class for Car Object

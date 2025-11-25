@@ -1,16 +1,16 @@
-package App;
+package app;
 
-import Booking.Booking;
-import Booking.BookingService;
-import Car.Car;
-import User.User;
-import User.UserService;
+import booking.Booking;
+import booking.BookingService;
+import car.Car;
+import user.User;
+import user.UserService;
 
 import java.util.Scanner;
 import java.util.UUID;
 
-import static Utility.CLIFormatUtility.*;
-import static Utility.CLIFormatUtility.displayCarDetailsFormatted;
+import static utility.CLIFormatUtility.*;
+import static utility.CLIFormatUtility.displayCarDetailsFormatted;
 
 public class CarBookingCLI {
 

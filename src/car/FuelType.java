@@ -1,4 +1,4 @@
-package Car;
+package car;
 
 /**
  *      The FuelType enum represents a list of supported fuel types.

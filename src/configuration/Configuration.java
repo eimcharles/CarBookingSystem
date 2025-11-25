@@ -1,11 +1,11 @@
-package Configuration;
+package configuration;
 
-import Booking.BookingDAO;
-import Booking.BookingService;
-import Car.CarDAO;
-import Car.CarService;
-import User.UserDAO;
-import User.UserService;
+import booking.BookingDAO;
+import booking.BookingService;
+import car.CarDAO;
+import car.CarService;
+import user.UserDAO;
+import user.UserService;
 
 /**
  *      The Configuration.Configuration class is a factory class

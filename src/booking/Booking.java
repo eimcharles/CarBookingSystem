@@ -1,11 +1,11 @@
-package Booking;
+package booking;
 
 /**
  *      Domain class for Booking Object
  * */
 
-import Car.Car;
-import User.User;
+import car.Car;
+import user.User;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
