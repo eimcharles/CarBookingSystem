@@ -235,18 +235,16 @@ public class CarBookingCLI {
     }
 
     /**
-     *          Retrieves all registered
-     *          users from the UserService
-     *          and prints them to the console.
+     *        Retrieves all registered users from the
+     *        UserService and prints them to the console
+     *        using the standardized `displayUserDetailsFormatted` method.
      *
-     *          If no users are found,
-     *          a corresponding message is displayed.
+     *        If no users are found, a corresponding message
+     *        is displayed using `displayIndentedMessage` method.
      *
-     *          @param userService
+     *        @param userService
      *
-     *          The UserService instance
-     *          used to fetch the data.
-     *          
+     *        The UserService instance used to fetch the user data.
      */
 
     public static void displayAllUsers(UserService userService){
