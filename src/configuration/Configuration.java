@@ -8,7 +8,7 @@ import user.UserDAO;
 import user.UserService;
 
 /**
- *      The Configuration.Configuration class is a factory class
+ *      The Configuration class is a factory class
  *      responsible for initializing and wiring all
  *      application services (Dependency Injection).
  *
@@ -21,7 +21,7 @@ import user.UserService;
 
 public class Configuration {
 
-    // Final Attributes to hold the instantiated and wired services
+
     private final CarService carService;
     private final UserService userService;
     private final BookingService bookingService;
@@ -34,7 +34,7 @@ public class Configuration {
 
         this.carService = new CarService(carDAO);
         this.userService = new UserService(userDAO);
-        this.bookingService = new BookingService(bookingDAO, this.carService);
+        this.bookingService = new BookingService(bookingDAO, getCarService());
     }
 
     public CarService getCarService() {
