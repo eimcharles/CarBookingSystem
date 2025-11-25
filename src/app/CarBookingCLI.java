@@ -228,7 +228,7 @@ public class CarBookingCLI {
         }
 
         for (Booking allBooking : allBookings) {
-            System.out.println(allBooking);
+            displayBookingDetailsFormatted(allBooking);
         }
     }
 
