@@ -21,30 +21,29 @@ public class CarBookingCLI {
     }
 
     /**
-     *      Guides the user to input a specific User ID,
-     *      validating the input format as a UUID.
+     *       Retrieves and prints all cars currently booked by a specific user.
      *
-     *       It then retrieves all cars currently booked
-     *      by that validated user from the BookingService
-     *      and prints them to the console.
+     *      This method first lists all available users and then enters a mandatory
+     *      `do-while` input loop to enforce that the user provides a valid,
+     *      non-empty User ID in the correct UUID format.
      *
-     *      If the user has no active bookings, a
-     *      corresponding message is displayed.
+     *      If the provided User ID is valid but the user has no bookings,
+     *      a clear message is displayed using `displayIndentedMessage` method.
+     *
+     *      The results are presented under the menu title
+     *      defined by `TITLE_USER_BOOKED_CARS`.
      *
      *      @param userService
      *
-     *      The UserService instance used to display
-     *      available user IDs.
+     *      The UserService instance used to fetch and display the list of all users.
      *
      *      @param bookingService
      *
-     *      The BookingService instance used to fetch
-     *      the user's booked car data.
+     *      The BookingService instance used to fetch the booked car data for the user.
      *
      *      @param scanner
      *
-     *      The Scanner instance used to handle
-     *      user input for the User ID.
+     *      The system input handler used to capture the user's keystrokes for the User ID.
      */
 
     public static void displayUserBookedCars(UserService userService, BookingService bookingService, Scanner scanner){
