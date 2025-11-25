@@ -3,6 +3,8 @@ package test;
 import booking.Booking;
 import car.*;
 import user.User;
+import user.UserDAO;
+import user.UserService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,10 +24,10 @@ public class Test {
 //        Scanner scanner = new Scanner(System.in);
 //        CarBookingCLI.makeACarBooking(configuration.getUserService(), configuration.getBookingService(), scanner);
 
-        CarDAO carDAO = new CarDAO();
-        CarService carService = new CarService(carDAO);
 
-        carService.getCarByRegistrationNumber("123_9");
+        UserDAO userDAO = new UserDAO();
+        UserService userService = new UserService(userDAO);
+        userService.getUsersById(UUID.fromString("fe5b09ca-1593-4813-8cf4-6566d4b0349c"));
 
     }
 }
