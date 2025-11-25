@@ -172,21 +172,20 @@ public class CarBookingCLI {
     }
 
     /**
-     *          Retrieves all currently available
-     *          cars from the BookingService and
-     *          prints them to the console.
+     *      Retrieves all currently available cars from the
+     *      BookingService and prints them to the console.
      *
-     *          Availability means the car is
-     *          not tied to any active booking.
+     *      Availability means the car is not tied to any active booking.
      *
-     *          If no cars are available, a
-     *          corresponding message is displayed.
+     *      If no cars are available, a corresponding message
+     *      is displayed using `displayIndentedMessage` method.
      *
-     *          @param bookingService
+     *      The results are presented under the menu title
+     *      defined by `TITLE_ALL_CARS`.
      *
-     *          The BookingService instance
-     *          used to fetch the availability data.
+     *      @param bookingService
      *
+     *      The BookingService instance used to fetch the availability data.
      */
 
     public static void displayAllAvailableCars(BookingService bookingService) {
