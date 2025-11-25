@@ -242,6 +242,9 @@ public class CarBookingCLI {
      *        If no users are found, a corresponding message
      *        is displayed using `displayIndentedMessage` method.
      *
+     *        The results are presented under the menu title
+     *        defined by `TITLE_REGISTERED_USERS`.
+     *
      *        @param userService
      *
      *        The UserService instance used to fetch the user data.
