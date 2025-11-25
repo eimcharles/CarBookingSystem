@@ -14,7 +14,7 @@ Each constraint was part of a structured learning framework designed to reinforc
 ✅ **Requirements** — implemented and completed features in the current release.<br>
 🚫 **Constraints** — features intentionally left for future iterations to reinforce learning objectives
 
-#### Release 1 (In Progress 🚀):
+### Release 1 (In Progress 🚀):
 - ✅ Uses **arrays** for storing data 
 - ✅ Uses **dependency injection**
 - ✅ Uses **exception handling**
@@ -33,13 +33,13 @@ Each constraint was part of a structured learning framework designed to reinforc
 - Display All Registered Users  
 
 
-#### Release 2: 
+### Release 2: 
 - 🚫 **Implement streams**  
 - 🚫 **Implement Maven**
-#### Release 3:   
+### Release 3:   
 - 🚫 **Implement unit testing**  
 - 🚫 **Implement Spring Boot Server**
-#### Release 4: 
+### Release 4: 
 - 🚫 **Implement Angular Client**
 ---
 
