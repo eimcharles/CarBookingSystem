@@ -24,7 +24,7 @@ public class CLIFormatUtility {
         displayIndentedMessage("➡️","1 To Display All Available Cars");
         displayIndentedMessage("➡️", "2 To Display Available Gasoline Cars");
         displayIndentedMessage("➡️", "3 To Display Available Electric Cars");
-        displayIndentedMessage("➡️","4 To Make a Car Booking (By Car Registration Number and User ID");
+        displayIndentedMessage("➡️","4 To Make a Car Booking (By Car Registration Number and User ID)");
         displayIndentedMessage("➡️", "5 To Display Cars Booked by a Specific User");
         displayIndentedMessage("➡️","6 To Display All Active Bookings");
         displayIndentedMessage("➡️", "7 To Display All Registered Users");
