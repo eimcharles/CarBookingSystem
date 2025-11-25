@@ -3,23 +3,18 @@ package App;
 import Booking.Booking;
 import Booking.BookingService;
 import Car.Car;
-import Car.CarService;
 import User.User;
 import User.UserService;
 
 import java.util.Scanner;
 import java.util.UUID;
 
-/**
- *      Driver class for Car Booking System CLI
- *
- *      TODO: Implement Driver Class
- * */
+import static Utility.CLIFormatUtility.*;
+import static Utility.CLIFormatUtility.displayCarDetailsFormatted;
 
 public class CarBookingCLI {
 
-
-    public static void makeACarBooking(BookingService bookingService, CarService carService, Scanner scanner){
+    public static void makeACarBooking(UserService userService, BookingService bookingService, Scanner scanner){
 
         displayAllAvailableCars(bookingService);
         ///  TODO implement logic
@@ -65,21 +60,16 @@ public class CarBookingCLI {
         do {
 
             // Prompt user for input
-            System.out.println("\n================================================================================================================");
-            System.out.print("➡️ Please enter the User ID (e.g., 'U1001') to view user booked cars: ");
+            displayIndentedUserInput("➡️", "Please enter the User ID (e.g., 'U1001') to view user booked cars: ");
             userIdInput = scanner.nextLine().trim();
-            System.out.println("================================================================================================================\n");
 
             // Check 1: Handle empty input
             if (userIdInput.isEmpty()) {
-                System.out.println("\n============================================================================================");
-                System.out.println("⚠️ User ID cannot be empty. Please try again.");
-                System.out.println("============================================================================================\n");
+                displayIndentedMessage("⚠️", "User ID cannot be empty. Please try again.");
 
                 // Skips the rest of the current loop body
                 continue;
             }
-
 
             try {
 
@@ -92,9 +82,7 @@ public class CarBookingCLI {
             } catch (IllegalArgumentException e){
 
                 // If conversion fails, print error message and loop continues (isValidInput remains false)
-                System.out.println("\n============================================================================================");
-                System.out.println("❌ Invalid User ID format: '" + userIdInput + "'. Please enter a valid UUID string.");
-                System.out.println("============================================================================================\n");
+                displayIndentedMessage("⚠️","Invalid User ID: "  + userIdInput);
 
                 // List all available users for the user to pick an ID from again.
                 displayAllUsers(userService);
@@ -103,27 +91,19 @@ public class CarBookingCLI {
 
         } while (!isValidInput);
 
-
-
         Car[] bookedCars = bookingService.getUserBookedCarsByUserId(userId);
 
         if (bookedCars == null || bookedCars.length == 0){
 
-            // Fetch and Display Results (only executed once valid UUID is guaranteed) ---
-            System.out.println("\n===============================  RESULTS  ==================================================");
-            System.out.println("❌ User ID '" + userIdInput + "' has no active car bookings.");
-            System.out.println("============================================================================================\n");
+            displayResultsMenu(TITLE_USER_BOOKED_CARS);
+            displayIndentedMessage("❌", "User ID '" + userIdInput + "' has no active car bookings.");
 
         } else {
 
-            // Booked cars were found
-            System.out.println("\n===============================  RESULTS  =================================================");
+            displayResultsMenu(TITLE_USER_BOOKED_CARS);
             for (Car bookedCar : bookedCars) {
-                System.out.println(bookedCar);
+                displayCarDetailsFormatted(bookedCar);
             }
-
-            System.out.println("============================================================================================\n");
-
         }
     }
 
@@ -148,19 +128,15 @@ public class CarBookingCLI {
 
         Car[] availableGasCars = bookingService.getAvailableGasCars();
 
+        displayResultsMenu(TITLE_GAS_CARS);
         if (availableGasCars == null || availableGasCars.length == 0) {
-            System.out.println("\n==========================================  AVAILABLE GAS CARS  ================================================");
-            System.out.println("❌ No gas cars currently available for booking");
+            displayIndentedMessage("❌", "No gas cars currently available for booking");
             return;
         }
 
-        System.out.println("\n==========================================  AVAILABLE GAS CARS  ================================================");
         for (Car availableGasCar : availableGasCars) {
-            System.out.println(availableGasCar);
+            displayCarDetailsFormatted(availableGasCar);
         }
-
-        System.out.println("================================================================================================================\n");
-
     }
 
     /**
@@ -184,20 +160,15 @@ public class CarBookingCLI {
 
         Car[] availableElectricCars = bookingService.getAvailableElectricCars();
 
+        displayResultsMenu(TITLE_ELECTRIC_CARS);
         if (availableElectricCars == null || availableElectricCars.length == 0) {
-            System.out.println("\n==========================================  AVAILABLE ELECTRIC CARS  ============================================");
-            System.out.println("❌ No electric cars currently available for booking");
-            System.out.println("=================================================================================================================\n");
+            displayIndentedMessage("❌", "No electric cars currently available for booking");
             return;
         }
 
-        System.out.println("\n==========================================  AVAILABLE ELECTRIC CARS  ============================================");
         for (Car availableEelectricCar : availableElectricCars) {
-            System.out.println(availableEelectricCar);
+            displayCarDetailsFormatted(availableEelectricCar);
         }
-
-        System.out.println("=================================================================================================================\n");
-
     }
 
     /**
@@ -222,21 +193,15 @@ public class CarBookingCLI {
 
         Car[] availableCars = bookingService.getAllAvailableCars();
 
+        displayResultsMenu(TITLE_ALL_CARS);
         if (availableCars == null || availableCars.length == 0) {
-            System.out.println("\n==========================================  AVAILABLE CARS  =====================================================");
-            System.out.println("❌ No cars currently available for booking");
-            System.out.println("=================================================================================================================\n");
-
+            displayIndentedMessage("❌", "No cars currently available for booking");
             return;
         }
 
-        System.out.println("\n==========================================  AVAILABLE CARS  =====================================================");
         for (Car availableCar : availableCars) {
-            System.out.println(availableCar);
+            displayCarDetailsFormatted(availableCar);
         }
-
-        System.out.println("=================================================================================================================\n");
-
     }
 
     /**
@@ -258,20 +223,15 @@ public class CarBookingCLI {
 
         Booking[] allBookings = bookingService.getAllBookings();
 
+        displayResultsMenu(TITLE_ALL_BOOKINGS);
         if (allBookings == null || allBookings.length == 0){
-            System.out.println("\n==========================================  ACTIVE BOOKINGS  ===================================================");
-            System.out.println("❌ No bookings currently registered in the system");
-            System.out.println("================================================================================================================\n");
+            displayIndentedMessage("❌", "No bookings currently registered in the system");
             return;
         }
 
-        System.out.println("\n==========================================  ACTIVE BOOKINGS  ==================================================");
         for (Booking allBooking : allBookings) {
             System.out.println(allBooking);
         }
-
-        System.out.println("================================================================================================================\n");
-
     }
 
     /**
@@ -293,21 +253,14 @@ public class CarBookingCLI {
 
         User[] users = userService.getAllUsers();
 
+        displayResultsMenu(TITLE_REGISTERED_USERS);
         if (users == null || users.length == 0){
-
-            System.out.println("\n=================================  USERS  ==================================================");
-            System.out.println("❌ No users currently registered in the system");
-            System.out.println("============================================================================================\n");
+            displayIndentedMessage("❌", "No users currently registered in the system");
             return;
-
         }
 
-        System.out.println("\n=================================  USERS  ==================================================");
         for (User user : users) {
-            System.out.println(user);
+            displayUserDetailsFormatted(user);
         }
-
-        System.out.println("============================================================================================\n");
-
     }
 }
