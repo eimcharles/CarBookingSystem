@@ -140,20 +140,20 @@ public class CarBookingCLI {
     }
 
     /**
-     *      Retrieves all currently available
-     *      cars that run on electricity from the
+     *      Retrieves all currently available electric cars from the
      *      BookingService and prints them to the console.
      *
-     *      Availability means the electric car is
-     *       not tied to any active booking.
+     *      Availability means the electric car is not tied to any active booking.
      *
-     *      If no electric cars are available, a
-     *      corresponding message is displayed.
+     *      If no electric cars are available, a corresponding message
+     *      is displayed using `displayIndentedMessage` method.
+     *
+     *      The results are presented under the menu title
+     *      defined by `TITLE_ELECTRIC_CARS`.
      *
      *      @param bookingService
      *
-     *      The BookingService instance
-     *      used to fetch the filtered availability data.
+     *      The BookingService instance used to fetch the filtered availability data.
      */
 
     public static void displayAllAvailableElectricCars(BookingService bookingService) {
