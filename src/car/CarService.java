@@ -1,5 +1,7 @@
 package car;
 
+import exception.CarNotFoundException;
+
 import java.util.NoSuchElementException;
 
 /**
@@ -22,7 +24,7 @@ public class CarService {
             }
         }
 
-        throw new NoSuchElementException(String.format("Car with registration number %s not found", registrationNumber));
+        throw new CarNotFoundException(registrationNumber);
 
     }
 
