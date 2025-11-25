@@ -1,5 +1,6 @@
 package utility;
 
+import booking.Booking;
 import user.User;
 import car.Car;
 
@@ -51,6 +52,19 @@ public class CLIFormatUtility {
         displayIndentedMessage("➡️","Follow the prompts for specific inputs (i.e. creating a Car Booking).");
     }
 
+    public static void displayBookingDetailsFormatted(Booking booking){
+
+        StringBuilder bookingDetailsFormatted = new StringBuilder();
+        String indentation = getIndentedMenuItem();
+
+        bookingDetailsFormatted.append(indentation).append("Booking ID:        ").append(booking.getUserBookingID()).append("\n");
+        bookingDetailsFormatted.append(indentation).append("Booking time:      ").append(booking.getBookingTime()).append("\n");
+        bookingDetailsFormatted.append(indentation).append("Booking Cancelled:    ").append(booking.isBookingCancelled()).append("\n");
+        System.out.println(bookingDetailsFormatted);
+
+        displayUserDetailsFormatted(booking.getUser());
+        displayCarDetailsFormatted(booking.getCar());
+    }
 
     public static void displayUserDetailsFormatted(User user){
 
