@@ -91,29 +91,29 @@ public class CLIFormatUtility {
         System.out.println(carDetailsFormatted);
     }
 
-    public static void displayCenteredMenu(String title){
+    private static void displayCenteredMenu(String title){
         System.out.println(getCenteredMenuTitle(title));
     }
 
-    public static String getCenteredMenuTitle(String title) {
+    private static String getCenteredMenuTitle(String title) {
         int titlePadding = (getMenuSeparation().length() - title.length()) / 2;
         String centeredTitle = String.format("%" + titlePadding + "s%s", "", title);
         return "\n" + centeredTitle + "\n";
     }
 
-    public static void displayMenuSeparation(){
+    private static void displayMenuSeparation(){
         System.out.println("\n" + getMenuSeparation());
     }
 
-    public static String getMenuSeparation(){
+    private static String getMenuSeparation(){
         return "=".repeat(CLI_WIDTH);
     }
 
-    public static String getIndentedMenuItem() {
+    private static String getIndentedMenuItem() {
         return "\t".repeat(TAB_COUNT);
     }
 
-    public static String getIndentedMessage(String symbol, String message) {
+    private static String getIndentedMessage(String symbol, String message) {
         return getIndentedMenuItem() + symbol + " " + message;
     }
 
@@ -121,7 +121,7 @@ public class CLIFormatUtility {
         System.out.println(getIndentedMessage(symbol, message));
     }
 
-    public static String getIndentedUserInput(String symbol, String message) {
+    private static String getIndentedUserInput(String symbol, String message) {
         return getIndentedMenuItem() + symbol + " " + message;
     }
 
