@@ -9,22 +9,27 @@ public class CLIFormatUtility {
     private static final int CLI_WIDTH = 230;
     private static final int TAB_COUNT = 18;
 
-    public static final String TITLE_REGISTERED_USERS = "REGISTERED USERS";
+    public static final String TITLE_REGISTERED_USERS = "ALL REGISTERED USERS";
     public static final String TITLE_ALL_CARS = "ALL AVAILABLE CARS";
     public static final String TITLE_GAS_CARS = "AVAILABLE GAS CARS";
     public static final String TITLE_ELECTRIC_CARS = "AVAILABLE ELECTRIC CARS";
     public static final String TITLE_ALL_BOOKINGS = "ALL ACTIVE BOOKINGS";
-    public static final String TITLE_MAKE_BOOKING = "MAKE BOOKING";
-    public static final String TITLE_USER_BOOKED_CARS = "USER BOOKED CARS";
+    public static final String TITLE_MAKE_BOOKING = "BOOKING BY USER ID AND REGISTRATION NUMBER";
+    public static final String TITLE_USER_BOOKED_CARS = "CARS BOOKED BY SPECIFIC USER";
+
+    public static final String TITLE_MAIN_MENU = "MAIN MENU";
+    public static final String TITLE_INPUT_MENU = "INPUT MENU";
+
+    public static final String TITLE_GREETING_MENU = "🚗 WELCOME TO THE CAR BOOKING MANAGEMENT SYSTEM 🚗";
 
 
     public static void displayMainMenu() {
         displayMenuSeparation();
-        displayCenteredMenu("Main menu");
+        displayCenteredMenu(TITLE_MAIN_MENU);
         displayIndentedMessage("➡️","1 To Display All Available Cars");
         displayIndentedMessage("➡️", "2 To Display Available Gasoline Cars");
         displayIndentedMessage("➡️", "3 To Display Available Electric Cars");
-        displayIndentedMessage("➡️","4 To Make a Car Booking (By Car Registration Number and User ID)");
+        displayIndentedMessage("➡️","4 To Make a Car Booking (By User ID and Car Registration Number)");
         displayIndentedMessage("➡️", "5 To Display Cars Booked by a Specific User");
         displayIndentedMessage("➡️","6 To Display All Active Bookings");
         displayIndentedMessage("➡️", "7 To Display All Registered Users");
@@ -38,18 +43,26 @@ public class CLIFormatUtility {
     }
 
     public static void displayUserInputMenu() {
-        displayCenteredMenu("Input menu");
+        displayCenteredMenu(TITLE_INPUT_MENU);
         displayIndentedMessage("➡️","Enter the number for a menu option (1-8) and press ENTER");
         displayIndentedUserInput("➡️","Please enter your choice (1-8): ");
     }
 
     public static void displayGreeting(){
-        displayCenteredMenu("🚗 Welcome to the car booking management system 🚗");
+        displayCenteredMenu(TITLE_GREETING_MENU);
     }
 
     public static void displayInteractionMenu() {
         displayIndentedMessage("➡️","Enter the number for a menu option (1-8) and press ENTER");
         displayIndentedMessage("➡️","Follow the prompts for specific inputs (i.e. creating a Car Booking).");
+    }
+
+    public static void displayUserIDInteractionMenu() {
+        displayIndentedMessage("⚠️","Please select a USER ID from registered users");
+    }
+
+    public static void displayRegistrationNumberInteractionMenu() {
+        displayIndentedMessage("⚠️","Please select a REGISTTRATION NUMBER from the available cars");
     }
 
     public static void displayBookingDetailsFormatted(Booking booking){
