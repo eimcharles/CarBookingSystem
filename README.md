@@ -1,12 +1,12 @@
 # Car Booking System
 
 ## Overview
-This application serves as a comprehensive system for managing the entire car rental lifecycle, including:
+This application serves as a system for managing the car rental lifecycle, including:
 - Transactional Operations: Facilitating the creation of new car bookings.
 - Inventory Management: Listing all available cars, filtered by type (Gasoline or Electric).
 - User Management: Displaying all registered users and checking a specific user's active reservations.
   
-The system is built with a strong emphasis on clean architecture, modularity, and robust input validation to ensure data integrity and a consistent user experience.
+The system is built with an emphasis on clean architecture, modularity, and robust input validation to ensure data integrity and a consistent user experience.
 
 
 
@@ -18,7 +18,7 @@ The system is built with a strong emphasis on clean architecture, modularity, an
 - ✅ Uses **exception handling**
 - ✅ Uses **defensive copying**
 - 🚫 **Implements interfaces, Abstraction or Polymorphism**
-- 🚫 **Demo - Coming soon!**
+- 🚫 **Release 1 Demo - Coming soon!**
   
 <img width="1667" height="603" alt="Screenshot 2025-11-25 at 5 01 23 PM" src="https://github.com/user-attachments/assets/eae19017-4478-4a12-8b56-9938ac50b7eb" />
 
@@ -32,6 +32,7 @@ The system is built with a strong emphasis on clean architecture, modularity, an
 - Display All Registered Users  
 
 ### Release 2: 
+- 🚫 **Implement Role-Based Access Control**
 - 🚫 **Implement streams**  
 - 🚫 **Implement Maven**
   
@@ -47,10 +48,9 @@ The system is built with a strong emphasis on clean architecture, modularity, an
 ## Requirements & Iteration Constraints
 
 - This project focuses on core Java OOP concepts and introduces advanced tools or frameworks through iterative development.
-- Each constraint was part of a structured learning framework designed to reinforce core Java principles and promote the development of robust, maintainable systems.
 
 ✅ **Requirements** — implemented and completed features in the current release.<br>
-🚫 **Constraints** — features intentionally left for future iterations to reinforce learning objectives
+🚫 **Constraints** — features left for future iterations to reinforce learning objectives
 
 ---
 
