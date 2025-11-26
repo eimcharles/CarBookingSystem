@@ -5,6 +5,7 @@ import booking.BookingService;
 import car.Car;
 import car.CarService;
 import exception.CarNotFoundException;
+import exception.CarUnavailableException;
 import exception.UserNotFoundException;
 import user.User;
 import user.UserService;
@@ -81,6 +82,7 @@ public class CarBookingCLI {
 
     private static UUID promptAndValidateUserID(UserService userService, Scanner scanner){
 
+        // User Input '8ca51d2b-aaaf-4bf2-834a-e02964e10fc3'
         String userIdInput;
 
         // Holds the validated and converted userId object
@@ -113,7 +115,7 @@ public class CarBookingCLI {
                 // Validating User Existence: throws if user doesn't exist
                 userService.getUsersById(userId);
 
-                // Both input and existence are valid
+                // Input and user exist and are valid
                 isValidInput = true;
 
             } catch (IllegalArgumentException e) {
@@ -125,6 +127,12 @@ public class CarBookingCLI {
 
                 // User doesn't exist
                 displayIndentedMessage("❌",e.getMessage());
+
+            } catch (Exception e) {
+
+                // Catches all unforeseen system errors
+                displayIndentedMessage("❌", "Displaying users booked cars failed - Please try again.");
+
             }
 
             // Re-display on invalid inputs
