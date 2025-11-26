@@ -2,6 +2,7 @@ package booking;
 
 import car.Car;
 import car.CarService;
+import exception.CarUnavailableException;
 import user.User;
 
 import java.time.LocalDateTime;
@@ -26,15 +27,8 @@ public class BookingService {
 
     public UUID addCarBooking(User user, String registrationNumber) {
 
-        // Check Car Availability
-        if (isCarCurrentlyBooked(registrationNumber)) {
-
-            throw new IllegalStateException(String.format("Car with registration number %s is currently booked.", registrationNumber));
-
-        }
-
-        //  Get available car based on registration number
-        Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
+        // Check if the car is currently tied to any active booking.
+        Car carToBook = getAvailableCarForBooking(registrationNumber);
 
         // Car is not booked and available - create a new bookingId
         UUID bookingId = UUID.randomUUID();
@@ -108,6 +102,19 @@ public class BookingService {
 
         return filteredBookings;
 
+    }
+
+    public Car getAvailableCarForBooking(String registrationNumber) {
+
+        Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
+
+        if (isCarCurrentlyBooked(registrationNumber)) {
+
+            throw new CarUnavailableException(registrationNumber);
+
+        }
+
+        return carToBook;
     }
 
     public Car[] getUserBookedCarsByUserId(UUID userId) {
