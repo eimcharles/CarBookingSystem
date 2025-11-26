@@ -70,9 +70,9 @@ public class CLIFormatUtility {
         StringBuilder bookingDetailsFormatted = new StringBuilder();
         String indentation = getIndentedMenuItem();
 
-        bookingDetailsFormatted.append(indentation).append("Booking ID:        ").append(booking.getUserBookingID()).append("\n");
-        bookingDetailsFormatted.append(indentation).append("Booking time:      ").append(booking.getBookingTime()).append("\n");
-        bookingDetailsFormatted.append(indentation).append("Booking Cancelled:    ").append(booking.isBookingCancelled()).append("\n");
+        bookingDetailsFormatted.append(indentation).append("Booking ID:             ").append(booking.getUserBookingID()).append("\n");
+        bookingDetailsFormatted.append(indentation).append("Booking time:           ").append(booking.getBookingTime()).append("\n");
+        bookingDetailsFormatted.append(indentation).append("Booking Cancelled:      ").append(booking.isBookingCancelled()).append("\n");
         System.out.println(bookingDetailsFormatted);
 
         displayUserDetailsFormatted(booking.getUser());
