@@ -58,11 +58,11 @@ public class CLIFormatUtility {
     }
 
     public static void displayUserIDInteractionMenu() {
-        displayIndentedMessage("⚠️","Please select a USER ID from all registered users menu");
+        displayIndentedMessage("⚠️","Please select a USER ID from all the registered users menu (e.g., '8ca51d2b-aaaf-4bf2-834a-e02964e10fc3')");
     }
 
     public static void displayRegistrationNumberInteractionMenu() {
-        displayIndentedMessage("⚠️","Please select a REGISTRATION NUMBER from the available cars menu");
+        displayIndentedMessage("⚠️","Please select a REGISTRATION NUMBER from the available cars menu (e.g., '123_3')");
     }
 
     public static void displayBookingDetailsFormatted(Booking booking){
