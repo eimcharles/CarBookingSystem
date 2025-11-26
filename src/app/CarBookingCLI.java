@@ -3,6 +3,9 @@ package app;
 import booking.Booking;
 import booking.BookingService;
 import car.Car;
+import car.CarService;
+import exception.CarNotFoundException;
+import exception.UserNotFoundException;
 import user.User;
 import user.UserService;
 
@@ -78,7 +81,6 @@ public class CarBookingCLI {
 
     private static UUID promptAndValidateUserID(UserService userService, Scanner scanner){
 
-        // User input "8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"
         String userIdInput;
 
         // Holds the validated and converted userId object
@@ -88,15 +90,16 @@ public class CarBookingCLI {
         boolean isValidInput = false;
 
         displayAllUsers(userService);
+        displayUserIDInteractionMenu();
 
         do {
 
-            displayIndentedUserInput("➡️", "Please enter the User ID (e.g., 'U1001') to view user booked cars: ");
+            displayIndentedUserInput("➡️", "Please enter the User ID: ");
             userIdInput = scanner.nextLine().trim();
 
             // Handles empty input
             if (userIdInput.isEmpty()) {
-                displayIndentedMessage("⚠️", "User ID cannot be empty. Please try again.");
+                displayIndentedMessage("⚠️", "User ID cannot be empty - Please try again.");
 
                 // Empty input: Skip the rest of the loop
                 continue;
@@ -104,18 +107,30 @@ public class CarBookingCLI {
 
             try {
 
-                // Valid Input: Attempt to convert the input string to a UUID object.
+                // Validating Input: Convert the input string to a UUID object.
                 userId = UUID.fromString(userIdInput);
 
-                // Exit loop
+                // Validating User Existence: throws if user doesn't exist
+                userService.getUsersById(userId);
+
+                // Both input and existence are valid
                 isValidInput = true;
 
             } catch (IllegalArgumentException e) {
 
-                // Conversion fails: Stay in loop
-                displayIndentedMessage("⚠️","Invalid User ID: "  + userIdInput);
-                displayAllUsers(userService);
+                // Handles bad UUID format
+                displayIndentedMessage("❌","Invalid User ID Format: "  + userIdInput);
 
+            } catch (UserNotFoundException e) {
+
+                // User doesn't exist
+                displayIndentedMessage("❌",e.getMessage());
+            }
+
+            // Re-display on invalid inputs
+            if (!isValidInput){
+                displayAllUsers(userService);
+                displayUserIDInteractionMenu();
             }
 
         } while (!isValidInput);
