@@ -213,12 +213,15 @@ public class CarBookingCLI {
      *      and prints them to the console.
      *
      *      If no active bookings are found,
-     *      a corresponding message is displayed.
+     *      a corresponding message is displayed
+     *      using `displayIndentedMessage` method.
+     *
+     *      The results are presented under the menu title
+     *      defined by `TITLE_ALL_BOOKINGS`.
      *
      *      @param bookingService
      *
-     *      The BookingService instance
-     *      used to fetch the data.
+     *      The BookingService instance used to fetch the data.
      *
      */
 
