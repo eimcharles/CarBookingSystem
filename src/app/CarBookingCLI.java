@@ -48,50 +48,54 @@ public class CarBookingCLI {
 
     public static void displayUserBookedCars(UserService userService, BookingService bookingService, Scanner scanner){
 
+        // User input "8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"
         String userIdInput;
+
+        // Holds the validated and converted userId object
         UUID userId = null;
-        // Set the user input to invalid first
+
+        // Flag for input validation
         boolean isValidInput = false;
 
-        // Display Feature Header and list all available users for the user to pick an ID from.
         displayAllUsers(userService);
 
         do {
 
-            // Prompt user for input
             displayIndentedUserInput("➡️", "Please enter the User ID (e.g., 'U1001') to view user booked cars: ");
             userIdInput = scanner.nextLine().trim();
 
-            // Check 1: Handle empty input
+            // Handles empty input
             if (userIdInput.isEmpty()) {
                 displayIndentedMessage("⚠️", "User ID cannot be empty. Please try again.");
 
-                // Skips the rest of the current loop body
+                // Empty input: Skip the rest of the loop
                 continue;
             }
 
             try {
 
-                // Check 2: Attempt to convert the input string to a UUID object.
+                // Valid Input: Attempt to convert the input string to a UUID object.
                 userId = UUID.fromString(userIdInput);
 
-                // If the conversion succeeds, set flag to true to exit loop
+                // Exit loop
                 isValidInput = true;
 
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
 
-                // If conversion fails, print error message and loop continues (isValidInput remains false)
+                // Conversion fails: Stay in loop
                 displayIndentedMessage("⚠️","Invalid User ID: "  + userIdInput);
-
-                // List all available users for the user to pick an ID from again.
                 displayAllUsers(userService);
 
             }
 
         } while (!isValidInput);
 
+        // End of Input Prompt and Validation Logic
+
+        // Array of booked cars for the validated user ID.
         Car[] bookedCars = bookingService.getUserBookedCarsByUserId(userId);
 
+        // No bookings found for the given userId
         if (bookedCars == null || bookedCars.length == 0){
 
             displayResultsMenu(TITLE_USER_BOOKED_CARS);
@@ -99,6 +103,7 @@ public class CarBookingCLI {
 
         } else {
 
+            // bookings are found, display the results
             displayResultsMenu(TITLE_USER_BOOKED_CARS);
             for (Car bookedCar : bookedCars) {
                 displayCarDetailsFormatted(bookedCar);
