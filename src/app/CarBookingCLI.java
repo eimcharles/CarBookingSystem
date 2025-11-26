@@ -48,6 +48,36 @@ public class CarBookingCLI {
 
     public static void displayUserBookedCars(UserService userService, BookingService bookingService, Scanner scanner){
 
+        // Validates the User ID from the console.
+        UUID validatedUserId = promptAndValidateUserID(userService, scanner);
+
+        // Array of booked cars for the validated user ID.
+        Car[] bookedCars = bookingService.getUserBookedCarsByUserId(validatedUserId);
+
+        // Format and display the results based on retrieved data
+        formatAndDisplayUserBookedCars(bookedCars, validatedUserId.toString());
+    }
+
+    private static void formatAndDisplayUserBookedCars(Car[] bookedCars, String validatedUserId){
+
+        // No bookings found for the given userId
+        if (bookedCars == null || bookedCars.length == 0){
+
+            displayResultsMenu(TITLE_USER_BOOKED_CARS);
+            displayIndentedMessage("❌", "User ID '" + validatedUserId + "' has no active car bookings.");
+
+        } else {
+
+            // bookings are found, display the results
+            displayResultsMenu(TITLE_USER_BOOKED_CARS);
+            for (Car bookedCar : bookedCars) {
+                displayCarDetailsFormatted(bookedCar);
+            }
+        }
+    }
+
+    private static UUID promptAndValidateUserID(UserService userService, Scanner scanner){
+
         // User input "8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"
         String userIdInput;
 
@@ -90,25 +120,8 @@ public class CarBookingCLI {
 
         } while (!isValidInput);
 
-        // End of Input Prompt and Validation Logic
+        return userId;
 
-        // Array of booked cars for the validated user ID.
-        Car[] bookedCars = bookingService.getUserBookedCarsByUserId(userId);
-
-        // No bookings found for the given userId
-        if (bookedCars == null || bookedCars.length == 0){
-
-            displayResultsMenu(TITLE_USER_BOOKED_CARS);
-            displayIndentedMessage("❌", "User ID '" + userIdInput + "' has no active car bookings.");
-
-        } else {
-
-            // bookings are found, display the results
-            displayResultsMenu(TITLE_USER_BOOKED_CARS);
-            for (Car bookedCar : bookedCars) {
-                displayCarDetailsFormatted(bookedCar);
-            }
-        }
     }
 
     /**
