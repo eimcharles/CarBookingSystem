@@ -56,7 +56,7 @@ public class BookingService {
 
     }
 
-    private boolean isCarCurrentlyBooked(String registrationNumber) {
+    public boolean isCarCurrentlyBooked(String registrationNumber) {
 
         // Get bookings
         Booking[] bookings = getAllBookings();
