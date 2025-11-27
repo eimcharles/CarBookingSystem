@@ -1,13 +1,20 @@
 package exception;
 
 /**
- *      CarNotFoundException is a
- *      custom exception thrown when a
- *      request is made for a Car that does not exist
- *      in the system
+ *      CarNotFoundException class throw
+ *      a custom exception when a
+ *      request is made for a Car
+ *      that does not exist in the system.
  * */
 
 public class CarNotFoundException extends RuntimeException {
+
+    /**
+     *   Constructs a new CarNotFoundException
+     *   with a detailed message indicating
+     *   the registration number for the car
+     *   that is not found
+     * */
 
     public CarNotFoundException(String registrationNumber) {
         super(String.format("Car with registration number '%s' not found.", registrationNumber));
