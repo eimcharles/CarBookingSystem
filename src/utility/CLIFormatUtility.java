@@ -51,7 +51,7 @@ public class CLIFormatUtility {
         displayFormattedMessage("➡️", "2 To Display Available Gasoline Cars");
         displayFormattedMessage("➡️", "3 To Display Available Electric Cars");
         displayFormattedMessage("➡️","4 To Make a Car Booking (By User ID and Car Registration Number)");
-        displayFormattedMessage("➡️", "5 To Display Cars Booked (By User ID)");
+        displayFormattedMessage("➡️", "5 To Display Cars Booked by User (By User ID)");
         displayFormattedMessage("➡️","6 To Display All Active Bookings");
         displayFormattedMessage("➡️", "7 To Display All Registered Users");
         displayFormattedMessage("➡️", "8 To View Main Menu");
