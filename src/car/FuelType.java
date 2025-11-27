@@ -1,8 +1,11 @@
 package car;
 
 /**
- *      The FuelType enum represents a list of supported fuel types.
- *      It defines a fixed set of constant values that can be used to specify
+ *      The FuelType enum represents a list
+ *      of supported fuel types.
+ *
+ *      It defines a fixed set of constant
+ *      values that can be used to specify
  *      the FuelType of a car within the application.
  */
 

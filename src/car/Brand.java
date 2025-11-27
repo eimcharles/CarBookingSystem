@@ -1,8 +1,11 @@
 package car;
 
 /**
- *      The Brand enum represents a list of supported car manufacturers.
- *      It defines a fixed set of constant values that can be used to specify
+ *      The Brand enum represents a list
+ *      of supported car manufacturers.
+ *
+ *      It defines a fixed set of constant values
+ *      that can be used to specify
  *      the brand of a car within the application.
  */
 
