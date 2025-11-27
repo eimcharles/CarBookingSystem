@@ -5,8 +5,12 @@ import user.User;
 import car.Car;
 
 /**
- *      CLIFormatUtility is a utility class dedicated
- *      to formatting and displaying all output within the
+ *      CLIFormatUtility is a utility class
+ *      that is part of the CarBookingApplication
+ *      presentation layer.
+ *
+ *      It is dedicated to formatting and
+ *      displaying all output within the
  *      CarBookingCLI class.
  */
 
@@ -30,6 +34,11 @@ public class CLIFormatUtility {
     public static final String SYSTEM_GUIDELINES_MENU = "GUIDELINES";
     public static final String USER_INPUT_MENU = "INPUT MENU";
 
+    /**
+     *      Displays the main greeting message for
+     *      the Car booking application with a
+     *      border.
+     * */
 
     public static void displayCarBookingGreeting(){
         System.out.println(displayMenuBorder());
@@ -38,11 +47,10 @@ public class CLIFormatUtility {
     }
 
     /**
-     *       TODO add documentation
-     *
-     *
-     *
-     *
+     *      Displays the Main menu of the application
+     *      listing all available options (1-9) that
+     *      allow the user to navigate the system,
+     *      view data, and initiate a Car booking
      * */
 
     public static void displayMainMenu() {
@@ -58,6 +66,11 @@ public class CLIFormatUtility {
         displayFormattedMessage("➡️", "9 To Exit Application");
     }
 
+    /**
+     *     Displays a formatted header for a
+     *     given menu name with a border
+     * */
+
     public static void displayResultsByMenuTitle(String menuName){
         System.out.println();
         System.out.println(displayMenuBorder());
@@ -67,18 +80,24 @@ public class CLIFormatUtility {
     }
 
     /**
-     *       TODO add documentation
-     *
-     *
-     *
-     *
+     *      Displays the main system prompt asking
+     *      the user to input their menu item choice.
      * */
-
 
     public static void displayUserInput() {
         displayCenteredMenuTitles(USER_INPUT_MENU);
         displayFormattedUserInput("➡️","Please enter your choice (To view MAIN MENU options press 8): ");
     }
+
+
+    /**
+     *      Displays the system's basic operating
+     *      instructions and guidelines.
+     *
+     *      Guides the user on how to interact
+     *      with the menu system and follow
+     *      input prompts.
+     */
 
     public static void displaySystemGuidelines() {
         displayCenteredMenuTitles(SYSTEM_GUIDELINES_MENU);
@@ -86,33 +105,53 @@ public class CLIFormatUtility {
         displayFormattedMessage("➡️","Follow the prompts for specific inputs (i.e. creating a Car Booking).");
     }
 
-
     /**
-     *       TODO add documentation
+     *       Displays instructions to the user
+     *       when navigating the display cars
+     *       booked by user id menu.
      *
-     *
-     *
-     *
+     *       Guides user to input the
+     *       correct format for a user id
+     *       to retrieve cars booked by a
+     *       user.
      * */
 
     public static void displayCarsBookedByUserIdGuidelines() {
-        displayFormattedMessage("✅️","Please select a USER ID (e.g. 'b10d126a-3608-4980-9f9c-aa179f5cebc3') from the REGISTERED USERS to DISPLAY CARS BOOKED BY USER ID");
+        displayFormattedMessage("✅️","Please select a USER ID (e.g. 'b10d126a-3608-4980-9f9c-aa179f5cebc3') from the REGISTERED USERS to DISPLAY CARS BOOKED BY USER");
     }
+
+    /**
+     *       Displays instructions to the user
+     *       when navigating the booking
+     *       menu.
+     *
+     *       Guides the user to input the
+     *       correct format for a user
+     *       id to begin the Car Booking.
+     * */
 
     public static void displayUserIdBookingGuidelines() {
         displayFormattedMessage("✅️","Please select a USER ID (e.g. 'b10d126a-3608-4980-9f9c-aa179f5cebc3') from the REGISTERED USERS to MAKE A BOOKING");
     }
+
+    /**
+     *       Displays instructions to the user
+     *       when navigating the booking
+     *       menu.
+     *
+     *       Guides the user to input the
+     *       correct format for a Car
+     *       registration number to complete
+     *       the Car Booking.
+     * */
 
     public static void displayRegistrationNumberBookingGuidelines() {
         displayFormattedMessage("✅","Please select a REGISTRATION NUMBER from the AVAILABLE CARS MENU (e.g., '123_3')");
     }
 
     /**
-     *       TODO add documentation
-     *
-     *
-     *
-     *
+     *       Formats and displays the complete details
+     *       of a single Booking object to the console.
      * */
 
     public static void displayFormattedBookingDetails(Booking booking){
@@ -129,6 +168,11 @@ public class CLIFormatUtility {
         displayFormattedCarDetails(booking.getCar());
     }
 
+    /**
+     *       Formats and displays the complete details
+     *       of a single User object to the console.
+     * */
+
     public static void displayFormattedUserDetails(User user){
 
         StringBuilder userDetailsFormatted = new StringBuilder();
@@ -140,6 +184,11 @@ public class CLIFormatUtility {
 
         System.out.println(userDetailsFormatted);
     }
+
+    /**
+     *       Formats and displays the complete details
+     *       of a single Car object to the console.
+     * */
 
     public static void displayFormattedCarDetails(Car Car){
 
@@ -154,18 +203,20 @@ public class CLIFormatUtility {
         System.out.println(carDetailsFormatted);
     }
 
-
     /**
-     *       TODO add documentation
-     *
-     *
-     *
-     *
+     *       Display the passed title
+     *       based on calculations from
+     *       centerMenuTitles()
      * */
 
     private static void displayCenteredMenuTitles(String menuTitles){
         System.out.println(centerMenuTitles(menuTitles));
     }
+
+    /**
+     *      Calculates and applies the necessary
+     *      left padding to center a given title
+     * */
 
     private static String centerMenuTitles(String menuTitle) {
 
@@ -181,48 +232,63 @@ public class CLIFormatUtility {
 
 
     /**
-     *       TODO add documentation
-     *
-     *
-     *
-     *
+     *       Displays an informational message
+     *       to the console with
+     *       a specified icon type and message
      * */
 
     public static void displayFormattedMessage(String messageIcon, String message) {
         System.out.println(getFormattedMessage(messageIcon, message));
     }
 
+    /**
+     *      Builds a formatted message by
+     *      prepending alignOutputByTabCount()
+     *      and the specified icon type to
+     *      the message content.
+     * */
+
     private static String getFormattedMessage(String messageIcon, String message) {
         return alignOutputByTabCount() + messageIcon + " " + message;
     }
 
     /**
-     *       TODO add documentation
-     *
-     *
-     *
-     *
+     *       Displays a prompt to the console with
+     *       a specified icon type and message
      * */
 
     public static void displayFormattedUserInput(String symbol, String message) {
         System.out.print(getFormattedUserInput(symbol, message));
     }
 
+    /**
+     *      Builds a formatted prompt by
+     *      prepending alignOutputByTabCount()
+     *      and the specified icon type to
+     *      the prompt content.
+     * */
+
     private static String getFormattedUserInput(String messageIcon, String message) {
         return alignOutputByTabCount() + messageIcon + " " + message;
     }
 
     /**
-     *       TODO add documentation
-     *
-     *
-     *
-     *
-     * */
+     *      Generates and returns a solid border
+     *      string composed of '=' characters
+     *      that spans the entire width of the
+     *      defined CLI_WIDTH constant.
+     */
 
     private static String displayMenuBorder(){
         return "=".repeat(CLI_WIDTH);
     }
+
+    /**
+     *      Generates and returns a string consisting of
+     *      'TAB_COUNT' number of tab characters.
+     *
+     *      Indentation used across all displayed output.
+     */
 
     private static String alignOutputByTabCount() {
         return "\t".repeat(TAB_COUNT);
