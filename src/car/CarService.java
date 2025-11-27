@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
  *
- *      TODO : implement booking Service business logic
+ *      TODO : implement Car Service business logic
  *      TODO : add comments for methods in CarService
  */
 

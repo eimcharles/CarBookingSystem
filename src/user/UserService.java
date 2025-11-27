@@ -9,8 +9,8 @@ import java.util.UUID;
  *      Service class for managing User objects.
  *      Contains business logic related to users.
  *
- *      TODO : implement booking Service business logic
- *      TODO : add comments for methods in BookingService
+ *      TODO : implement User service business logic
+ *      TODO : add comments for methods in UserService
  */
 
 public class UserService {
