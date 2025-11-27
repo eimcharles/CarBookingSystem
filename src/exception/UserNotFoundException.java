@@ -3,8 +3,8 @@ package exception;
 import java.util.UUID;
 
 /**
- *      UserNotFoundException class is a
- *      custom exception thrown when a
+ *      UserNotFoundException class
+ *      throws a custom exception when a
  *      request is made for a User that
  *      does not exist in the system.
  * */
