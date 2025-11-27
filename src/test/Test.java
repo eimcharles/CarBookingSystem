@@ -13,21 +13,21 @@ import java.util.UUID;
 import static utility.CLIFormatUtility.*;
 
 /**
- *      Test.Test class for Car Booking System CLI
+ *      Test class for Car Booking System CLI
+ *
+ *      Serves as a Testing environment to
+ *      ensure proper implementation and
+ *      output.
  * */
 
 public class Test {
 
-    public static void main(String[] args) {
-
+//    public static void main(String[] args) {
+//
 //        Configuration configuration = new Configuration();
 //        Scanner scanner = new Scanner(System.in);
 //        CarBookingCLI.makeACarBooking(configuration.getUserService(), configuration.getBookingService(), scanner);
-
-
-        UserDAO userDAO = new UserDAO();
-        UserService userService = new UserService(userDAO);
-        userService.getUsersById(UUID.fromString("fe5b09ca-1593-4813-8cf4-6566d4b0349c"));
-
-    }
+//
+//
+//    }
 }
