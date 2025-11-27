@@ -13,11 +13,11 @@ The system is built with an emphasis on clean architecture, modularity, and robu
 ---
 
 ### Release 1 (In Progress 🚀):
-- ✅ Uses **arrays** for storing data 
-- ✅ Uses **dependency injection**
-- ✅ Uses **exception handling**
-- ✅ Uses **defensive copying**
-- 🚫 **Implements interfaces, abstraction or polymorphism**
+- ✅ Uses **Arrays** for storing all data 
+- ✅ Uses **Dependency Injection**
+- ✅ Uses **Exception Handling**
+- ✅ Uses **Defensive Copying**
+- 🚫 **Implements Interfaces**
 - 🚫 **Release 1 Demo - Coming soon!**
   
 <img width="881" height="643" alt="Screenshot 2025-11-27 at 3 19 57 PM" src="https://github.com/user-attachments/assets/eb81fbfb-d52c-41b5-ba42-17c772310556" />
@@ -32,12 +32,13 @@ The system is built with an emphasis on clean architecture, modularity, and robu
 - Display All Registered Users  
 
 ### Release 2: 
+- 🚫 **Implements Abstraction / Polymorphism**
 - 🚫 **Implement Role-Based Access Control**
-- 🚫 **Implement streams**  
+- 🚫 **Implement Streams**  
 - 🚫 **Implement Maven**
   
 ### Release 3:   
-- 🚫 **Implement unit testing**  
+- 🚫 **Implement Unit Testing**  
 - 🚫 **Implement Spring Boot Server**
 
 ### Release 4: 
