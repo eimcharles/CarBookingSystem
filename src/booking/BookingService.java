@@ -13,6 +13,8 @@ import java.util.UUID;
  *      Contains business logic related to bookings.
  *
  *      TODO : implement booking Service business logic
+ *      TODO : add comments for methods in BookingService
+ *
  */
 
 public class BookingService {
