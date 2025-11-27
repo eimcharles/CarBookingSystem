@@ -17,9 +17,10 @@ The system is built with an emphasis on clean architecture, modularity, and robu
 - ✅ Uses **dependency injection**
 - ✅ Uses **exception handling**
 - ✅ Uses **defensive copying**
-- 🚫 **Implements interfaces, Abstraction or Polymorphism**
+- 🚫 **Implements interfaces, abstraction or polymorphism**
 - 🚫 **Release 1 Demo - Coming soon!**
-  <img width="1228" height="592" alt="Screenshot 2025-11-26 at 3 22 38 PM" src="https://github.com/user-attachments/assets/97661932-a401-4fac-a1cf-18d56cab43a5" />
+  
+<img width="890" height="611" alt="Screenshot 2025-11-26 at 10 32 27 PM" src="https://github.com/user-attachments/assets/01e2fde9-4882-4f6a-b21b-105df46d686b" />
 
 
 ### Release 1 Features
