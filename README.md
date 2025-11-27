@@ -19,15 +19,15 @@ The system is built with an emphasis on clean architecture, modularity, and robu
 - ✅ Uses **defensive copying**
 - 🚫 **Implements interfaces, abstraction or polymorphism**
 - 🚫 **Release 1 Demo - Coming soon!**
-
-<img width="929" height="618" alt="Screenshot 2025-11-27 at 3 16 05 PM" src="https://github.com/user-attachments/assets/dbe92c44-3d28-4242-a98e-44a06cfbbf90" />
+  
+<img width="881" height="643" alt="Screenshot 2025-11-27 at 3 19 57 PM" src="https://github.com/user-attachments/assets/eb81fbfb-d52c-41b5-ba42-17c772310556" />
 
 ### Release 1 Features
 - Display All Available Cars
 - Display Available Gasoline Cars
 - Display Available Electric Cars
 - Make a Car Booking (By User ID and Car Registration Number)  
-- Display Cars Booked by a Specific User
+- Display Cars Booked by User (By User ID)
 - Display All Active Bookings
 - Display All Registered Users  
 
