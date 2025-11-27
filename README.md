@@ -19,9 +19,8 @@ The system is built with an emphasis on clean architecture, modularity, and robu
 - ✅ Uses **defensive copying**
 - 🚫 **Implements interfaces, abstraction or polymorphism**
 - 🚫 **Release 1 Demo - Coming soon!**
-  
-<img width="890" height="611" alt="Screenshot 2025-11-26 at 10 32 27 PM" src="https://github.com/user-attachments/assets/01e2fde9-4882-4f6a-b21b-105df46d686b" />
 
+<img width="929" height="618" alt="Screenshot 2025-11-27 at 3 16 05 PM" src="https://github.com/user-attachments/assets/dbe92c44-3d28-4242-a98e-44a06cfbbf90" />
 
 ### Release 1 Features
 - Display All Available Cars
