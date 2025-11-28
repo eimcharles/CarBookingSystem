@@ -3,6 +3,8 @@ package app;
 import booking.Booking;
 import booking.BookingService;
 import car.Car;
+import exception.CarNotFoundException;
+import exception.CarUnavailableException;
 import exception.UserNotFoundException;
 import user.User;
 import user.UserService;
@@ -24,6 +26,63 @@ public class CarBookingCLI {
     public static void makeACarBooking(UserService userService, BookingService bookingService, Scanner scanner) {
 
         ///  TODO implement logic
+    }
+
+    public static void promptAndValidateCarRegistration(BookingService bookingService, Scanner scanner){
+
+        // User input "123_1"
+        String userRegistrationInput;
+
+        // Flag for input validation
+        boolean isValidInput = false;
+
+        do {
+
+            displayFormattedUserInput("➡️", "Please enter the Car Registration Number: ");
+            userRegistrationInput = scanner.nextLine().trim();
+
+            // Handles empty input
+            if (userRegistrationInput.isEmpty()) {
+                displayFormattedMessage("⚠️", "Car Registration Number cannot be empty - Please try again.");
+
+                // Empty input: Skip the rest of the loop
+                continue;
+
+            }
+
+            try {
+
+                // Validates available car: existence and car current availability
+                bookingService.getAvailableCarForBooking(userRegistrationInput);
+
+                // Car exists and is currently available
+                isValidInput = true;
+
+            } catch (CarNotFoundException e) {
+
+                // Car does not exist
+                displayFormattedMessage("⚠️", e.getMessage());
+
+            } catch (CarUnavailableException e) {
+
+                // Car is unavailable
+                displayFormattedMessage("⚠️", e.getMessage());
+
+            } catch (Exception e) {
+
+                // Catches all unforeseen system errors
+                displayFormattedMessage("❌", "Booking attempt failed - Please try again.");
+
+            }
+
+            // Re-display on invalid inputs
+            if (!isValidInput){
+                displayAllAvailableCars(bookingService);
+                displayRegistrationNumberBookingGuidelines();
+            }
+
+        } while (!isValidInput);
+
     }
 
     /**
