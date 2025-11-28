@@ -25,6 +25,22 @@ public class CarBookingCLI {
 
     public static void makeACarBooking(UserService userService, BookingService bookingService, Scanner scanner) {
 
+        // Menus, instructions for entering userId to make booking
+        displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
+        displayUserIdBookingGuidelines();
+        displayAllUsers(userService);
+
+        // Validates the User ID from the console.
+        UUID validatedUserId = promptAndValidateUserID(userService, scanner);
+
+        // Menus, instructions for entering registration number to make booking
+        displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
+        displayRegistrationNumberBookingGuidelines();
+        displayAllAvailableCars(bookingService);
+
+        // Validates the Car registration number from the console.
+        String validatedCarRegistration = promptAndValidateCarRegistrationNumber(bookingService, scanner);
+
     }
 
     private static String promptAndValidateCarRegistrationNumber(BookingService bookingService, Scanner scanner){
