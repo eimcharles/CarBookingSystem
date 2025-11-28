@@ -11,7 +11,7 @@ import java.util.Arrays;
  *      This implementation stores and manages cars using arrays.
  */
 
-public class ArrayCarDAO {
+public class ArrayCarDAO implements CarDAO {
 
     private final Car[] carDAO;
 
@@ -27,6 +27,7 @@ public class ArrayCarDAO {
         };
     }
 
+    @Override
     public Car[] getCarsDAO() {
         // Copy of Car objects returned from carDAO
         return Arrays.copyOf(this.carDAO, this.carDAO.length);
