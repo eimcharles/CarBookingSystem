@@ -26,6 +26,30 @@ public class CarBookingCLI {
         ///  TODO implement logic
     }
 
+    /**
+     *      Retrieves all cars that are associated to a user from
+     *      the BookingService and prints them to the console using the
+     *      standardized `formatAndDisplayUserBookedCars()` method.
+     *
+     *      This method guides the user to select and validates a User ID
+     *      using 'promptAndValidateUserID()' method, once the user input is
+     *      validated it then retrieves the corresponding cars currently booked by that user.
+     *
+     *      If no cars are actively booked by the user, a corresponding message
+     *      is displayed using the `displayFormattedMessage()` method within the helper.
+     *
+     *      The results are presented in formatAndDisplayUserBookedCars()
+     *      defined by `TITLE_USER_BOOKED_CARS`.
+     *
+     *      @param userService
+     *      The UserService instance used to display all registered users and validate the entered ID.
+     *
+     *      @param bookingService
+     *      The BookingService instance used to fetch the booked cars associated with the user.
+     *
+     *      @param scanner
+     *      The Scanner object used for reading the user's input (the User ID).
+     */
 
     public static void displayUserBookedCars(UserService userService, BookingService bookingService, Scanner scanner){
 
@@ -138,7 +162,7 @@ public class CarBookingCLI {
      *      Availability means the gas car is not tied to any active booking.
      *
      *      If no gas cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage` method.
+     *      is displayed using `displayFormattedMessage()` method.
      *
      *      The results are presented under the menu title
      *      defined by `TITLE_GAS_CARS`.
@@ -172,7 +196,7 @@ public class CarBookingCLI {
      *      Availability means the electric car is not tied to any active booking.
      *
      *      If no electric cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage` method.
+     *      is displayed using `displayFormattedMessage()` method.
      *
      *      The results are presented under the menu title
      *      defined by `TITLE_ELECTRIC_CARS`.
@@ -206,7 +230,7 @@ public class CarBookingCLI {
      *      Availability means the car is not tied to any active booking.
      *
      *      If no cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage` method.
+     *      is displayed using `displayFormattedMessage()` method.
      *
      *      The results are presented under the menu title
      *      defined by `TITLE_ALL_CARS`.
