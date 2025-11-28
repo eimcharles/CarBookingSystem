@@ -15,8 +15,8 @@ This application serves as a system for managing the car rental lifecycle, inclu
 - ✅ Make use of **dependency injection** to ensure decoupled components. 
 - ✅ Makes use of **exception handling** for custom exceptions. 
 - ✅ Makes use of **arrays** for storing all data. 
-- ✅ Makes uses of **defensive copying** for all data access objects. 
-- ✅ Makes uses **interfaces** for dependency inversion for data access objects. 
+- ✅ Makes use of **defensive copying** for all data access objects. 
+- ✅ Makes use of **interfaces** for dependency inversion for data access objects. 
 - 🚫 **Release 1 Demo - Coming soon!**
 
 ### Release 1 Features:
