@@ -1,4 +1,8 @@
-package car;
+package car.dao;
+
+import car.Brand;
+import car.Car;
+import car.FuelType;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

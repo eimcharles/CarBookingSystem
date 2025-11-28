@@ -1,4 +1,6 @@
-package car;
+package car.dao;
+
+import car.Car;
 
 /**
  *      CarDAO defines the contract for all data
