@@ -1,4 +1,6 @@
-package booking;
+package booking.dao;
+
+import booking.Booking;
 
 /**
  *      BookingDAO defines the contract for all data

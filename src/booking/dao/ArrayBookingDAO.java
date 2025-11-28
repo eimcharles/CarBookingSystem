@@ -1,4 +1,6 @@
-package booking;
+package booking.dao;
+
+import booking.Booking;
 
 import java.util.Arrays;
 

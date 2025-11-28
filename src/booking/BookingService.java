@@ -1,5 +1,6 @@
 package booking;
 
+import booking.dao.ArrayBookingDAO;
 import car.Car;
 import car.CarService;
 import exception.CarUnavailableException;

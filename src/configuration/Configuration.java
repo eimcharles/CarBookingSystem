@@ -1,6 +1,6 @@
 package configuration;
 
-import booking.ArrayBookingDAO;
+import booking.dao.ArrayBookingDAO;
 import booking.BookingService;
 import car.ArrayCarDAO;
 import car.CarService;
