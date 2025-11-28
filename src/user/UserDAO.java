@@ -10,20 +10,22 @@ import java.util.UUID;
 
 public class UserDAO {
 
-    private static final User[] userDAO;
+    private final User[] userDAO;
 
-    static {
+    public UserDAO() {
 
-        userDAO = new User[]{
+        this.userDAO = new User[]
 
-            new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "Charles", "Eimer"),
-            new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "Leblond"),
+                {
+
+                new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "Charles", "Eimer"),
+                new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "Leblond"),
 
         };
     }
 
-    public static User[] getUserDAO() {
+    public  User[] getUserDAO() {
         // Copy of User objects returned from userDAO
-        return Arrays.copyOf(userDAO, userDAO.length);
+        return Arrays.copyOf(this.userDAO,this.userDAO.length);
     }
 }
