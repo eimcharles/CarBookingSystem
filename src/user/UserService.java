@@ -1,6 +1,7 @@
 package user;
 
 import exception.UserNotFoundException;
+import user.dao.ArrayUserDAO;
 
 import java.util.UUID;
 

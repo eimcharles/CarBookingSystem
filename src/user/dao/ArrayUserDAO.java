@@ -1,4 +1,6 @@
-package user;
+package user.dao;
+
+import user.User;
 
 import java.util.Arrays;
 import java.util.UUID;

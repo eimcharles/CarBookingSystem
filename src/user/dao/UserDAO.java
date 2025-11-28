@@ -1,4 +1,6 @@
-package user;
+package user.dao;
+
+import user.User;
 
 /**
  *      UserDAO defines the contract for all data

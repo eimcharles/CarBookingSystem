@@ -4,7 +4,7 @@ import booking.dao.ArrayBookingDAO;
 import booking.BookingService;
 import car.dao.ArrayCarDAO;
 import car.CarService;
-import user.ArrayUserDAO;
+import user.dao.ArrayUserDAO;
 import user.UserService;
 
 /**
