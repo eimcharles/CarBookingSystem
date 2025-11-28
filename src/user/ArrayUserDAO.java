@@ -6,7 +6,7 @@ import java.util.UUID;
 /**
  *      ArrayUserDAO is a Data Access Object (DAO)
  *      class for managing User objects,
- *      it implements the IUserDAO contract.
+ *      it implements the UserDAO contract.
  *
  *      This implementation stores and manages users using arrays.
  */
