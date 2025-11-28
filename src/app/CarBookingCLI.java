@@ -25,10 +25,9 @@ public class CarBookingCLI {
 
     public static void makeACarBooking(UserService userService, BookingService bookingService, Scanner scanner) {
 
-        ///  TODO implement logic
     }
 
-    public static void promptAndValidateCarRegistration(BookingService bookingService, Scanner scanner){
+    private static String promptAndValidateCarRegistrationNumber(BookingService bookingService, Scanner scanner){
 
         // User input "123_1"
         String userRegistrationInput;
@@ -82,6 +81,8 @@ public class CarBookingCLI {
             }
 
         } while (!isValidInput);
+
+        return userRegistrationInput;
 
     }
 
