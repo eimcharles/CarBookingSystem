@@ -20,7 +20,7 @@ The system is built with an emphasis on clean architecture, modularity, and robu
 - 🚫 **Implements Interfaces**
 - 🚫 **Release 1 Demo - Coming soon!**
   
-<img width="881" height="643" alt="Screenshot 2025-11-27 at 3 19 57 PM" src="https://github.com/user-attachments/assets/eb81fbfb-d52c-41b5-ba42-17c772310556" />
+<img width="1007" height="661" alt="Screenshot 2025-11-28 at 9 42 03 AM" src="https://github.com/user-attachments/assets/549ca6b5-f541-4bf8-8328-c950b896b9d6" />
 
 ### Release 1 Features
 - Display All Available Cars
