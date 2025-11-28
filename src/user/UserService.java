@@ -2,7 +2,6 @@ package user;
 
 import exception.UserNotFoundException;
 
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 /**

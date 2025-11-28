@@ -2,8 +2,6 @@ package car;
 
 import exception.CarNotFoundException;
 
-import java.util.NoSuchElementException;
-
 /**
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
