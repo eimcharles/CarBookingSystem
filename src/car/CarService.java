@@ -12,10 +12,10 @@ import exception.CarNotFoundException;
 
 public class CarService {
 
-    private final CarDAO carDAO;
+    private final ArrayCarDAO arrayCarDAO;
 
-    public CarService(CarDAO carDAO) {
-        this.carDAO = carDAO;
+    public CarService(ArrayCarDAO arrayCarDAO) {
+        this.arrayCarDAO = arrayCarDAO;
     }
 
     public Car getCarByRegistrationNumber(String registrationNumber) {
@@ -54,7 +54,7 @@ public class CarService {
 
     public Car[] getAllCars() {
         // Passing the copy of Car objects returned from DAO layer
-        return this.carDAO.getCarsFromDAO();
+        return this.arrayCarDAO.getCarsDAO();
     }
 
     public Car[] getElectricCars() {
