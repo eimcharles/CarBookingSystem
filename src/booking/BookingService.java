@@ -19,11 +19,11 @@ import java.util.UUID;
 
 public class BookingService {
 
-    private final BookingDAO bookingDAO;
+    private final ArrayBookingDAO arrayBookingDAO;
     private final CarService carService;
 
-    public BookingService(BookingDAO bookingDAO, CarService carService) {
-        this.bookingDAO = bookingDAO;
+    public BookingService(ArrayBookingDAO arrayBookingDAO, CarService carService) {
+        this.arrayBookingDAO = arrayBookingDAO;
         this.carService = carService;
     }
 
@@ -36,7 +36,7 @@ public class BookingService {
         UUID bookingId = UUID.randomUUID();
 
         // Create and Save Booking in bookingDAO
-        this.bookingDAO.addBooking(
+        this.arrayBookingDAO.addBooking(
 
                 new Booking(
                         bookingId,
@@ -81,7 +81,7 @@ public class BookingService {
     public Booking[] getAllBookings() {
 
         // Booking returned from DAO layer
-        Booking[] bookings = this.bookingDAO.getBookingDao();
+        Booking[] bookings = this.arrayBookingDAO.getBookingDao();
 
         // If bookings are null or empty, return empty array
         if (bookings == null || bookings.length == 0){
@@ -122,7 +122,7 @@ public class BookingService {
     public Car[] getUserBookedCarsByUserId(UUID userId) {
 
         // Bookings returned from DAO layer
-        Booking[] bookings = this.bookingDAO.getBookingDao();
+        Booking[] bookings = this.arrayBookingDAO.getBookingDao();
 
         // If bookings are null or empty, return empty array
         if (bookings == null || bookings.length == 0) {
@@ -167,7 +167,7 @@ public class BookingService {
         }
 
         // Booking returned from DAO layer
-        Booking[] bookings = bookingDAO.getBookingDao();
+        Booking[] bookings = arrayBookingDAO.getBookingDao();
 
         // If bookings are null or empty, return allCars
         if (bookings == null || bookings.length == 0) {

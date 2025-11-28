@@ -1,6 +1,6 @@
 package configuration;
 
-import booking.BookingDAO;
+import booking.ArrayBookingDAO;
 import booking.BookingService;
 import car.ArrayCarDAO;
 import car.CarService;
@@ -30,11 +30,11 @@ public class Configuration {
 
         ArrayCarDAO arrayCarDAO = new ArrayCarDAO();
         ArrayUserDAO arrayUserDAO = new ArrayUserDAO();
-        BookingDAO bookingDAO = new BookingDAO();
+        ArrayBookingDAO arrayBookingDAO = new ArrayBookingDAO();
 
         this.carService = new CarService(arrayCarDAO);
         this.userService = new UserService(arrayUserDAO);
-        this.bookingService = new BookingService(bookingDAO, getCarService());
+        this.bookingService = new BookingService(arrayBookingDAO, getCarService());
     }
 
     public CarService getCarService() {
