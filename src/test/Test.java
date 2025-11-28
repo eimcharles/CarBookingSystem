@@ -1,5 +1,6 @@
 package test;
 
+import app.CarBookingCLI;
 import configuration.Configuration;
 
 import booking.BookingService;
@@ -7,6 +8,8 @@ import booking.dao.ArrayBookingDAO;
 
 import car.CarService;
 import car.dao.ArrayCarDAO;
+import user.UserService;
+import user.dao.ArrayUserDAO;
 
 import java.util.Scanner;
 
@@ -28,8 +31,12 @@ public class Test {
         ArrayCarDAO arrayCarDAO = new ArrayCarDAO();
         CarService carService = new CarService(arrayCarDAO);
 
+        ArrayUserDAO arrayUserDAO = new ArrayUserDAO();
+        UserService userService = new UserService(arrayUserDAO);
+
         ArrayBookingDAO arrayBookingDAO = new ArrayBookingDAO();
         BookingService bookingService = new BookingService(arrayBookingDAO, carService);
+        CarBookingCLI.makeACarBooking(userService, bookingService, scanner);
 
     }
 }
