@@ -4,7 +4,7 @@ import booking.BookingDAO;
 import booking.BookingService;
 import car.CarDAO;
 import car.CarService;
-import user.UserDAO;
+import user.ArrayUserDAO;
 import user.UserService;
 
 /**
@@ -29,11 +29,11 @@ public class Configuration {
     public Configuration() {
 
         CarDAO carDAO = new CarDAO();
-        UserDAO userDAO = new UserDAO();
+        ArrayUserDAO arrayUserDAO = new ArrayUserDAO();
         BookingDAO bookingDAO = new BookingDAO();
 
         this.carService = new CarService(carDAO);
-        this.userService = new UserService(userDAO);
+        this.userService = new UserService(arrayUserDAO);
         this.bookingService = new BookingService(bookingDAO, getCarService());
     }
 

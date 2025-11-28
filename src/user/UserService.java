@@ -14,15 +14,15 @@ import java.util.UUID;
 
 public class UserService {
 
-    private final UserDAO userDAO;
+    private final ArrayUserDAO arrayUserDAO;
 
-    public UserService(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserService(ArrayUserDAO arrayUserDAO) {
+        this.arrayUserDAO = arrayUserDAO;
     }
 
     public User[] getAllUsers() {
         // Passing the copy of User objects returned from DAO layer
-        return this.userDAO.getUserDAO();
+        return this.arrayUserDAO.getUserDAO();
     }
 
     public User getUsersById(UUID id) {
