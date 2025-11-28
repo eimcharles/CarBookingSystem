@@ -1,4 +1,4 @@
-package utility;
+package app;
 
 import booking.Booking;
 import user.User;

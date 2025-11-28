@@ -12,8 +12,8 @@ import user.UserService;
 import java.util.Scanner;
 import java.util.UUID;
 
-import static utility.CLIFormatUtility.*;
-import static utility.CLIFormatUtility.displayFormattedCarDetails;
+import static app.CLIFormatUtility.*;
+import static app.CLIFormatUtility.displayFormattedCarDetails;
 
 /**
  *      TODO write comment for CarBookingCLI
