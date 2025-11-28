@@ -1,7 +1,7 @@
 package car;
 
 /**
- *      CarDAO Defines the contract for all data
+ *      CarDAO defines the contract for all data
  *      access operations related to Car entities
  * */
 

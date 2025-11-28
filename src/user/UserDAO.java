@@ -1,7 +1,7 @@
 package user;
 
 /**
- *      UserDAO Defines the contract for all data
+ *      UserDAO defines the contract for all data
  *      access operations related to User entities
  * */
 

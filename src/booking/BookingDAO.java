@@ -1,7 +1,7 @@
 package booking;
 
 /**
- *      BookingDAO Defines the contract for all data
+ *      BookingDAO defines the contract for all data
  *      access operations related to Booking entities
  * */
 
