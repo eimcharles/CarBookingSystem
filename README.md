@@ -53,11 +53,11 @@ Maven application that serves as a system for managing the car rental lifecycle,
 ## Release 3 Implementation Details  
 - 🚫 Makes use of **React / Angular** as frontend for the client-side user interface.
 - 🚫 Makes use of **Spring Email** for sending transactional notifications and alerts.
-- 🚫 Makes use of **Spring Security** for handling user authentication, role-based authorization, and securing application endpoints.
+- 🚫 Makes use of **Spring Security** for user authentication, role-based authorization, and securing application endpoints.
 - 🚫 Makes use of **Spring Lombok** for reducing boilerplate and logging utilities.
 - 🚫 Makes use of **CI/CD** for automating the build, test, and deployment pipeline.
 - 🚫 Makes use of **Docker** for containerizing the application for consistent deployment and portability.
-- 🚫 Makes use of **Kubernetes** for orchestrating the deployment, scaling, and management of application containers.
+- 🚫 Makes use of **Kubernetes** for orchestrating deployment and management of application containers.
   
 ---
 
