@@ -1,62 +1,71 @@
 # Car Booking System
 
-## Overview
-This application serves as a system for managing the car rental lifecycle, including:
+## Application Overview
+Maven application that serves as a system for managing the car rental lifecycle, including:
 - Transactional Operations: Facilitating the creation of new car bookings.
 - Inventory Management: Listing all available cars, filtered by type (Gasoline or Electric).
 - User Management: Displaying all registered users and checking a specific user's active reservations.
   
 ---
 
-## Release 1 (In Progress 🚀):  
+## Release 1 (In Progress 🚀) 
 <img width="1007" height="661" alt="Screenshot 2025-11-28 at 9 42 03 AM" src="https://github.com/user-attachments/assets/549ca6b5-f541-4bf8-8328-c950b896b9d6" />
 
-### Architectural Principles and Implementation Details
-- ✅ Make use of **dependency injection** to ensure decoupled components. 
-- ✅ Makes use of **exception handling** for custom exceptions. 
-- ✅ Makes use of **arrays** for storing all data. 
-- ✅ Makes use of **defensive copying** for all data access objects. 
-- ✅ Makes use of **interfaces** for dependency inversion for data access objects. 
+### Demo 
 - 🚫 **Release 1 Demo - Coming soon!**
 
-### Release 1 Features:
+### Release 1 Implementation Details
+- 🚫 Make use of **Maven** to manage project's dependencies and build lifecycle.
+- 🚫 Makes use of **SOLID principles** to ensure maintainable, and flexible object-oriented design.
+- ✅ Make use of **Dependency Injection** to ensure decoupled components. 
+- ✅ Makes use of **Exception Handling** for custom exceptions. 
+- ✅ Makes use of **Arrays** for storing all data. 
+- ✅ Makes use of **Defensive Copying** for all data access objects. 
+- ✅ Makes use of **Interfaces** for dependency inversion for data access objects.
+- 🚫 Makes use of **Unit Testing** using JUnit for correctness.
+
+### Release 1 Features
 - Display All Available Cars
 - Display Available Gasoline Cars
 - Display Available Electric Cars
 - Make a Car Booking (By User ID and Car Registration Number)  
 - Display Cars Booked by User (By User ID)
+- Cancel a Car Booking (By Booking ID)
 - Display All Active Bookings
 - Display All Registered Users  
 
 ---
 
-## Release 2: 
-- 🚫 **Implements Abstraction / Polymorphism**
-- 🚫 **Implement Streams**  
-- 🚫 **Implement Maven**
+## Release 2 Implementation Details
+- 🚫 Makes use of **Spring Boot** to manage project's configurations.
+- 🚫 Makes use of **Spring Data JPA with SQL database** for persistent storage and retrieval of application data.
+- 🚫 Makes use of **Streams** for functional programming
+- 🚫 Makes use of **Generics** for type-safe API response mapping.
+- 🚫 Makes use of **Mocking** using Mockito for testing component interactions
+- 🚫 Makes use of **Java Test Containers** to for isolated database environments for integration tests
+- 🚫 Makes use of **Abstraction / Polymorphism** to define clear interfaces for components.
 
-## Release 2 Features:
-- Role-based access control
-  
+### Release 2 Features
+- Role-based access control (User / Administrator)
+    
 ---
   
-## Release 3:   
-- 🚫 **Implement Unit Testing**  
-- 🚫 **Implement Spring Boot Server**
-
----
-
-## Release 4: 
-- 🚫 **Implement Client**
+## Release 3 Implementation Details  
+- 🚫 Makes use of **React / Angular** as frontend for the client-side user interface.
+- 🚫 Makes use of **Spring Email** for sending transactional notifications and alerts.
+- 🚫 Makes use of **Spring Security** for handling user authentication, role-based authorization, and securing application endpoints.
+- 🚫 Makes use of **Spring Lombok** for reducing boilerplate and logging utilities.
+- 🚫 Makes use of **CI/CD** for automating the build, test, and deployment pipeline.
+- 🚫 Makes use of **Docker** for containerizing the application for consistent deployment and portability.
+- 🚫 Makes use of **Kubernetes** for orchestrating the deployment, scaling, and management of application containers.
   
 ---
 
 ## Requirements & Iteration Constraints
-
 - This project focuses on core Java OOP concepts and introduces advanced tools or frameworks through iterative development.
 
-✅ **Requirements** — implemented and completed features in the current release.<br>
-🚫 **Constraints** — features left for future iterations to reinforce learning objectives
+✅ **Requirements** — completed features in the current release.<br>
+🚫 **Constraints** — features to be implemented in the current release.
 
 ---
 
