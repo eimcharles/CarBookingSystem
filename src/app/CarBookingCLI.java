@@ -41,6 +41,51 @@ public class CarBookingCLI {
         // Validates the Car registration number from the console.
         String validatedCarRegistration = promptAndValidateCarRegistrationNumber(bookingService, scanner);
 
+        // Process booking once user ID and Car registration are validated
+        processBookingTransaction(userService, bookingService, validatedUserId, validatedCarRegistration);
+
+    }
+
+    private static void processBookingTransaction(UserService userService, BookingService bookingService, UUID validatedUserId, String validatedCarRegistration){
+
+        try {
+
+            // Attempt to create user object using the validated UUID
+            User user = userService.getUsersById(validatedUserId);
+
+            // if the user doesn't exist by userId
+            if (user == null) {
+
+                displayFormattedMessage("❌", "No user found with id " + validatedUserId.toString());
+                return;
+
+            }
+
+            // Attempt to create the booking by associating the user and car registration
+            UUID userBookingID = bookingService.addCarBooking(user, validatedCarRegistration);
+
+            // Display booking menu
+            displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
+
+            // Display booking success message
+            displayFormattedMessage("✅", "Successfully booked car with registration number " + validatedCarRegistration + " for " + user.getName() + " with booking id " + userBookingID);
+
+        } catch (CarNotFoundException e) {
+
+            // Car does not exist
+            displayFormattedMessage("⚠️",e.getMessage());
+
+        } catch (CarUnavailableException e) {
+
+            // Car is unavailable
+            displayFormattedMessage("⚠️", e.getMessage());
+
+        } catch (Exception e) {
+
+            displayFormattedMessage("❌", "Booking attempt failed - Please try again.");
+
+        }
+
     }
 
     private static String promptAndValidateCarRegistrationNumber(BookingService bookingService, Scanner scanner){
