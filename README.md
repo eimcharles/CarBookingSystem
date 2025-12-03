@@ -9,7 +9,7 @@ Maven application that serves as a system for managing the car rental lifecycle,
 ---
 
 ## Release 1 (In Progress 🚀) 
-<img width="1007" height="661" alt="Screenshot 2025-11-28 at 9 42 03 AM" src="https://github.com/user-attachments/assets/549ca6b5-f541-4bf8-8328-c950b896b9d6" />
+<img width="1067" height="667" alt="Screenshot 2025-12-03 at 2 52 09 PM" src="https://github.com/user-attachments/assets/2df1e683-423b-4d17-a5db-9a0d6a194fb5" />
 
 ### Demo 
 - 🚫 **Release 1 Demo - Coming soon!**
@@ -25,15 +25,15 @@ Maven application that serves as a system for managing the car rental lifecycle,
 - 🚫 Makes use of **Unit Testing** using JUnit for correctness.
 
 ### Release 1 Features
-- Display All Available Cars
-- Display Available Gasoline Cars
-- Display Available Electric Cars
-- Make a Car Booking (By User ID and Car Registration Number)  
-- Display Cars Booked by User (By User ID)
+- Make a Car Booking (By User ID and Car Registration Number)
 - Cancel a Car Booking (By Booking ID)
-- Display All Active Bookings
-- Display All Registered Users  
-
+- Display All Available Cars
+- To Display Available Gasoline Cars
+- To Display Available Electric Cars
+- Display Cars Booked by User (By User ID)
+- Display All Registered Users
+- Display All Registered Users
+- View Main Menu
 ---
 
 ## Release 2 Implementation Details
