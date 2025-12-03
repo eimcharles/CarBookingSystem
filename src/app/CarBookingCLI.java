@@ -24,6 +24,34 @@ import static app.CLIFormatUtility.displayFormattedCarDetails;
 
 public class CarBookingCLI {
 
+    /**
+     *      Handles the flow for making a new car booking.
+     *
+     *      1.Displays necessary menus and user instructions defined by `TITLE_MAKE_BOOKING`.
+     *
+     *      2. Guides the user to select, and validates a User ID for new car booking
+     *      by using 'promptAndValidateUserID()' helper method.
+     *
+     *      2. Guides the user to select, and validates a car registration number for new car booking
+     *      by using 'promptAndValidateCarRegistrationNumber()' helper method.
+     *
+     *      4. Once both identifiers are successfully validated, it delegates
+     *      to the `processBookingTransaction()` helper method to make
+     *      a new car booking.
+     *
+     *      @param userService
+     *
+     *      The UserService instance for user validation and lookup.
+     *
+     *      @param bookingService
+     *
+     *      The BookingService instance for car validation and booking creation.
+     *
+     *      @param scanner
+     *
+     *      The Scanner object used to capture console input from the user.
+     */
+
     public static void makeACarBookingByUserIdAndRegistrationNumber(UserService userService, BookingService bookingService, Scanner scanner) {
 
         // Menus, instructions for entering userId to make booking
@@ -147,6 +175,12 @@ public class CarBookingCLI {
         return userRegistrationInput;
 
     }
+
+    /**
+     *      TODO add JavaDocs
+     *
+     *
+     * */
 
     public static void cancelCarBookingByBookingId(UserService userService, BookingService bookingService, Scanner scanner) {
 
@@ -294,9 +328,11 @@ public class CarBookingCLI {
      *      the BookingService and prints them to the console using the
      *      standardized `formatAndDisplayUserBookedCars()` method.
      *
-     *      This method guides the user to select and validates a User ID
-     *      using 'promptAndValidateUserID()' method, once the user input is
-     *      validated it then retrieves the corresponding cars currently booked by that user.
+     *      This method guides the user to select, and validates a User ID
+     *      using 'promptAndValidateUserID()' helper method.
+     *
+     *      Once the user input is validated it then
+     *      retrieves the corresponding cars currently booked by that user.
      *
      *      If no cars are actively booked by the user, a corresponding message
      *      is displayed using the `displayFormattedMessage()` method within the helper.
