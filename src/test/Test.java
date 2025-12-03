@@ -12,6 +12,7 @@ import user.UserService;
 import user.dao.ArrayUserDAO;
 
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  *      Test class for Car Booking System CLI
@@ -36,7 +37,15 @@ public class Test {
 
         ArrayBookingDAO arrayBookingDAO = new ArrayBookingDAO();
         BookingService bookingService = new BookingService(arrayBookingDAO, carService);
-        CarBookingCLI.makeACarBooking(userService, bookingService, scanner);
+
+        // User not found
+        CarBookingCLI.processBookingTransaction(userService, bookingService, UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc1"), "123_1");
+
+        // Car not found
+        CarBookingCLI.processBookingTransaction(userService, bookingService, UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "123_0");
+
+        // Both user and car are validated process booking
+        CarBookingCLI.processBookingTransaction(userService, bookingService, UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "123_1");
 
     }
 }
