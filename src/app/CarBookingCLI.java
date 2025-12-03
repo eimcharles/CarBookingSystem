@@ -16,19 +16,20 @@ import static app.CLIFormatUtility.*;
 import static app.CLIFormatUtility.displayFormattedCarDetails;
 
 /**
- *      TODO write comment for CarBookingCLI
+ *      TODO write comment for CarBookingCLI Class
  *      TODO write comment for all methods CarBookingCLI
- *      TODO finish implementation
+ *      TODO finish implementation for CarBookingCLI Class
+ *      TODO Refactor class for single responsibility principle
  * */
 
 public class CarBookingCLI {
 
-    public static void makeACarBooking(UserService userService, BookingService bookingService, Scanner scanner) {
+    public static void makeACarBookingByUserIdAndRegistrationNumber(UserService userService, BookingService bookingService, Scanner scanner) {
 
         // Menus, instructions for entering userId to make booking
         displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
         displayUserIdBookingGuidelines();
-        displayAllUsers(userService);
+        displayAllRegisteredUsers(userService);
 
         // Validates the User ID from the console.
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
@@ -147,6 +148,147 @@ public class CarBookingCLI {
 
     }
 
+    public static void cancelCarBookingByBookingId(UserService userService, BookingService bookingService, Scanner scanner) {
+
+        ///  TODO to implement
+
+    }
+
+    /**
+     *      Retrieves all currently available
+     *      cars from the BookingService and
+     *      prints them to the console using the
+     *      standardized `displayFormattedCarDetails()` method.
+     *
+     *      Availability means the car is not tied to any active booking.
+     *
+     *      If no cars are available, a corresponding message
+     *      is displayed using `displayFormattedMessage()` method.
+     *
+     *      The results are presented under the menu title
+     *      defined by `TITLE_ALL_CARS`.
+     *
+     *      @param bookingService
+     *
+     *      The BookingService instance used to fetch the availability data.
+     */
+
+    public static void displayAllAvailableCars(BookingService bookingService) {
+
+        Car[] availableCars = bookingService.getAllAvailableCars();
+
+        displayResultsByMenuTitle(TITLE_ALL_CARS);
+        if (availableCars == null || availableCars.length == 0) {
+            displayFormattedMessage("❌", "No cars currently available for booking");
+            return;
+        }
+
+        for (Car availableCar : availableCars) {
+            displayFormattedCarDetails(availableCar);
+        }
+    }
+
+    /**
+     *      Retrieves all currently available gas cars from the
+     *      BookingService and prints them to the console using the
+     *      standardized `displayFormattedCarDetails()` method.
+     *
+     *      Availability means the gas car is not tied to any active booking.
+     *
+     *      If no gas cars are available, a corresponding message
+     *      is displayed using `displayFormattedMessage()` method.
+     *
+     *      The results are presented under the menu title
+     *      defined by `TITLE_GAS_CARS`.
+     *
+     *      @param bookingService
+     *
+     *      The BookingService instance used to fetch the filtered availability data.
+     */
+
+    public static void displayAllAvailableGasCars(BookingService bookingService) {
+
+        Car[] availableGasCars = bookingService.getAvailableGasCars();
+
+        displayResultsByMenuTitle(TITLE_GAS_CARS);
+        if (availableGasCars == null || availableGasCars.length == 0) {
+            displayFormattedMessage("❌", "No gas cars currently available for booking");
+            return;
+        }
+
+        for (Car availableGasCar : availableGasCars) {
+            displayFormattedCarDetails(availableGasCar);
+        }
+    }
+
+    /**
+     *      Retrieves all currently available
+     *      electric cars from the BookingService
+     *      and prints them to the console using the
+     *      standardized `displayFormattedCarDetails()` method.
+     *
+     *      Availability means the electric car is not tied to any active booking.
+     *
+     *      If no electric cars are available, a corresponding message
+     *      is displayed using `displayFormattedMessage()` method.
+     *
+     *      The results are presented under the menu title
+     *      defined by `TITLE_ELECTRIC_CARS`.
+     *
+     *      @param bookingService
+     *
+     *      The BookingService instance used to fetch the filtered availability data.
+     */
+
+    public static void displayAllAvailableElectricCars(BookingService bookingService) {
+
+        Car[] availableElectricCars = bookingService.getAvailableElectricCars();
+
+        displayResultsByMenuTitle(TITLE_ELECTRIC_CARS);
+        if (availableElectricCars == null || availableElectricCars.length == 0) {
+            displayFormattedMessage("❌", "No electric cars currently available for booking");
+            return;
+        }
+
+        for (Car availableEelectricCar : availableElectricCars) {
+            displayFormattedCarDetails(availableEelectricCar);
+        }
+    }
+
+    /**
+     *      Retrieves all active
+     *      bookings from the BookingService
+     *      and prints them to the console using the
+     *      standardized `displayFormattedBookingDetails()` method.
+     *
+     *      If no active bookings are found,
+     *      a corresponding message is displayed
+     *      using `displayFormattedMessage()` method.
+     *
+     *      The results are presented under the menu title
+     *      defined by `TITLE_ALL_BOOKINGS`.
+     *
+     *      @param bookingService
+     *
+     *      The BookingService instance used to fetch the data.
+     *
+     */
+
+    public static void displayAllActiveBookings(BookingService bookingService){
+
+        Booking[] allBookings = bookingService.getAllBookings();
+
+        displayResultsByMenuTitle(TITLE_ALL_BOOKINGS);
+        if (allBookings == null || allBookings.length == 0){
+            displayFormattedMessage("❌", "No bookings currently registered in the system");
+            return;
+        }
+
+        for (Booking allBooking : allBookings) {
+            displayFormattedBookingDetails(allBooking);
+        }
+    }
+
     /**
      *      Retrieves all cars that are associated to a user from
      *      the BookingService and prints them to the console using the
@@ -172,7 +314,7 @@ public class CarBookingCLI {
      *      The Scanner object used for reading the user's input (the User ID).
      */
 
-    public static void displayUserBookedCars(UserService userService, BookingService bookingService, Scanner scanner){
+    public static void displayUserBookedCarsByUserId(UserService userService, BookingService bookingService, Scanner scanner){
 
         // CARS BOOKED BY USER ID MENU
         displayResultsByMenuTitle(TITLE_USER_BOOKED_CARS);
@@ -181,7 +323,7 @@ public class CarBookingCLI {
         displayCarsBookedByUserIdGuidelines();
 
         // REGISTERED USERS MENU
-        displayAllUsers(userService);
+        displayAllRegisteredUsers(userService);
 
         // Validates the User ID from the console and returns a UUID object
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
@@ -265,7 +407,7 @@ public class CarBookingCLI {
 
             // Re-display on invalid inputs
             if (!isValidInput){
-                displayAllUsers(userService);
+                displayAllRegisteredUsers(userService);
                 displayCarsBookedByUserIdGuidelines();
             }
 
@@ -273,141 +415,6 @@ public class CarBookingCLI {
 
         return userId;
 
-    }
-
-    /**
-     *      Retrieves all currently available gas cars from the
-     *      BookingService and prints them to the console using the
-     *      standardized `displayFormattedCarDetails()` method.
-     *
-     *      Availability means the gas car is not tied to any active booking.
-     *
-     *      If no gas cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_GAS_CARS`.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the filtered availability data.
-     */
-
-    public static void displayAllAvailableGasCars(BookingService bookingService) {
-
-        Car[] availableGasCars = bookingService.getAvailableGasCars();
-
-        displayResultsByMenuTitle(TITLE_GAS_CARS);
-        if (availableGasCars == null || availableGasCars.length == 0) {
-            displayFormattedMessage("❌", "No gas cars currently available for booking");
-            return;
-        }
-
-        for (Car availableGasCar : availableGasCars) {
-            displayFormattedCarDetails(availableGasCar);
-        }
-    }
-
-    /**
-     *      Retrieves all currently available
-     *      electric cars from the BookingService
-     *      and prints them to the console using the
-     *      standardized `displayFormattedCarDetails()` method.
-     *
-     *      Availability means the electric car is not tied to any active booking.
-     *
-     *      If no electric cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_ELECTRIC_CARS`.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the filtered availability data.
-     */
-
-    public static void displayAllAvailableElectricCars(BookingService bookingService) {
-
-        Car[] availableElectricCars = bookingService.getAvailableElectricCars();
-
-        displayResultsByMenuTitle(TITLE_ELECTRIC_CARS);
-        if (availableElectricCars == null || availableElectricCars.length == 0) {
-            displayFormattedMessage("❌", "No electric cars currently available for booking");
-            return;
-        }
-
-        for (Car availableEelectricCar : availableElectricCars) {
-            displayFormattedCarDetails(availableEelectricCar);
-        }
-    }
-
-    /**
-     *      Retrieves all currently available
-     *      cars from the BookingService and
-     *      prints them to the console using the
-     *      standardized `displayFormattedCarDetails()` method.
-     *
-     *      Availability means the car is not tied to any active booking.
-     *
-     *      If no cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_ALL_CARS`.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the availability data.
-     */
-
-    public static void displayAllAvailableCars(BookingService bookingService) {
-
-        Car[] availableCars = bookingService.getAllAvailableCars();
-
-        displayResultsByMenuTitle(TITLE_ALL_CARS);
-        if (availableCars == null || availableCars.length == 0) {
-            displayFormattedMessage("❌", "No cars currently available for booking");
-            return;
-        }
-
-        for (Car availableCar : availableCars) {
-            displayFormattedCarDetails(availableCar);
-        }
-    }
-
-    /**
-     *      Retrieves all active
-     *      bookings from the BookingService
-     *      and prints them to the console using the
-     *      standardized `displayFormattedBookingDetails()` method.
-     *
-     *      If no active bookings are found,
-     *      a corresponding message is displayed
-     *      using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_ALL_BOOKINGS`.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the data.
-     *
-     */
-
-    public static void displayAllBooking(BookingService bookingService){
-
-        Booking[] allBookings = bookingService.getAllBookings();
-
-        displayResultsByMenuTitle(TITLE_ALL_BOOKINGS);
-        if (allBookings == null || allBookings.length == 0){
-            displayFormattedMessage("❌", "No bookings currently registered in the system");
-            return;
-        }
-
-        for (Booking allBooking : allBookings) {
-            displayFormattedBookingDetails(allBooking);
-        }
     }
 
     /**
@@ -426,7 +433,7 @@ public class CarBookingCLI {
      *        The UserService instance used to fetch the user data.
      */
 
-    public static void displayAllUsers(UserService userService){
+    public static void displayAllRegisteredUsers(UserService userService){
 
         User[] users = userService.getAllUsers();
 
