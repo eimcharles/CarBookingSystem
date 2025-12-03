@@ -39,43 +39,47 @@ public class CarBookingApp {
 
                 switch (userInput) {
                     case "1":
+                        // To Make a Car Booking (By User ID and Car Registration Number)
+                        makeACarBookingByUserIdAndRegistrationNumber(configuration.getUserService(), configuration.getBookingService(), scanner);
                         // Display All Available Cars
                         displayAllAvailableCars(configuration.getBookingService());
                         break;
                     case "2":
-                        // Display Available Gasoline Cars
-                        displayAllAvailableGasCars(configuration.getBookingService());
+                        // To Cancel a Car Booking (By Booking ID)
+                        ///  TO implement
                         break;
                     case "3":
-                        // Display Available Electric Cars
-                        displayAllAvailableElectricCars(configuration.getBookingService());
+                        // To Display All Available Cars
+                        displayAllAvailableCars(configuration.getBookingService());
                         break;
                     case "4":
-                        // Make a Car Booking (By User ID and Car Registration Number)
-                        makeACarBooking(configuration.getUserService(), configuration.getBookingService(), scanner);
+                        // To Display Available Gasoline Cars
+                        displayAllAvailableGasCars(configuration.getBookingService());
                         break;
                     case "5":
-                        // Display Cars Booked by User (By User ID)
-                        displayUserBookedCars(configuration.getUserService(), configuration.getBookingService(), scanner);
+                        // To Display Available Electric Cars
+                        displayAllAvailableElectricCars(configuration.getBookingService());
                         break;
                     case "6":
-                        // Display All Active Bookings
-                        displayAllBooking(configuration.getBookingService());
+                        // To Display All Active Bookings
+                        displayAllActiveBookings(configuration.getBookingService());
                         break;
                     case "7":
-                        // Display All Registered Users
-                        displayAllUsers(configuration.getUserService());
+                        // To Display Cars Booked by User (By User ID)
+                        displayUserBookedCarsByUserId(configuration.getUserService(), configuration.getBookingService(), scanner);
                         break;
                     case "8":
-                        // Display Main Menu for user
-                        displayMainMenu();
+                        // To Display All Registered Users
+                        displayAllRegisteredUsers(configuration.getUserService());
                         break;
                     case "9":
-                        // Upon exit
+                        // To View Main Menu
+                        displayMainMenu();
+                        break;
+                    case "0":
+                        // To Exit Application
                         displayFormattedMessage("👋","Thank you for using the Car Booking System. Goodbye!");
-                        // Close resources
                         scanner.close();
-                        // Exit
                         return;
                     default:
                         // For invalid user inputs
