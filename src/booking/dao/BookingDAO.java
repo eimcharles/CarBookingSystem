@@ -2,6 +2,8 @@ package booking.dao;
 
 import booking.Booking;
 
+import java.util.UUID;
+
 /**
  *      BookingDAO defines the contract for all data
  *      access operations related to Booking entities
@@ -9,7 +11,10 @@ import booking.Booking;
 
 public interface BookingDAO {
 
+    Booking[] getBookings();
+
     void addBooking(Booking carBooking);
 
-    Booking[] getBookingDao();
+    boolean cancelBooking(UUID bookingId);
+
 }

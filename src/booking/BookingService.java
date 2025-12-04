@@ -340,4 +340,9 @@ public class BookingService {
         return getUnbookedCars(carService.getElectricCars());
     }
 
+    public void cancelBooking(UUID validatedBookingId) {
+
+        this.arrayBookingDAO.cancelBooking(validatedBookingId);
+
+    }
 }

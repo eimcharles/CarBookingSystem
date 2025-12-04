@@ -51,7 +51,7 @@ public class CarBookingApp {
                         break;
                     case "2":
                         // To Cancel a Car Booking (By Booking ID)
-                        cancelCarBookingByBookingId(configuration.getUserService(), configuration.getBookingService(), scanner);
+                        cancelCarBookingByBookingId(configuration.getBookingService(), scanner);
                         break;
                     case "3":
                         // To Display All Available Cars

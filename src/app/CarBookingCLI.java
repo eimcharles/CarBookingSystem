@@ -126,9 +126,26 @@ public class CarBookingCLI {
      *
      * */
 
-    public static void cancelCarBookingByBookingId(UserService userService, BookingService bookingService, Scanner scanner) {
+    public static void cancelCarBookingByBookingId(BookingService bookingService, Scanner scanner) {
 
         ///  TODO to implement
+        displayResultsByMenuTitle(TITLE_CANCEL_BOOKING);
+        displayCancelBookingByBookingIdGuidelines();
+        displayAllActiveBookings(bookingService);
+
+        // Validates the Booking ID from the console.
+        UUID validatedBookingId = promptAndValidateBookingID(bookingService, scanner);
+
+        // Process booking cancellation once Booking ID is validated
+        processBookingCancellation(bookingService, validatedBookingId);
+
+
+    }
+
+    private static void processBookingCancellation(BookingService bookingService, UUID validatedBookingId) {
+
+            ///  TODO to implement
+            bookingService.cancelBooking(validatedBookingId);
 
     }
 

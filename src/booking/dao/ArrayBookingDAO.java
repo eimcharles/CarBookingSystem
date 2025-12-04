@@ -3,6 +3,7 @@ package booking.dao;
 import booking.Booking;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  *      ArrayBookingDAO is a Data Access Object (DAO)
@@ -46,7 +47,13 @@ public class ArrayBookingDAO implements BookingDAO {
     }
 
     @Override
-    public Booking[] getBookingDao() {
+    public boolean cancelBooking(UUID bookingId) {
+
+        return true;
+    }
+
+    @Override
+    public Booking[] getBookings() {
         // Copy of bookingsDao returned from BookingDAO
         return Arrays.copyOf(this.bookingsDao, this.bookingsDao.length);
     }
