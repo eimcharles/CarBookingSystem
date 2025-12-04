@@ -7,7 +7,6 @@ import exception.CarNotFoundException;
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
  *
- *      TODO : implement Car Service business logic
  *      TODO : add comments for methods in CarService
  */
 
@@ -20,7 +19,7 @@ public class CarService {
     }
 
     public Car getCarByRegistrationNumber(String registrationNumber) {
-        for (Car car: getAllCars()){
+        for (Car car: getCars()){
             if (car.getRegistrationNumber().equals(registrationNumber)){
                 return car;
             }
@@ -30,33 +29,56 @@ public class CarService {
 
     }
 
-    public Car[] getCarsByFuelType(FuelType fuelType){
+    public Car[] getCars() {
 
-        // Get all cars
-        Car[] cars = getAllCars();
+        // Get all cars from DAO
+        Car[] cars = this.arrayCarDAO.getCarsDAO();
 
         // If cars is null or empty, return empty array
         if (cars == null || cars.length == 0){
             return new Car[0];
         }
 
-        // Number of cars by passed fuelType
-        int carCount = countCarsByFuelType(cars, fuelType);
 
-        // Create a new array with the carCount for size
-        Car[] filteredCars = new Car[carCount];
+        int nonNullCarCount = getNonNullCarCount(cars);
 
-        // Populates a pre-sized Car array with cars that match the specified FuelType.
-        populateCarsByFuelType(cars, fuelType, filteredCars);
+        if (nonNullCarCount == 0){
+            return new Car[0];
+        }
 
-        return filteredCars;
+        Car[] nonNullCars = populateNonNullCars(nonNullCarCount, cars);
+
+        return nonNullCars;
+    }
+
+    private Car[] populateNonNullCars(int nonNullCarCount, Car[] cars) {
+
+        // Create a new array with the nonNullCarCount for size
+        Car[] nonNullCars = new Car[nonNullCarCount];
+
+        int index = 0;
+        for (int i = 0; i < cars.length; i++) {
+
+            Car nonNullCar = cars[i];
+
+            if (nonNullCar != null){
+                nonNullCars[index++] = nonNullCar;
+            }
+        }
+        return nonNullCars;
 
     }
 
-    public Car[] getAllCars() {
-        // Passing the copy of Car objects returned from DAO layer
-        return this.arrayCarDAO.getCarsDAO();
-    }
+    private int getNonNullCarCount(Car[] cars) {
+
+        // Count non-null Cars in DAO array
+        int nonNullCarCount = 0;
+        for (Car car : cars) {
+            if (car != null){
+                nonNullCarCount++;
+            }
+        }
+        return nonNullCarCount;    }
 
     public Car[] getElectricCars() {
         return getCarsByFuelType(FuelType.ELECTRIC);
@@ -66,22 +88,45 @@ public class CarService {
         return getCarsByFuelType(FuelType.GASOLINE);
     }
 
+    public Car[] getCarsByFuelType(FuelType fuelType){
+
+        // Get all cars
+        Car[] cars = getCars();
+
+        // If cars is null or empty, return empty array
+        if (cars == null || cars.length == 0){
+            return new Car[0];
+        }
+
+        // Number of cars by passed fuelType
+        int carCountByFuelType = countCarsByFuelType(cars, fuelType);
+
+        // Create a new array with the carCountByFuelType for size
+        Car[] filteredCarsByFuelType = new Car[carCountByFuelType];
+
+        // Populates a pre-sized Car array with cars that match the specified FuelType.
+        populateCarsByFuelType(cars, fuelType, filteredCarsByFuelType);
+
+        return filteredCarsByFuelType;
+
+    }
+
     private int countCarsByFuelType(Car[] cars, FuelType fuelType){
 
-        int carCount = 0;
+        int carCountByFuelType = 0;
 
         // Count the cars based on fuel type in cars array
         for (Car car : cars) {
             if (car.getFuelType() == fuelType){
-                carCount++;
+                carCountByFuelType++;
             }
         }
 
-        return carCount;
+        return carCountByFuelType;
 
     }
 
-    private void populateCarsByFuelType(Car[] cars, FuelType fuelType, Car[] filteredCars){
+    private void populateCarsByFuelType(Car[] cars, FuelType fuelType, Car[] filteredCarsByFuelType){
 
         // Index for the new array, avoids null gaps,
         int index = 0;
@@ -92,9 +137,9 @@ public class CarService {
             // Use the car at the current index of the source array
             Car currentCar = cars[i];
 
-            // if the car at an index matches the passed fuelType, add it to filteredCars
+            // if the car at an index matches the passed fuelType, add it to filteredCarsByFuelType
             if (currentCar.getFuelType() == fuelType){
-                filteredCars[index++] = currentCar;
+                filteredCarsByFuelType[index++] = currentCar;
 
             }
         }
