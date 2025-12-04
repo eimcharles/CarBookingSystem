@@ -1,5 +1,6 @@
 package user.dao;
 
+import exception.UserNotFoundException;
 import user.User;
 
 import java.util.Arrays;
@@ -30,8 +31,19 @@ public class ArrayUserDAO implements UserDAO {
     }
 
     @Override
-    public  User[] getUserDAO() {
+    public  User[] getUsers() {
         // Copy of User objects returned from userDAO
         return Arrays.copyOf(this.userDAO,this.userDAO.length);
+    }
+
+    public User getUserById(UUID id) {
+        for (User user: this.userDAO){
+            if (user.getUserId().equals(id)){
+                return user;
+            }
+        }
+
+        throw new UserNotFoundException(id);
+
     }
 }
