@@ -97,7 +97,6 @@ public class CLIFormatUtility {
         displayFormattedUserInput("➡️","Please enter your choice (To view MAIN MENU options press 9 or 0 to EXIT.): ");
     }
 
-
     /**
      *      Displays the system's basic operating
      *      instructions and guidelines.
@@ -159,11 +158,13 @@ public class CLIFormatUtility {
     }
 
     /**
-     *      TODO write JavaDocs
+     *       Displays instructions to the user
+     *       when navigating the cancel booking
+     *       by booking id menu.
      *
-     *
-     *
-     *
+     *       Guides the user to input the
+     *       correct format for a booking
+     *       id number to cancel a booking.
      * */
 
     public static void displayCancelBookingByBookingIdGuidelines() {
@@ -250,7 +251,6 @@ public class CLIFormatUtility {
         // centeredTitle appears on its own line
         return "\n" + centeredTitle + "\n";
     }
-
 
     /**
      *       Displays an informational message
