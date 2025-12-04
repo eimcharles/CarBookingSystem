@@ -33,6 +33,8 @@ public class CLIFormatUtility {
     public static final String TITLE_GREETING_MENU = "🚗 WELCOME TO THE CAR BOOKING MANAGEMENT SYSTEM 🚗";
     public static final String TITLE_MAIN_MENU = "MAIN MENU";
     public static final String TITLE_BOOKING_SUCCESS_MENU = "BOOKING CONFIRMATION MENU";
+    public static final String TITLE_CANCELLATION_SUCCESS_MENU = "CANCELLATION CONFIRMATION MENU";
+
 
     public static final String SYSTEM_GUIDELINES_MENU = "GUIDELINES";
     public static final String USER_INPUT_MENU = "INPUT MENU";
