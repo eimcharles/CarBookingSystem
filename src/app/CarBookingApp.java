@@ -41,12 +41,10 @@ public class CarBookingApp {
                     case "1":
                         // To Make a Car Booking (By User ID and Car Registration Number)
                         makeACarBookingByUserIdAndRegistrationNumber(configuration.getUserService(), configuration.getBookingService(), scanner);
-                        // Display All Available Cars
-                        displayAllAvailableCars(configuration.getBookingService());
                         break;
                     case "2":
                         // To Cancel a Car Booking (By Booking ID)
-                        ///  TO implement
+                        cancelCarBookingByBookingId(configuration.getUserService(), configuration.getBookingService(), scanner);
                         break;
                     case "3":
                         // To Display All Available Cars
