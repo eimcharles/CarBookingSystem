@@ -3,9 +3,7 @@ package app;
 import booking.Booking;
 import booking.BookingService;
 import car.Car;
-import exception.CarNotFoundException;
-import exception.CarUnavailableException;
-import exception.UserNotFoundException;
+import exception.*;
 import user.User;
 import user.UserService;
 
@@ -80,7 +78,7 @@ public class CarBookingCLI {
         try {
 
             // Attempt to create user object using the validated UUID
-            User user = userService.getUsersById(validatedUserId);
+            User user = userService.getUserById(validatedUserId);
 
             // if the user doesn't exist by userId
             if (user == null) {
@@ -93,10 +91,8 @@ public class CarBookingCLI {
             // Attempt to create the booking by associating the user and car registration
             UUID userBookingID = bookingService.addCarBooking(user, validatedCarRegistration);
 
-            // Display booking menu
-            displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
-
             // Display booking success message
+            displayResultsByMenuTitle(TITLE_BOOKING_SUCCESS_MENU);
             displayFormattedMessage("✅", "Successfully booked car with registration number " + validatedCarRegistration + " for " + user.getName() + " with booking id " + userBookingID);
 
         } catch (CarNotFoundException e) {
@@ -142,7 +138,7 @@ public class CarBookingCLI {
             try {
 
                 // Validates available car: existence and car current availability
-                bookingService.getAvailableCarForBooking(userRegistrationInput);
+                bookingService.getUnbookedCarForBooking(userRegistrationInput);
 
                 // Car exists and is currently available
                 isValidInput = true;
@@ -209,7 +205,7 @@ public class CarBookingCLI {
 
     public static void displayAllAvailableCars(BookingService bookingService) {
 
-        Car[] availableCars = bookingService.getAllAvailableCars();
+        Car[] availableCars = bookingService.getAllUnbookedCars();
 
         displayResultsByMenuTitle(TITLE_ALL_CARS);
         if (availableCars == null || availableCars.length == 0) {
@@ -242,7 +238,7 @@ public class CarBookingCLI {
 
     public static void displayAllAvailableGasCars(BookingService bookingService) {
 
-        Car[] availableGasCars = bookingService.getAvailableGasCars();
+        Car[] availableGasCars = bookingService.getAllUnbookedGasCars();
 
         displayResultsByMenuTitle(TITLE_GAS_CARS);
         if (availableGasCars == null || availableGasCars.length == 0) {
@@ -276,7 +272,7 @@ public class CarBookingCLI {
 
     public static void displayAllAvailableElectricCars(BookingService bookingService) {
 
-        Car[] availableElectricCars = bookingService.getAvailableElectricCars();
+        Car[] availableElectricCars = bookingService.getAllUnbookedElectricCars();
 
         displayResultsByMenuTitle(TITLE_ELECTRIC_CARS);
         if (availableElectricCars == null || availableElectricCars.length == 0) {
@@ -310,13 +306,13 @@ public class CarBookingCLI {
 
     public static void displayAllActiveBookings(BookingService bookingService){
 
-        Booking[] allBookings = bookingService.getAllBookings();
+        Booking[] allBookings = bookingService.getBookings();
 
-        displayResultsByMenuTitle(TITLE_ALL_BOOKINGS);
+        displayResultsByMenuTitle(TITLE_ACTIVE_BOOKINGS);
         if (allBookings == null || allBookings.length == 0){
             displayFormattedMessage("❌", "No bookings currently registered in the system");
-            return;
         }
+
 
         for (Booking allBooking : allBookings) {
             displayFormattedBookingDetails(allBooking);
@@ -419,7 +415,7 @@ public class CarBookingCLI {
                 userId = UUID.fromString(userIdInput);
 
                 // Validates User Existence: throws if user doesn't exist.
-                userService.getUsersById(userId);
+                userService.getUserById(userId);
 
                 // Input and user exist and are valid.
                 isValidInput = true;
@@ -431,7 +427,7 @@ public class CarBookingCLI {
 
             } catch (UserNotFoundException e) {
 
-                // Handles User non existence
+                // Handles User non-existence
                 displayFormattedMessage("❌",e.getMessage());
 
             } catch (Exception e) {
@@ -471,7 +467,7 @@ public class CarBookingCLI {
 
     public static void displayAllRegisteredUsers(UserService userService){
 
-        User[] users = userService.getAllUsers();
+        User[] users = userService.getUsers();
 
         displayResultsByMenuTitle(TITLE_REGISTERED_USERS);
         if (users == null || users.length == 0){
