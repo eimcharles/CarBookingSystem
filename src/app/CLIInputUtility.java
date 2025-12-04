@@ -149,7 +149,6 @@ public class CLIInputUtility {
     public static UUID promptAndValidateBookingID(BookingService bookingService, Scanner scanner){
 
         ///  TODO implement method
-
         return null;
     }
 }

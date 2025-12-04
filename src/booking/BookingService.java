@@ -342,6 +342,7 @@ public class BookingService {
 
     public void cancelBooking(UUID validatedBookingId) {
 
+        ///  TODO to implement
         this.arrayBookingDAO.cancelBooking(validatedBookingId);
 
     }

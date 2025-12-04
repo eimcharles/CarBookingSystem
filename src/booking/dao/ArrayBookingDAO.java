@@ -49,6 +49,7 @@ public class ArrayBookingDAO implements BookingDAO {
     @Override
     public boolean cancelBooking(UUID bookingId) {
 
+        ///  TODO to implement
         return true;
     }
 
