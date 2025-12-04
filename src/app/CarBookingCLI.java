@@ -440,7 +440,7 @@ public class CarBookingCLI {
             // Re-display on invalid inputs
             if (!isValidInput){
                 displayAllRegisteredUsers(userService);
-                displayCarsBookedByUserIdGuidelines();
+                displayUserIdBookingGuidelines();
             }
 
         } while (!isValidInput);
