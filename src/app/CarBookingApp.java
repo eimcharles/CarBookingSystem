@@ -2,10 +2,17 @@ package app;
 
 import configuration.Configuration;
 
+import static app.CLIDisplayUtility.*;
 import static app.CarBookingCLI.*;
 import static app.CLIFormatUtility.*;
 
 import java.util.Scanner;
+
+/**
+ *      CarBookingApp is the main entry point
+ *      that initializes services
+ *      and starts the application loop.
+ * */
 
 public class CarBookingApp {
 
