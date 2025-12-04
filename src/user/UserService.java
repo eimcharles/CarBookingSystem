@@ -1,17 +1,13 @@
 package user;
 
-import booking.Booking;
-import car.Car;
 import user.dao.ArrayUserDAO;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
  *      Service class for managing User objects.
  *      Contains business logic related to users.
  *
- *      TODO : implement User service business logic
  *      TODO : add comments for methods in UserService
  */
 
@@ -28,7 +24,7 @@ public class UserService {
         // Get all users from DAO
         User[] users = this.arrayUserDAO.getUsers();
 
-        // If cars is null or empty, return empty array
+        // If users is null or empty, return empty array
         if (users == null || users.length == 0){
             return new User[0];
         }
@@ -62,6 +58,7 @@ public class UserService {
     }
 
     private static int getNonNullUserCount(User[] users) {
+
         // Count non-null users in DAO array
         int nonNullUserCount = 0;
         for (User user : users) {
