@@ -1,8 +1,10 @@
 package user;
 
-import exception.UserNotFoundException;
+import booking.Booking;
+import car.Car;
 import user.dao.ArrayUserDAO;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -21,19 +23,57 @@ public class UserService {
         this.arrayUserDAO = arrayUserDAO;
     }
 
-    public User[] getAllUsers() {
-        // Passing the copy of User objects returned from DAO layer
-        return this.arrayUserDAO.getUserDAO();
-    }
+    public User[] getUsers() {
 
-    public User getUsersById(UUID id) {
-        for (User user: getAllUsers()){
-            if (user.getUserId().equals(id)){
-                return user;
-            }
+        // Get all users from DAO
+        User[] users = this.arrayUserDAO.getUsers();
+
+        // If cars is null or empty, return empty array
+        if (users == null || users.length == 0){
+            return new User[0];
         }
 
-        throw new UserNotFoundException(id);
+        int nonNullUserCount = getNonNullUserCount(users);
 
+        if (nonNullUserCount == 0){
+            return new User[0];
+        }
+
+        User[] nonNullUsers = populateNonNullUsers(nonNullUserCount, users);
+
+        return nonNullUsers;
     }
+
+    private static User[] populateNonNullUsers(int nonNullUserCount, User[] users) {
+
+        // Create a new array with the nonNullUserCount for size
+        User[] nonNullUsers = new User[nonNullUserCount];
+
+        int index = 0;
+        for (int i = 0; i < users.length; i++) {
+
+            User nonNullUser = users[i];
+
+            if (nonNullUser != null){
+                nonNullUsers[index++] = nonNullUser;
+            }
+        }
+        return nonNullUsers;
+    }
+
+    private static int getNonNullUserCount(User[] users) {
+        // Count non-null users in DAO array
+        int nonNullUserCount = 0;
+        for (User user : users) {
+            if (user != null){
+                nonNullUserCount++;
+            }
+        }
+        return nonNullUserCount;
+    }
+
+    public User getUserById(UUID id) {
+        return this.arrayUserDAO.getUserById(id);
+    }
+
 }
