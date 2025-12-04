@@ -2,6 +2,8 @@ package user.dao;
 
 import user.User;
 
+import java.util.UUID;
+
 /**
  *      UserDAO defines the contract for all data
  *      access operations related to User entities
@@ -9,5 +11,7 @@ import user.User;
 
 public interface UserDAO {
 
-    User[] getUserDAO();
+    User[] getUsers();
+
+    User getUserById(UUID id);
 }
