@@ -31,7 +31,7 @@ public class BookingService {
     public UUID addCarBooking(User user, String registrationNumber) {
 
         // Check if the car is currently tied to any active booking.
-        Car carToBook = getAvailableCarForBooking(registrationNumber);
+        Car carToBook = getUnbookedCarForBooking(registrationNumber);
 
         // Car is not booked and available - create a new bookingId
         UUID bookingId = UUID.randomUUID();
@@ -56,7 +56,7 @@ public class BookingService {
     public boolean isCarCurrentlyBooked(String registrationNumber) {
 
         // Get bookings
-        Booking[] bookings = getAllBookings();
+        Booking[] bookings = getBookings();
 
         // Go through bookings
         for (Booking booking : bookings) {
@@ -65,7 +65,7 @@ public class BookingService {
             if (!booking.isBookingCancelled()) {
 
                 // Check if the car's registration matches the requested one
-                if (booking.getCar().getRegistrationNumber().equals(registrationNumber)) {
+                if (booking.getCar() != null && booking.getCar().getRegistrationNumber().equals(registrationNumber)) {
 
                     // Match found: the car is currently booked
                     return true;
@@ -79,61 +79,78 @@ public class BookingService {
 
     }
 
-    public Booking[] getAllBookings() {
+    public Booking[] getBookings() {
 
-        // Booking returned from DAO layer
-        Booking[] bookings = this.arrayBookingDAO.getBookingDao();
+        // Get all Bookings from DAO
+        Booking[] bookings = this.arrayBookingDAO.getBookings();
 
         // If bookings are null or empty, return empty array
         if (bookings == null || bookings.length == 0){
             return new Booking[0];
         }
 
-        // Number of active bookings
-        int allActiveBookingsCount = countActiveBookings(bookings);
 
-        // If no active bookings are found
-        if (allActiveBookingsCount == 0) {
+        int nonNullBookingsCount = getNonNullBookingsCount(bookings);
+
+        if (nonNullBookingsCount == 0) {
             return new Booking[0];
         }
 
-        // Create a new array with the allActiveBookingsCount for size
-        Booking[] filteredBookings = new Booking[allActiveBookingsCount];
+        // Create a new array with the nonNullBookingsCount for size
+        Booking[] nonNullBookings = new Booking[nonNullBookingsCount];
 
-        // Populates the pre-sized array with active bookings
-        populateBookingsArray(bookings, filteredBookings);
+        // Populates the pre-sized array with nonNullBookings
+        populateNonNullBookings(bookings, nonNullBookings);
 
-        return filteredBookings;
+        return nonNullBookings;
 
     }
 
-    public Car getAvailableCarForBooking(String registrationNumber) {
+    private void populateNonNullBookings(Booking[] bookings, Booking[] nonNullBookings){
 
-        Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
+        // Index for the new array, avoids null gaps,
+        int index = 0;
 
-        if (isCarCurrentlyBooked(registrationNumber)) {
+        // Look through all the bookings
+        for (int i = 0; i < bookings.length; i++) {
 
-            throw new CarUnavailableException(registrationNumber);
+            // Use the nonNullBooking at the current index of the source array
+            Booking nonNullBooking = bookings[i];
 
+            if (nonNullBooking != null){
+                nonNullBookings[index++] = nonNullBooking;
+
+            }
+        }
+    }
+
+    private int getNonNullBookingsCount(Booking[] bookings){
+
+
+        // Count non-null Bookings in DAO array
+        int nonNullBookingsCount = 0;
+        for (Booking booking : bookings) {
+            if (booking != null){
+                nonNullBookingsCount++;
+            }
         }
 
-        return carToBook;
+        return nonNullBookingsCount;
+
     }
 
     public Car[] getUserBookedCarsByUserId(UUID userId) {
 
-        // Bookings returned from DAO layer
-        Booking[] bookings = this.arrayBookingDAO.getBookingDao();
+        Booking[] bookings = getBookings();
 
         // If bookings are null or empty, return empty array
         if (bookings == null || bookings.length == 0) {
             return new Car[0];
         }
 
-        // Number of user booked cars
+
         int numberOfUserCarsBooked = countUserBookedCars(bookings,userId);
 
-        // If there are no cars found for the passed userId
         if (numberOfUserCarsBooked == 0) {
             return new Car[0];
         }
@@ -148,35 +165,79 @@ public class BookingService {
 
     }
 
-    public Car[] getAllAvailableCars(){
-        return getAvailableCars(carService.getAllCars());
+    private void populateUserBookedCarsArray(Booking[] bookings, UUID userId, Car[] userCarsBooked){
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through bookings
+        for (int i = 0; i < bookings.length; i++) {
+
+            // Use the activeBooking at the current index of the source array
+            Booking activeBooking = bookings[i];
+
+            // If the active booking and user exists, and the userID matches the passed userId, add the associated car.
+            if (activeBooking != null &&
+                    activeBooking.getUser() != null &&
+                    activeBooking.getUser().getUserId().equals(userId)){
+
+                userCarsBooked[index++] = activeBooking.getCar();
+
+            }
+        }
     }
 
-    public Car[] getAvailableGasCars(){
-        return getAvailableCars(carService.getGasolineCars());
+    private int countUserBookedCars(Booking[] bookings, UUID userId){
+
+        int numberOfUserCarsBooked = 0;
+
+        // Count the bookings associated to the passed userId
+        for (Booking activeBooking : bookings) {
+
+            // If the booking and user exists - check that the activeBooking userId matches the passed userId
+            if (activeBooking != null &&
+                    activeBooking.getUser() != null &&
+                    activeBooking.getUser().getUserId().equals(userId)){
+
+                numberOfUserCarsBooked++;
+
+            }
+        }
+
+        return numberOfUserCarsBooked;
+
     }
 
-    public Car[] getAvailableElectricCars(){
-        return getAvailableCars(carService.getElectricCars());
+    public Car getUnbookedCarForBooking(String registrationNumber) {
+
+        Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
+
+        if (isCarCurrentlyBooked(registrationNumber)) {
+
+            throw new CarUnavailableException(registrationNumber);
+
+        }
+
+        return carToBook;
     }
 
-    public Car[] getAvailableCars(Car[] allCars) {
+    public Car[] getUnbookedCars(Car[] cars) {
 
         // No cars in the system
-        if (allCars == null || allCars.length == 0) {
+        if (cars == null || cars.length == 0) {
             return new Car[0];
         }
 
         // Booking returned from DAO layer
-        Booking[] bookings = arrayBookingDAO.getBookingDao();
+        Booking[] bookings = arrayBookingDAO.getBookings();
 
         // If bookings are null or empty, return allCars
         if (bookings == null || bookings.length == 0) {
-            return allCars;
+            return cars;
         }
 
         // Number of cars that are not associated with any active booking
-        int availableCarsCount = countAvailableCars(allCars,bookings);
+        int availableCarsCount = getUnbookedCarsCount(cars,bookings);
 
         // If availableCarsCount is 0, return an empty Car array
         if (availableCarsCount == 0) {
@@ -187,13 +248,13 @@ public class BookingService {
         Car[] availableCars = new Car[availableCarsCount];
 
         // Populates the pre-sized array with cars that are NOT booked.
-        populateAvailableCarsArray(allCars, bookings, availableCars);
+        populateUnbookedCars(cars, bookings, availableCars);
 
         return availableCars;
 
     }
 
-    private int countAvailableCars(Car[] allCars, Booking[] bookings){
+    private int getUnbookedCarsCount(Car[] allCars, Booking[] bookings){
 
         int availableCarsCount = 0;
 
@@ -229,7 +290,7 @@ public class BookingService {
 
     }
 
-    private void populateAvailableCarsArray(Car[] allCars, Booking[] bookings, Car[] availableCars){
+    private void populateUnbookedCars(Car[] allCars, Booking[] bookings, Car[] availableCars){
 
         // Index for the new array, avoids null gaps,
         int index = 0;
@@ -267,80 +328,16 @@ public class BookingService {
         }
     }
 
-    private int countActiveBookings(Booking[] bookings){
-
-        int allActiveBookingsCount = 0;
-
-        // Count the active bookings
-        for (Booking booking : bookings) {
-            if (booking != null){
-                allActiveBookingsCount++;
-            }
-        }
-
-        return allActiveBookingsCount;
-
+    public Car[] getAllUnbookedCars(){
+        return getUnbookedCars(carService.getCars());
     }
 
-    private void populateBookingsArray(Booking[] bookings, Booking[] filteredBookings){
-
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through all the bookings
-        for (int i = 0; i < bookings.length; i++) {
-
-            // Use the activeBooking at the current index of the source array
-            Booking activeBooking = bookings[i];
-
-            if (activeBooking != null){
-                filteredBookings[index++] = activeBooking;
-
-            }
-        }
+    public Car[] getAllUnbookedGasCars(){
+        return getUnbookedCars(carService.getGasolineCars());
     }
 
-    private int countUserBookedCars(Booking[] bookings, UUID userId){
-
-        int numberOfUserCarsBooked = 0;
-
-        // Count the bookings associated to the passed userId
-        for (Booking activeBooking : bookings) {
-
-            // If the booking and user exists - check that the activeBooking userId matches the passed userId
-            if (activeBooking != null &&
-                    activeBooking.getUser() != null &&
-                    activeBooking.getUser().getUserId().equals(userId)){
-
-                numberOfUserCarsBooked++;
-
-            }
-        }
-
-        return numberOfUserCarsBooked;
-
-    }
-
-    private void populateUserBookedCarsArray(Booking[] bookings, UUID userId, Car[] userCarsBooked){
-
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through bookings
-        for (int i = 0; i < bookings.length; i++) {
-
-            // Use the activeBooking at the current index of the source array
-            Booking activeBooking = bookings[i];
-
-            // If the active booking and user exists, and the userID matches the passed userId, add the associated car.
-            if (activeBooking != null &&
-                    activeBooking.getUser() != null &&
-                    activeBooking.getUser().getUserId().equals(userId)){
-
-                userCarsBooked[index++] = activeBooking.getCar();
-
-            }
-        }
+    public Car[] getAllUnbookedElectricCars(){
+        return getUnbookedCars(carService.getElectricCars());
     }
 
 }
