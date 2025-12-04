@@ -9,5 +9,5 @@ import car.Car;
 
 public interface CarDAO {
 
-    Car[] getCarsDAO();
+    Car[] getCars();
 }

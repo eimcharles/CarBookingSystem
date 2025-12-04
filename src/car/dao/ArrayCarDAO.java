@@ -32,7 +32,7 @@ public class ArrayCarDAO implements CarDAO {
     }
 
     @Override
-    public Car[] getCarsDAO() {
+    public Car[] getCars() {
         // Copy of Car objects returned from carDAO
         return Arrays.copyOf(this.carDAO, this.carDAO.length);
     }

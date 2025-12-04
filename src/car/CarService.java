@@ -32,7 +32,7 @@ public class CarService {
     public Car[] getCars() {
 
         // Get all cars from DAO
-        Car[] cars = this.arrayCarDAO.getCarsDAO();
+        Car[] cars = this.arrayCarDAO.getCars();
 
         // If cars is null or empty, return empty array
         if (cars == null || cars.length == 0){
