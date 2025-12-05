@@ -158,9 +158,6 @@ public class CLIInputUtility {
         // Flag for input validation
         boolean isValidInput = false;
 
-        // Bookings exist - prompt the user
-        if (bookingService.hasActiveBookings()){
-
             do {
 
                 displayFormattedUserInput("➡️", "Please enter the Booking ID: ");
@@ -195,6 +192,10 @@ public class CLIInputUtility {
                     // Handles Booking non-existence
                     displayFormattedMessage("❌", e.getMessage());
 
+                } catch (Exception e) {
+
+                    displayFormattedMessage("❌", "Invalid Booking ID");
+
                 }
 
 
@@ -205,8 +206,6 @@ public class CLIInputUtility {
                 }
 
             } while (!isValidInput);
-
-        }
 
         return bookingId;
     }
