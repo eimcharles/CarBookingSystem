@@ -1,6 +1,7 @@
 package app;
 
 import booking.BookingService;
+import exception.BookingNotFoundException;
 import user.UserService;
 
 import exception.CarNotFoundException;
@@ -148,7 +149,65 @@ public class CLIInputUtility {
 
     public static UUID promptAndValidateBookingID(BookingService bookingService, Scanner scanner){
 
-        ///  TODO implement method
-        return null;
+        // User Input '8ca51d2b-aaaf-4bf2-834a-e02964e10fc3'
+        String bookingIdInput;
+
+        // Holds the validated and converted bookingId object
+        UUID bookingId = null;
+
+        // Flag for input validation
+        boolean isValidInput = false;
+
+        // Bookings exist - prompt the user
+        if (bookingService.hasActiveBookings()){
+
+            do {
+
+                displayFormattedUserInput("➡️", "Please enter the Booking ID: ");
+                bookingIdInput = scanner.nextLine().trim();
+
+                // Handles empty input
+                if (bookingIdInput.isEmpty()) {
+                    displayFormattedMessage("⚠️", "Booking ID cannot be empty - Please try again.");
+
+                    // Empty input: Skip the rest of the loop
+                    continue;
+                }
+
+                try {
+
+                    // Validates Input: Convert the input string to a UUID object.
+                    bookingId = UUID.fromString(bookingIdInput);
+
+                    // Validates Booking Existence: throws if booking doesn't exist.
+                    bookingService.getBookingById(bookingId);
+
+                    // Input and booking exist and are valid.
+                    isValidInput = true;
+
+                } catch (IllegalArgumentException e){
+
+                    // Handles bad UUID format
+                    displayFormattedMessage("❌", "Invalid Booking ID Format: " + bookingIdInput);
+
+                } catch (BookingNotFoundException e) {
+
+                    // Handles Booking non-existence
+                    displayFormattedMessage("❌", e.getMessage());
+
+                }
+
+
+                // Re-display on invalid inputs
+                if (!isValidInput){
+                    displayAllActiveBookings(bookingService);
+                    displayCancelBookingByBookingIdGuidelines();
+                }
+
+            } while (!isValidInput);
+
+        }
+
+        return bookingId;
     }
 }
