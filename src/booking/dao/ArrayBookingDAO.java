@@ -1,6 +1,9 @@
 package booking.dao;
 
 import booking.Booking;
+import exception.BookingNotFoundException;
+import exception.UserNotFoundException;
+import user.User;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -57,6 +60,18 @@ public class ArrayBookingDAO implements BookingDAO {
     public Booking[] getBookings() {
         // Copy of bookingsDao returned from BookingDAO
         return Arrays.copyOf(this.bookingsDao, this.bookingsDao.length);
+    }
+
+    @Override
+    public Booking getBookingById(UUID bookingId) {
+        for (Booking booking: this.bookingsDao){
+            if (booking.getUserBookingID().equals(bookingId)){
+                return booking;
+            }
+        }
+
+        throw new BookingNotFoundException(bookingId);
+
     }
 
 }

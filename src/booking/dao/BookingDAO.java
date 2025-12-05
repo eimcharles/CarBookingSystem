@@ -17,4 +17,6 @@ public interface BookingDAO {
 
     boolean cancelBooking(UUID bookingId);
 
+    Booking getBookingById(UUID bookingId);
+
 }
