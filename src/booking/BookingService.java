@@ -346,4 +346,12 @@ public class BookingService {
         this.arrayBookingDAO.cancelBooking(validatedBookingId);
 
     }
+
+    public boolean hasActiveBookings(){
+        return getBookings().length > 0;
+    }
+
+    public Booking getBookingById(UUID bookindId){
+        return this.arrayBookingDAO.getBookingById(bookindId);
+    }
 }
