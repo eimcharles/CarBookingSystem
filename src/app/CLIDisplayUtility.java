@@ -37,7 +37,6 @@ public class CLIDisplayUtility {
 
         User[] users = userService.getUsers();
 
-        displayResultsByMenuTitle(TITLE_REGISTERED_USERS);
         if (users == null || users.length == 0){
             displayFormattedMessage("❌", "No users currently registered in the system");
             return;
@@ -71,7 +70,6 @@ public class CLIDisplayUtility {
 
         Car[] availableCars = bookingService.getAllUnbookedCars();
 
-        displayResultsByMenuTitle(TITLE_ALL_CARS);
         if (availableCars == null || availableCars.length == 0) {
             displayFormattedMessage("❌", "No cars currently available for booking");
             return;
@@ -104,7 +102,6 @@ public class CLIDisplayUtility {
 
         Car[] availableGasCars = bookingService.getAllUnbookedGasCars();
 
-        displayResultsByMenuTitle(TITLE_GAS_CARS);
         if (availableGasCars == null || availableGasCars.length == 0) {
             displayFormattedMessage("❌", "No gas cars currently available for booking");
             return;
@@ -138,7 +135,6 @@ public class CLIDisplayUtility {
 
         Car[] availableElectricCars = bookingService.getAllUnbookedElectricCars();
 
-        displayResultsByMenuTitle(TITLE_ELECTRIC_CARS);
         if (availableElectricCars == null || availableElectricCars.length == 0) {
             displayFormattedMessage("❌", "No electric cars currently available for booking");
             return;
@@ -172,9 +168,9 @@ public class CLIDisplayUtility {
 
         Booking[] allBookings = bookingService.getBookings();
 
-        displayResultsByMenuTitle(TITLE_ACTIVE_BOOKINGS);
         if (allBookings == null || allBookings.length == 0){
             displayFormattedMessage("❌", "No bookings currently registered in the system");
+            return;
         }
 
 
