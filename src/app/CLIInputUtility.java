@@ -37,12 +37,12 @@ public class CLIInputUtility {
 
         do {
 
-            displayFormattedUserInput("➡️", "Please enter the User ID: ");
+            displayFormattedUserInput("➡️", "Please enter the USER ID: ");
             userIdInput = scanner.nextLine().trim();
 
             // Handles empty input
             if (userIdInput.isEmpty()) {
-                displayFormattedMessage("⚠️", "User ID cannot be empty - Please try again.");
+                displayFormattedMessage("⚠️", "USER ID cannot be empty - Please try again.");
 
                 // Empty input: Skip the rest of the loop
                 continue;
@@ -62,7 +62,7 @@ public class CLIInputUtility {
             } catch (IllegalArgumentException e) {
 
                 // Handles bad UUID format
-                displayFormattedMessage("❌","Invalid User ID Format: "  + userIdInput);
+                displayFormattedMessage("❌","Invalid USER ID Format: "  + userIdInput);
 
             } catch (UserNotFoundException e) {
 
@@ -78,6 +78,7 @@ public class CLIInputUtility {
 
             // Re-display on invalid inputs
             if (!isValidInput){
+                displayResultsByMenuTitle(TITLE_REGISTERED_USERS);
                 displayAllRegisteredUsers(userService);
                 displayUserIdBookingGuidelines();
             }
@@ -98,12 +99,12 @@ public class CLIInputUtility {
 
         do {
 
-            displayFormattedUserInput("➡️", "Please enter the Car Registration Number: ");
+            displayFormattedUserInput("➡️", "Please enter the CAR REGISTRATION Number: ");
             userRegistrationInput = scanner.nextLine().trim();
 
             // Handles empty input
             if (userRegistrationInput.isEmpty()) {
-                displayFormattedMessage("⚠️", "Car Registration Number cannot be empty - Please try again.");
+                displayFormattedMessage("⚠️", "CAR REGISTRATION Number cannot be empty - Please try again.");
 
                 // Empty input: Skip the rest of the loop
                 continue;
@@ -137,6 +138,7 @@ public class CLIInputUtility {
 
             // Re-display on invalid inputs
             if (!isValidInput){
+                displayResultsByMenuTitle(TITLE_ALL_CARS);
                 displayAllAvailableCars(bookingService);
                 displayRegistrationNumberBookingGuidelines();
             }
@@ -160,12 +162,12 @@ public class CLIInputUtility {
 
             do {
 
-                displayFormattedUserInput("➡️", "Please enter the Booking ID: ");
+                displayFormattedUserInput("➡️", "Please enter the BOOKING ID: ");
                 bookingIdInput = scanner.nextLine().trim();
 
                 // Handles empty input
                 if (bookingIdInput.isEmpty()) {
-                    displayFormattedMessage("⚠️", "Booking ID cannot be empty - Please try again.");
+                    displayFormattedMessage("⚠️", "BOOKING ID cannot be empty - Please try again.");
 
                     // Empty input: Skip the rest of the loop
                     continue;
@@ -185,7 +187,7 @@ public class CLIInputUtility {
                 } catch (IllegalArgumentException e){
 
                     // Handles bad UUID format
-                    displayFormattedMessage("❌", "Invalid Booking ID Format: " + bookingIdInput);
+                    displayFormattedMessage("❌", "Invalid BOOKING ID Format: " + bookingIdInput);
 
                 } catch (BookingNotFoundException e) {
 
@@ -194,13 +196,14 @@ public class CLIInputUtility {
 
                 } catch (Exception e) {
 
-                    displayFormattedMessage("❌", "Invalid Booking ID");
+                    displayFormattedMessage("❌", "Invalid BOOKING ID");
 
                 }
 
 
                 // Re-display on invalid inputs
                 if (!isValidInput){
+                    displayResultsByMenuTitle(TITLE_ACTIVE_BOOKINGS);
                     displayAllActiveBookings(bookingService);
                     displayCancelBookingByBookingIdGuidelines();
                 }
