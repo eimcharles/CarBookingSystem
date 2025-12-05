@@ -1,8 +1,11 @@
 package app;
 
+import booking.Booking;
 import booking.BookingService;
 
 import car.Car;
+import exception.BookingNotActiveException;
+import exception.BookingNotFoundException;
 import user.User;
 import user.UserService;
 
@@ -60,17 +63,17 @@ public class CarBookingCLI {
     public static void makeACarBookingByUserIdAndRegistrationNumber(UserService userService, BookingService bookingService, Scanner scanner) {
 
         // Menus, instructions for entering userId to make booking
-        displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
-        displayUserIdBookingGuidelines();
         displayAllRegisteredUsers(userService);
+        displayUserIdBookingGuidelines();
+
 
         // Validates the User ID from the console.
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
         // Menus, instructions for entering registration number to make booking
         displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
-        displayRegistrationNumberBookingGuidelines();
         displayAllAvailableCars(bookingService);
+        displayRegistrationNumberBookingGuidelines();
 
         // Validates the Car registration number from the console.
         String validatedCarRegistration = promptAndValidateCarRegistrationNumber(bookingService, scanner);
@@ -128,10 +131,14 @@ public class CarBookingCLI {
 
     public static void cancelCarBookingByBookingId(BookingService bookingService, Scanner scanner) {
 
-        ///  TODO to implement
-        displayResultsByMenuTitle(TITLE_CANCEL_BOOKING);
-        displayCancelBookingByBookingIdGuidelines();
+        // if no active bookings present
+        if (!bookingService.hasActiveBookings()){
+            displayFormattedMessage("❌", "No bookings currently registered in the system");
+            return;
+        }
+
         displayAllActiveBookings(bookingService);
+        displayCancelBookingByBookingIdGuidelines();
 
         // Validates the Booking ID from the console.
         UUID validatedBookingId = promptAndValidateBookingID(bookingService, scanner);
@@ -139,13 +146,32 @@ public class CarBookingCLI {
         // Process booking cancellation once Booking ID is validated
         processBookingCancellation(bookingService, validatedBookingId);
 
-
     }
 
     private static void processBookingCancellation(BookingService bookingService, UUID validatedBookingId) {
 
-            ///  TODO to implement
-            bookingService.cancelBooking(validatedBookingId);
+            try {
+
+                // Cancel the booking
+                bookingService.cancelBooking(validatedBookingId);
+                displayResultsByMenuTitle(TITLE_CANCELLATION_SUCCESS_MENU);
+                displayFormattedMessage("✅", "Successfully cancelled booking with ID: " + validatedBookingId.toString());
+
+            } catch (BookingNotFoundException e) {
+
+                // Handles Booking non-existence
+                displayFormattedMessage("❌", e.getMessage());
+
+            } catch (BookingNotActiveException e) {
+
+                // Handles inactive Booking
+                displayFormattedMessage("❌", e.getMessage());
+
+            } catch (Exception e) {
+
+                displayFormattedMessage("❌", "No bookings currently registered in the system");
+
+            }
 
     }
 
@@ -178,14 +204,11 @@ public class CarBookingCLI {
 
     public static void displayUserBookedCarsByUserId(UserService userService, BookingService bookingService, Scanner scanner){
 
-        // CARS BOOKED BY USER ID MENU
-        displayResultsByMenuTitle(TITLE_USER_BOOKED_CARS);
+        // REGISTERED USERS MENU
+        displayAllRegisteredUsers(userService);
 
         // Guidelines to Display Cars Booked by User (By User ID)
         displayCarsBookedByUserIdGuidelines();
-
-        // REGISTERED USERS MENU
-        displayAllRegisteredUsers(userService);
 
         // Validates the User ID from the console and returns a UUID object
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
