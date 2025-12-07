@@ -15,7 +15,7 @@ public interface BookingDAO {
 
     void addBooking(Booking carBooking);
 
-    boolean cancelBooking(UUID bookingId);
+    boolean updateBooking(Booking carBookingToUpdate);
 
     Booking getBookingById(UUID bookingId);
 
