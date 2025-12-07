@@ -13,12 +13,15 @@ public class Car {
     private BigDecimal rentalPricePerDay;
     private Brand manufacturer;
     private FuelType fuelType;
+    private boolean isBooked;
+
 
     public Car(String registrationNumber, BigDecimal rentalPricePerDay, Brand manufacturer, FuelType fuelType) {
         this.registrationNumber = registrationNumber;
         this.rentalPricePerDay = rentalPricePerDay;
         this.manufacturer = manufacturer;
         this.fuelType = fuelType;
+        this.isBooked = false;
     }
 
     public String getRegistrationNumber() {
@@ -57,24 +60,31 @@ public class Car {
 
     public boolean isGasoline() { return this.fuelType == FuelType.GASOLINE; }
 
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.isBooked = booked;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return fuelType == car.fuelType &&
-                Objects.equals(registrationNumber, car.registrationNumber) &&
-                Objects.equals(rentalPricePerDay, car.rentalPricePerDay) && manufacturer == car.manufacturer;
+        return isBooked == car.isBooked && Objects.equals(registrationNumber, car.registrationNumber) &&
+                Objects.equals(rentalPricePerDay, car.rentalPricePerDay) &&
+                manufacturer == car.manufacturer
+                && fuelType == car.fuelType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNumber, rentalPricePerDay, manufacturer, fuelType);
+        return Objects.hash(registrationNumber, rentalPricePerDay, manufacturer, fuelType, isBooked);
     }
 
     @Override
     public String toString() {
-        return "Car { registrationNumber = '%s' , rentalPricePerDay = %s , manufacturer = %s, fuelType = %s }".formatted(registrationNumber, rentalPricePerDay, manufacturer, fuelType);
+        return "Car { registrationNumber = '%s' , rentalPricePerDay = %s , manufacturer = %s, fuelType = %s, booked = %b}".formatted(registrationNumber, rentalPricePerDay, manufacturer, fuelType, isBooked);
     }
 }
