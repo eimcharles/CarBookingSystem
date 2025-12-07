@@ -1,11 +1,13 @@
 package car.dao;
 
+import booking.Booking;
 import car.Brand;
 import car.Car;
 import car.FuelType;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  *      ArrayCarDAO is a Data Access Object (DAO)
@@ -35,6 +37,32 @@ public class ArrayCarDAO implements CarDAO {
     public Car[] getCars() {
         // Copy of Car objects returned from carDAO
         return Arrays.copyOf(this.carDAO, this.carDAO.length);
+    }
+
+    @Override
+    public boolean updateCar(Car carToUpdate) {
+
+        // Car to be cancelled registration number
+        String registrationNumber = carToUpdate.getRegistrationNumber();
+
+        for (int i = 0; i < this.carDAO.length; i++) {
+
+            Car currentCar = this.carDAO[i];
+
+            // Match the car to be cancelled with the registration number
+            if (currentCar != null && currentCar.getRegistrationNumber().equals(registrationNumber)) {
+
+                // Replace the old object reference with the new,
+                this.carDAO[i] = carToUpdate;
+
+                // the car registration was found and cancelled
+                return true;
+            }
+        }
+
+        // the car registration was not found and cancelled
+        return false;
+
     }
 
 }
