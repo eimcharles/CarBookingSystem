@@ -50,10 +50,29 @@ public class ArrayBookingDAO implements BookingDAO {
     }
 
     @Override
-    public boolean cancelBooking(UUID bookingId) {
+    public boolean updateBooking(Booking carBookingToUpdate) {
 
-        ///  TODO to implement
-        return true;
+        // Holds the booking id
+        UUID targetId = carBookingToUpdate.getUserBookingID();
+
+        for (int i = 0; i < this.nextAvailableIndex; i++) {
+
+            Booking currentBooking = this.bookingsDao[i];
+
+            // Match the booking with the targetId
+            if (currentBooking != null && currentBooking.getUserBookingID().equals(targetId)) {
+
+                // Replace the old object reference with the new,
+                this.bookingsDao[i] = carBookingToUpdate;
+
+                // the booking ID was not found and cancelled
+                return true;
+            }
+        }
+
+        // the booking ID was not found and not cancelled
+        return false;
+
     }
 
     @Override
@@ -65,7 +84,7 @@ public class ArrayBookingDAO implements BookingDAO {
     @Override
     public Booking getBookingById(UUID bookingId) {
         for (Booking booking: this.bookingsDao){
-            if (booking.getUserBookingID().equals(bookingId)){
+            if (booking != null && booking.getUserBookingID().equals(bookingId)){
                 return booking;
             }
         }
