@@ -114,7 +114,7 @@ public class CLIInputUtility {
             try {
 
                 // Validates available car: existence and car current availability
-                bookingService.getUnbookedCarForBooking(userRegistrationInput);
+                bookingService.getAvailableCarForBookingByRegistrationNumber(userRegistrationInput);
 
                 // Car exists and is currently available
                 isValidInput = true;
