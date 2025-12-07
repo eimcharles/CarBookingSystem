@@ -1,5 +1,6 @@
 package car.dao;
 
+import booking.Booking;
 import car.Car;
 
 /**
@@ -10,4 +11,7 @@ import car.Car;
 public interface CarDAO {
 
     Car[] getCars();
+
+    boolean updateCar(Car carToUpdate);
+
 }
