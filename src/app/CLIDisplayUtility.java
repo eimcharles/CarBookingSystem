@@ -10,8 +10,9 @@ import static app.CLIFormatUtility.*;
 
 /**
  *      CLIDisplayUtility is a utility class
- *      responsible for fetching data and
- *      organizing it for display,
+ *      that is part of the CarBookingApplication presentation layer.
+ *
+ *      It is responsible for fetching data and organizing it for display,
  *      delegating formatting to CLIFormatUtility.
  * */
 

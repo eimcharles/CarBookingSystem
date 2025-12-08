@@ -15,8 +15,11 @@ import static app.CLIDisplayUtility.*;
 import static app.CLIFormatUtility.*;
 
 /**
- *      CLIInputUtility is a utility class responsible for
- *      prompting the user and validating user input.
+ *      CLIInputUtility is a  utility class
+ *      that is part of the CarBookingApplication presentation layer.
+ *
+ *      It responsible for prompting the user and validating user input within the
+ *      CarBookingCLI class.
  * */
 
 public class CLIInputUtility {

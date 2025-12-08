@@ -6,11 +6,9 @@ import car.Car;
 
 /**
  *      CLIFormatUtility is a utility class
- *      that is part of the CarBookingApplication
- *      presentation layer.
+ *      that is part of the CarBookingApplication presentation layer.
  *
- *      It is dedicated to formatting and
- *      displaying all output within the
+ *      It is responsible for formatting and displaying all output within the
  *      CarBookingCLI class.
  */
 
