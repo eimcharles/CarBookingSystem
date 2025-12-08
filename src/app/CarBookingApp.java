@@ -78,7 +78,7 @@ public class CarBookingApp {
                     case "7":
                         // To Display Cars Booked by User (By User ID)
                         displayResultsByMenuTitle(TITLE_USER_BOOKED_CARS);
-                        displayUserBookedCarsByUserId(configuration.getUserService(), configuration.getBookingService(), scanner);
+                        displayCarsBookedByUserByUserId(configuration.getUserService(), configuration.getBookingService(), scanner);
                         break;
                     case "8":
                         // To Display All Registered Users
