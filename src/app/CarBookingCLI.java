@@ -20,13 +20,10 @@ import static app.CLIDisplayUtility.*;
 
 /**
  *      CarBookingCLI class is the central controller
- *      that takes user input,
- *      calls the business services,
- *      and orchestrates the display of results.
- *
- *      TODO write comment for all methods CarBookingCLI
- *      TODO finish implementation for CarBookingCLI Class
- *
+ *      that takes user input, calls the business services,
+ *      and orchestrates the creation of a Car booking,
+ *      the cancellation of a Car booking and displaying
+ *      all cars that are booked by a given user.
  * */
 
 public class CarBookingCLI {
