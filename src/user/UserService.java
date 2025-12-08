@@ -32,7 +32,7 @@ public class UserService {
     }
 
     /**
-     *      Retrieves all User objects from arrayUserDAO, filtering out any null references that
+     *      Retrieves all User objects from the arrayUserDAO class, filtering out any null references that
      *      may exist, and returns a compacted array of Users.
      *
      *      @return A new, compacted array of User objects,
