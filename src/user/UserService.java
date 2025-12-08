@@ -7,8 +7,6 @@ import java.util.UUID;
 /**
  *      Service class for managing User objects.
  *      Contains business logic related to users.
- *
- *      TODO : add comments for methods in UserService
  */
 
 public class UserService {
@@ -18,6 +16,20 @@ public class UserService {
     public UserService(ArrayUserDAO arrayUserDAO) {
         this.arrayUserDAO = arrayUserDAO;
     }
+
+    /**
+     *
+     *
+     */
+
+    public User getUserById(UUID id) {
+        return this.arrayUserDAO.getUserById(id);
+    }
+
+    /**
+     *
+     *
+     */
 
     public User[] getUsers() {
 
@@ -29,35 +41,23 @@ public class UserService {
             return new User[0];
         }
 
-        int nonNullUserCount = getNonNullUserCount(users);
+        // Number of non-null users
+        int nonNullUserCount = getUserCount(users);
 
         if (nonNullUserCount == 0){
             return new User[0];
         }
 
-        User[] nonNullUsers = populateNonNullUsers(nonNullUserCount, users);
-
-        return nonNullUsers;
-    }
-
-    private static User[] populateNonNullUsers(int nonNullUserCount, User[] users) {
-
         // Create a new array with the nonNullUserCount for size
         User[] nonNullUsers = new User[nonNullUserCount];
 
-        int index = 0;
-        for (int i = 0; i < users.length; i++) {
+        // Populates a pre-sized Car array with nonNullUsers
+        populateUsers(users, nonNullUsers);
 
-            User nonNullUser = users[i];
-
-            if (nonNullUser != null){
-                nonNullUsers[index++] = nonNullUser;
-            }
-        }
         return nonNullUsers;
     }
 
-    private static int getNonNullUserCount(User[] users) {
+    private static int getUserCount(User[] users) {
 
         // Count non-null users in DAO array
         int nonNullUserCount = 0;
@@ -69,8 +69,22 @@ public class UserService {
         return nonNullUserCount;
     }
 
-    public User getUserById(UUID id) {
-        return this.arrayUserDAO.getUserById(id);
+    private static void populateUsers(User[] users, User[] nonNullUsers) {
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through users
+        for (int i = 0; i < users.length; i++) {
+
+            // Use the user at the current index of the source array
+            User nonNullUser = users[i];
+
+            // Add to nonNullUsers
+            if (nonNullUser != null){
+                nonNullUsers[index++] = nonNullUser;
+            }
+        }
     }
 
 }
