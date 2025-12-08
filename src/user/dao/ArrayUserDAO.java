@@ -36,6 +36,19 @@ public class ArrayUserDAO implements UserDAO {
         return Arrays.copyOf(this.userDAO,this.userDAO.length);
     }
 
+    /**
+     *      Finds a User whose ID matches the
+     *      provided UUID in the userDAO array.
+     *
+     *      @param id The unique identifier (UUID)
+     *      of the user to find.
+     *
+     *      @return The User object if found.
+     *
+     *      @throws UserNotFoundException If no user
+     *      with the given ID exists in userDAO array.
+     */
+
     @Override
     public User getUserById(UUID id) {
         for (User user: this.userDAO){
