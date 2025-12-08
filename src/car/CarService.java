@@ -72,7 +72,7 @@ public class CarService {
 
 
     /**
-     *      Retrieves all Car objects from arrayCarDAO, filtering out any null references that
+     *      Retrieves all Car objects from the arrayCarDAO class, filtering out any null references that
      *      may exist, and returns a compacted array of Cars.
      *
      *      @return A new, compacted array of Car objects,
