@@ -2,12 +2,11 @@ package car;
 
 import car.dao.ArrayCarDAO;
 import exception.CarNotFoundException;
+import exception.CarUnavailableException;
 
 /**
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
- *
- *      TODO : add comments for methods in CarService
  */
 
 public class CarService {
@@ -17,6 +16,21 @@ public class CarService {
     public CarService(ArrayCarDAO arrayCarDAO) {
         this.arrayCarDAO = arrayCarDAO;
     }
+
+    /**
+     *
+     *
+     */
+
+    public void cancelAssociatedCarByRegistrationNumber(String registrationNumber){
+
+
+    }
+
+    /**
+     *
+     *
+     */
 
     public Car getCarByRegistrationNumber(String registrationNumber) {
         for (Car car: getCars()){
@@ -29,6 +43,71 @@ public class CarService {
 
     }
 
+    /**
+     *
+     *
+     */
+
+    public Car[] getAllAvailableCars() {
+
+        // Get all cars that are non-null
+        Car[] nonNullCars = getCars();
+
+        // If cars is null or empty, return empty array
+        if (nonNullCars == null || nonNullCars.length == 0){
+            return new Car[0];
+        }
+
+        // Number of available cars
+        int availableCarCount = getAllAvailableCarCount(nonNullCars);
+
+        if (availableCarCount == 0){
+            return new Car[0];
+        }
+
+        // Create a new array with the availableCarCount for size
+        Car[] availableCars = new Car[availableCarCount];
+
+        // Populates a pre-sized Car array with availableCars
+        populateAllAvailableCars(nonNullCars, availableCars);
+
+        return availableCars;
+    }
+
+    private int getAllAvailableCarCount(Car[] cars) {
+
+        // Count not booked cars
+        int availableCarCount = 0;
+        for (Car car : cars) {
+            if (car != null && !car.isBooked()){
+                availableCarCount++;
+            }
+        }
+        return availableCarCount;    }
+
+    private void populateAllAvailableCars(Car[] nonNullCars, Car[] availableCars) {
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through nonNullCars
+        for (int i = 0; i < nonNullCars.length; i++) {
+
+            // Use the nonNullCar at the current index of the source array
+            Car availableCar = nonNullCars[i];
+
+            // Add to availableCars if the is not booked
+            if (availableCar != null && !availableCar.isBooked()){
+                availableCars[index++] = availableCar;
+            }
+        }
+    }
+
+    /**
+     *
+     *
+     */
+
     public Car[] getCars() {
 
         // Get all cars from DAO
@@ -39,37 +118,23 @@ public class CarService {
             return new Car[0];
         }
 
-
-        int nonNullCarCount = getNonNullCarCount(cars);
+        // Number of non-null cars
+        int nonNullCarCount = getCarCount(cars);
 
         if (nonNullCarCount == 0){
             return new Car[0];
         }
 
-        Car[] nonNullCars = populateNonNullCars(nonNullCarCount, cars);
-
-        return nonNullCars;
-    }
-
-    private Car[] populateNonNullCars(int nonNullCarCount, Car[] cars) {
-
         // Create a new array with the nonNullCarCount for size
         Car[] nonNullCars = new Car[nonNullCarCount];
 
-        int index = 0;
-        for (int i = 0; i < cars.length; i++) {
+        // Populates a pre-sized Car array with nonNullCars
+        populateCars(cars, nonNullCars);
 
-            Car nonNullCar = cars[i];
-
-            if (nonNullCar != null){
-                nonNullCars[index++] = nonNullCar;
-            }
-        }
         return nonNullCars;
-
     }
 
-    private int getNonNullCarCount(Car[] cars) {
+    private int getCarCount(Car[] cars) {
 
         // Count non-null Cars in DAO array
         int nonNullCarCount = 0;
@@ -78,45 +143,83 @@ public class CarService {
                 nonNullCarCount++;
             }
         }
-        return nonNullCarCount;    }
 
-    public Car[] getElectricCars() {
-        return getCarsByFuelType(FuelType.ELECTRIC);
+        return nonNullCarCount;
     }
 
-    public Car[] getGasolineCars() {
-        return getCarsByFuelType(FuelType.GASOLINE);
+    private void populateCars(Car[] cars, Car[] nonNullCars) {
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through cars
+        for (int i = 0; i < cars.length; i++) {
+
+            // Use the car at the current index of the source array
+            Car nonNullCar = cars[i];
+
+            // Add to nonNullCars
+            if (nonNullCar != null){
+                nonNullCars[index++] = nonNullCar;
+            }
+        }
     }
 
-    public Car[] getCarsByFuelType(FuelType fuelType){
+    /**
+     *
+     *
+     */
 
-        // Get all cars
-        Car[] cars = getCars();
+    public Car[] getAllElectricCars() {
+        return getAllAvailableCarsByFuelType(FuelType.ELECTRIC);
+    }
 
-        // If cars is null or empty, return empty array
-        if (cars == null || cars.length == 0){
+    /**
+     *
+     *
+     */
+
+    public Car[] getAllGasolineCars() {
+        return getAllAvailableCarsByFuelType(FuelType.GASOLINE);
+    }
+
+    /**
+     *
+     *
+     */
+
+    public Car[] getAllAvailableCarsByFuelType(FuelType fuelType){
+
+        // Get all availableCars that are not booked
+        Car[] availableCars = getAllAvailableCars();
+
+        // If availableCars is null or empty, return empty array
+        if (availableCars == null || availableCars.length == 0){
             return new Car[0];
         }
 
-        // Number of cars by passed fuelType
-        int carCountByFuelType = countCarsByFuelType(cars, fuelType);
+        // Number of availableCars by passed fuelType
+        int carCountByFuelType = getCarCountByFuelType(availableCars, fuelType);
+
+        if (carCountByFuelType == 0){
+            return new Car[0];
+        }
 
         // Create a new array with the carCountByFuelType for size
         Car[] filteredCarsByFuelType = new Car[carCountByFuelType];
 
-        // Populates a pre-sized Car array with cars that match the specified FuelType.
-        populateCarsByFuelType(cars, fuelType, filteredCarsByFuelType);
+        // Populates a pre-sized Car array with availableCars that match the specified FuelType.
+        populateCarsByFuelType(availableCars, filteredCarsByFuelType , fuelType);
 
         return filteredCarsByFuelType;
 
     }
 
-    private int countCarsByFuelType(Car[] cars, FuelType fuelType){
+    private int getCarCountByFuelType(Car[] availableCars, FuelType fuelType){
 
+        // Count the availableCars based on fuel type in availableCars array
         int carCountByFuelType = 0;
-
-        // Count the cars based on fuel type in cars array
-        for (Car car : cars) {
+        for (Car car : availableCars) {
             if (car.getFuelType() == fuelType){
                 carCountByFuelType++;
             }
@@ -126,18 +229,18 @@ public class CarService {
 
     }
 
-    private void populateCarsByFuelType(Car[] cars, FuelType fuelType, Car[] filteredCarsByFuelType){
+    private void populateCarsByFuelType(Car[] availableCars, Car[] filteredCarsByFuelType, FuelType fuelType){
 
         // Index for the new array, avoids null gaps,
         int index = 0;
 
-        // Look through all the cars
-        for (int i = 0; i < cars.length; i++) {
+        // Look through all the availableCars
+        for (int i = 0; i < availableCars.length; i++) {
 
             // Use the car at the current index of the source array
-            Car currentCar = cars[i];
+            Car currentCar = availableCars[i];
 
-            // if the car at an index matches the passed fuelType, add it to filteredCarsByFuelType
+            // if the car at an index matches the passed fuelType, add it to filteredCarsByFuelType array
             if (currentCar.getFuelType() == fuelType){
                 filteredCarsByFuelType[index++] = currentCar;
 
