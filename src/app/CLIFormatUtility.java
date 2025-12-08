@@ -139,7 +139,7 @@ public class CLIFormatUtility {
      * */
 
     public static void displayUserIdBookingGuidelines() {
-        displayFormattedMessage("✅️","Please select a USER ID (e.g. 'b10d126a-3608-4980-9f9c-aa179f5cebc3') from the REGISTERED USERS to MAKE A BOOKING.");
+        displayFormattedMessage("✅️","Please enter a USER ID (e.g. 'b10d126a-3608-4980-9f9c-aa179f5cebc3') from the REGISTERED USERS to MAKE A BOOKING.");
     }
 
     /**
@@ -154,7 +154,7 @@ public class CLIFormatUtility {
      * */
 
     public static void displayRegistrationNumberBookingGuidelines() {
-        displayFormattedMessage("✅","Please select a REGISTRATION NUMBER from the AVAILABLE CARS MENU (e.g., '123_3').");
+        displayFormattedMessage("✅","Please enter a REGISTRATION NUMBER from the AVAILABLE CARS MENU (e.g., '123_3').");
     }
 
     /**
@@ -168,7 +168,7 @@ public class CLIFormatUtility {
      * */
 
     public static void displayCancelBookingByBookingIdGuidelines() {
-        displayFormattedMessage("✅","Please select a BOOKING ID from the ACTIVE BOOKINGS MENU to cancel a booking.");
+        displayFormattedMessage("✅","Please enter a BOOKING ID from the ACTIVE BOOKINGS MENU to cancel a booking.");
     }
 
     /**
