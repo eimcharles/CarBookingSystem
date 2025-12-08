@@ -18,8 +18,15 @@ public class UserService {
     }
 
     /**
+     *      Retrieves a specific User object
+     *      by its unique identifier (UUID).
      *
+     *      Delegates the data lookup operation
+     *      to ArrayUserDAO.
      *
+     *      @param id The UUID of the User to retrieve.
+     *
+     *      @return The User object corresponding to the provided ID.
      */
 
     public User getUserById(UUID id) {
@@ -27,8 +34,13 @@ public class UserService {
     }
 
     /**
+     *      Retrieves all User objects from arrayUserDAO,
+     *      filtering out any null references that
+     *      may exist, and returns a compacted array of
+     *      Users.
      *
-     *
+     *      @return A new, compacted array of User objects,
+     *      or an empty array if no users are found or all are null.
      */
 
     public User[] getUsers() {
