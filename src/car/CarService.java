@@ -38,7 +38,7 @@ public class CarService {
         // Update the state change - holds car cancellation confirmation status
         boolean isCancelledAndUpdated = this.arrayCarDAO.updateCar(carToRelease);
 
-        // Car couldn't be cancelled and back in inventory
+        // Car couldn't be cancelled and put back in inventory
         if (!isCancelledAndUpdated) {
             throw new CarNotFoundException(registrationNumber);
         }
