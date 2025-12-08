@@ -15,11 +15,8 @@ import static app.CLIDisplayUtility.*;
 import static app.CLIFormatUtility.*;
 
 /**
- *
- *      CLIInputUtility is a static class responsible for
- *      prompting the user and validating their
- *      input (e.g., validating a User ID or Booking ID).
- *
+ *      CLIInputUtility is a utility class responsible for
+ *      prompting the user and validating user input.
  * */
 
 public class CLIInputUtility {
