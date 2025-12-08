@@ -1,6 +1,5 @@
 package app;
 
-import booking.Booking;
 import booking.BookingService;
 
 import car.Car;
@@ -66,7 +65,6 @@ public class CarBookingCLI {
         displayAllRegisteredUsers(userService);
         displayUserIdBookingGuidelines();
 
-
         // Validates the User ID from the console.
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
@@ -99,11 +97,13 @@ public class CarBookingCLI {
             }
 
             // Attempt to create the booking by associating the user and car registration
-            UUID userBookingID = bookingService.addCarBooking(user, validatedCarRegistration);
+            UUID userBookingID = bookingService.addCarBookingByUserAndRegistrationNumber(user, validatedCarRegistration);
 
             // Display booking success message
             displayResultsByMenuTitle(TITLE_BOOKING_SUCCESS_MENU);
-            displayFormattedMessage("✅", "Successfully booked car with registration number " + validatedCarRegistration + " for " + user.getName() + " with booking id " + userBookingID);
+            displayFormattedMessage("✅", "Successfully booked the car with registration number " +
+                    validatedCarRegistration + " for " +
+                    user.getName() + " with booking id " + userBookingID);
 
         } catch (CarNotFoundException e) {
 
@@ -153,9 +153,12 @@ public class CarBookingCLI {
             try {
 
                 // Cancel the booking
-                bookingService.cancelBooking(validatedBookingId);
+                bookingService.cancelActiveBookingByBookingId(validatedBookingId);
                 displayResultsByMenuTitle(TITLE_CANCELLATION_SUCCESS_MENU);
-                displayFormattedMessage("✅", "Successfully cancelled booking with ID: " + validatedBookingId.toString());
+
+                displayFormattedMessage("✅", "Successfully cancelled the booked car with registration number " +
+                        bookingService.getBookingByBookingId(validatedBookingId).getCar().getRegistrationNumber() + " for " +
+                        bookingService.getBookingByBookingId(validatedBookingId).getUser().getName() + " with booking id " + validatedBookingId);
 
             } catch (BookingNotFoundException e) {
 
@@ -202,7 +205,7 @@ public class CarBookingCLI {
      *      The Scanner object used for reading the user's input (the User ID).
      */
 
-    public static void displayUserBookedCarsByUserId(UserService userService, BookingService bookingService, Scanner scanner){
+    public static void displayCarsBookedByUserByUserId(UserService userService, BookingService bookingService, Scanner scanner){
 
         // REGISTERED USERS MENU
         displayAllRegisteredUsers(userService);
@@ -214,7 +217,7 @@ public class CarBookingCLI {
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
         // Array of user booked cars for the validated user ID.
-        Car[] bookedCars = bookingService.getUserBookedCarsByUserId(validatedUserId);
+        Car[] bookedCars = bookingService.getAllBookedCarsByUserId(validatedUserId);
 
         // Format and display the user booked cars
         formatAndDisplayUserBookedCars(bookedCars, validatedUserId.toString());
