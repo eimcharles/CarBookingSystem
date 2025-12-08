@@ -116,8 +116,11 @@ public class BookingService {
     }
 
     /**
+     *      Retrieves a specific booking from the arrayBookingDAO class.
      *
+     *      @param bookingId The unique UUID that identifies the desired booking.
      *
+     *      @return The Booking object associated with the ID
      */
 
     public Booking getBookingByBookingId(UUID bookingId){
@@ -125,12 +128,230 @@ public class BookingService {
     }
 
     /**
+     *      Checks if there are any active bookings present in the system.
      *
+     *      @return {@code true} if one or more active bookings are found,
      *
+     *      {@code false} otherwise.
      */
 
     public boolean hasActiveBookings(){
         return getAllActiveBookings().length > 0;
+    }
+
+
+    /**
+     *      Retrieves all Booking objects from the arrayBookingDAO class, filtering out
+     *      any null references that may exist, and returns a compacted array of Booking.
+     *
+     *      @return A new, compacted array of Booking objects,
+     *      or an empty array if no users are found or all are null.
+     */
+    public Booking[] getBookings() {
+
+        // Get all Bookings from DAO - includes null elements
+        Booking[] bookings = this.arrayBookingDAO.getBookings();
+
+        // If bookings are null or empty, return empty array
+        if (bookings == null || bookings.length == 0){
+            return new Booking[0];
+        }
+
+        // Number of nonNullBookings
+        int nonNullBookingsCount = getBookingsCount(bookings);
+
+        if (nonNullBookingsCount == 0) {
+            return new Booking[0];
+        }
+
+        // Create a new array with the nonNullBookingsCount for size
+        Booking[] nonNullBookings = new Booking[nonNullBookingsCount];
+
+        // Populates the pre-sized array with nonNullBookings
+        populateBookings(bookings, nonNullBookings);
+
+        return nonNullBookings;
+
+    }
+
+    private int getBookingsCount(Booking[] bookings){
+
+        // Count non-null Bookings in DAO array
+        int nonNullBookingsCount = 0;
+        for (Booking booking : bookings) {
+            if (booking != null){
+                nonNullBookingsCount++;
+            }
+        }
+
+        return nonNullBookingsCount;
+
+    }
+
+    private void populateBookings(Booking[] bookings, Booking[] nonNullBookings){
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through all the bookings
+        for (int i = 0; i < bookings.length; i++) {
+
+            // Use the nonNullBooking at the current index of the source array
+            Booking nonNullBooking = bookings[i];
+
+            if (nonNullBooking != null){
+                nonNullBookings[index++] = nonNullBooking;
+
+            }
+        }
+    }
+
+    /**
+     *      Retrieves an array of all Booking objects that are currently active.
+     *
+     *      @return A new, compacted array containing only
+     *      active Booking objects, or an empty array if none are available.
+     */
+
+    public Booking[] getAllActiveBookings() {
+
+        // Get all Bookings that are non-null
+        Booking[] nonNullBookings = getBookings();
+
+        // If bookings are null or empty, return empty array
+        if (nonNullBookings == null || nonNullBookings.length == 0){
+            return new Booking[0];
+        }
+
+        int activeBookingsCount = getAllActiveBookingsCount(nonNullBookings);
+
+        if (activeBookingsCount == 0) {
+            return new Booking[0];
+        }
+
+        // Create a new array with the nonNullBookingsCount for size
+        Booking[] activeBookings = new Booking[activeBookingsCount];
+
+        // Populates the pre-sized array with nonNullBookings
+        populateAllActiveBookings(nonNullBookings, activeBookings);
+
+        return activeBookings;
+
+    }
+
+    private int getAllActiveBookingsCount(Booking[] bookings){
+
+        // Count bookings that are active
+        int activeBookingsCount = 0;
+        for (Booking activeBooking : bookings) {
+
+            // Check the booking status
+            if (activeBooking != null && !activeBooking.isBookingCancelled()){
+                activeBookingsCount++;
+            }
+        }
+
+        return activeBookingsCount;
+
+    }
+
+    private void populateAllActiveBookings(Booking[] nonNullBookings, Booking[] activeBookings){
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through all the bookings
+        for (int i = 0; i < nonNullBookings.length; i++) {
+
+            // Use the nonNullBooking at the current index of the source array
+            Booking activeBooking = nonNullBookings[i];
+
+            // Check the booking status
+            if (activeBooking != null && !activeBooking.isBookingCancelled()){
+                activeBookings[index++] = activeBooking;
+
+            }
+        }
+    }
+
+    /**
+     *      Retrieves an array of all Car objects that are associated to an active booking
+     *      and a given user by user id.
+     *
+     *      @return A new, compacted array containing only
+     *      Car objects, or an empty array if none are available.
+     */
+
+    public Car[] getAllBookedCarsByUserId(UUID userId) {
+
+        // All activeBookings with status active
+        Booking[] activeBookings = getAllActiveBookings();
+
+        // If activeBookings are null or empty, return empty array
+        if (activeBookings == null || activeBookings.length == 0) {
+            return new Car[0];
+        }
+
+        // Number of numberOfUserCarsBooked from active bookings
+        int numberOfUserCarsBooked = getAllBookedCarsCount(activeBookings,userId);
+
+        if (numberOfUserCarsBooked == 0) {
+            return new Car[0];
+        }
+
+        // Create a new array with the numberOfUserCarsBooked for size
+        Car[] userCarsBooked = new Car[numberOfUserCarsBooked];
+
+        // Populates the pre-sized array with cars associated to the given userId
+        populateAllBookedCarsArray(activeBookings, userCarsBooked, userId);
+
+        return userCarsBooked;
+
+    }
+
+    private int getAllBookedCarsCount(Booking[] bookings, UUID userId){
+
+        int numberOfCarsBooked = 0;
+
+        // Count the bookings associated to the passed userId
+        for (Booking activeBooking : bookings) {
+
+            // If the booking and user exists - check that the activeBooking userId matches the passed userId
+            if (activeBooking != null &&
+                    activeBooking.getUser() != null &&
+                    activeBooking.getCar() != null &&
+                    activeBooking.getUser().getUserId().equals(userId)){
+
+                numberOfCarsBooked++;
+
+            }
+        }
+
+        return numberOfCarsBooked;
+
+    }
+
+    private void populateAllBookedCarsArray(Booking[] activeBookings, Car[] userCarsBooked, UUID userId){
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through activeBookings
+        for (int i = 0; i < activeBookings.length; i++) {
+
+            // Use the activeBooking at the current index of the source array
+            Booking activeBooking = activeBookings[i];
+
+            // If the active booking and user exists, and the userID matches the passed userId, add the associated car.
+            if (activeBooking != null &&
+                    activeBooking.getUser() != null &&
+                    activeBooking.getCar() != null &&
+                    activeBooking.getUser().getUserId().equals(userId)){
+
+                userCarsBooked[index++] = activeBooking.getCar();
+
+            }
+        }
     }
 
     /**
@@ -261,219 +482,5 @@ public class BookingService {
 
     public Car[] getAllAvailableElectricCars(){
         return getAllAvailableCarsForBooking(carService.getAllElectricCars());
-    }
-
-    /**
-     *      Retrieves an array of all Car objects that are associated to an active booking
-     *      and a given user by user id.
-     *
-     *      @return A new, compacted array containing only
-     *      Car objects, or an empty array if none are available.
-     */
-
-    public Car[] getAllBookedCarsByUserId(UUID userId) {
-
-        // All activeBookings with status active
-        Booking[] activeBookings = getAllActiveBookings();
-
-        // If activeBookings are null or empty, return empty array
-        if (activeBookings == null || activeBookings.length == 0) {
-            return new Car[0];
-        }
-
-        // Number of numberOfUserCarsBooked from active bookings
-        int numberOfUserCarsBooked = getAllBookedCarsCount(activeBookings,userId);
-
-        if (numberOfUserCarsBooked == 0) {
-            return new Car[0];
-        }
-
-        // Create a new array with the numberOfUserCarsBooked for size
-        Car[] userCarsBooked = new Car[numberOfUserCarsBooked];
-
-        // Populates the pre-sized array with cars associated to the given userId
-        populateAllBookedCarsArray(activeBookings, userCarsBooked, userId);
-
-        return userCarsBooked;
-
-    }
-
-    private int getAllBookedCarsCount(Booking[] bookings, UUID userId){
-
-        int numberOfCarsBooked = 0;
-
-        // Count the bookings associated to the passed userId
-        for (Booking activeBooking : bookings) {
-
-            // If the booking and user exists - check that the activeBooking userId matches the passed userId
-            if (activeBooking != null &&
-                    activeBooking.getUser() != null &&
-                    activeBooking.getCar() != null &&
-                    activeBooking.getUser().getUserId().equals(userId)){
-
-                numberOfCarsBooked++;
-
-            }
-        }
-
-        return numberOfCarsBooked;
-
-    }
-
-    private void populateAllBookedCarsArray(Booking[] activeBookings, Car[] userCarsBooked, UUID userId){
-
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through activeBookings
-        for (int i = 0; i < activeBookings.length; i++) {
-
-            // Use the activeBooking at the current index of the source array
-            Booking activeBooking = activeBookings[i];
-
-            // If the active booking and user exists, and the userID matches the passed userId, add the associated car.
-            if (activeBooking != null &&
-                    activeBooking.getUser() != null &&
-                    activeBooking.getCar() != null &&
-                    activeBooking.getUser().getUserId().equals(userId)){
-
-                userCarsBooked[index++] = activeBooking.getCar();
-
-            }
-        }
-    }
-
-    /**
-     *      Retrieves an array of all Booking objects that are currently active.
-     *
-     *      @return A new, compacted array containing only
-     *      active Booking objects, or an empty array if none are available.
-     */
-
-    public Booking[] getAllActiveBookings() {
-
-        // Get all Bookings that are non-null
-        Booking[] nonNullBookings = getBookings();
-
-        // If bookings are null or empty, return empty array
-        if (nonNullBookings == null || nonNullBookings.length == 0){
-            return new Booking[0];
-        }
-
-        int activeBookingsCount = getAllActiveBookingsCount(nonNullBookings);
-
-        if (activeBookingsCount == 0) {
-            return new Booking[0];
-        }
-
-        // Create a new array with the nonNullBookingsCount for size
-        Booking[] activeBookings = new Booking[activeBookingsCount];
-
-        // Populates the pre-sized array with nonNullBookings
-        populateAllActiveBookings(nonNullBookings, activeBookings);
-
-        return activeBookings;
-
-    }
-
-    private int getAllActiveBookingsCount(Booking[] bookings){
-
-        // Count bookings that are active
-        int activeBookingsCount = 0;
-        for (Booking activeBooking : bookings) {
-
-            // Check the booking status
-            if (activeBooking != null && !activeBooking.isBookingCancelled()){
-                activeBookingsCount++;
-            }
-        }
-
-        return activeBookingsCount;
-
-    }
-
-    private void populateAllActiveBookings(Booking[] nonNullBookings, Booking[] activeBookings){
-
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through all the bookings
-        for (int i = 0; i < nonNullBookings.length; i++) {
-
-            // Use the nonNullBooking at the current index of the source array
-            Booking activeBooking = nonNullBookings[i];
-
-            // Check the booking status
-            if (activeBooking != null && !activeBooking.isBookingCancelled()){
-                activeBookings[index++] = activeBooking;
-
-            }
-        }
-    }
-
-    /**
-     *      Retrieves all Booking objects from arrayBookingDAO, filtering out any null references that
-     *      may exist, and returns a compacted array of Booking.
-     *
-     *      @return A new, compacted array of Booking objects,
-     *      or an empty array if no users are found or all are null.
-     */
-    public Booking[] getBookings() {
-
-        // Get all Bookings from DAO - includes null elements
-        Booking[] bookings = this.arrayBookingDAO.getBookings();
-
-        // If bookings are null or empty, return empty array
-        if (bookings == null || bookings.length == 0){
-            return new Booking[0];
-        }
-
-        // Number of nonNullBookings
-        int nonNullBookingsCount = getBookingsCount(bookings);
-
-        if (nonNullBookingsCount == 0) {
-            return new Booking[0];
-        }
-
-        // Create a new array with the nonNullBookingsCount for size
-        Booking[] nonNullBookings = new Booking[nonNullBookingsCount];
-
-        // Populates the pre-sized array with nonNullBookings
-        populateBookings(bookings, nonNullBookings);
-
-        return nonNullBookings;
-
-    }
-
-    private int getBookingsCount(Booking[] bookings){
-
-        // Count non-null Bookings in DAO array
-        int nonNullBookingsCount = 0;
-        for (Booking booking : bookings) {
-            if (booking != null){
-                nonNullBookingsCount++;
-            }
-        }
-
-        return nonNullBookingsCount;
-
-    }
-
-    private void populateBookings(Booking[] bookings, Booking[] nonNullBookings){
-
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through all the bookings
-        for (int i = 0; i < bookings.length; i++) {
-
-            // Use the nonNullBooking at the current index of the source array
-            Booking nonNullBooking = bookings[i];
-
-            if (nonNullBooking != null){
-                nonNullBookings[index++] = nonNullBooking;
-
-            }
-        }
     }
 }
