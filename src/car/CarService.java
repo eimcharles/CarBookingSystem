@@ -18,8 +18,13 @@ public class CarService {
     }
 
     /**
+     *      Cancels the association of a single Car by its registration number to a single booking.
      *
+     *      @param registrationNumber The unique registration number of the car to cancel and release.
      *
+     *      @throws CarNotFoundException if the car does not exist in the inventory.
+     *
+     *      @throws CarUnavailableException if the car exists but is not currently marked as booked .
      */
 
     public void cancelAssociatedCarByRegistrationNumber(String registrationNumber){
@@ -45,8 +50,13 @@ public class CarService {
     }
 
     /**
+     *      Retrieves a single Car object using its registration number.
      *
+     *      @param registrationNumber The unique identifier of the car to find.
      *
+     *      @return The Car object matching the given registration number.
+     *
+     *      @throws CarNotFoundException if no car exists with the specified registration number.
      */
 
     public Car getCarByRegistrationNumber(String registrationNumber) {
@@ -60,69 +70,13 @@ public class CarService {
 
     }
 
-    /**
-     *
-     *
-     */
-
-    public Car[] getAllAvailableCars() {
-
-        // Get all cars that are non-null
-        Car[] nonNullCars = getCars();
-
-        // If cars is null or empty, return empty array
-        if (nonNullCars == null || nonNullCars.length == 0){
-            return new Car[0];
-        }
-
-        // Number of available cars
-        int availableCarCount = getAllAvailableCarCount(nonNullCars);
-
-        if (availableCarCount == 0){
-            return new Car[0];
-        }
-
-        // Create a new array with the availableCarCount for size
-        Car[] availableCars = new Car[availableCarCount];
-
-        // Populates a pre-sized Car array with availableCars
-        populateAllAvailableCars(nonNullCars, availableCars);
-
-        return availableCars;
-    }
-
-    private int getAllAvailableCarCount(Car[] cars) {
-
-        // Count not booked cars
-        int availableCarCount = 0;
-        for (Car car : cars) {
-            if (car != null && !car.isBooked()){
-                availableCarCount++;
-            }
-        }
-        return availableCarCount;    }
-
-    private void populateAllAvailableCars(Car[] nonNullCars, Car[] availableCars) {
-
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through nonNullCars
-        for (int i = 0; i < nonNullCars.length; i++) {
-
-            // Use the nonNullCar at the current index of the source array
-            Car availableCar = nonNullCars[i];
-
-            // Add to availableCars if the is not booked
-            if (availableCar != null && !availableCar.isBooked()){
-                availableCars[index++] = availableCar;
-            }
-        }
-    }
 
     /**
+     *      Retrieves all Car objects from arrayCarDAO, filtering out any null references that
+     *      may exist, and returns a compacted array of Cars.
      *
-     *
+     *      @return A new, compacted array of Car objects,
+     *      or an empty array if no users are found or all are null.
      */
 
     public Car[] getCars() {
@@ -183,27 +137,75 @@ public class CarService {
     }
 
     /**
+     *      Retrieves an array of all Car objects that are currently available (not booked).
      *
-     *
+     *      @return A new, compacted array containing only
+     *      available Car objects, or an empty array if none are available.
      */
 
-    public Car[] getAllElectricCars() {
-        return getAllAvailableCarsByFuelType(FuelType.ELECTRIC);
+    public Car[] getAllAvailableCars() {
+
+        // Get all cars that are non-null
+        Car[] nonNullCars = getCars();
+
+        // If cars is null or empty, return empty array
+        if (nonNullCars == null || nonNullCars.length == 0){
+            return new Car[0];
+        }
+
+        // Number of available cars
+        int availableCarCount = getAllAvailableCarCount(nonNullCars);
+
+        if (availableCarCount == 0){
+            return new Car[0];
+        }
+
+        // Create a new array with the availableCarCount for size
+        Car[] availableCars = new Car[availableCarCount];
+
+        // Populates a pre-sized Car array with availableCars
+        populateAllAvailableCars(nonNullCars, availableCars);
+
+        return availableCars;
+    }
+
+    private int getAllAvailableCarCount(Car[] cars) {
+
+        // Count not booked cars
+        int availableCarCount = 0;
+        for (Car car : cars) {
+            if (car != null && !car.isBooked()){
+                availableCarCount++;
+            }
+        }
+        return availableCarCount;    }
+
+    private void populateAllAvailableCars(Car[] nonNullCars, Car[] availableCars) {
+
+        // Index for the new array, avoids null gaps,
+        int index = 0;
+
+        // Look through nonNullCars
+        for (int i = 0; i < nonNullCars.length; i++) {
+
+            // Use the nonNullCar at the current index of the source array
+            Car availableCar = nonNullCars[i];
+
+            // Add to availableCars if the is not booked
+            if (availableCar != null && !availableCar.isBooked()){
+                availableCars[index++] = availableCar;
+            }
+        }
     }
 
     /**
+     *      Retrieves an array of all Car objects that are currently available (not booked)
+     *      by their fuel type.
      *
-     *
+     *      @return A new, compacted array containing only available Car objects
+     *      by their fuel type, or an empty array if none are available.
      */
 
-    public Car[] getAllGasolineCars() {
-        return getAllAvailableCarsByFuelType(FuelType.GASOLINE);
-    }
-
-    /**
-     *
-     *
-     */
 
     public Car[] getAllAvailableCarsByFuelType(FuelType fuelType){
 
@@ -265,4 +267,11 @@ public class CarService {
         }
     }
 
+    public Car[] getAllElectricCars() {
+        return getAllAvailableCarsByFuelType(FuelType.ELECTRIC);
+    }
+
+    public Car[] getAllGasolineCars() {
+        return getAllAvailableCarsByFuelType(FuelType.GASOLINE);
+    }
 }
