@@ -24,7 +24,24 @@ public class CarService {
 
     public void cancelAssociatedCarByRegistrationNumber(String registrationNumber){
 
+        // Fetch Car to be put back in inventory
+        Car carToRelease = getCarByRegistrationNumber(registrationNumber);
 
+        // Make sure the car is booked
+        if (!carToRelease.isBooked()) {
+            throw new CarUnavailableException(registrationNumber);
+        }
+
+        // State change to the Car object - remove the car from booking.
+        carToRelease.setBooked(false);
+
+        // Update the state change - holds car cancellation confirmation status
+        boolean isCancelledAndUpdated = this.arrayCarDAO.updateCar(carToRelease);
+
+        // Car couldn't be cancelled and back in inventory
+        if (!isCancelledAndUpdated) {
+            throw new CarNotFoundException(registrationNumber);
+        }
     }
 
     /**
