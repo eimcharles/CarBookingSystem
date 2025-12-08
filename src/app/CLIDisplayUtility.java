@@ -9,10 +9,10 @@ import user.UserService;
 import static app.CLIFormatUtility.*;
 
 /**
- *      CLIDisplayUtility is responsible for fetching
- *      data and organizing it for display,
- *      delegating formatting to CLIFormatUtility
- *
+ *      CLIDisplayUtility is a utility class
+ *      responsible for fetching data and
+ *      organizing it for display,
+ *      delegating formatting to CLIFormatUtility.
  * */
 
 public class CLIDisplayUtility {
