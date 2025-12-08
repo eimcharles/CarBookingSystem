@@ -31,15 +31,13 @@ public class CarBookingCLI {
     /**
      *      Handles the flow for making a new car booking.
      *
-     *      1.Displays necessary menus and user instructions defined by `TITLE_MAKE_BOOKING`.
-     *
-     *      2. Guides the user to select, and validates a User ID for new car booking
+     *      1. Guides the user to select, and validates a User ID for new car booking
      *      by using 'promptAndValidateUserID()' CLIDisplayUtility method.
      *
      *      2. Guides the user to select, and validates a car registration number for new car booking
      *      by using 'promptAndValidateCarRegistrationNumber()' CLIDisplayUtility method.
      *
-     *      4. Once both identifiers are successfully validated, it delegates
+     *      3. Once both identifiers are successfully validated, it delegates
      *      to the `processBookingTransaction()` helper method to make
      *      a new car booking.
      *
@@ -121,10 +119,25 @@ public class CarBookingCLI {
     }
 
     /**
-     *      TODO add JavaDocs
+     *      Handles the flow for cancelling an active car booking
      *
+     *      Validates that there are active bookings in the system.
      *
-     * */
+     *      1. Guides the user to select, and validates a Booking ID for cancellation
+     *      by using 'promptAndValidateBookingID()' CLIDisplayUtility method.
+     *
+     *      2. Once the booking ID is successfully validated, it delegates
+     *      to the `processBookingCancellation()` helper method to cancel a
+     *      car booking and release the associated car.
+     *
+     *      @param bookingService
+     *
+     *      The BookingService instance for cancellation of active booking
+     *
+     *      @param scanner
+     *
+     *      The Scanner object used to capture console input from the user.
+     */
 
     public static void cancelCarBookingByBookingId(BookingService bookingService, Scanner scanner) {
 
@@ -178,19 +191,16 @@ public class CarBookingCLI {
     /**
      *      Retrieves all cars that are associated to a user from
      *      the BookingService and prints them to the console using the
-     *      standardized `formatAndDisplayUserBookedCars()` method.
+     *      `formatAndDisplayUserBookedCars()` method.
      *
-     *      This method guides the user to select, and validates a User ID
+     *      1. Guides the user to select, and validates a User ID
      *      using 'promptAndValidateUserID()' CLIDisplayUtility method.
      *
-     *      Once the user input is validated it then
+     *      2.Once the user input is validated it then
      *      retrieves the corresponding cars currently booked by that user.
      *
      *      If no cars are actively booked by the user, a corresponding message
-     *      is displayed using the `displayFormattedMessage()` method within the helper.
-     *
-     *      The results are presented in formatAndDisplayUserBookedCars()
-     *      defined by `TITLE_USER_BOOKED_CARS`.
+     *      is displayed using the `displayFormattedMessage()` method.
      *
      *      @param userService
      *      The UserService instance used to display all registered users and validate the entered ID.
