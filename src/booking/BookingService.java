@@ -134,35 +134,10 @@ public class BookingService {
     }
 
     /**
+     *      Retrieves an array of all Car objects that are not associated to an active booking.
      *
-     *
-     */
-
-    public Car[] getAllAvailableCars(){
-        return getAllAvailableCarsForBooking(carService.getAllAvailableCars());
-    }
-
-    /**
-     *
-     *
-     */
-
-    public Car[] getAllAvailableGasCars(){
-        return getAllAvailableCarsForBooking(carService.getAllGasolineCars());
-    }
-
-    /**
-     *
-     *
-     */
-
-    public Car[] getAllAvailableElectricCars(){
-        return getAllAvailableCarsForBooking(carService.getAllElectricCars());
-    }
-
-    /**
-     *
-     *
+     *      @return A new, compacted array containing only
+     *      Car objects, or an empty array if none are available.
      */
 
     public Car[] getAllAvailableCarsForBooking(Car[] allCars) {
@@ -192,7 +167,7 @@ public class BookingService {
         Car[] availableCars = new Car[availableCarsCount];
 
         // Populates the pre-sized array with availableCars that are NOT booked.
-        populateAvailableCars(allCars, activeBookings, availableCars);
+        populateAvailableCarsForBooking(allCars, activeBookings, availableCars);
 
         return availableCars;
 
@@ -236,7 +211,7 @@ public class BookingService {
 
     }
 
-    private void populateAvailableCars(Car[] allCars, Booking[] activeBookings, Car[] availableCars){
+    private void populateAvailableCarsForBooking(Car[] allCars, Booking[] activeBookings, Car[] availableCars){
 
         // Index for the new array, avoids null gaps,
         int index = 0;
@@ -276,9 +251,24 @@ public class BookingService {
         }
     }
 
+    public Car[] getAllAvailableCars(){
+        return getAllAvailableCarsForBooking(carService.getAllAvailableCars());
+    }
+
+    public Car[] getAllAvailableGasCars(){
+        return getAllAvailableCarsForBooking(carService.getAllGasolineCars());
+    }
+
+    public Car[] getAllAvailableElectricCars(){
+        return getAllAvailableCarsForBooking(carService.getAllElectricCars());
+    }
+
     /**
+     *      Retrieves an array of all Car objects that are associated to an active booking
+     *      and a given user by user id.
      *
-     *
+     *      @return A new, compacted array containing only
+     *      Car objects, or an empty array if none are available.
      */
 
     public Car[] getAllBookedCarsByUserId(UUID userId) {
@@ -354,8 +344,10 @@ public class BookingService {
     }
 
     /**
+     *      Retrieves an array of all Booking objects that are currently active.
      *
-     *
+     *      @return A new, compacted array containing only
+     *      active Booking objects, or an empty array if none are available.
      */
 
     public Booking[] getAllActiveBookings() {
@@ -420,10 +412,12 @@ public class BookingService {
     }
 
     /**
+     *      Retrieves all Booking objects from arrayBookingDAO, filtering out any null references that
+     *      may exist, and returns a compacted array of Booking.
      *
-     *
+     *      @return A new, compacted array of Booking objects,
+     *      or an empty array if no users are found or all are null.
      */
-
     public Booking[] getBookings() {
 
         // Get all Bookings from DAO - includes null elements
