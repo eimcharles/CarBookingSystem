@@ -125,7 +125,7 @@ public class CLIFormatUtility {
      * */
 
     public static void displayCarsBookedByUserIdGuidelines() {
-        displayFormattedMessage("✅️","Please select a USER ID (e.g. 'b10d126a-3608-4980-9f9c-aa179f5cebc3') from the REGISTERED USERS to DISPLAY CARS BOOKED BY USER.");
+        displayFormattedMessage("✅️","Please enter a USER ID (e.g. 'b10d126a-3608-4980-9f9c-aa179f5cebc3') from the REGISTERED USERS to DISPLAY CARS BOOKED BY USER.");
     }
 
     /**
