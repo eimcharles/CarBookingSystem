@@ -19,14 +19,11 @@ public class CLIDisplayUtility {
 
     /**
      *        Retrieves all registered users from the
-     *        UserService and prints them to the console
-     *        using the standardized `displayFormattedUserDetails()` method.
+     *        UserService class and prints them to the console
+     *        using the `displayFormattedUserDetails()` method.
      *
      *        If no users are found, a corresponding message
      *        is displayed using `displayFormattedMessage()` method.
-     *
-     *        The results are presented under the menu title
-     *        defined by `TITLE_REGISTERED_USERS`.
      *
      *        @param userService
      *
@@ -48,18 +45,14 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      Retrieves all currently available
-     *      cars from the BookingService and
-     *      prints them to the console using the
-     *      standardized `displayFormattedCarDetails()` method.
+     *      Retrieves all currently available cars from the
+     *      BookingService class and prints them to the console
+     *      using the `displayFormattedCarDetails()` method.
      *
      *      Availability means the car is not tied to any active booking.
      *
      *      If no cars are available, a corresponding message
      *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_ALL_CARS`.
      *
      *      @param bookingService
      *
@@ -82,16 +75,13 @@ public class CLIDisplayUtility {
 
     /**
      *      Retrieves all currently available gas cars from the
-     *      BookingService and prints them to the console using the
-     *      standardized `displayFormattedCarDetails()` method.
+     *      BookingService class and prints them to the console
+     *      using the `displayFormattedCarDetails()` method.
      *
      *      Availability means the gas car is not tied to any active booking.
      *
      *      If no gas cars are available, a corresponding message
      *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_GAS_CARS`.
      *
      *      @param bookingService
      *
@@ -113,18 +103,14 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      Retrieves all currently available
-     *      electric cars from the BookingService
-     *      and prints them to the console using the
-     *      standardized `displayFormattedCarDetails()` method.
+     *      Retrieves all currently available electric cars from the
+     *      BookingService class and prints them to the console using the
+     *      `displayFormattedCarDetails()` method.
      *
      *      Availability means the electric car is not tied to any active booking.
      *
      *      If no electric cars are available, a corresponding message
      *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_ELECTRIC_CARS`.
      *
      *      @param bookingService
      *
@@ -146,17 +132,13 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      Retrieves all active
-     *      bookings from the BookingService
-     *      and prints them to the console using the
-     *      standardized `displayFormattedBookingDetails()` method.
+     *      Retrieves all active bookings from the
+     *      BookingService class and prints them to the console using the
+     *      `displayFormattedBookingDetails()` method.
      *
      *      If no active bookings are found,
      *      a corresponding message is displayed
      *      using `displayFormattedMessage()` method.
-     *
-     *      The results are presented under the menu title
-     *      defined by `TITLE_ALL_BOOKINGS`.
      *
      *      @param bookingService
      *
