@@ -35,14 +35,14 @@ public class CLIDisplayUtility {
 
     public static void displayAllRegisteredUsers(UserService userService){
 
-        User[] users = userService.getUsers();
+        User[] registeredUsers = userService.getUsers();
 
-        if (users == null || users.length == 0){
-            displayFormattedMessage("❌", "No users currently registered in the system");
+        if (registeredUsers == null || registeredUsers.length == 0){
+            displayFormattedMessage("❌", "No registeredUsers currently registered in the system");
             return;
         }
 
-        for (User user : users) {
+        for (User user : registeredUsers) {
             displayFormattedUserDetails(user);
         }
     }
@@ -68,14 +68,14 @@ public class CLIDisplayUtility {
 
     public static void displayAllAvailableCars(BookingService bookingService) {
 
-        Car[] availableCars = bookingService.getAllUnbookedCars();
+        Car[] allAvailableCars = bookingService.getAllAvailableCars();
 
-        if (availableCars == null || availableCars.length == 0) {
+        if (allAvailableCars == null || allAvailableCars.length == 0) {
             displayFormattedMessage("❌", "No cars currently available for booking");
             return;
         }
 
-        for (Car availableCar : availableCars) {
+        for (Car availableCar : allAvailableCars) {
             displayFormattedCarDetails(availableCar);
         }
     }
@@ -100,7 +100,7 @@ public class CLIDisplayUtility {
 
     public static void displayAllAvailableGasCars(BookingService bookingService) {
 
-        Car[] availableGasCars = bookingService.getAllUnbookedGasCars();
+        Car[] availableGasCars = bookingService.getAllAvailableGasCars();
 
         if (availableGasCars == null || availableGasCars.length == 0) {
             displayFormattedMessage("❌", "No gas cars currently available for booking");
@@ -133,7 +133,7 @@ public class CLIDisplayUtility {
 
     public static void displayAllAvailableElectricCars(BookingService bookingService) {
 
-        Car[] availableElectricCars = bookingService.getAllUnbookedElectricCars();
+        Car[] availableElectricCars = bookingService.getAllAvailableElectricCars();
 
         if (availableElectricCars == null || availableElectricCars.length == 0) {
             displayFormattedMessage("❌", "No electric cars currently available for booking");
@@ -166,15 +166,15 @@ public class CLIDisplayUtility {
 
     public static void displayAllActiveBookings(BookingService bookingService){
 
-        Booking[] allBookings = bookingService.getBookings();
+        Booking[] allActiveBookings = bookingService.getAllActiveBookings();
 
-        if (allBookings == null || allBookings.length == 0){
+        if (allActiveBookings == null || allActiveBookings.length == 0){
             displayFormattedMessage("❌", "No bookings currently registered in the system");
             return;
         }
 
 
-        for (Booking allBooking : allBookings) {
+        for (Booking allBooking : allActiveBookings) {
             displayFormattedBookingDetails(allBooking);
         }
     }
