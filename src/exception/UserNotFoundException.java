@@ -11,7 +11,6 @@ import java.util.UUID;
 
 public class UserNotFoundException extends RuntimeException {
 
-
     /**
      *   Constructs a new UserNotFoundException
      *   with a detailed message indicating
