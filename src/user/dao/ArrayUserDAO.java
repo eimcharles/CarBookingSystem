@@ -36,6 +36,7 @@ public class ArrayUserDAO implements UserDAO {
         return Arrays.copyOf(this.userDAO,this.userDAO.length);
     }
 
+    @Override
     public User getUserById(UUID id) {
         for (User user: this.userDAO){
             if (user.getUserId().equals(id)){
