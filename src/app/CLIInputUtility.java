@@ -179,7 +179,7 @@ public class CLIInputUtility {
                     bookingId = UUID.fromString(bookingIdInput);
 
                     // Validates Booking Existence: throws if booking doesn't exist.
-                    bookingService.getBookingById(bookingId);
+                    bookingService.getBookingByBookingId(bookingId);
 
                     // Input and booking exist and are valid.
                     isValidInput = true;
