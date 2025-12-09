@@ -39,7 +39,7 @@ A Maven application that serves as a system for managing the car rental lifecycl
 ---
 
 ## System Architecture
-- Layered Filtering within a Multi-Tier Architecture using an Array based approach to store data.
+- Layered Filtering within a Layered Architecture using an Array based approach to store data.
 ---
 
 ## File Structure
@@ -90,7 +90,6 @@ CarBookingSystem/
 ├── CarBookingSystem.iml 
 └── README.md                               
 ```
----
 
 ## How to Run
 
