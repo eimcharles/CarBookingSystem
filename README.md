@@ -7,5 +7,5 @@
 - 🚫 **Release 1 Demo**
 
 #### System Documentation
-- [Car Booking System Documentation](src/releaseOneDocs/README.md)
+- [Car Booking System Documentation](releaseOneDocs/README.md)
 ---
