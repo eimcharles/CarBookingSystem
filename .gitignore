@@ -4,7 +4,6 @@ out/
 !**/src/test/**/out/
 .kotlin
 .idea
-/CarBookingSystem.iml
 
 ### Eclipse ###
 .apt_generated
@@ -33,3 +32,6 @@ bin/
 
 ### Maven Build Output ###
 target/
+
+### Car booking IML ###
+/CarBookingSystem.iml
