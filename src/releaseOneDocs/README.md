@@ -39,7 +39,7 @@ A Maven application that serves as a system for managing the car rental lifecycl
 ---
 
 ## System Architecture
-- Layered Filtering within a Layered Architecture using an Array based approach to store data.
+- Layered filtering within a layered architecture using an array based approach to store data.
 ---
 
 ## File Structure
