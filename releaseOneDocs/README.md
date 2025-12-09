@@ -22,7 +22,7 @@ A Maven application that serves as a system for managing the car rental lifecycl
 - ✅ **Arrays** for storing all data.
 - ✅ **Defensive Copying** for all data access objects.
 - ✅ **Interfaces** for dependency inversion for data access objects.
-- 🚫 **Unit Testing JUnit** for correctness.
+- 🚫 **Unit Testing** for correctness.
 
 ---
 
@@ -39,7 +39,7 @@ A Maven application that serves as a system for managing the car rental lifecycl
 ---
 
 ## System Architecture
-- Layered filtering within a layered architecture using an array based approach to store data.
+- Layered architecture using an array based approach to store data.
 ---
 
 ## File Structure
