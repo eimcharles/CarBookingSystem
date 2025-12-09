@@ -14,7 +14,7 @@ This project is a Maven application that serves as a system for managing the car
 ---
 
 ## Learning Outcomes
-- 🚫 **Maven** to manage project's dependencies and build lifecycle.
+- ✅ **Maven** to manage project's dependencies and build lifecycle.
 - 🚫 **SOLID principles** to ensure maintainable, and flexible object-oriented design.
 - ✅ **Chained Filtering** for algorithmic control and procedural efficiency.
 - ✅ **Dependency Injection** to ensure decoupled components.
@@ -22,7 +22,9 @@ This project is a Maven application that serves as a system for managing the car
 - ✅ **Arrays** for storing all data.
 - ✅ **Defensive Copying** for all data access objects.
 - ✅ **Interfaces** for dependency inversion for data access objects.
-- 🚫 **Unit Testing** for correctness.
+- 🚫 **Unit Testing using JUnit** for correctness in domain classes.
+- 🚫 **Mocking using Mokito** for correctness in service layers.
+
 
 ---
 
@@ -45,49 +47,67 @@ This project is a Maven application that serves as a system for managing the car
 ## File Structure
 ```
 CarBookingSystem/
-├── .idea/ 
 ├── src/
-│     ├── app/                              (Presentation Layer)
-│     │   ├── CarBookingApp.java
-│     │   ├── CarBookingCLI.java
-│     │   ├── CLIDisplayUtility.java
-│     │   ├── CLIFormatUtility.java
-│     │   └── CLIInputUtility.java
-│     │
-│     ├── booking/                          (Booking Domain Component)
-│     │   ├── Booking.java                  
-│     │   ├── BookingService.java           
-│     │   └── dao/                          (Data Access Layer for Booking)
-│     │       ├── ArrayBookingDAO.java      (Concrete Array Implementation)
-│     │       └── BookingDAO.java           (Interface / Contract)
-│     │
-│     ├── car/                              (Car Domain Component)
-│     │   ├── Brand.java                    
-│     │   ├── Car.java                      
-│     │   ├── CarService.java               
-│     │   ├── FuelType.java                 
-│     │   └── dao/                          (Data Access Layer for Car)
-│     │       ├── ArrayCarDAO.java          (Concrete Array Implementation)
-│     │       └── CarDAO.java               (Interface / Contract)
-│     │
-│     ├── configuration/                    (Dependency Injection Setup)
-│     │   └── Configuration.java            (Initializes and links all services/DAOs)
-│     │
-│     ├── exception/ 
-│     │   ├── BookingNotActiveException.java
-│     │   ├── BookingNotFoundException.java
-│     │   ├── CarNotFoundException.java
-│     │   ├── CarUnavailableException.java
-│     │   └── UserNotFoundException.java
-│     │ 
-│     └──  user/                            (User Domain Component)
-│         ├── User.java                     
-│         ├── UserService.java              
-│         └── dao/                          (Data Access Layer for User)
-│             ├── ArrayUserDAO.java         (Concrete Array Implementation)
-│             └── UserDAO.java              (Interface / Contract)
-│           
-├── CarBookingSystem.iml 
+│   └── main/                                      
+│       ├── java/                                  
+│       │   ├── com/
+│       │   │    └── eimc/ 				
+│       │   │           ├── app/                                          (Presentation Layer)
+│       │   │           │    ├── CarBookingApp.java
+│       │   │           │    ├── CarBookingCLI.java
+│       │   │           │    ├── CLIDisplayUtility.java
+│       │   │           │    ├── CLIFormatUtility.java
+│       │   │           │    └── CLIInputUtility.java 
+│       │   │           │ 
+│       │   │           │
+│       │   │           ├── booking/                                      (Booking Domain Component)
+│       │   │           │       ├── Booking.java
+│       │   │           │       ├── BookingService.java 
+│       │   │           │       └── dao/                                  (Data Access Layer for Booking)
+│       │   │           │            ├── ArrayBookingDAO.java             (Concrete Array Implementation)
+│       │   │           │            └── BookingDAO.java                  (Interface / Contract)
+│       │   │           │ 
+│       │   │           ├── car/                                          (Car Domain Component)
+│       │   │           │     ├── Brand.java
+│       │   │           │     ├── FuelType.java
+│       │   │           │     ├── Car.java
+│       │   │           │     ├── CarService.java
+│       │   │           │     └── dao/                                    (Data Access Layer for Car)
+│       │   │           │          ├── ArrayCarDAO.java                   (Concrete Array Implementation) 
+│       │   │           │          └── CarDAO.java                        (Interface / Contract)
+│       │   │           │ 
+│       │   │           ├── configuration/
+│       │   │           │         └── Configuration.java                  (Initializes and links all services/DAOs)
+│       │   │           │ 
+│       │   │           │ 
+│       │   │           ├── exception/
+│       │   │           │       ├── BookingNotActiveException.java
+│       │   │           │       ├── BookingNotFoundException.java
+│       │   │           │       ├── CarNotFoundException.java
+│       │   │           │       └── UserNotFoundException.java
+│       │   │           │       
+│       │   │           │
+│       │   │           └── user/  
+│       │   │                 ├── User.java 
+│       │   │                 └── UserService.java      
+│       │   │                           └── dao/                          (Data Access Layer for User)
+│       │   │                                 ├── ArrayUserDAO.java       (Concrete Array Implementation)
+│       │   │                                 └── UserDAO.java            (Interface / Contract)
+│       │   │ 
+│       │   └── resources/
+│       │            └── application.properties
+│       └── test/                                                          (Testing Layer)                                  
+│             ├── java/
+│             │     └── com/
+│             │         └── eimc/  
+│             │              ├── booking/ 
+│             │              ├── car/
+│             │              └── user/
+│             │                            
+│             └── resources/ 
+│                     └── application-test.properties
+├── .gitignore          
+├── pom.xml          
 └── README.md                               
 ```
 
