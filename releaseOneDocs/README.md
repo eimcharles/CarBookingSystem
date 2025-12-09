@@ -5,7 +5,7 @@
 <img width="1067" height="667" alt="Screenshot 2025-12-03 at 2 52 09 PM" src="https://github.com/user-attachments/assets/2df1e683-423b-4d17-a5db-9a0d6a194fb5" />
 
 ## Application Overview
-A Maven application that serves as a system for managing the car rental lifecycle, including:
+This project is a Maven application that serves as a system for managing the car booking lifecycle, it includes:
 - **Transactional Operations**: facilitating the creation / cancellation of car bookings.
 - **Inventory Management**: listing all available cars, filtered by type (Gasoline or Electric).
 - **User Management**: displaying all registered users and displaying cars booked for a specific user.
@@ -22,7 +22,7 @@ A Maven application that serves as a system for managing the car rental lifecycl
 - ✅ **Arrays** for storing all data.
 - ✅ **Defensive Copying** for all data access objects.
 - ✅ **Interfaces** for dependency inversion for data access objects.
-- 🚫 **Unit Testing JUnit** for correctness.
+- 🚫 **Unit Testing** for correctness.
 
 ---
 
@@ -39,7 +39,7 @@ A Maven application that serves as a system for managing the car rental lifecycl
 ---
 
 ## System Architecture
-- Layered filtering within a layered architecture using an array based approach to store data.
+- Layered architecture using an array based approach to store data.
 ---
 
 ## File Structure
