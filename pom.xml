@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--
+        The section defines the identity of the project,
+        which uniquely identifies the artifact of
+        any maven repository.
+
+        modelVersion -> Project Object Model Version
+        groupId -> Organization name
+        artifactId -> Project name
+        version -> Project Version
+    -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.eimc</groupId>
+    <artifactId>CarBookingSystem</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--
+        The properties section defines configuration variables
+        that can be used throughout the rest of
+        the project configuration.
+
+        Most common use is defining the
+        Java version for the Maven compiler.
+    -->
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <!--
+        This defines and sets the character encoding for all
+        files used during the Maven build process to UTF-8.
+        -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--
+        This defines a core plugin in
+        the Maven build system whose primary
+        role is to package the compiled project
+        code into a standard Java Archive (JAR) file
+        -->
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    </properties>
+
+    <!--
+    The build tag defines how Maven will build and package the application,
+    specifically focusing on creating an executable Java Archive (JAR) file.
+
+        Executable Artifact: In the context of Maven,
+        the main class is explicitly declared within the
+        configuration of the maven-jar-plugin (in the pom.xml)
+        using the mainClass tag, which tells the final
+        executable JAR file where to begin execution.
+    -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.eimc.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
