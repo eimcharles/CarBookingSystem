@@ -22,8 +22,8 @@ This project is a Maven application that serves as a system for managing the car
 - ✅ **Arrays** for storing all data.
 - ✅ **Defensive Copying** for all data access objects.
 - ✅ **Interfaces** for dependency inversion for data access objects.
-- 🚫 **Unit Testing using JUnit** for correctness in domain classes.
-- 🚫 **Mocking using Mokito** for correctness in service layers.
+- 🚫 **Unit Testing using JUnit** for correctness in domain classes and data access classes.
+- 🚫 **Mocking using Mokito** for correctness in service layers and business logic.
 
 
 ---
