@@ -14,7 +14,7 @@ public class UserNotFoundException extends RuntimeException {
     /**
      *   Constructs a new UserNotFoundException
      *   with a detailed message indicating
-     *   which specific User ID could not be found
+     *   which specific User ID could not be found.
      * */
 
     public UserNotFoundException(UUID userId) {

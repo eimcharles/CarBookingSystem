@@ -15,8 +15,7 @@ import static com.eimc.app.CLIDisplayUtility.*;
 import static com.eimc.app.CLIFormatUtility.*;
 
 /**
- *      CLIInputUtility is a  utility class
- *      that is part of the CarBookingApplication presentation layer.
+ *      CLIInputUtility is a utility class that is part of the CarBookingApplication presentation layer.
  *
  *      It responsible for prompting the user and validating user input within the
  *      CarBookingCLI class.
@@ -199,7 +198,6 @@ public class CLIInputUtility {
                     displayFormattedMessage("❌", "Invalid BOOKING ID");
 
                 }
-
 
                 // Re-display on invalid inputs
                 if (!isValidInput){

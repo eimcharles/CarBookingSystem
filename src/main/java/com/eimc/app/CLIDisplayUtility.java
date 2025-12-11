@@ -9,8 +9,7 @@ import com.eimc.user.UserService;
 import static com.eimc.app.CLIFormatUtility.*;
 
 /**
- *      CLIDisplayUtility is a utility class
- *      that is part of the CarBookingApplication presentation layer.
+ *      CLIDisplayUtility is a utility class that is part of the CarBookingApplication presentation layer.
  *
  *      It is responsible for fetching data and organizing it for display,
  *      delegating formatting to CLIFormatUtility.
@@ -19,7 +18,7 @@ import static com.eimc.app.CLIFormatUtility.*;
 public class CLIDisplayUtility {
 
     /**
-     *        Retrieves all registered users from the
+     *        displayAllRegisteredUsers retrieves all registered users from the
      *        UserService class and prints them to the console
      *        using the `displayFormattedUserDetails()` method.
      *
@@ -46,11 +45,11 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      Retrieves all currently available cars from the
+     *      displayAllAvailableCars retrieves all available cars from the
      *      BookingService class and prints them to the console
      *      using the `displayFormattedCarDetails()` method.
      *
-     *      Availability means the car is not tied to any active booking.
+     *      Availability: the car is not associated to any active booking.
      *
      *      If no cars are available, a corresponding message
      *      is displayed using `displayFormattedMessage()` method.
@@ -75,11 +74,11 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      Retrieves all currently available gas cars from the
+     *      displayAllAvailableGasCars retrieves all available gas cars from the
      *      BookingService class and prints them to the console
      *      using the `displayFormattedCarDetails()` method.
      *
-     *      Availability means the gas car is not tied to any active booking.
+     *      Availability: the gas car is not associated to any active booking.
      *
      *      If no gas cars are available, a corresponding message
      *      is displayed using `displayFormattedMessage()` method.
@@ -104,11 +103,11 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      Retrieves all currently available electric cars from the
+     *      displayAllAvailableElectricCars retrieves all  available electric cars from the
      *      BookingService class and prints them to the console using the
      *      `displayFormattedCarDetails()` method.
      *
-     *      Availability means the electric car is not tied to any active booking.
+     *      Availability: the electric car is not associated to any active booking.
      *
      *      If no electric cars are available, a corresponding message
      *      is displayed using `displayFormattedMessage()` method.
@@ -133,7 +132,7 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      Retrieves all active bookings from the
+     *      displayAllActiveBookings retrieves all active bookings from the
      *      BookingService class and prints them to the console using the
      *      `displayFormattedBookingDetails()` method.
      *
@@ -144,7 +143,6 @@ public class CLIDisplayUtility {
      *      @param bookingService
      *
      *      The BookingService instance used to fetch the data.
-     *
      */
 
     public static void displayAllActiveBookings(BookingService bookingService){

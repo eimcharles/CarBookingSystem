@@ -27,13 +27,13 @@ public class BookingService {
     }
 
     /**
-     *
-     *
+     *      addCarBookingByUserAndRegistrationNumber creates a booking by car registration
+     *      number sets its state to active.
      */
 
     public UUID addCarBookingByUserAndRegistrationNumber(User user, String registrationNumber) {
 
-        // Check if the car is currently tied to any active booking by registration number
+        // Check if the car is currently associated to any active booking by registration number
         Car carToBook = getAvailableCarForBookingByRegistrationNumber(registrationNumber);
 
         // Car is not booked and available - create a new bookingId
@@ -51,17 +51,19 @@ public class BookingService {
                 )
         );
 
-        // car is booked an unavailable
+        // Car is booked and associated to booking
         carToBook.setBooked(true);
 
-        // return the booking id
+        // Return the booking id
         return bookingId;
 
     }
 
     /**
+     *      getAvailableCarForBookingByRegistrationNumber retrieves an available Car
+     *      (not associated to an active booking) object by its registration number.
      *
-     *
+     *      @throws CarUnavailableException if the car does not exist in the system.
      */
 
     public Car getAvailableCarForBookingByRegistrationNumber(String registrationNumber) {
@@ -69,19 +71,21 @@ public class BookingService {
         // Get the car by registration number
         Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
 
-        // Check if car is booked
+        // Check if car is booked (associated to a booking)
         if (carToBook.isBooked()) {
-
             throw new CarUnavailableException(registrationNumber);
-
         }
 
         return carToBook;
     }
 
     /**
+     *      cancelActiveBookingByBookingId sets the state of an active Booking to
+     *      inactive and updates the reference to the booking object.
      *
+     *      @throws BookingNotFoundException if the Booking does not exist in the system
      *
+     *      @throws BookingNotFoundException if the Booking is currently not active.
      */
 
     public void cancelActiveBookingByBookingId(UUID validatedBookingId) {
@@ -94,7 +98,7 @@ public class BookingService {
             throw new BookingNotFoundException(validatedBookingId);
         }
 
-        // Activity Check - prevent re-cancellation
+        // Check if booking is active
         if (bookingToCancel.isBookingCancelled()) {
             throw new BookingNotActiveException(validatedBookingId);
         }
@@ -111,16 +115,12 @@ public class BookingService {
         }
 
         //Release the Asset (Car)
-        this.carService.cancelAssociatedCarByRegistrationNumber(bookingToCancel.getCar().getRegistrationNumber());
+        this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getRegistrationNumber());
 
     }
 
     /**
-     *      Retrieves a specific booking from the arrayBookingDAO class.
-     *
-     *      @param bookingId The unique UUID that identifies the desired booking.
-     *
-     *      @return The Booking object associated with the ID
+     *      getBookingByBookingId retrieves Booking by booking id from the arrayBookingDAO class.
      */
 
     public Booking getBookingByBookingId(UUID bookingId){
@@ -128,25 +128,18 @@ public class BookingService {
     }
 
     /**
-     *      Checks if there are any active bookings present in the system.
-     *
-     *      @return {@code true} if one or more active bookings are found,
-     *
-     *      {@code false} otherwise.
+     *      hasActiveBookings validates active Bookings present in the system.
      */
 
     public boolean hasActiveBookings(){
         return getAllActiveBookings().length > 0;
     }
 
-
     /**
-     *      Retrieves all Booking objects from the arrayBookingDAO class, filtering out
+     *      getBookings retrieves all Booking objects from the arrayBookingDAO class, filtering out
      *      any null references that may exist, and returns a compacted array of Booking.
-     *
-     *      @return A new, compacted array of Booking objects,
-     *      or an empty array if no users are found or all are null.
      */
+
     public Booking[] getBookings() {
 
         // Get all Bookings from DAO - includes null elements
@@ -207,10 +200,7 @@ public class BookingService {
     }
 
     /**
-     *      Retrieves an array of all Booking objects that are currently active.
-     *
-     *      @return A new, compacted array containing only
-     *      active Booking objects, or an empty array if none are available.
+     *      Retrieves an array of Bookings that are currently active.
      */
 
     public Booking[] getAllActiveBookings() {
@@ -223,6 +213,7 @@ public class BookingService {
             return new Booking[0];
         }
 
+        // Number of activeBookingsCount from nonNullBookings
         int activeBookingsCount = getAllActiveBookingsCount(nonNullBookings);
 
         if (activeBookingsCount == 0) {
@@ -275,11 +266,8 @@ public class BookingService {
     }
 
     /**
-     *      Retrieves an array of all Car objects that are associated to an active booking
-     *      and a given user by user id.
-     *
-     *      @return A new, compacted array containing only
-     *      Car objects, or an empty array if none are available.
+     *      getAllBookedCarsByUserId retrieves an array of all Car objects that are
+     *      associated to an active booking by user id.
      */
 
     public Car[] getAllBookedCarsByUserId(UUID userId) {
@@ -355,10 +343,8 @@ public class BookingService {
     }
 
     /**
-     *      Retrieves an array of all Car objects that are not associated to an active booking.
-     *
-     *      @return A new, compacted array containing only
-     *      Car objects, or an empty array if none are available.
+     *      getAllAvailableCarsForBooking retrieves an array of Car objects that are available
+     *      (not associated to an active booking).
      */
 
     public Car[] getAllAvailableCarsForBooking(Car[] allCars) {

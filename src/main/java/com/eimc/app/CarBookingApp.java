@@ -9,9 +9,7 @@ import static com.eimc.app.CLIFormatUtility.*;
 import java.util.Scanner;
 
 /**
- *      CarBookingApp is the main entry point
- *      that initializes services
- *      and starts the application loop.
+ *      CarBookingApp is the entry point to start the application.
  * */
 
 public class CarBookingApp {

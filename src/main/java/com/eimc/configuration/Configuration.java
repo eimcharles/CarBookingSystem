@@ -16,7 +16,6 @@ import com.eimc.user.UserService;
  *      and injects them into their corresponding
  *      Service layer components, providing a central
  *      source of configured services to the application entry point.
- *
  * */
 
 public class Configuration {

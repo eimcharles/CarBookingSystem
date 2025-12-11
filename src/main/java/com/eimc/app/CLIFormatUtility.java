@@ -5,8 +5,7 @@ import com.eimc.user.User;
 import com.eimc.car.Car;
 
 /**
- *      CLIFormatUtility is a utility class
- *      that is part of the CarBookingApplication presentation layer.
+ *      CLIFormatUtility is a utility class that is part of the CarBookingApplication presentation layer.
  *
  *      It is responsible for formatting and displaying all output within the
  *      CarBookingCLI class.
@@ -171,7 +170,7 @@ public class CLIFormatUtility {
 
     /**
      *       Formats and displays the complete details
-     *       of a single Booking object to the console.
+     *       of a single active car booking  to the console.
      * */
 
     public static void displayFormattedBookingDetails(Booking booking){
@@ -190,7 +189,7 @@ public class CLIFormatUtility {
 
     /**
      *       Formats and displays the complete details
-     *       of a single User object to the console.
+     *       of a single user to the console.
      * */
 
     public static void displayFormattedUserDetails(User user){
@@ -207,7 +206,7 @@ public class CLIFormatUtility {
 
     /**
      *       Formats and displays the complete details
-     *       of a single Car object to the console.
+     *       of a single car to the console.
      * */
 
     public static void displayFormattedCarDetails(Car Car){
@@ -224,9 +223,7 @@ public class CLIFormatUtility {
     }
 
     /**
-     *       Display the passed title
-     *       based on calculations from
-     *       centerMenuTitles()
+     *       Displays and Centers menu titles
      * */
 
     private static void displayCenteredMenuTitles(String menuTitles){
@@ -234,8 +231,7 @@ public class CLIFormatUtility {
     }
 
     /**
-     *      Calculates and applies the necessary
-     *      left padding to center a given title
+     *        returns centered menu titles
      * */
 
     private static String centerMenuTitles(String menuTitle) {
@@ -251,8 +247,7 @@ public class CLIFormatUtility {
     }
 
     /**
-     *       Displays an informational message
-     *       to the console with
+     *       Displays a centered message to the console with
      *       a specified icon type and message
      * */
 
@@ -261,10 +256,8 @@ public class CLIFormatUtility {
     }
 
     /**
-     *      Builds a formatted message by
-     *      prepending alignOutputByTabCount()
-     *      and the specified icon type to
-     *      the message content.
+     *       Returns a centered message to the console with
+     *       a specified icon type and message
      * */
 
     private static String getFormattedMessage(String messageIcon, String message) {
@@ -272,7 +265,7 @@ public class CLIFormatUtility {
     }
 
     /**
-     *       Displays a prompt to the console with
+     *       Displays a centered prompt to the console with
      *       a specified icon type and message
      * */
 
@@ -281,9 +274,7 @@ public class CLIFormatUtility {
     }
 
     /**
-     *      Builds a formatted prompt by
-     *      prepending alignOutputByTabCount()
-     *      and the specified icon type to
+     *      Returns a centered prompt with the specified icon type to
      *      the prompt content.
      * */
 
@@ -292,10 +283,8 @@ public class CLIFormatUtility {
     }
 
     /**
-     *      Generates and returns a solid border
-     *      string composed of '=' characters
-     *      that spans the entire width of the
-     *      defined CLI_WIDTH constant.
+     *      Solid border that spans the entire width of the
+     *      defined by CLI_WIDTH constant.
      */
 
     private static String displayMenuBorder(){
@@ -303,10 +292,7 @@ public class CLIFormatUtility {
     }
 
     /**
-     *      Generates and returns a string consisting of
-     *      'TAB_COUNT' number of tab characters.
-     *
-     *      Indentation used across all displayed output.
+     *      Centers output to console, defined by TAB_COUNT constant.
      */
 
     private static String alignOutputByTabCount() {

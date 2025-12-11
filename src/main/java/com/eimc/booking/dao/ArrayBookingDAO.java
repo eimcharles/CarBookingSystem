@@ -50,13 +50,10 @@ public class ArrayBookingDAO implements BookingDAO {
     /**
      *      Transactional commit:
      *
-     *      updateBooking() ensures that
-     *      the bookingsDao array
-     *      slot at position i contains
-     *      the most up-to-date reference
-     *      to the booking object, persisting
-     *      any recent changes made
-     *      in the Service layer
+     *      updateBooking() ensures that the bookingsDao array slot at position i contains
+     *      the most up-to-date reference to the booking object, persisting
+     *      any recent changes made in the Service layer.
+
      *      (e.g., bookingToCancel.cancelBooking()).
      * */
 

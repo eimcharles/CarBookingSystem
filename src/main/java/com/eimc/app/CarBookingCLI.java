@@ -19,39 +19,28 @@ import static com.eimc.app.CLIInputUtility.*;
 import static com.eimc.app.CLIDisplayUtility.*;
 
 /**
- *      CarBookingCLI class is the central controller
- *      that takes user input, calls the business services,
- *      and orchestrates the creation of a Car booking,
- *      the cancellation of a Car booking and displaying
- *      all cars that are booked by a given user.
+ *      CarBookingCLI class is the central controller that takes user input,
+ *
+ *      It calls the business services, and orchestrates:
+ *
+ *      - The creation of a Car booking.
+ *      - The cancellation of a Car booking
+ *      - Displaying all cars that are booked by a given user.
+ *
  * */
 
 public class CarBookingCLI {
 
     /**
-     *      Handles the flow for making a new car booking.
+     *      makeACarBookingByUserIdAndRegistrationNumber Handles the flow for making a new car booking by
+     *      user id and registration number.
      *
-     *      1. Guides the user to select, and validates a User ID for new car booking
-     *      by using 'promptAndValidateUserID()' CLIDisplayUtility method.
+     *      - Guides the user to select, and validates a User ID for new car booking
      *
-     *      2. Guides the user to select, and validates a car registration number for new car booking
-     *      by using 'promptAndValidateCarRegistrationNumber()' CLIDisplayUtility method.
+     *      - Guides the user to select, and validates a car registration number for new car booking
      *
-     *      3. Once both identifiers are successfully validated, it delegates
-     *      to the `processBookingTransaction()` helper method to make
-     *      a new car booking.
+     *      - Once both identifiers are successfully validated it creates a new car booking.
      *
-     *      @param userService
-     *
-     *      The UserService instance for user validation and lookup.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance for car validation and booking creation.
-     *
-     *      @param scanner
-     *
-     *      The Scanner object used to capture console input from the user.
      */
 
     public static void makeACarBookingByUserIdAndRegistrationNumber(UserService userService, BookingService bookingService, Scanner scanner) {
@@ -60,7 +49,7 @@ public class CarBookingCLI {
         displayAllRegisteredUsers(userService);
         displayUserIdBookingGuidelines();
 
-        // Validates the User ID from the console.
+        // Validates the User ID from the console and returns a validated UUID object
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
         // Menus, instructions for entering registration number to make booking
@@ -71,7 +60,7 @@ public class CarBookingCLI {
         // Validates the Car registration number from the console.
         String validatedCarRegistration = promptAndValidateCarRegistrationNumber(bookingService, scanner);
 
-        // Process booking once user ID and Car registration are validated
+        // Create booking once user ID and Car registration are validated
         processBookingTransaction(userService, bookingService, validatedUserId, validatedCarRegistration);
 
     }
@@ -85,10 +74,8 @@ public class CarBookingCLI {
 
             // if the user doesn't exist by userId
             if (user == null) {
-
                 displayFormattedMessage("❌", "No user found with id " + validatedUserId.toString());
                 return;
-
             }
 
             // Attempt to create the booking by associating the user and car registration
@@ -119,29 +106,19 @@ public class CarBookingCLI {
     }
 
     /**
-     *      Handles the flow for cancelling an active car booking
+     *      cancelCarBookingByBookingId the cancellation of an active car booking by booking id.
      *
-     *      Validates that there are active bookings in the system.
+     *      It validates that there are active bookings in the system:
      *
-     *      1. Guides the user to select, and validates a Booking ID for cancellation
-     *      by using 'promptAndValidateBookingID()' CLIDisplayUtility method.
+     *      - Guides the user to select, and validates a Booking ID for cancellation
      *
-     *      2. Once the booking ID is successfully validated, it delegates
-     *      to the `processBookingCancellation()` helper method to cancel a
-     *      car booking and release the associated car.
+     *      - Once the booking ID is successfully validated, it cancels the car booking and releases the associated car.
      *
-     *      @param bookingService
-     *
-     *      The BookingService instance for cancellation of active booking
-     *
-     *      @param scanner
-     *
-     *      The Scanner object used to capture console input from the user.
      */
 
     public static void cancelCarBookingByBookingId(BookingService bookingService, Scanner scanner) {
 
-        // if no active bookings present
+        // if no active bookings exist
         if (!bookingService.hasActiveBookings()){
             displayFormattedMessage("❌", "No bookings currently registered in the system");
             return;
@@ -150,10 +127,10 @@ public class CarBookingCLI {
         displayAllActiveBookings(bookingService);
         displayCancelBookingByBookingIdGuidelines();
 
-        // Validates the Booking ID from the console.
+        // Validates the Booking ID from the console and returns a validated UUID object.
         UUID validatedBookingId = promptAndValidateBookingID(bookingService, scanner);
 
-        // Process booking cancellation once Booking ID is validated
+        //  Cancel car booking once Booking ID is validated
         processBookingCancellation(bookingService, validatedBookingId);
 
     }
@@ -189,38 +166,22 @@ public class CarBookingCLI {
     }
 
     /**
-     *      Retrieves all cars that are associated to a user from
-     *      the BookingService and prints them to the console using the
-     *      `formatAndDisplayUserBookedCars()` method.
+     *      displayCarsBookedByUserByUserId retrieves all car booked by a user by user id.
      *
-     *      1. Guides the user to select, and validates a User ID
-     *      using 'promptAndValidateUserID()' CLIDisplayUtility method.
+     *      - Guides the user to select, and validates a User ID
      *
-     *      2.Once the user input is validated it then
-     *      retrieves the corresponding cars currently booked by that user.
-     *
-     *      If no cars are actively booked by the user, a corresponding message
-     *      is displayed using the `displayFormattedMessage()` method.
-     *
-     *      @param userService
-     *      The UserService instance used to display all registered users and validate the entered ID.
-     *
-     *      @param bookingService
-     *      The BookingService instance used to fetch the booked cars associated with the user.
-     *
-     *      @param scanner
-     *      The Scanner object used for reading the user's input (the User ID).
+     *      - Once the user input is validated, it retrieves the corresponding cars booked by that user.
      */
 
     public static void displayCarsBookedByUserByUserId(UserService userService, BookingService bookingService, Scanner scanner){
 
-        // REGISTERED USERS MENU
+
         displayAllRegisteredUsers(userService);
 
         // Guidelines to Display Cars Booked by User (By User ID)
         displayCarsBookedByUserIdGuidelines();
 
-        // Validates the User ID from the console and returns a UUID object
+        // Validates the User ID from the console and returns a validated UUID object
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
         // Array of user booked cars for the validated user ID.

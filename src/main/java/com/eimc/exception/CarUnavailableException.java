@@ -4,7 +4,7 @@ package com.eimc.exception;
  *      CarUnavailableException class throws
  *      a custom exception when a
  *      request is made for a Car that
- *      is currently booked by another user.
+ *      is currently booked.
  * */
 
 public class CarUnavailableException extends RuntimeException {
@@ -13,7 +13,7 @@ public class CarUnavailableException extends RuntimeException {
      *   Constructs a new CarUnavailableException
      *   with a detailed message indicating
      *   the registration number for the car
-     *   that is currently booked by another user
+     *   that is currently booked.
      * */
 
     public CarUnavailableException(String registrationNumber) {

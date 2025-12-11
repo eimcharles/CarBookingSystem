@@ -41,12 +41,10 @@ public class ArrayCarDAO implements CarDAO {
     /**
      *      Transactional commit:
      *
-     *      updateCar() ensures that the carDAO array
-     *      slot at position i contains
-     *      the most up-to-date reference
-     *      to the car object, persisting
-     *      any recent changes made
-     *      in the Service layer
+     *      updateCar() ensures that the carDAO array slot at position i contains
+     *      the most up-to-date reference to the car object, persisting
+     *      any recent changes made in the Service layer.
+     *
      *      (e.g., setBooked(false)).
      * */
 

@@ -18,16 +18,15 @@ public class CarService {
     }
 
     /**
-     *      Cancels the association of a single Car by its registration number to a single booking.
+     *      cancelAssociatedCarByRegistrationNumber releases the association
+     *      of a single Car object to a single active booking by its registration number.
      *
-     *      @param registrationNumber The unique registration number of the car to cancel and release.
+     *      @throws CarNotFoundException if the car does not exist in the system.
      *
-     *      @throws CarNotFoundException if the car does not exist in the inventory.
-     *
-     *      @throws CarUnavailableException if the car exists but is not currently marked as booked .
+     *      @throws CarUnavailableException if the car exists but is currently booked.
      */
 
-    public void cancelAssociatedCarByRegistrationNumber(String registrationNumber){
+    public void cancelAssociatedCarToActiveBookingByRegistrationNumber(String registrationNumber){
 
         // Fetch Car to be put back in inventory
         Car carToRelease = getCarByRegistrationNumber(registrationNumber);
@@ -50,13 +49,9 @@ public class CarService {
     }
 
     /**
-     *      Retrieves a single Car object using its registration number.
-     *
-     *      @param registrationNumber The unique identifier of the car to find.
-     *
-     *      @return The Car object matching the given registration number.
-     *
-     *      @throws CarNotFoundException if no car exists with the specified registration number.
+     *      getCarByRegistrationNumber retrieves a single Car object using its registration number.
+     **
+     *      @throws CarNotFoundException if the car does not exist in the system.
      */
 
     public Car getCarByRegistrationNumber(String registrationNumber) {
@@ -72,11 +67,8 @@ public class CarService {
 
 
     /**
-     *      Retrieves all Car objects from the arrayCarDAO class, filtering out any null references that
-     *      may exist, and returns a compacted array of Cars.
-     *
-     *      @return A new, compacted array of Car objects,
-     *      or an empty array if no users are found or all are null.
+     *      getCars retrieves all Car objects from the arrayCarDAO class, filtering out any null
+     *      references that may exist, and returns a compacted array of Cars.
      */
 
     public Car[] getCars() {
@@ -137,10 +129,8 @@ public class CarService {
     }
 
     /**
-     *      Retrieves an array of all Car objects that are currently available (not booked).
-     *
-     *      @return A new, compacted array containing only
-     *      available Car objects, or an empty array if none are available.
+     *      getAllAvailableCars retrieves an array of Car objects that are currently
+     *      available (not booked).
      */
 
     public Car[] getAllAvailableCars() {
@@ -199,11 +189,8 @@ public class CarService {
     }
 
     /**
-     *      Retrieves an array of all Car objects that are currently available (not booked)
-     *      by their fuel type.
-     *
-     *      @return A new, compacted array containing only available Car objects
-     *      by their fuel type, or an empty array if none are available.
+     *      getAllAvailableCarsByFuelType retrieves an array of Car objects that are
+     *      currently available (not booked) by their fuel type.
      */
 
 
