@@ -4,12 +4,13 @@
 
 <img width="1067" height="667" alt="Screenshot 2025-12-03 at 2 52 09 PM" src="https://github.com/user-attachments/assets/2df1e683-423b-4d17-a5db-9a0d6a194fb5" />
 
+---
+
 ## Application Overview
 This project is a Maven application that serves as a system for managing the car booking lifecycle, it includes:
 - **Transactional Operations**: facilitating the creation / cancellation of car bookings.
 - **Inventory Management**: listing all available cars, filtered by type (Gasoline or Electric).
 - **User Management**: displaying all registered users and displaying cars booked for a specific user.
-
 
 ---
 
@@ -22,9 +23,7 @@ This project is a Maven application that serves as a system for managing the car
 - ✅ **Arrays** for storing all data.
 - ✅ **Defensive Copying** for all data access objects.
 - ✅ **Interfaces** for dependency inversion for data access objects.
-- 🚫 **Unit Testing using JUnit** for correctness in domain classes and data access classes.
-- 🚫 **Mocking using Mokito** for correctness in service layers and business logic.
-
+- 🚫 **Unit Testing using AssertJ** for correctness in domain classes and data access classes.
 
 ---
 
@@ -38,10 +37,12 @@ This project is a Maven application that serves as a system for managing the car
 - Display All Registered Users
 - Display All Registered Users
 - View Main Menu
+  
 ---
 
 ## System Architecture
 - Layered architecture using an array based approach to store data.
+  
 ---
 
 ## File Structure
