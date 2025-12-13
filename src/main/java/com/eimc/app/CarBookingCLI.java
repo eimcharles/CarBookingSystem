@@ -3,13 +3,9 @@ package com.eimc.app;
 import com.eimc.booking.BookingService;
 
 import com.eimc.car.Car;
-import com.eimc.exception.BookingNotActiveException;
-import com.eimc.exception.BookingNotFoundException;
+import com.eimc.exception.*;
 import com.eimc.user.User;
 import com.eimc.user.UserService;
-
-import com.eimc.exception.CarNotFoundException;
-import com.eimc.exception.CarUnavailableException;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -72,12 +68,6 @@ public class CarBookingCLI {
             // Attempt to create user object using the validated UUID
             User user = userService.getUserById(validatedUserId);
 
-            // if the user doesn't exist by userId
-            if (user == null) {
-                displayFormattedMessage("❌", "No user found with id " + validatedUserId.toString());
-                return;
-            }
-
             // Attempt to create the booking by associating the user and car registration
             UUID userBookingID = bookingService.addCarBookingByUserAndRegistrationNumber(user, validatedCarRegistration);
 
@@ -86,6 +76,11 @@ public class CarBookingCLI {
             displayFormattedMessage("✅", "Successfully booked the car with registration number " +
                     validatedCarRegistration + " for " +
                     user.getName() + " with booking id " + userBookingID);
+
+        }  catch (UserNotFoundException e) {
+
+            // User does not exist
+            displayFormattedMessage("⚠️",e.getMessage());
 
         } catch (CarNotFoundException e) {
 
@@ -152,12 +147,7 @@ public class CarBookingCLI {
                 // Handles Booking non-existence
                 displayFormattedMessage("❌", e.getMessage());
 
-            } catch (BookingNotActiveException e) {
-
-                // Handles inactive Booking
-                displayFormattedMessage("❌", e.getMessage());
-
-            } catch (Exception e) {
+            }  catch (Exception e) {
 
                 displayFormattedMessage("❌", "No bookings currently registered in the system");
 
