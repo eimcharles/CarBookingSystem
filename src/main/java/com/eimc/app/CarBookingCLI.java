@@ -79,9 +79,8 @@ public class CarBookingCLI {
 
             // Display booking success message
             displayResultsByMenuTitle(TITLE_BOOKING_SUCCESS_MENU);
-            displayFormattedMessage("✅", "Successfully booked the car with registration number " +
-                    validatedCarRegistration + " for " +
-                    user.getName() + " with booking id " + userBookingID);
+            displayFormattedMessage("✅", "Booking created for " +
+                    user.getName() + " with booking id: " + userBookingID);
 
         }  catch (UserNotFoundException e) {
 
@@ -149,9 +148,8 @@ public class CarBookingCLI {
                 bookingService.cancelActiveBookingByBookingId(validatedBookingId);
                 displayResultsByMenuTitle(TITLE_CANCELLATION_SUCCESS_MENU);
 
-                displayFormattedMessage("✅", "Successfully cancelled the booked car with registration number " +
-                        bookingService.getBookingByBookingId(validatedBookingId).getCar().getRegistrationNumber() + " for " +
-                        bookingService.getBookingByBookingId(validatedBookingId).getUser().getName() + " with booking id " + validatedBookingId);
+                displayFormattedMessage("✅", "Booking cancelled for " +
+                        bookingService.getBookingByBookingId(validatedBookingId).getUser().getName() + " with booking id: " + validatedBookingId);
 
             } catch (BookingNotFoundException e) {
 

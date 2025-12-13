@@ -36,12 +36,12 @@ public class CLIInputUtility {
 
         do {
 
-            displayFormattedUserInput("➡️", "Please enter the USER ID: ");
+            displayFormattedUserInput("➡️", "Please enter the user id: ");
             userIdInput = scanner.nextLine().trim();
 
             // Handles empty input
             if (userIdInput.isEmpty()) {
-                displayFormattedMessage("⚠️", "USER ID cannot be empty - Please try again.");
+                displayFormattedMessage("⚠️", "User id cannot be empty - Please try again.");
 
                 // Empty input: Skip the rest of the loop
                 continue;
@@ -61,7 +61,7 @@ public class CLIInputUtility {
             } catch (IllegalArgumentException e) {
 
                 // Handles bad UUID format
-                displayFormattedMessage("❌","Invalid USER ID Format: "  + userIdInput);
+                displayFormattedMessage("❌","Invalid user id format: "  + userIdInput);
 
             } catch (UserNotFoundException e) {
 
@@ -71,7 +71,7 @@ public class CLIInputUtility {
             } catch (Exception e) {
 
                 // Catches all unforeseen system errors
-                displayFormattedMessage("❌", "Displaying users booked cars failed - Please try again.");
+                displayFormattedMessage("❌", "Displaying users booked cars failed.");
 
             }
 
@@ -98,12 +98,12 @@ public class CLIInputUtility {
 
         do {
 
-            displayFormattedUserInput("➡️", "Please enter the CAR REGISTRATION Number: ");
+            displayFormattedUserInput("➡️", "Please enter the car registration number: ");
             userRegistrationInput = scanner.nextLine().trim();
 
             // Handles empty input
             if (userRegistrationInput.isEmpty()) {
-                displayFormattedMessage("⚠️", "CAR REGISTRATION Number cannot be empty - Please try again.");
+                displayFormattedMessage("⚠️", "Car registration number cannot be empty - Please try again.");
 
                 // Empty input: Skip the rest of the loop
                 continue;
@@ -161,12 +161,12 @@ public class CLIInputUtility {
 
             do {
 
-                displayFormattedUserInput("➡️", "Please enter the BOOKING ID: ");
+                displayFormattedUserInput("➡️", "Please enter the booking id: ");
                 bookingIdInput = scanner.nextLine().trim();
 
                 // Handles empty input
                 if (bookingIdInput.isEmpty()) {
-                    displayFormattedMessage("⚠️", "BOOKING ID cannot be empty - Please try again.");
+                    displayFormattedMessage("⚠️", "Booking id cannot be empty - Please try again.");
 
                     // Empty input: Skip the rest of the loop
                     continue;
@@ -186,7 +186,7 @@ public class CLIInputUtility {
                 } catch (IllegalArgumentException e){
 
                     // Handles bad UUID format
-                    displayFormattedMessage("❌", "Invalid BOOKING ID Format: " + bookingIdInput);
+                    displayFormattedMessage("❌", "Invalid booking id format: " + bookingIdInput);
 
                 } catch (BookingNotFoundException e) {
 
@@ -195,7 +195,7 @@ public class CLIInputUtility {
 
                 } catch (Exception e) {
 
-                    displayFormattedMessage("❌", "Invalid BOOKING ID");
+                    displayFormattedMessage("❌", "Invalid booking id.");
 
                 }
 

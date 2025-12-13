@@ -124,7 +124,7 @@ public class CLIFormatUtility {
      * */
 
     public static void displayCarsBookedByUserIdGuidelines() {
-        displayFormattedMessage("✅️","Please enter a user id from the registered users to display the cars booked.");
+        displayFormattedMessage("✅️","Please enter a user id from the registered users to display the cars booked by the user.");
     }
 
     /**
@@ -153,7 +153,7 @@ public class CLIFormatUtility {
      * */
 
     public static void displayRegistrationNumberBookingGuidelines() {
-        displayFormattedMessage("✅","Please enter a registration number from the available cars menu.");
+        displayFormattedMessage("✅","Please enter a registration number from the available cars menu to complete a booking.");
     }
 
     /**

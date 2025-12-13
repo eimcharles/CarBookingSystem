@@ -35,7 +35,7 @@ public class CLIDisplayUtility {
         User[] registeredUsers = userService.getUsers();
 
         if (registeredUsers == null || registeredUsers.length == 0){
-            displayFormattedMessage("❌", "No registeredUsers currently registered in the system");
+            displayFormattedMessage("❌", "No users currently registered in the system");
             return;
         }
 
@@ -150,7 +150,7 @@ public class CLIDisplayUtility {
         Booking[] allActiveBookings = bookingService.getAllActiveBookings();
 
         if (allActiveBookings == null || allActiveBookings.length == 0){
-            displayFormattedMessage("❌", "No bookings currently registered in the system");
+            displayFormattedMessage("❌", "No active bookings currently registered in the system");
             return;
         }
 
