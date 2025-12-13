@@ -180,11 +180,12 @@ public class CLIFormatUtility {
 
         bookingDetailsFormatted.append(indentation).append("Booking ID:             ").append(booking.getUserBookingID()).append("\n");
         bookingDetailsFormatted.append(indentation).append("Booking time:           ").append(booking.getBookingTime()).append("\n");
-        bookingDetailsFormatted.append(indentation).append("Booking Cancelled:      ").append(booking.isBookingCancelled()).append("\n");
+        bookingDetailsFormatted.append(indentation).append("Booking active:         ").append(booking.isBookingActive()).append("\n");
         System.out.println(bookingDetailsFormatted);
 
         displayFormattedUserDetails(booking.getUser());
         displayFormattedCarDetails(booking.getCar());
+
     }
 
     /**
@@ -214,7 +215,7 @@ public class CLIFormatUtility {
         StringBuilder carDetailsFormatted = new StringBuilder();
         String indentation = alignOutputByTabCount();
 
-        carDetailsFormatted.append(indentation).append("Manufacturer:            ").append(Car.getManufacturer()).append("\n");
+        carDetailsFormatted.append(indentation).append("Manufacturer:            ").append(Car.getBrand()).append("\n");
         carDetailsFormatted.append(indentation).append("Fuel Type:               ").append(Car.getFuelType().toString()).append("\n");
         carDetailsFormatted.append(indentation).append("Registration Number:     ").append(Car.getRegistrationNumber()).append("\n");
         carDetailsFormatted.append(indentation).append("Rental Price Per Day:    ").append(Car.getRentalPricePerDay()).append("\n");
