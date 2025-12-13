@@ -31,13 +31,9 @@ public class CarService {
         // Fetch Car to be put back in inventory
         Car carToRelease = getCarByRegistrationNumber(registrationNumber);
 
-        // Make sure the car is booked
-        if (!carToRelease.isBooked()) {
-            throw new CarUnavailableException(registrationNumber);
-        }
 
         // State change to the Car object - remove the car from booking.
-        carToRelease.setBooked(false);
+        carToRelease.setCarBooked(false);
 
         // Update the state change - holds car cancellation confirmation status
         boolean isCancelledAndUpdated = this.arrayCarDAO.updateCar(carToRelease);
@@ -164,7 +160,7 @@ public class CarService {
         // Count not booked cars
         int availableCarCount = 0;
         for (Car car : cars) {
-            if (car != null && !car.isBooked()){
+            if (car != null && !car.isCarBooked()){
                 availableCarCount++;
             }
         }
@@ -182,7 +178,7 @@ public class CarService {
             Car availableCar = nonNullCars[i];
 
             // Add to availableCars if the is not booked
-            if (availableCar != null && !availableCar.isBooked()){
+            if (availableCar != null && !availableCar.isCarBooked()){
                 availableCars[index++] = availableCar;
             }
         }

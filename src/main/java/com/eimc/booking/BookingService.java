@@ -3,7 +3,6 @@ package com.eimc.booking;
 import com.eimc.booking.dao.ArrayBookingDAO;
 import com.eimc.car.Car;
 import com.eimc.car.CarService;
-import com.eimc.exception.BookingNotActiveException;
 import com.eimc.exception.BookingNotFoundException;
 import com.eimc.exception.CarUnavailableException;
 import com.eimc.user.User;
@@ -52,7 +51,7 @@ public class BookingService {
         );
 
         // Car is booked and associated to booking
-        carToBook.setBooked(true);
+        carToBook.setCarBooked(true);
 
         // Return the booking id
         return bookingId;
@@ -72,7 +71,7 @@ public class BookingService {
         Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
 
         // Check if car is booked (associated to a booking)
-        if (carToBook.isBooked()) {
+        if (carToBook.isCarBooked()) {
             throw new CarUnavailableException(registrationNumber);
         }
 
