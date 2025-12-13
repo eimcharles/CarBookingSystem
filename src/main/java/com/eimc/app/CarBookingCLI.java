@@ -98,6 +98,11 @@ public class CarBookingCLI {
             // Car is unavailable
             displayFormattedMessage("⚠️", e.getMessage());
 
+        } catch (IllegalStateException e) {
+
+            // No more slot available for bookings
+            displayFormattedMessage("⚠️", e.getMessage());
+
         } catch (Exception e) {
 
             displayFormattedMessage("❌", "Booking attempt failed - Please try again.");
