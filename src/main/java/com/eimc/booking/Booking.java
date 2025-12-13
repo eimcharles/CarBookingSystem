@@ -17,14 +17,14 @@ public class Booking {
     private final User user;
     private final Car car;
     private final LocalDateTime bookingTime;
-    private boolean isBookingCancelled;
+    private boolean isBookingActive;
 
     public Booking(UUID userBookingID, User user, Car car, LocalDateTime bookingTime) {
         this.userBookingID = userBookingID;
         this.user = user;
         this.car = car;
         this.bookingTime = bookingTime;
-        this.isBookingCancelled = false;
+        this.isBookingActive = true;
     }
 
     public UUID getUserBookingID() {
@@ -43,12 +43,12 @@ public class Booking {
         return bookingTime;
     }
 
-    public boolean isBookingCancelled() {
-        return isBookingCancelled;
+    public boolean isBookingActive() {
+        return isBookingActive;
     }
 
     public void cancelBooking() {
-        this.isBookingCancelled = true;
+        this.isBookingActive = false;
     }
 
     @Override
@@ -69,6 +69,6 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking { userBookingID = %s, user = %s, car = %s, bookingTime = %s, isBookingCancelled = %s }".formatted(userBookingID, user, car, bookingTime, isBookingCancelled);
+        return "Booking { userBookingID = %s, user = %s, car = %s, bookingTime = %s, isBookingActive = %s }".formatted(userBookingID, user, car, bookingTime, isBookingActive);
     }
 }

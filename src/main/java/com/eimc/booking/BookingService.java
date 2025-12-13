@@ -98,13 +98,10 @@ public class BookingService {
             throw new BookingNotFoundException(validatedBookingId);
         }
 
-        // Check if booking is active
-        if (bookingToCancel.isBookingCancelled()) {
-            throw new BookingNotActiveException(validatedBookingId);
+        // Ensure booking is active
+        if (bookingToCancel.isBookingActive()) {
+            bookingToCancel.cancelBooking();
         }
-
-        // Cancel booking
-        bookingToCancel.cancelBooking();
 
         // Holds booking cancellation status
         boolean isCancelledAndUpdated = this.arrayBookingDAO.updateBooking(bookingToCancel);
@@ -237,7 +234,7 @@ public class BookingService {
         for (Booking activeBooking : bookings) {
 
             // Check the booking status
-            if (activeBooking != null && !activeBooking.isBookingCancelled()){
+            if (activeBooking != null && activeBooking.isBookingActive()){
                 activeBookingsCount++;
             }
         }
@@ -258,7 +255,7 @@ public class BookingService {
             Booking activeBooking = nonNullBookings[i];
 
             // Check the booking status
-            if (activeBooking != null && !activeBooking.isBookingCancelled()){
+            if (activeBooking != null && activeBooking.isBookingActive()){
                 activeBookings[index++] = activeBooking;
 
             }
