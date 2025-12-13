@@ -48,14 +48,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userId, user.userId) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(lastName, user.lastName);
+        return Objects.equals(userId, user.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, name, lastName);
+        return Objects.hash(userId);
     }
 
     @Override
