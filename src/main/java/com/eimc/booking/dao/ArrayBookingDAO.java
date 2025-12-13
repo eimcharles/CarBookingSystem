@@ -1,8 +1,14 @@
 package com.eimc.booking.dao;
 
 import com.eimc.booking.Booking;
+import com.eimc.car.Brand;
+import com.eimc.car.Car;
+import com.eimc.car.FuelType;
 import com.eimc.exception.BookingNotFoundException;
+import com.eimc.user.User;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -22,21 +28,28 @@ public class ArrayBookingDAO implements BookingDAO {
     private int nextAvailableIndex = 0;
 
     // Defines the fixed, maximum size of the array storage.
-    private static final int MAX_CAPACITY = 10;
+    private static final int MAX_CAPACITY = 3;
 
     public ArrayBookingDAO() {
 
         // Storage for available bookings
         this.bookingsDao = new Booking[MAX_CAPACITY];
 
+        Booking initialBooking =  new Booking(UUID.randomUUID(),
+                new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "LeBlond"),
+                new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC),
+                LocalDateTime.now());
+
+        addBooking(initialBooking);
+
     }
 
     @Override
-    public  void addBooking(Booking carBooking) {
+    public void addBooking(Booking carBooking) {
 
         // Checks if index of next available slot has reached length of array
         if (this.nextAvailableIndex >= this.bookingsDao.length) {
-            throw new IllegalStateException(String.format("No more bookings available, total slots available %d", this.bookingsDao.length));
+            throw new IllegalStateException(String.format("No more bookings space available - total bookings available:  %d", this.bookingsDao.length));
         }
 
         // Adds the carBooking into the slot that nextAvailableIndex points to
@@ -97,7 +110,7 @@ public class ArrayBookingDAO implements BookingDAO {
 
     @Override
     public Booking getBookingById(UUID bookingId) {
-        for (Booking booking: this.bookingsDao){
+        for (Booking booking: getBookings()){
             if (booking != null && booking.getUserBookingID().equals(bookingId)){
                 return booking;
             }
