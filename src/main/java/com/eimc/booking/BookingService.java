@@ -112,6 +112,14 @@ public class BookingService {
     }
 
     /**
+     *      hasAvailableCarsForBooking validates available car for booking in the system.
+     */
+
+    public boolean hasAvailableCarsForBooking() {
+        return getAllAvailableCars().length > 0;
+    }
+
+    /**
      *      hasActiveBookings validates active Bookings present in the system.
      */
 

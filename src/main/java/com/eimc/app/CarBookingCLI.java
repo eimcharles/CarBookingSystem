@@ -41,6 +41,12 @@ public class CarBookingCLI {
 
     public static void makeACarBookingByUserIdAndRegistrationNumber(UserService userService, BookingService bookingService, Scanner scanner) {
 
+        // if no available car exist
+        if (!bookingService.hasAvailableCarsForBooking()){
+            displayFormattedMessage("❌", "No car available for booking in the system");
+            return;
+        }
+
         // Menus, instructions for entering userId to make booking
         displayAllRegisteredUsers(userService);
         displayUserIdBookingGuidelines();
