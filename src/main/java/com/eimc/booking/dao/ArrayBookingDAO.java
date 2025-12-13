@@ -48,20 +48,23 @@ public class ArrayBookingDAO implements BookingDAO {
     }
 
     /**
-     *      Transactional commit:
+     * Transactional commit:
+     * <p>
+     * updateBooking() ensures that the bookingsDao array slot at position i contains
+     * the most up-to-date reference to the booking object, persisting
+     * any recent changes made in the Service layer.
+     * <p>
+     * (e.g., bookingToCancel.cancelBooking()).
      *
-     *      updateBooking() ensures that the bookingsDao array slot at position i contains
-     *      the most up-to-date reference to the booking object, persisting
-     *      any recent changes made in the Service layer.
-
-     *      (e.g., bookingToCancel.cancelBooking()).
-     * */
+     */
 
     @Override
-    public boolean updateBooking(Booking carBookingToUpdate) {
+    public void updateBooking(Booking carBookingToUpdate) {
 
         // Holds the booking id
         UUID targetId = carBookingToUpdate.getUserBookingID();
+
+        boolean bookingFound = false;
 
         for (int i = 0; i < this.nextAvailableIndex; i++) {
 
@@ -73,13 +76,16 @@ public class ArrayBookingDAO implements BookingDAO {
                 // Replace the old object reference with the new,
                 this.bookingsDao[i] = carBookingToUpdate;
 
-                // the booking ID was not found and cancelled
-                return true;
+                // booking found
+                bookingFound = true;
+
+                break;
             }
         }
 
-        // the booking ID was not found and not cancelled
-        return false;
+        if (!bookingFound) {
+            throw new BookingNotFoundException(targetId);
+        }
 
     }
 

@@ -11,6 +11,6 @@ public interface CarDAO {
 
     Car[] getCars();
 
-    boolean updateCar(Car carToUpdate);
+    void updateCar(Car carToUpdate);
 
 }

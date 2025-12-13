@@ -3,6 +3,7 @@ package com.eimc.car.dao;
 import com.eimc.car.Brand;
 import com.eimc.car.Car;
 import com.eimc.car.FuelType;
+import com.eimc.exception.CarNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -45,14 +46,17 @@ public class ArrayCarDAO implements CarDAO {
      *      the most up-to-date reference to the car object, persisting
      *      any recent changes made in the Service layer.
      *
-     *      (e.g., setBooked(false)).
-     * */
+     * (        e.g., setBooked(false)).
+     *
+     */
 
     @Override
-    public boolean updateCar(Car carToUpdate) {
+    public void updateCar(Car carToUpdate) {
 
         // Car to be cancelled registration number
         String registrationNumber = carToUpdate.getRegistrationNumber();
+
+        boolean carFound = false;
 
         for (int i = 0; i < this.carDAO.length; i++) {
 
@@ -64,13 +68,16 @@ public class ArrayCarDAO implements CarDAO {
                 // Replace the old object reference with the new,
                 this.carDAO[i] = carToUpdate;
 
-                // the car registration was found and cancelled
-                return true;
+                // car found
+                carFound = true;
+
+                break;
             }
         }
 
-        // the car registration was not found and cancelled
-        return false;
+        if (!carFound) {
+            throw new CarNotFoundException(registrationNumber);
+        }
 
     }
 

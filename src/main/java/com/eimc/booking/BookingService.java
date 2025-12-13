@@ -92,23 +92,11 @@ public class BookingService {
         // Booking with corresponding booking id
         Booking bookingToCancel = getBookingByBookingId(validatedBookingId);
 
-        // Check if the booking exists
-        if (bookingToCancel == null) {
-            throw new BookingNotFoundException(validatedBookingId);
-        }
-
-        // Ensure booking is active
-        if (bookingToCancel.isBookingActive()) {
-            bookingToCancel.cancelBooking();
-        }
+        // Change the booking state to inactive
+        bookingToCancel.cancelBooking();
 
         // Holds booking cancellation status
-        boolean isCancelledAndUpdated = this.arrayBookingDAO.updateBooking(bookingToCancel);
-
-        // booking couldn't be cancelled
-        if (!isCancelledAndUpdated) {
-            throw new BookingNotFoundException(validatedBookingId);
-        }
+        this.arrayBookingDAO.updateBooking(bookingToCancel);
 
         //Release the Asset (Car)
         this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getRegistrationNumber());

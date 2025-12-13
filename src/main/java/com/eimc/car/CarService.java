@@ -31,17 +31,12 @@ public class CarService {
         // Fetch Car to be put back in inventory
         Car carToRelease = getCarByRegistrationNumber(registrationNumber);
 
-
         // State change to the Car object - remove the car from booking.
         carToRelease.setCarBooked(false);
 
         // Update the state change - holds car cancellation confirmation status
-        boolean isCancelledAndUpdated = this.arrayCarDAO.updateCar(carToRelease);
+        this.arrayCarDAO.updateCar(carToRelease);
 
-        // Car couldn't be cancelled and put back in inventory
-        if (!isCancelledAndUpdated) {
-            throw new CarNotFoundException(registrationNumber);
-        }
     }
 
     /**
