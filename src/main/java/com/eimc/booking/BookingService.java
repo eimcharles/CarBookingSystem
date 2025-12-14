@@ -4,6 +4,7 @@ import com.eimc.booking.dao.ArrayBookingDAO;
 import com.eimc.car.Car;
 import com.eimc.car.CarService;
 import com.eimc.exception.BookingNotFoundException;
+import com.eimc.exception.CarNotFoundException;
 import com.eimc.exception.CarUnavailableException;
 import com.eimc.user.User;
 
@@ -26,19 +27,19 @@ public class BookingService {
     }
 
     /**
-     *      addCarBookingByUserAndRegistrationNumber creates a booking by car registration
+     *      addCarBookingByUserAndRegistrationNumber() creates a booking by car registration
      *      number sets its state to active.
      */
 
     public UUID addCarBookingByUserAndRegistrationNumber(User user, String registrationNumber) {
 
-        // Check if the car is currently associated to any active booking by registration number
+        // Check if the car is available for booking by registration number
         Car carToBook = getAvailableCarForBookingByRegistrationNumber(registrationNumber);
 
-        // Car is not booked and available - create a new bookingId
+        // Car is available - create a new bookingId
         UUID bookingId = UUID.randomUUID();
 
-        // Create and Save Booking in bookingDAO
+        // Create and save the new booking
         this.arrayBookingDAO.addBooking(
 
                 new Booking(
@@ -59,7 +60,7 @@ public class BookingService {
     }
 
     /**
-     *      getAvailableCarForBookingByRegistrationNumber retrieves an available Car
+     *      getAvailableCarForBookingByRegistrationNumber() retrieves an available car
      *      (not associated to an active booking) object by its registration number.
      *
      *      @throws CarUnavailableException if the car does not exist in the system.
@@ -70,7 +71,7 @@ public class BookingService {
         // Get the car by registration number
         Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
 
-        // Check if car is booked (associated to a booking)
+        // Check if car is booked
         if (carToBook.isCarBooked()) {
             throw new CarUnavailableException(registrationNumber);
         }
@@ -79,32 +80,31 @@ public class BookingService {
     }
 
     /**
-     *      cancelActiveBookingByBookingId sets the state of an active Booking to
-     *      inactive and updates the reference to the booking object.
+     *      cancelActiveBookingByBookingId() sets the state of an active booking to inactive.
      *
-     *      @throws BookingNotFoundException if the Booking does not exist in the system
+     *      @throws BookingNotFoundException if the Booking does not exist in the system.
      *
-     *      @throws BookingNotFoundException if the Booking is currently not active.
+     *      @throws CarNotFoundException if the car does not exist in the system.
      */
 
     public void cancelActiveBookingByBookingId(UUID validatedBookingId) {
 
-        // Booking with corresponding booking id
+        // Booking with corresponding booking id to cancel
         Booking bookingToCancel = getBookingByBookingId(validatedBookingId);
 
         // Change the booking state to inactive
         bookingToCancel.cancelBooking();
 
-        // Holds booking cancellation status
+        // Update the state change
         this.arrayBookingDAO.updateBooking(bookingToCancel);
 
-        //Release the Asset (Car)
+        // Release the car
         this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getRegistrationNumber());
 
     }
 
     /**
-     *      getBookingByBookingId retrieves Booking by booking id from the arrayBookingDAO class.
+     *      getBookingByBookingId() retrieves a booking by booking id.
      */
 
     public Booking getBookingByBookingId(UUID bookingId){
@@ -112,7 +112,7 @@ public class BookingService {
     }
 
     /**
-     *      hasAvailableCarsForBooking validates available car for booking in the system.
+     *      hasAvailableCarsForBooking() validates available cars for booking in the system.
      */
 
     public boolean hasAvailableCarsForBooking() {
@@ -120,7 +120,7 @@ public class BookingService {
     }
 
     /**
-     *      hasActiveBookings validates active Bookings present in the system.
+     *      hasActiveBookings() validates active bookings present in the system.
      */
 
     public boolean hasActiveBookings(){
@@ -128,8 +128,8 @@ public class BookingService {
     }
 
     /**
-     *      getBookings retrieves all Booking objects from the arrayBookingDAO class, filtering out
-     *      any null references that may exist, and returns a compacted array of Booking.
+     *      getBookings() retrieves booking objects from the arrayBookingDAO class, filtering out
+     *      any null references that may exist, and returns an array of bookings.
      */
 
     public Booking[] getBookings() {
@@ -192,7 +192,7 @@ public class BookingService {
     }
 
     /**
-     *      Retrieves an array of Bookings that are currently active.
+     *      getAllActiveBookings() retrieves an array of Bookings that are currently active.
      */
 
     public Booking[] getAllActiveBookings() {
@@ -258,7 +258,7 @@ public class BookingService {
     }
 
     /**
-     *      getAllBookedCarsByUserId retrieves an array of all Car objects that are
+     *      getAllBookedCarsByUserId() retrieves an array of car objects that are
      *      associated to an active booking by user id.
      */
 
@@ -335,7 +335,7 @@ public class BookingService {
     }
 
     /**
-     *      getAllAvailableCarsForBooking retrieves an array of Car objects that are available
+     *      getAllAvailableCarsForBooking() retrieves an array of car objects that are available
      *      (not associated to an active booking).
      */
 
