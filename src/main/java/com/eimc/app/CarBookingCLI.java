@@ -15,33 +15,33 @@ import static com.eimc.app.CLIInputUtility.*;
 import static com.eimc.app.CLIDisplayUtility.*;
 
 /**
- *      CarBookingCLI class is the central controller that takes user input,
+ *      CarBookingCLI class is the central controller.
  *
  *      It calls the business services, and orchestrates:
  *
  *      - The creation of a Car booking.
  *      - The cancellation of a Car booking
  *      - Displaying all cars that are booked by a given user.
- *
  * */
 
 public class CarBookingCLI {
 
     /**
-     *      makeACarBookingByUserIdAndRegistrationNumber Handles the flow for making a new car booking by
-     *      user id and registration number.
+     *      makeACarBookingByUserIdAndRegistrationNumber() handles the
+     *      flow for making a new car booking by user id and registration number.
      *
-     *      - Guides the user to select, and validates a User ID for new car booking
+     *      It validates available cars for booking.
      *
-     *      - Guides the user to select, and validates a car registration number for new car booking
+     *      - Guides the user to select, and validates a User ID for new car booking.
      *
-     *      - Once both identifiers are successfully validated it creates a new car booking.
+     *      - Guides the user to select, and validates a car registration number for new car booking.
      *
+     *      - Once both identifiers are successfully validated, creates a new car booking.
      */
 
     public static void makeACarBookingByUserIdAndRegistrationNumber(UserService userService, BookingService bookingService, Scanner scanner) {
 
-        // if no available car exist
+        // if no available car exist - return
         if (!bookingService.hasAvailableCarsForBooking()){
             displayFormattedMessage("❌", "No car available for booking in the system");
             return;
@@ -51,7 +51,7 @@ public class CarBookingCLI {
         displayAllRegisteredUsers(userService);
         displayUserIdBookingGuidelines();
 
-        // Validates the User ID from the console and returns a validated UUID object
+        // Validates the user id from the console and returns a validated UUID object
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
         // Menus, instructions for entering registration number to make booking
@@ -59,10 +59,10 @@ public class CarBookingCLI {
         displayAllAvailableCars(bookingService);
         displayRegistrationNumberBookingGuidelines();
 
-        // Validates the Car registration number from the console.
+        // Validates the car registration number from the console.
         String validatedCarRegistration = promptAndValidateCarRegistrationNumber(bookingService, scanner);
 
-        // Create booking once user ID and Car registration are validated
+        // Create booking once user id and Car registration are validated
         processBookingTransaction(userService, bookingService, validatedUserId, validatedCarRegistration);
 
     }
@@ -84,17 +84,17 @@ public class CarBookingCLI {
 
         }  catch (UserNotFoundException e) {
 
-            // User does not exist
+            // User does not found
             displayFormattedMessage("⚠️",e.getMessage());
 
         } catch (CarNotFoundException e) {
 
-            // Car does not exist
+            // Car does not found
             displayFormattedMessage("⚠️",e.getMessage());
 
         } catch (CarUnavailableException e) {
 
-            // Car is unavailable
+            // Car is unavailable (booked)
             displayFormattedMessage("⚠️", e.getMessage());
 
         } catch (IllegalStateException e) {
@@ -111,31 +111,30 @@ public class CarBookingCLI {
     }
 
     /**
-     *      cancelCarBookingByBookingId the cancellation of an active car booking by booking id.
+     *      cancelCarBookingByBookingId() handles the cancellation of an active car booking by booking id.
      *
-     *      It validates that there are active bookings in the system:
+     *      It validates active bookings in the system:
      *
      *      - Guides the user to select, and validates a Booking ID for cancellation
      *
      *      - Once the booking ID is successfully validated, it cancels the car booking and releases the associated car.
-     *
      */
 
     public static void cancelCarBookingByBookingId(BookingService bookingService, Scanner scanner) {
 
-        // if no active bookings exist
+        // if no active bookings exist - return
         if (!bookingService.hasActiveBookings()){
-            displayFormattedMessage("❌", "No bookings currently registered in the system");
+            displayFormattedMessage("❌", "No active bookings currently registered in the system");
             return;
         }
 
         displayAllActiveBookings(bookingService);
         displayCancelBookingByBookingIdGuidelines();
 
-        // Validates the Booking ID from the console and returns a validated UUID object.
+        // Validates the booking id from the console and returns a validated UUID object.
         UUID validatedBookingId = promptAndValidateBookingID(bookingService, scanner);
 
-        //  Cancel car booking once Booking ID is validated
+        //  Cancel car booking once Booking id is validated
         processBookingCancellation(bookingService, validatedBookingId);
 
     }
@@ -144,8 +143,9 @@ public class CarBookingCLI {
 
             try {
 
-                // Cancel the booking
+                // Attempt to cancel the booking
                 bookingService.cancelActiveBookingByBookingId(validatedBookingId);
+
                 displayResultsByMenuTitle(TITLE_CANCELLATION_SUCCESS_MENU);
 
                 displayFormattedMessage("✅", "Booking cancelled for " +
@@ -153,7 +153,7 @@ public class CarBookingCLI {
 
             } catch (BookingNotFoundException e) {
 
-                // Handles Booking non-existence
+                // Booking not found
                 displayFormattedMessage("❌", e.getMessage());
 
             }  catch (Exception e) {
@@ -165,7 +165,7 @@ public class CarBookingCLI {
     }
 
     /**
-     *      displayCarsBookedByUserByUserId retrieves all car booked by a user by user id.
+     *      displayCarsBookedByUserByUserId() retrieves all car booked by a user by user id.
      *
      *      - Guides the user to select, and validates a User ID
      *
@@ -174,20 +174,17 @@ public class CarBookingCLI {
 
     public static void displayCarsBookedByUserByUserId(UserService userService, BookingService bookingService, Scanner scanner){
 
-
         displayAllRegisteredUsers(userService);
-
-        // Guidelines to Display Cars Booked by User (By User ID)
         displayCarsBookedByUserIdGuidelines();
 
-        // Validates the User ID from the console and returns a validated UUID object
+        // Validates the user id from the console and returns a validated UUID object
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
-        // Array of user booked cars for the validated user ID.
+        // Array of user booked cars for the validated user id.
         Car[] bookedCars = bookingService.getAllBookedCarsByUserId(validatedUserId);
 
         // Format and display the user booked cars
-        formatAndDisplayUserBookedCars(bookedCars, validatedUserId.toString());
+        displayUserBookedCars(bookedCars, validatedUserId.toString());
     }
 
 }

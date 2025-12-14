@@ -49,7 +49,7 @@ public class CLIInputUtility {
 
             try {
 
-                // Validates Input: Convert the input string to a UUID object.
+                // Validates Input: convert the input string to a UUID object.
                 userId = UUID.fromString(userIdInput);
 
                 // Validates User Existence: throws if user doesn't exist.
@@ -60,17 +60,17 @@ public class CLIInputUtility {
 
             } catch (IllegalArgumentException e) {
 
-                // Handles bad UUID format
+                // Bad UUID format
                 displayFormattedMessage("❌","Invalid user id format: "  + userIdInput);
 
             } catch (UserNotFoundException e) {
 
-                // Handles User non-existence
+                // User not found
                 displayFormattedMessage("❌",e.getMessage());
 
             } catch (Exception e) {
 
-                // Catches all unforeseen system errors
+
                 displayFormattedMessage("❌", "Displaying users booked cars failed.");
 
             }
@@ -120,17 +120,16 @@ public class CLIInputUtility {
 
             } catch (CarNotFoundException e) {
 
-                // Car does not exist
+                // Car not found
                 displayFormattedMessage("⚠️", e.getMessage());
 
             } catch (CarUnavailableException e) {
 
-                // Car is unavailable
+                // Car unavailable
                 displayFormattedMessage("⚠️", e.getMessage());
 
             } catch (Exception e) {
 
-                // Catches all unforeseen system errors
                 displayFormattedMessage("❌", "Booking attempt failed - Please try again.");
 
             }
@@ -185,12 +184,12 @@ public class CLIInputUtility {
 
                 } catch (IllegalArgumentException e){
 
-                    // Handles bad UUID format
+                    // Bad UUID format
                     displayFormattedMessage("❌", "Invalid booking id format: " + bookingIdInput);
 
                 } catch (BookingNotFoundException e) {
 
-                    // Handles Booking non-existence
+                    // Booking not found
                     displayFormattedMessage("❌", e.getMessage());
 
                 } catch (Exception e) {

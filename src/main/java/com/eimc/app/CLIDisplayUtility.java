@@ -18,16 +18,9 @@ import static com.eimc.app.CLIFormatUtility.*;
 public class CLIDisplayUtility {
 
     /**
-     *        displayAllRegisteredUsers retrieves all registered users from the
-     *        UserService class and prints them to the console
-     *        using the `displayFormattedUserDetails()` method.
+     *        displayAllRegisteredUsers() retrieves all registered in the system
      *
-     *        If no users are found, a corresponding message
-     *        is displayed using `displayFormattedMessage()` method.
-     *
-     *        @param userService
-     *
-     *        The UserService instance used to fetch the user data.
+     *        If no users are found, a corresponding message is displayed.
      */
 
     public static void displayAllRegisteredUsers(UserService userService){
@@ -45,18 +38,11 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      displayAllAvailableCars retrieves all available cars from the
-     *      BookingService class and prints them to the console
-     *      using the `displayFormattedCarDetails()` method.
+     *      displayAllAvailableCars() retrieves all available cars in the system
      *
      *      Availability: the car is not associated to any active booking.
      *
-     *      If no cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the availability data.
+     *      If no cars are available, a corresponding message is displayed
      */
 
     public static void displayAllAvailableCars(BookingService bookingService) {
@@ -74,18 +60,11 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      displayAllAvailableGasCars retrieves all available gas cars from the
-     *      BookingService class and prints them to the console
-     *      using the `displayFormattedCarDetails()` method.
+     *      displayAllAvailableGasCars retrieves all available gas cars from the system
      *
      *      Availability: the gas car is not associated to any active booking.
      *
-     *      If no gas cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the filtered availability data.
+     *      If no gas cars are available, a corresponding message is displayed
      */
 
     public static void displayAllAvailableGasCars(BookingService bookingService) {
@@ -103,18 +82,11 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      displayAllAvailableElectricCars retrieves all  available electric cars from the
-     *      BookingService class and prints them to the console using the
-     *      `displayFormattedCarDetails()` method.
+     *      displayAllAvailableElectricCars() retrieves all available electric cars from the system
      *
      *      Availability: the electric car is not associated to any active booking.
      *
-     *      If no electric cars are available, a corresponding message
-     *      is displayed using `displayFormattedMessage()` method.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the filtered availability data.
+     *      If no electric cars are available, a corresponding message is displayed
      */
 
     public static void displayAllAvailableElectricCars(BookingService bookingService) {
@@ -132,17 +104,9 @@ public class CLIDisplayUtility {
     }
 
     /**
-     *      displayAllActiveBookings retrieves all active bookings from the
-     *      BookingService class and prints them to the console using the
-     *      `displayFormattedBookingDetails()` method.
+     *      displayAllActiveBookings() retrieves all active bookings from the system
      *
-     *      If no active bookings are found,
-     *      a corresponding message is displayed
-     *      using `displayFormattedMessage()` method.
-     *
-     *      @param bookingService
-     *
-     *      The BookingService instance used to fetch the data.
+     *      If no active bookings are found, a corresponding message is displayed
      */
 
     public static void displayAllActiveBookings(BookingService bookingService){
@@ -160,7 +124,13 @@ public class CLIDisplayUtility {
         }
     }
 
-    public static void formatAndDisplayUserBookedCars(Car[] bookedCars, String validatedUserId){
+    /**
+     *      displayUserBookedCars() retrieves user booked cars by user id
+     *
+     *      If a user has no active bookings a corresponding message is displayed
+     */
+
+    public static void displayUserBookedCars(Car[] bookedCars, String validatedUserId){
 
         if (bookedCars == null || bookedCars.length == 0){
 
