@@ -23,9 +23,12 @@ public class ArrayCarDAO implements CarDAO {
     public ArrayCarDAO() {
         this.carDAO = new Car[]{
 
+                // Available for booking
                 new Car("123_1", new BigDecimal("89.00"), Brand.BMW, FuelType.ELECTRIC),
                 new Car("123_2", new BigDecimal("79.00"), Brand.BMW, FuelType.GASOLINE),
                 new Car("123_3", new BigDecimal("69.00"), Brand.VOLKSWAGEN, FuelType.ELECTRIC),
+
+                // Already in System
                 new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC),
 
         };
@@ -37,16 +40,14 @@ public class ArrayCarDAO implements CarDAO {
         return Arrays.copyOf(this.carDAO, this.carDAO.length);
     }
 
-
     /**
      *      Transactional commit:
      *
-     *      updateCar() ensures that the carDAO array slot at position i contains
-     *      the most up-to-date reference to the car object, persisting
-     *      any recent changes made in the Service layer.
+     *      updateCar() ensures that the carDAO array contains
+     *      the most up-to-date reference to the car object,
+     *      persisting any recent changes made in the Service layer.
      *
-     * (        e.g., setBooked(false)).
-     *
+     *      (e.g., setCarBooked(false)).
      */
 
     @Override
@@ -64,16 +65,17 @@ public class ArrayCarDAO implements CarDAO {
             // Match the car to be cancelled with the registration number
             if (currentCar != null && currentCar.getRegistrationNumber().equals(registrationNumber)) {
 
-                // Replace the old object reference with the new,
+                // Replace the old object reference with the new
                 this.carDAO[i] = carToUpdate;
 
-                // car found
+                // Car found
                 carFound = true;
 
                 break;
             }
         }
 
+        // Car not found
         if (!carFound) {
             throw new CarNotFoundException(registrationNumber);
         }

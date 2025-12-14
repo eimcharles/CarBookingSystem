@@ -21,11 +21,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CarTest {
 
     private Car actualTestCar;
+
     private String actualTestRegistrationNumber;
     private BigDecimal actualTestRentalPricePerDay;
     private Brand actualTestBrand;
     private FuelType actualTestFuelType;
-
 
     @BeforeEach
     void setUp(){
