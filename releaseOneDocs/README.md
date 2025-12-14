@@ -104,8 +104,8 @@ CarBookingSystem/
 │       │   │           │ 
 │       │   │           │ 
 │       │   │           ├── exception/
-│       │   │           │       ├── BookingNotActiveException.java
 │       │   │           │       ├── BookingNotFoundException.java
+│       │   │           │       ├── CarUnavailableException.Java
 │       │   │           │       ├── CarNotFoundException.java
 │       │   │           │       └── UserNotFoundException.java
 │       │   │           │       
@@ -119,14 +119,24 @@ CarBookingSystem/
 │       │   │ 
 │       │   └── resources/
 │       │            └── application.properties
-│       └── test/                                                          (Testing Layer)                                  
+│       └── test/                                                         (Testing Layer)                                  
 │             ├── java/
 │             │     └── com/
 │             │         └── eimc/  
-│             │              ├── booking/ 
-│             │              ├── car/
+│             │              ├── booking/
+│             │              │        ├── BookingTest.Java                (Booking Domain Test Class)
+│             │              |        └── ArrayBookingDAOTest.Java        (Booking Data Access Test Class)
+│             │              |
+│             |              ├── car/
+│             │              |    ├── CarTest.Java                        (Car Domain Test Class)
+│             │              |    └── ArrayCarDAOTest.java                (Car Data Access Test Class)
+│             │              |
+│             │              |
 │             │              └── user/
-│             │                            
+│             │                    ├── UserTest.java                      (User Domain Test Class)
+│             │                    └── ArrayUserDAOTest.java              (User Data Access Test Class)
+│             │       
+│             │       
 │             └── resources/ 
 │                     └── application-test.properties
 ├── .gitignore          
