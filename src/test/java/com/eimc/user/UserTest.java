@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserTest {
 
     private User actualTestUser;
+
     private UUID actualTestUserId;
 
     @BeforeEach

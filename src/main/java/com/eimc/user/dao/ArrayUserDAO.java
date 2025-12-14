@@ -37,11 +37,11 @@ public class ArrayUserDAO implements UserDAO {
     }
 
     /**
-     *      Finds a User whose ID matches the
+     *      Finds a user whose user id matches the
      *      provided UUID in the userDAO array.
      *.
      *      @throws UserNotFoundException If no user
-     *      with the given ID exists in userDAO array.
+     *      with the given id exists in userDAO array.
      */
 
     @Override
@@ -52,6 +52,7 @@ public class ArrayUserDAO implements UserDAO {
             }
         }
 
+        // User not found
         throw new UserNotFoundException(id);
 
     }

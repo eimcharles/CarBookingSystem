@@ -14,4 +14,5 @@ public interface UserDAO {
     User[] getUsers();
 
     User getUserById(UUID id);
+
 }
