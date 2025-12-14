@@ -15,7 +15,6 @@ public class Car {
     private FuelType fuelType;
     private boolean isCarBooked;
 
-
     public Car(String registrationNumber, BigDecimal rentalPricePerDay, Brand brand, FuelType fuelType) {
         this.registrationNumber = registrationNumber;
         this.rentalPricePerDay = rentalPricePerDay;

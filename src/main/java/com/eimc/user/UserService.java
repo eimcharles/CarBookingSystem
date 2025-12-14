@@ -18,7 +18,7 @@ public class UserService {
     }
 
     /**
-     *      getUserById retrieves a specific User by its unique identifier (UUID).
+     *      getUserById() retrieves a specific User by its unique identifier (UUID).
      */
 
     public User getUserById(UUID id) {
@@ -26,8 +26,8 @@ public class UserService {
     }
 
     /**
-     *      getUsers retrieves all User objects from the arrayUserDAO class, filtering
-     *      out any null references that may exist, and returns a compacted array of Users.
+     *      getUsers() retrieves user objects from the arrayUserDAO class, filtering
+     *      out any null references that may exist, and returns an array of Users.
      */
 
     public User[] getUsers() {

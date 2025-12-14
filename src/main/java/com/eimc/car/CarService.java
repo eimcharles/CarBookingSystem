@@ -2,7 +2,6 @@ package com.eimc.car;
 
 import com.eimc.car.dao.ArrayCarDAO;
 import com.eimc.exception.CarNotFoundException;
-import com.eimc.exception.CarUnavailableException;
 
 /**
  *      Service class for managing Car objects.
@@ -18,12 +17,10 @@ public class CarService {
     }
 
     /**
-     *      cancelAssociatedCarByRegistrationNumber releases the association
-     *      of a single Car object to a single active booking by its registration number.
+     *      cancelAssociatedCarByRegistrationNumber() releases the association
+     *      of a single car object to a single active booking by its registration number.
      *
      *      @throws CarNotFoundException if the car does not exist in the system.
-     *
-     *      @throws CarUnavailableException if the car exists but is currently booked.
      */
 
     public void cancelAssociatedCarToActiveBookingByRegistrationNumber(String registrationNumber){
@@ -34,13 +31,13 @@ public class CarService {
         // State change to the Car object - remove the car from booking.
         carToRelease.setCarBooked(false);
 
-        // Update the state change - holds car cancellation confirmation status
+        // Update the state change
         this.arrayCarDAO.updateCar(carToRelease);
 
     }
 
     /**
-     *      getCarByRegistrationNumber retrieves a single Car object using its registration number.
+     *      getCarByRegistrationNumber() retrieves a single car object by registration number.
      **
      *      @throws CarNotFoundException if the car does not exist in the system.
      */
@@ -52,14 +49,14 @@ public class CarService {
             }
         }
 
+        // Car not found
         throw new CarNotFoundException(registrationNumber);
 
     }
 
-
     /**
-     *      getCars retrieves all Car objects from the arrayCarDAO class, filtering out any null
-     *      references that may exist, and returns a compacted array of Cars.
+     *      getCars() retrieves all Car objects from the arrayCarDAO class, filtering out any null
+     *      references that may exist, and returns an array of Cars.
      */
 
     public Car[] getCars() {
@@ -120,7 +117,7 @@ public class CarService {
     }
 
     /**
-     *      getAllAvailableCars retrieves an array of Car objects that are currently
+     *      getAllAvailableCars() retrieves an array of car objects that are currently
      *      available (not booked).
      */
 
@@ -180,10 +177,9 @@ public class CarService {
     }
 
     /**
-     *      getAllAvailableCarsByFuelType retrieves an array of Car objects that are
-     *      currently available (not booked) by their fuel type.
+     *      getAllAvailableCarsByFuelType() retrieves an array of car objects that are
+     *      available (not booked) by their fuel type.
      */
-
 
     public Car[] getAllAvailableCarsByFuelType(FuelType fuelType){
 
