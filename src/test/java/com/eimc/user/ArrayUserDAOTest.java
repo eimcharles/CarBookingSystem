@@ -77,6 +77,24 @@ public class ArrayUserDAOTest {
     }
 
     @Test
+    void getUserCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
+
+        // GIVEN actualTestUsers
+        User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
+
+        // WHEN
+        actualTestUsers[0] = null;
+
+        // THEN
+        User[] expectedTestUsersAfterModification = actualTestArrayUserDAO.getUsers();
+
+        assertThat(expectedTestUsersAfterModification[0])
+                .as("The element at index 0 in actualTestUsers state should not be null")
+                .isNotNull();
+
+    }
+
+    @Test
     void getUserByIdCanThrowUserNotFoundExceptionForUserNotFoundWhenUserIdDoesntExist(){
 
         // GIVEN expectedNotFoundRandomTestTargetId
