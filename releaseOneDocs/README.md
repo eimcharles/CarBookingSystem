@@ -24,7 +24,6 @@
 - **To Display Available Electric Cars**
 - **Display Cars Booked by User** (By User ID)
 - **Display All Registered Users**
-- **Display All Registered Users**
 - **View Main Menu**
   
 ---
