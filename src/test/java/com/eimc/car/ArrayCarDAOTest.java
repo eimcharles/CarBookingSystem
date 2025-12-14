@@ -59,7 +59,7 @@ public class ArrayCarDAOTest {
     }
 
     @Test
-    void getCarCanReturnCarsAndHasCorrectSizeAndContent(){
+    void getCarsCanReturnCarsAndHasCorrectSizeAndContent(){
 
         // WHEN
         Car[] actualTestCars = actualTestArrayCarDAO.getCars();

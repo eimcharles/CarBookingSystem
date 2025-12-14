@@ -47,7 +47,7 @@ public class ArrayUserDAOTest {
     }
 
     @Test
-    void getUserCanReturnUsersAndHasCorrectSizeAndContent(){
+    void getUsersCanReturnUsersAndHasCorrectSizeAndContent(){
 
         // WHEN
         User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
@@ -61,7 +61,7 @@ public class ArrayUserDAOTest {
     }
 
     @Test
-    void getUserCanReturnCorrespondingUserById(){
+    void getUsersCanReturnCorrespondingUserById(){
 
         // GIVEN expectedTestTargetId
         UUID expectedTestTargetId = actualTestUserCharles.getUserId();
@@ -77,7 +77,7 @@ public class ArrayUserDAOTest {
     }
 
     @Test
-    void getUserCanThrowUserNotFoundExceptionForUserNotFoundWhenUserIdDoesntExist(){
+    void getUserByIdCanThrowUserNotFoundExceptionForUserNotFoundWhenUserIdDoesntExist(){
 
         // GIVEN expectedNotFoundRandomTestTargetId
         UUID expectedNotFoundRandomTestTargetId = UUID.randomUUID();
