@@ -37,7 +37,7 @@ public class ArrayUserDAO implements UserDAO {
     }
 
     /**
-     *      Finds a user whose user id matches the
+     *      getUserById() finds a user whose user id matches the
      *      provided UUID in the userDAO array.
      *.
      *      @throws UserNotFoundException If no user

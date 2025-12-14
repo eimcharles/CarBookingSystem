@@ -41,8 +41,6 @@ public class ArrayCarDAO implements CarDAO {
     }
 
     /**
-     *      Transactional commit:
-     *
      *      updateCar() ensures that the carDAO array contains
      *      the most up-to-date reference to the car object,
      *      persisting any recent changes made in the Service layer.
