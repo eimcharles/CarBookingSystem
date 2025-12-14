@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- *      Unit testing: ArrayUserDAOTest
+ *      Unit tests for the ArrayUserDAO class
  *
  *      Test methods follow the Arrange-Act-Assert (AAA) pattern,
  *      commonly labeled as Given-When-Then:

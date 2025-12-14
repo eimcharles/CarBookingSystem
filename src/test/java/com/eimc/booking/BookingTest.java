@@ -27,11 +27,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BookingTest {
 
     private Booking actualTestBooking;
+
     private UUID actualTestUserBookingID;
     private User actualTestUser;
     private Car actualTestCar;
     private LocalDateTime actualTestBookingTime;
-    private boolean actualTestisBookingActive;
 
     @BeforeEach
     void setUp(){
