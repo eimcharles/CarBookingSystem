@@ -66,6 +66,9 @@ Layered architecture using an array based approach to store data.</br>
 |[../src/test/java/com/eimc/car/CarTest.java](../src/test/java/com/eimc/car/CarTest.java)|Car Domain Test Class|
 
 ### Test results
+**Domain and DAO testing** is done using **AssertJ** testing library.</br>
+
+
 <img width="1068" height="578" alt="Screenshot 2025-12-15 at 4 38 32 PM" src="https://github.com/user-attachments/assets/cb8f1f9e-d31e-4bbf-a329-f747bcf5b910" /> </br>
 ---
 
