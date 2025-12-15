@@ -5,6 +5,7 @@ import com.eimc.car.Brand;
 import com.eimc.car.Car;
 import com.eimc.car.FuelType;
 import com.eimc.exception.BookingNotFoundException;
+import com.eimc.exception.UserNotFoundException;
 import com.eimc.user.User;
 
 import java.math.BigDecimal;
@@ -35,14 +36,34 @@ public class ArrayBookingDAO implements BookingDAO {
         // Storage for available bookings
         this.bookingsDao = new Booking[MAX_CAPACITY];
 
-        Booking initialBooking =  new Booking(UUID.randomUUID(),
+        Booking initialBooking =  new Booking(UUID.fromString("8e397f1e-e7a4-4c39-8331-968a9ab3faef"),
                 new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "LeBlond"),
                 new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC),
                 LocalDateTime.now());
 
+        // Total Bookings in system: 1 (bookings slots available: 2)
         addBooking(initialBooking);
 
     }
+
+    @Override
+    public Booking[] getBookings() {
+        // Copy of bookingsDao returned from BookingDAO
+        return Arrays.copyOf(this.bookingsDao, this.bookingsDao.length);
+    }
+
+    /**
+     *      addBooking() adds a new car booking to bookingsDao
+     *      array.
+     *
+     *      The booking is stored at the next available
+     *      index in the internal array, and the index
+     *      is then incremented.
+     *
+     *      @throws IllegalStateException if the internal
+     *      storage array is full and no more bookings can
+     *      be added.
+     */
 
     @Override
     public void addBooking(Booking carBooking) {
@@ -61,14 +82,11 @@ public class ArrayBookingDAO implements BookingDAO {
     }
 
     /**
-     * Transactional commit:
-     * <p>
-     * updateBooking() ensures that the bookingsDao array slot at position i contains
-     * the most up-to-date reference to the booking object, persisting
-     * any recent changes made in the Service layer.
-     * <p>
-     * (e.g., bookingToCancel.cancelBooking()).
+     *      updateBooking() ensures that the bookingDAO array contains
+     *      the most up-to-date reference to the booking object,
+     *      persisting any recent changes made in the Service layer.
      *
+     *      (e.g., cancelBooking();).
      */
 
     @Override
@@ -89,24 +107,27 @@ public class ArrayBookingDAO implements BookingDAO {
                 // Replace the old object reference with the new,
                 this.bookingsDao[i] = carBookingToUpdate;
 
-                // booking found
+                // Booking found
                 bookingFound = true;
 
                 break;
             }
         }
 
+        // Booking not found
         if (!bookingFound) {
             throw new BookingNotFoundException(targetId);
         }
 
     }
 
-    @Override
-    public Booking[] getBookings() {
-        // Copy of bookingsDao returned from BookingDAO
-        return Arrays.copyOf(this.bookingsDao, this.bookingsDao.length);
-    }
+    /**
+     *      getBookingById() finds a booking whose user
+     *      id matches the provided UUID in the bookingDAO array.
+     *.
+     *      @throws BookingNotFoundException If no booking
+     *      with the given id exists in bookingDAO array.
+     */
 
     @Override
     public Booking getBookingById(UUID bookingId) {
@@ -116,6 +137,7 @@ public class ArrayBookingDAO implements BookingDAO {
             }
         }
 
+        // Booking not found
         throw new BookingNotFoundException(bookingId);
 
     }
