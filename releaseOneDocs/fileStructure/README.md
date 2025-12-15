@@ -79,17 +79,3 @@ CarBookingSystem/
 └── README.md                               
 ```
 ----
-
-## How to Run
-
-1. Navigate to the JAR Location
-
- ```bash 
-    car-booking-cli.jar file.
-```
-
-1. Run the Application
-
- ```bash 
-    Execute the JAR file using the java -jar car-booking-cli.jar
-```

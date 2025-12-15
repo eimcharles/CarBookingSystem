@@ -1,8 +1,6 @@
 # Car Booking System Release 1 
 
-## Important Files
-
-### Test Files
+## Test Files
 
 | File path with clickable link | Purpose (1 line description) |
 |------|------------|
