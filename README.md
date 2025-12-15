@@ -1,9 +1,14 @@
 # Car Booking System
+
 ---
 ### Release 1 
 #### [CLI Maven application that serves as a system for managing the car booking lifecycle.](releaseOneDocs/README.md) <br>
 ####  Demo 1 (Coming soon) 🚀 <br>
-  
+
+![Java](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-4.0-C71A36?logo=apache-maven&logoColor=white)
+![AssertJ](https://img.shields.io/badge/Assertions-AssertJ-FFD166?logo=assertj&logoColor=black)
+
 ---
 
 ### 🚫 Release 2 
