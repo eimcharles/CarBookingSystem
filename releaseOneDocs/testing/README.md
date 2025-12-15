@@ -1,6 +1,6 @@
 # Car Booking System Release 1 
-
-## Test Files
+## Test files
+#### Domain and DAO testing is done using AssertJ testing library.
 
 | File path with clickable link | Purpose (1 line description) |
 |------|------------|
