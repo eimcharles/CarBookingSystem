@@ -4,6 +4,8 @@ import com.eimc.car.dao.ArrayCarDAO;
 import com.eimc.exception.CarNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 
@@ -91,11 +93,21 @@ public class ArrayCarDAOTest {
 
     }
 
-    @Test
-    void updateCarCanThrowCarNotFoundExceptionForCarNotFoundWhenRegistrationDoesntExist(){
+    @ParameterizedTest
+    @CsvSource(
 
-        // GIVEN expectedNotFoundRegistrationNumber
-        String expectedNotFoundRegistrationNumber = "123_6";
+            {
+
+                    "123_6",
+                    "123_$",
+                    "_",
+                    "&",
+                    "b10d126a-3608-4980-9f9c-aa179f5cebc3",
+
+            }
+
+    )
+    void updateCarCanThrowCarNotFoundExceptionWhenRegistrationDoesntExist(String expectedNotFoundRegistrationNumber){
 
         // WHEN
         Car expectedCarNotFound = new Car(

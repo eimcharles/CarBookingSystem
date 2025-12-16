@@ -95,7 +95,7 @@ public class ArrayUserDAOTest {
     }
 
     @Test
-    void getUserByIdCanThrowUserNotFoundExceptionForUserNotFoundWhenUserIdDoesntExist(){
+    void getUserByIdCanThrowUserNotFoundExceptionWhenUserIdDoesntExist(){
 
         // GIVEN expectedNotFoundRandomTestTargetId
         UUID expectedNotFoundRandomTestTargetId = UUID.randomUUID();

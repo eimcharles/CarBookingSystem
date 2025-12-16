@@ -8,6 +8,8 @@ import com.eimc.exception.BookingNotFoundException;
 import com.eimc.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -79,16 +81,27 @@ public class ArrayBookingDAOTest {
 
     }
 
-    @Test
-    void updateBookingCanThrowBookingNotFoundExceptionForBookingNotFoundWhenRegistrationNumberDoesntExist(){
+    @ParameterizedTest
+    @CsvSource(
 
-        // GIVEN expectedNotFoundRegistrationNumber
-        String expectedNotFoundRegistrationNumber = "123_6";
+            {
+
+                    "123_6",
+                    "123_$",
+                    "_",
+                    "&",
+                    "b10d126a-3608-4980-9f9c-aa179f5cebc3",
+
+            }
+
+    )
+    void updateBookingCanThrowBookingNotFoundExceptionWhenRegistrationNumberDoesntExist(String expectedNotFoundRegistrationNumber){
+
 
         // WHEN
         Booking expectedBookingNotFound = new Booking(UUID.randomUUID(),
                 new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "LeBlond"),
-                new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC),
+                new Car(expectedNotFoundRegistrationNumber, new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC),
                 LocalDateTime.now());
 
         /**
@@ -105,6 +118,7 @@ public class ArrayBookingDAOTest {
                 .hasMessageContaining(expectedBookingNotFound.getUserBookingID().toString());
 
     }
+
 
     @Test
     void getBookingByIdCanThrowBookingNotFoundExceptionForBookingNotFoundWhenBookingIdDoesntExist(){
