@@ -133,7 +133,7 @@ public class ArrayBookingDAOTest {
         Booking expectedTestBookingReturnedById = actualTestArrayBookingDAO.getBookingById(actualTestTargetId);
 
         // THEN
-        assertThat(actualTestBookingOne).as("The getBookingById() method must return a booking with the correct user id.")
+        assertThat(actualTestBookingOne).as("The getBookingById() method must return a booking with the correct booking id.")
                 .isNotNull()
                 .isEqualTo(expectedTestBookingReturnedById);
 
