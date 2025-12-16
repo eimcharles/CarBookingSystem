@@ -12,7 +12,7 @@
 |[../../src/test/java/com/eimc/user/UserTest.java](../../src/test/java/com/eimc/user/UserTest.java)|User Domain Test Class|
 
 ## Test results
-<img width="1028" height="583" alt="Screenshot 2025-12-16 at 2 19 04 PM" src="https://github.com/user-attachments/assets/89eb5914-665c-4c51-a5da-9216bcef4e6b" /></br>
+<img width="1111" height="581" alt="Screenshot 2025-12-16 at 3 21 01 PM" src="https://github.com/user-attachments/assets/3fd77714-dc1b-4bae-8dee-4f116355f977" /> </br>
 ---
 
 
