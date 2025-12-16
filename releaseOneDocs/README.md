@@ -68,8 +68,7 @@ Layered architecture using an array based approach to store data.</br>
 ### Test results
 **Domain and DAO testing** is done using **AssertJ** testing library.</br>
 
-
-<img width="1068" height="578" alt="Screenshot 2025-12-15 at 4 38 32 PM" src="https://github.com/user-attachments/assets/cb8f1f9e-d31e-4bbf-a329-f747bcf5b910" /> </br>
+<img width="1028" height="583" alt="Screenshot 2025-12-16 at 2 19 04 PM" src="https://github.com/user-attachments/assets/4b9a2e8b-48ff-4ea2-9c49-f2261cd0ca3c" /></br>
 ---
 
 ## How to Run
