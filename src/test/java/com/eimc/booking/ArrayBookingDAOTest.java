@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -51,11 +52,13 @@ public class ArrayBookingDAOTest {
     @Test
     void getBookingCanReturnBookingsAndHasCorrectSizeAndContent(){
 
+        // GIVEN actualTestArrayBookingDAO object created in setUp();
+
         // WHEN
-        Booking[] actualTestBookings = actualTestArrayBookingDAO.getBookings();
+        Booking[] expectedTestBookings = actualTestArrayBookingDAO.getBookings();
 
         // THEN
-        assertThat(actualTestBookings)
+        assertThat(expectedTestBookings)
                 .as("The getBookings() method must return an array of 3 booking with the correct contents.")
                 .isNotNull()
                 .hasSize(3)
@@ -66,11 +69,11 @@ public class ArrayBookingDAOTest {
     @Test
     void getBookingsCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
 
-        // GIVEN actualTestBookings
-        Booking[] actualTestBookings = actualTestArrayBookingDAO.getBookings();
+        // GIVEN actualTestArrayBookingDAO object created in setUp();
 
         // WHEN
-        actualTestBookings[0] = null;
+        Booking[] expectedTestBookings = actualTestArrayBookingDAO.getBookings();
+        expectedTestBookings[0] = null;
 
         // THEN
         Booking[] expectedTestBookingAfterModification = actualTestArrayBookingDAO.getBookings();
@@ -97,6 +100,7 @@ public class ArrayBookingDAOTest {
     )
     void updateBookingCanThrowBookingNotFoundExceptionWhenRegistrationNumberDoesntExist(String expectedNotFoundRegistrationNumber){
 
+        // GIVEN actualTestArrayBookingDAO object created in setUp();
 
         // WHEN
         Booking expectedBookingNotFound = new Booking(UUID.randomUUID(),
@@ -119,9 +123,26 @@ public class ArrayBookingDAOTest {
 
     }
 
+    @Test
+    void getBookingByCanReturnCorrespondingBookingById(){
+
+        // GIVEN actualTestTargetId
+        UUID actualTestTargetId = actualTestBookingOne.getUserBookingID();
+
+        // WHEN
+        Booking expectedTestBookingReturnedById = actualTestArrayBookingDAO.getBookingById(actualTestTargetId);
+
+        // THEN
+        assertThat(actualTestBookingOne).as("The getBookingById() method must return a booking with the correct user id.")
+                .isNotNull()
+                .isEqualTo(expectedTestBookingReturnedById);
+
+    }
 
     @Test
-    void getBookingByIdCanThrowBookingNotFoundExceptionForBookingNotFoundWhenBookingIdDoesntExist(){
+    void getBookingByIdCanThrowBookingNotFoundExceptionWhenBookingIdDoesntExist(){
+
+        // GIVEN actualTestArrayBookingDAO object created in setUp();
 
         // GIVEN expectedNotFoundRandomTestTargetId
         UUID expectedNotFoundRandomTestTargetId = UUID.randomUUID();
@@ -139,4 +160,5 @@ public class ArrayBookingDAOTest {
                 .hasMessageContaining(expectedNotFoundRandomTestTargetId.toString());
 
     }
+
 }

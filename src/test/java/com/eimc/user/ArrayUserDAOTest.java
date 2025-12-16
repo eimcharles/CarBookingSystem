@@ -49,11 +49,13 @@ public class ArrayUserDAOTest {
     @Test
     void getUsersCanReturnUsersAndHasCorrectSizeAndContent(){
 
+        // GIVEN actualTestArrayUserDAO object created in setUp();
+
         // WHEN
-        User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
+        User[] expectedTestUsers = actualTestArrayUserDAO.getUsers();
 
         // THEN
-        assertThat(actualTestUsers).as("The getUsers() method must return an array of 2 users with the correct contents.")
+        assertThat(expectedTestUsers).as("The getUsers() method must return an array of 2 users with the correct contents.")
                 .isNotNull()
                 .hasSize(2)
                 .containsExactly(actualTestUserCharles, actualTestUserJerry);
@@ -61,13 +63,31 @@ public class ArrayUserDAOTest {
     }
 
     @Test
-    void getUsersCanReturnCorrespondingUserById(){
+    void getUserCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
 
-        // GIVEN expectedTestTargetId
-        UUID expectedTestTargetId = actualTestUserCharles.getUserId();
+        // GIVEN actualTestArrayUserDAO object created in setUp();
+
+        // WHEN expectedTestUsers
+        User[] expectedTestUsers = actualTestArrayUserDAO.getUsers();
+        expectedTestUsers[0] = null;
+
+        // THEN
+        User[] expectedTestUsersAfterModification = actualTestArrayUserDAO.getUsers();
+
+        assertThat(expectedTestUsersAfterModification[0])
+                .as("The element at index 0 in expectedTestUsers state should not be null")
+                .isNotNull();
+
+    }
+
+    @Test
+    void getUserByIdCanReturnCorrespondingUserById(){
+
+        // GIVEN actualTestTargetId
+        UUID actualTestTargetId = actualTestUserCharles.getUserId();
 
         // WHEN
-        User expectedTestUserReturnedById = actualTestArrayUserDAO.getUserById(expectedTestTargetId);
+        User expectedTestUserReturnedById = actualTestArrayUserDAO.getUserById(actualTestTargetId);
 
         // THEN
         assertThat(actualTestUserCharles).as("The getUserById() method must return a user with the correct user id.")
@@ -77,30 +97,19 @@ public class ArrayUserDAOTest {
     }
 
     @Test
-    void getUserCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
-
-        // GIVEN actualTestUsers
-        User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
-
-        // WHEN
-        actualTestUsers[0] = null;
-
-        // THEN
-        User[] expectedTestUsersAfterModification = actualTestArrayUserDAO.getUsers();
-
-        assertThat(expectedTestUsersAfterModification[0])
-                .as("The element at index 0 in actualTestUsers state should not be null")
-                .isNotNull();
-
-    }
-
-    @Test
     void getUserByIdCanThrowUserNotFoundExceptionWhenUserIdDoesntExist(){
 
-        // GIVEN expectedNotFoundRandomTestTargetId
+        // GIVEN actualTestArrayUserDAO object created in setUp();
+
+        // WHEN expectedNotFoundRandomTestTargetId
         UUID expectedNotFoundRandomTestTargetId = UUID.randomUUID();
 
-        // WHEN actualTestArrayUserDAO object created in setUp();
+        /**
+         *     Functional Programming:
+         *
+         *     Asserts that calling getUserById() with a non-existent ID (within the lambda)
+         *     throws a UserNotFoundException, and verifies the exception message contains the missing ID.
+         * */
 
         // THEN
         assertThatThrownBy(() -> actualTestArrayUserDAO.getUserById(expectedNotFoundRandomTestTargetId))
