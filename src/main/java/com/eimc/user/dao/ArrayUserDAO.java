@@ -17,23 +17,51 @@ import java.util.UUID;
 public class ArrayUserDAO implements UserDAO {
 
     private final User[] userDAO;
+    private int numberOfUsers = 0;
+    private static final int MAX_CAPACITY_OF_USERS = 2;
 
     public ArrayUserDAO() {
 
-        this.userDAO = new User[]
+        this.userDAO = new User[MAX_CAPACITY_OF_USERS];
 
-                {
+        addUser(new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"),
+                "Charles",
+                "Eimer"));
 
-                new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "Charles", "Eimer"),
-                new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "Leblond"),
-
-        };
+        addUser(new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
+                "Jerry",
+                "Leblond"));
     }
 
     @Override
     public  User[] getUsers() {
         // Copy of User objects returned from userDAO
-        return Arrays.copyOf(this.userDAO,this.userDAO.length);
+        return Arrays.copyOf(this.userDAO, this.userDAO.length);
+    }
+
+    /**
+     *      addUser() adds a new user to userDAO
+     *      array.
+     *
+     *      The user is stored at the next available
+     *      index in the internal array, and the index
+     *      is then incremented.
+     *
+     *      @throws IllegalStateException if the internal
+     *      storage array is full and no more users can
+     *      be added.
+     */
+
+    @Override
+    public void addUser(User user) {
+
+        if (this.numberOfUsers >= this.userDAO.length) {
+            throw new IllegalStateException(String.format("No more available space to add users"));
+        }
+
+        // Store user at the current pointer and increment the index for the next addition
+        this.userDAO[this.numberOfUsers] = user;
+        this.numberOfUsers++;
     }
 
     /**
@@ -46,9 +74,11 @@ public class ArrayUserDAO implements UserDAO {
 
     @Override
     public User getUserById(UUID id) {
-        for (User user: this.userDAO){
-            if (user.getUserId().equals(id)){
-                return user;
+
+        // Iterate up to numberOfUsers to find a matching ID
+        for (int i = 0; i < numberOfUsers; i++) {
+            if (id.equals(userDAO[i].getUserId())){
+                return userDAO[i];
             }
         }
 
@@ -56,4 +86,5 @@ public class ArrayUserDAO implements UserDAO {
         throw new UserNotFoundException(id);
 
     }
+
 }

@@ -13,6 +13,8 @@ public interface UserDAO {
 
     User[] getUsers();
 
+    void addUser(User user);
+
     User getUserById(UUID id);
 
 }
