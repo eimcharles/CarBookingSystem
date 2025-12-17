@@ -4,6 +4,7 @@ import com.eimc.car.Brand;
 import com.eimc.car.Car;
 import com.eimc.car.FuelType;
 import com.eimc.exception.CarNotFoundException;
+import com.eimc.user.User;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -19,25 +20,52 @@ import java.util.Arrays;
 public class ArrayCarDAO implements CarDAO {
 
     private final Car[] carDAO;
+    private int numberOfCars = 0;
+    private static final int MAX_CAPACITY_OF_CARS = 4;
 
     public ArrayCarDAO() {
-        this.carDAO = new Car[]{
 
-                // Available for booking
-                new Car("123_1", new BigDecimal("89.00"), Brand.BMW, FuelType.ELECTRIC),
-                new Car("123_2", new BigDecimal("79.00"), Brand.BMW, FuelType.GASOLINE),
-                new Car("123_3", new BigDecimal("69.00"), Brand.VOLKSWAGEN, FuelType.ELECTRIC),
+        this.carDAO = new Car[MAX_CAPACITY_OF_CARS];
 
-                // Already in System
-                new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC),
+        // Available for booking
+        addCar(new Car("123_1", new BigDecimal("89.00"), Brand.BMW, FuelType.ELECTRIC));
+        addCar(new Car("123_2", new BigDecimal("79.00"), Brand.BMW, FuelType.GASOLINE));
+        addCar(new Car("123_3", new BigDecimal("69.00"), Brand.VOLKSWAGEN, FuelType.ELECTRIC));
 
-        };
+        // Already in System and booked
+        addCar(new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC));
+
     }
 
     @Override
     public Car[] getCars() {
         // Copy of Car objects returned from carDAO
         return Arrays.copyOf(this.carDAO, this.carDAO.length);
+    }
+
+    /**
+     *      addCar() adds a new car to carDAO
+     *      array.
+     *
+     *      The car is stored at the next available
+     *      index in the internal array, and the index
+     *      is then incremented.
+     *
+     *      @throws IllegalStateException if the internal
+     *      storage array is full and no more cars can
+     *      be added.
+     */
+
+    @Override
+    public void addCar(Car car) {
+
+        if (this.numberOfCars >= this.carDAO.length) {
+            throw new IllegalStateException(String.format("No more available space to add cars"));
+        }
+
+        // Store car at the current pointer and increment the index for the next addition
+        this.carDAO[this.numberOfCars] = car;
+        this.numberOfCars++;
     }
 
     /**
@@ -56,7 +84,7 @@ public class ArrayCarDAO implements CarDAO {
 
         boolean carFound = false;
 
-        for (int i = 0; i < this.carDAO.length; i++) {
+        for (int i = 0; i < this.numberOfCars; i++) {
 
             Car currentCar = this.carDAO[i];
 
