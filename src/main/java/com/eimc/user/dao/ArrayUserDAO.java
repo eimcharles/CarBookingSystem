@@ -76,9 +76,9 @@ public class ArrayUserDAO implements UserDAO {
     public User getUserById(UUID id) {
 
         // Iterate up to numberOfUsers to find a matching ID
-        for (int i = 0; i < numberOfUsers; i++) {
-            if (id.equals(userDAO[i].getUserId())){
-                return userDAO[i];
+        for (User user : getUsers()) {
+            if (user != null && user.getUserId().equals(id)) {
+                return user;
             }
         }
 
@@ -86,5 +86,4 @@ public class ArrayUserDAO implements UserDAO {
         throw new UserNotFoundException(id);
 
     }
-
 }

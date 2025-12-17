@@ -32,7 +32,7 @@ public class ArrayCarDAO implements CarDAO {
         addCar(new Car("123_2", new BigDecimal("79.00"), Brand.BMW, FuelType.GASOLINE));
         addCar(new Car("123_3", new BigDecimal("69.00"), Brand.VOLKSWAGEN, FuelType.ELECTRIC));
 
-        // Already in System and booked
+        // Car booked in system
         addCar(new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC));
 
     }

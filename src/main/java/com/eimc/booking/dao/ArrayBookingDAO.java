@@ -5,7 +5,6 @@ import com.eimc.car.Brand;
 import com.eimc.car.Car;
 import com.eimc.car.FuelType;
 import com.eimc.exception.BookingNotFoundException;
-import com.eimc.exception.UserNotFoundException;
 import com.eimc.user.User;
 
 import java.math.BigDecimal;
@@ -26,7 +25,7 @@ public class ArrayBookingDAO implements BookingDAO {
     private final Booking[] bookingsDao;
 
     // Tracks the index of the next available slot in bookingsDao
-    private int nextAvailableIndex = 0;
+    private int numberOfBookings = 0;
 
     // Defines the fixed, maximum size of the array storage.
     private static final int MAX_CAPACITY = 3;
@@ -69,15 +68,15 @@ public class ArrayBookingDAO implements BookingDAO {
     public void addBooking(Booking carBooking) {
 
         // Checks if index of next available slot has reached length of array
-        if (this.nextAvailableIndex >= this.bookingsDao.length) {
+        if (this.numberOfBookings >= this.bookingsDao.length) {
             throw new IllegalStateException(String.format("No more bookings space available - total bookings available:  %d", this.bookingsDao.length));
         }
 
         // Adds the carBooking into the slot that nextAvailableIndex points to
-        this.bookingsDao[this.nextAvailableIndex] = carBooking;
+        this.bookingsDao[this.numberOfBookings] = carBooking;
 
         // Moves the index to point to the following slot
-        this.nextAvailableIndex++;
+        this.numberOfBookings++;
 
     }
 
@@ -97,7 +96,7 @@ public class ArrayBookingDAO implements BookingDAO {
 
         boolean bookingFound = false;
 
-        for (int i = 0; i < this.nextAvailableIndex; i++) {
+        for (int i = 0; i < this.numberOfBookings; i++) {
 
             Booking currentBooking = this.bookingsDao[i];
 
@@ -106,6 +105,9 @@ public class ArrayBookingDAO implements BookingDAO {
 
                 // Replace the old object reference with the new,
                 this.bookingsDao[i] = carBookingToUpdate;
+
+                // Decrement the number of total bookings after update
+                numberOfBookings--;
 
                 // Booking found
                 bookingFound = true;
