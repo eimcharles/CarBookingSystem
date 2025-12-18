@@ -29,7 +29,7 @@ public class UserTest {
 
         // GIVEN
         actualTestUserId = UUID.randomUUID();
-        actualTestUser = new User(actualTestUserId, "Jerry", "Leblond");
+        actualTestUser = new User(actualTestUserId, "Jerry", "LeBlond");
 
     }
 
@@ -60,7 +60,7 @@ public class UserTest {
     void equalsCanCheckEqualityWhenAttributesAreIdentical(){
 
         // GIVEN expectedTestUserCopy
-        User expectedTestUserCopy = new User(actualTestUserId, "Jerry", "Leblond");
+        User expectedTestUserCopy = new User(actualTestUserId, "Jerry", "LeBlond");
 
         // WHEN actualTestUser object created in setUp();
 
@@ -127,7 +127,7 @@ public class UserTest {
     void hashCodeCanCheckEqualityWhenAttributesAreIdentical(){
 
         // GIVEN expectedTestUserCopy
-        User expectedTestUserCopy = new User(actualTestUserId, "Jerry", "Leblond");
+        User expectedTestUserCopy = new User(actualTestUserId, "Jerry", "LeBlond");
 
         // WHEN actualTestUser object created in setUp();
         int actualTestUserHashCode = actualTestUser.hashCode();

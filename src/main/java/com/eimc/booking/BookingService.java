@@ -92,14 +92,14 @@ public class BookingService {
         // Booking with corresponding booking id to cancel
         Booking bookingToCancel = getBookingByBookingId(validatedBookingId);
 
+        // Release the car
+        this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getRegistrationNumber());
+
         // Change the booking state to inactive
         bookingToCancel.cancelBooking();
 
         // Update the state change
-        this.arrayBookingDAO.updateBooking(bookingToCancel);
-
-        // Release the car
-        this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getRegistrationNumber());
+        this.arrayBookingDAO.removeBooking(bookingToCancel);
 
     }
 

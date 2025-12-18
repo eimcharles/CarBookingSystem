@@ -25,8 +25,8 @@ public class ArrayUserDAOTest {
 
     private ArrayUserDAO actualTestArrayUserDAO;
 
-    private User actualTestUserCharles;
-    private User actualTestUserJerry;
+    private User expectedTestUserCharles;
+    private User expectedTestUserJerry;
 
     @BeforeEach
     void setUp(){
@@ -34,15 +34,15 @@ public class ArrayUserDAOTest {
         // GIVEN
         actualTestArrayUserDAO = new ArrayUserDAO();
 
-        actualTestUserCharles = new User(
+        expectedTestUserCharles = new User(
                 UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"),
                 "Charles",
                 "Eimer");
 
-        actualTestUserJerry = new User(
+        expectedTestUserJerry = new User(
                 UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
                 "Jerry",
-                "Leblond");
+                "LeBlond");
 
     }
 
@@ -52,30 +52,29 @@ public class ArrayUserDAOTest {
         // GIVEN actualTestArrayUserDAO object created in setUp();
 
         // WHEN
-        User[] expectedTestUsers = actualTestArrayUserDAO.getUsers();
+        User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
 
         // THEN
-        assertThat(expectedTestUsers).as("The getUsers() method must return an array of 2 users with the correct contents.")
+        assertThat(actualTestUsers).as("The getUsers() method must return an array of 2 users with the correct contents.")
                 .isNotNull()
                 .hasSize(2)
-                .containsExactly(actualTestUserCharles, actualTestUserJerry);
+                .containsExactly(expectedTestUserCharles, expectedTestUserJerry);
 
     }
 
     @Test
-    void getUserCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
+    void getUsersCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
 
         // GIVEN actualTestArrayUserDAO object created in setUp();
 
-        // WHEN expectedTestUsers
-        User[] expectedTestUsers = actualTestArrayUserDAO.getUsers();
-        expectedTestUsers[0] = null;
+        // WHEN actualTestUsers
+        User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
+        actualTestUsers[0] = null;
+        User[] actualTestUsersAfterModification = actualTestArrayUserDAO.getUsers();
 
         // THEN
-        User[] expectedTestUsersAfterModification = actualTestArrayUserDAO.getUsers();
-
-        assertThat(expectedTestUsersAfterModification[0])
-                .as("The element at index 0 in expectedTestUsers state should not be null")
+        assertThat(actualTestUsersAfterModification[0])
+                .as("The element at index 0 in actualTestUsers state should not be null")
                 .isNotNull();
 
     }
@@ -83,26 +82,24 @@ public class ArrayUserDAOTest {
     @Test
     void getUserByIdCanReturnCorrespondingUserById(){
 
-        // GIVEN actualTestTargetId
-        UUID actualTestTargetId = actualTestUserCharles.getUserId();
+        // GIVEN
+        UUID testTargetId = expectedTestUserCharles.getUserId();
 
         // WHEN
-        User expectedTestUserReturnedById = actualTestArrayUserDAO.getUserById(actualTestTargetId);
+        User actualUserReturnedById = actualTestArrayUserDAO.getUserById(testTargetId);
 
         // THEN
-        assertThat(actualTestUserCharles).as("The getUserById() method must return a user with the correct user id.")
+        assertThat(actualUserReturnedById).as("The getUserById() method must return a user with the correct user id.")
                 .isNotNull()
-                .isEqualTo(expectedTestUserReturnedById);
+                .isEqualTo(expectedTestUserCharles);
 
     }
 
     @Test
     void getUserByIdCanThrowUserNotFoundExceptionWhenUserIdDoesntExist(){
 
-        // GIVEN actualTestArrayUserDAO object created in setUp();
-
-        // WHEN expectedNotFoundRandomTestTargetId
-        UUID expectedNotFoundRandomTestTargetId = UUID.randomUUID();
+        // GIVEN
+        UUID nonExistentId = UUID.randomUUID();
 
         /**
          *     Functional Programming:
@@ -111,10 +108,10 @@ public class ArrayUserDAOTest {
          *     throws a UserNotFoundException, and verifies the exception message contains the missing ID.
          * */
 
-        // THEN
-        assertThatThrownBy(() -> actualTestArrayUserDAO.getUserById(expectedNotFoundRandomTestTargetId))
+        // WHEN & THEN
+        assertThatThrownBy(() -> actualTestArrayUserDAO.getUserById(nonExistentId))
                 .isInstanceOf(UserNotFoundException.class)
-                .hasMessageContaining(expectedNotFoundRandomTestTargetId.toString());
+                .hasMessageContaining(nonExistentId.toString());
 
     }
 

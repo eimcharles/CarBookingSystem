@@ -39,7 +39,7 @@ public class BookingTest {
         // GIVEN
         actualTestUserBookingID = UUID.randomUUID();
 
-        actualTestUser = new User(UUID.randomUUID(), "Jerry", "Leblond");
+        actualTestUser = new User(UUID.randomUUID(), "Jerry", "LeBlond");
 
         actualTestCar = new Car("123_1",
                 new BigDecimal("89.00"),

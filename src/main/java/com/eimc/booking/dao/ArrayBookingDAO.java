@@ -27,7 +27,7 @@ public class ArrayBookingDAO implements BookingDAO {
     // Tracks the index of the next available slot in bookingsDao
     private int numberOfBookings = 0;
 
-    // Defines the fixed, maximum size of the array storage.
+    // Defines a maximum size of the array storage.
     private static final int MAX_CAPACITY = 3;
 
     public ArrayBookingDAO() {
@@ -67,59 +67,58 @@ public class ArrayBookingDAO implements BookingDAO {
     @Override
     public void addBooking(Booking carBooking) {
 
-        // Checks if index of next available slot has reached length of array
+        // Checks if index of numberOfBookings has reached MAX_CAPACITY
         if (this.numberOfBookings >= this.bookingsDao.length) {
-            throw new IllegalStateException(String.format("No more bookings space available - total bookings available:  %d", this.bookingsDao.length));
+            throw new IllegalStateException(String.format("No space available to add bookings - total bookings space available:  %d", this.bookingsDao.length));
         }
 
-        // Adds the carBooking into the slot that nextAvailableIndex points to
+        // Adds the carBooking into the index that numberOfBookings points to
         this.bookingsDao[this.numberOfBookings] = carBooking;
 
-        // Moves the index to point to the following slot
+        // Moves the index to point to the following array index
         this.numberOfBookings++;
-
     }
 
     /**
-     *      updateBooking() ensures that the bookingDAO array contains
-     *      the most up-to-date reference to the booking object,
-     *      persisting any recent changes made in the Service layer.
-     *
-     *      (e.g., cancelBooking();).
+     *      removeBooking() removes a booking from the bookingDAO
+     *      array by setting the booking reference to null.
      */
 
     @Override
-    public void updateBooking(Booking carBookingToUpdate) {
+    public void removeBooking(Booking carBookingToUpdate) {
 
-        // Holds the booking id
         UUID targetId = carBookingToUpdate.getUserBookingID();
 
-        boolean bookingFound = false;
+        // Check the booking state
+        if (carBookingToUpdate.isBookingActive()) {
+            throw new IllegalStateException("Booking state is active, unable to remove booking with id: " + targetId);
+        }
 
         for (int i = 0; i < this.numberOfBookings; i++) {
 
             Booking currentBooking = this.bookingsDao[i];
 
-            // Match the booking with the targetId
+            // Match the current booking with the targetId
             if (currentBooking != null && currentBooking.getUserBookingID().equals(targetId)) {
 
-                // Replace the old object reference with the new,
-                this.bookingsDao[i] = carBookingToUpdate;
+                // Shift all subsequent elements one position to the left to fill removed booking
+                for (int j = i; j < this.numberOfBookings - 1; j++) {
+                    this.bookingsDao[j] = this.bookingsDao[j + 1];
+                }
 
-                // Decrement the number of total bookings after update
-                numberOfBookings--;
+                    // Nullify the last position
+                    bookingsDao[numberOfBookings - 1] = null;
 
-                // Booking found
-                bookingFound = true;
+                    // Decrement numberOfBookings
+                    numberOfBookings--;
 
-                break;
+                    // Booking found and removed
+                    return;
             }
         }
 
         // Booking not found
-        if (!bookingFound) {
-            throw new BookingNotFoundException(targetId);
-        }
+        throw new BookingNotFoundException(targetId);
 
     }
 

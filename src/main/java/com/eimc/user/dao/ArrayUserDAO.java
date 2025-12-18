@@ -30,7 +30,7 @@ public class ArrayUserDAO implements UserDAO {
 
         addUser(new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
                 "Jerry",
-                "Leblond"));
+                "LeBlond"));
     }
 
     @Override
@@ -59,7 +59,6 @@ public class ArrayUserDAO implements UserDAO {
             throw new IllegalStateException(String.format("No more available space to add users"));
         }
 
-        // Store user at the current pointer and increment the index for the next addition
         this.userDAO[this.numberOfUsers] = user;
         this.numberOfUsers++;
     }
@@ -75,7 +74,6 @@ public class ArrayUserDAO implements UserDAO {
     @Override
     public User getUserById(UUID id) {
 
-        // Iterate up to numberOfUsers to find a matching ID
         for (User user : getUsers()) {
             if (user != null && user.getUserId().equals(id)) {
                 return user;

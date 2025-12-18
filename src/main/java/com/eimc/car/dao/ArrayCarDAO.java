@@ -63,7 +63,6 @@ public class ArrayCarDAO implements CarDAO {
             throw new IllegalStateException(String.format("No more available space to add cars"));
         }
 
-        // Store car at the current pointer and increment the index for the next addition
         this.carDAO[this.numberOfCars] = car;
         this.numberOfCars++;
     }
@@ -82,30 +81,23 @@ public class ArrayCarDAO implements CarDAO {
         // Car to be cancelled registration number
         String registrationNumber = carToUpdate.getRegistrationNumber();
 
-        boolean carFound = false;
-
         for (int i = 0; i < this.numberOfCars; i++) {
 
             Car currentCar = this.carDAO[i];
 
-            // Match the car to be cancelled with the registration number
+            // Match the current car with the registration number
             if (currentCar != null && currentCar.getRegistrationNumber().equals(registrationNumber)) {
 
                 // Replace the old object reference with the new
                 this.carDAO[i] = carToUpdate;
 
-                // Car found
-                carFound = true;
-
-                break;
+                // Car found and updated
+                return;
             }
         }
 
         // Car not found
-        if (!carFound) {
-            throw new CarNotFoundException(registrationNumber);
-        }
-
+        throw new CarNotFoundException(registrationNumber);
     }
 
 }

@@ -145,11 +145,8 @@ public class CarBookingCLI {
 
                 // Attempt to cancel the booking
                 bookingService.cancelActiveBookingByBookingId(validatedBookingId);
-
                 displayResultsByMenuTitle(TITLE_CANCELLATION_SUCCESS_MENU);
-
-                displayFormattedMessage("✅", "Booking cancelled for " +
-                        bookingService.getBookingByBookingId(validatedBookingId).getUser().getName() + " with booking id: " + validatedBookingId);
+                displayFormattedMessage("✅", "Booking with booking id: " + validatedBookingId + " cancelled");
 
             } catch (BookingNotFoundException e) {
 
