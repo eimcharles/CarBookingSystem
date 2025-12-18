@@ -20,246 +20,184 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
 
+    // The result we are testing (ACTUAL)
     private Car actualTestCar;
 
-    private String actualTestRegistrationNumber;
-    private BigDecimal actualTestRentalPricePerDay;
-    private Brand actualTestBrand;
-    private FuelType actualTestFuelType;
+    // The data we use to compare (EXPECTED)
+    private String expectedRegistrationNumber;
+    private BigDecimal expectedRentalPricePerDay;
+    private Brand expectedBrand;
+    private FuelType expectedFuelType;
 
     @BeforeEach
     void setUp(){
 
+        // GIVEN: Set up the expected data
+        expectedRegistrationNumber = "123_1";
+        expectedRentalPricePerDay = new BigDecimal("89.00");
+        expectedBrand = Brand.BMW;
+        expectedFuelType = FuelType.ELECTRIC;
+
+        // ACT: Construct the actual car
+        actualTestCar = new Car(expectedRegistrationNumber,
+                expectedRentalPricePerDay,
+                expectedBrand,
+                expectedFuelType);
+
+    }
+
+    @Test
+    void constructorShouldCorrectlyInitializeAllFields() {
+        // GIVEN & WHEN: Handled in setUp()
+
+        // THEN: Use AssertJ Fluent API for a "One-Stop-Shop" check
+        assertThat(actualTestCar)
+                .as("The Car object must be fully and correctly initialized")
+                .isNotNull()
+                .returns(expectedRegistrationNumber, Car::getRegistrationNumber)
+                .returns(expectedRentalPricePerDay, Car::getRentalPricePerDay)
+                .returns(expectedBrand, Car::getBrand)
+                .returns(expectedFuelType, Car::getFuelType)
+                .returns(false, Car::isCarBooked);
+    }
+
+    @Test
+    void equalsCanCheckEqualityWhenCarsAreIdentical() {
+
         // GIVEN
-        actualTestRegistrationNumber = "123_1";
-        actualTestRentalPricePerDay = new BigDecimal("89.00");
-        actualTestBrand = Brand.BMW;
-        actualTestFuelType = FuelType.ELECTRIC;
-
-        actualTestCar = new Car(actualTestRegistrationNumber,
-                actualTestRentalPricePerDay,
-                actualTestBrand,
-                actualTestFuelType);
-
-    }
-
-    @Test
-    void constructorCanInitializeCarObject() {
-
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
-        assertThat(actualTestCar).isNotNull();
-
-    }
-
-    @Test
-    void constructorCanInitializeCarRegistrationNumber() {
-
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
-        assertThat(actualTestCar).as("The registrationNumber attribute must be initialized correctly by the constructor.")
-                .extracting(Car::getRegistrationNumber)             // Extracts the value of the 'getRegistrationNumber' attribute
-                .isEqualTo(actualTestRegistrationNumber);
-
-    }
-
-    @Test
-    void constructorCanInitializeCarRentalPricePerDay() {
-
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
-        assertThat(actualTestCar).as("The rentalPricePerDay attribute must be initialized correctly by the constructor.")
-                .extracting(Car::getRentalPricePerDay)              // Extracts the value of the 'getRentalPricePerDay' attribute
-                .isEqualTo(actualTestRentalPricePerDay);
-
-    }
-
-    @Test
-    void constructorCanInitializeCarBrand(){
-
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
-        assertThat(actualTestCar).as("The brand attribute must be initialized correctly by the constructor.")
-                .extracting(Car::getBrand)                         // Extracts the value of the 'getBrand' attribute
-                .isEqualTo(actualTestBrand);
-
-    }
-
-    @Test
-    void constructorCanInitializeCarFuelType() {
-
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
-        assertThat(actualTestCar).as("The fuelType attribute must be initialized correctly by the constructor.")
-                .extracting(Car::getFuelType)                     // Extracts the value of the 'getFuelType' attribute
-                .isEqualTo(actualTestFuelType);
-
-    }
-
-    @Test
-    void constructorCanInitializeIsCarBookedStatus() {
-
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
-        assertThat(actualTestCar).as("The isCarBooked attribute must be initialized correctly by the constructor.")
-                .extracting(Car::isCarBooked)                          // Extracts the value of the 'isBooked' attribute
-                .isEqualTo(false);
-
-    }
-
-    @Test
-    void equalsCanCheckEqualityWhenAttributesAreIdentical() {
-
-        // GIVEN expectedTestCarCopy
-        Car expectedTestCarCopy = new Car(actualTestRegistrationNumber,
-                actualTestRentalPricePerDay,
-                actualTestBrand,
-                actualTestFuelType);
+        Car identicalCar = new Car(expectedRegistrationNumber,
+                expectedRentalPricePerDay,
+                expectedBrand,
+                expectedFuelType);
 
         // WHEN actualTestCar object created in setUp();
 
         // THEN
         assertThat(actualTestCar).as("Cars with identical attributes are equal")
-                .isEqualTo(expectedTestCarCopy);
+                .isEqualTo(identicalCar);
 
     }
 
     @Test
     void equalsCanCheckEqualityWhenRegistrationNumbersAreIdentical() {
 
-        // GIVEN expectedTestCarWithSameRegistrationNumber
-        Car expectedTestCarWithSameRegistrationNumber = new Car(actualTestRegistrationNumber,
+        // GIVEN
+        Car carWithSameRegistrationNumber = new Car(expectedRegistrationNumber,
                 new BigDecimal("79.00"),
                 Brand.BMW,
                 FuelType.GASOLINE);
 
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestCar).as("Cars with identical registrationNumber attributes are equal, even if other attributes are not identical")
-                .isEqualTo(expectedTestCarWithSameRegistrationNumber);
+                .isEqualTo(carWithSameRegistrationNumber);
 
     }
 
     @Test
     void equalsCanCheckEqualityWhenComparingACarToItself() {
 
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestCar).as("Identical cars are equal to each other")
                 .isEqualTo(actualTestCar);
 
     }
 
     @Test
-    void equalsCanCheckInequalityWhenComparingACarToNull() {
+    void equalsCanCheckInequalityWhenACarIsNull() {
 
-        // GIVEN expectedTestNullCar
-        Car expectedTestNullCar = null;
+        // GIVEN nullCar
+        Car nullCar = null;
 
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestCar).as("A car is not equal to a Null Car object")
-                .isNotEqualTo(expectedTestNullCar);
+                .isNotEqualTo(nullCar);
 
     }
 
     @Test
-    void equalsCanCheckInequalityWhenComparingDifferentCarsWithADifferentRegistrationNumber() {
+    void equalsCanCheckInequalityWhenRegistrationNumbersAreDifferent() {
 
-        // GIVEN expectedDifferentCar
-        Car expectedDifferentCar = new Car("123_2",
+        // GIVEN
+        Car carWithDifferentRegistrationNumber = new Car("123_2",
                 new BigDecimal("79.00"),
                 Brand.BMW,
                 FuelType.GASOLINE);
 
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestCar).as("Cars should not be equal if their registration number is different and their attributes are different")
-                .isNotEqualTo(expectedDifferentCar);
+                .isNotEqualTo(carWithDifferentRegistrationNumber);
 
     }
 
     @Test
-    void equalsCanCheckInequalityWhenComparingTheSameCarWithDifferentRegistrationNumber() {
+    void equalsCanCheckInequalityWhenComparingDifferentCars() {
 
-        // GIVEN expectedDifferentCar
-        Car expectedDifferentCar = new Car("123_2",
+        // GIVEN
+        Car carWithDifferentRegistrationNumber = new Car("123_2",
                 new BigDecimal("89.00"),
                 Brand.BMW,
                 FuelType.ELECTRIC);
 
-        // WHEN actualTestCar object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestCar).as("Cars should not be equal if their registration number is different, and their attributes are identical")
-                .isNotEqualTo(expectedDifferentCar);
+                .isNotEqualTo(carWithDifferentRegistrationNumber);
 
     }
 
     @Test
-    void hashCodeCanCheckEqualityWhenAttributesAreIdentical() {
+    void hashCodeCanCheckEqualityWhenCarsAreIdentical() {
 
-        // GIVEN expectedTestCarCopy
-        Car expectedTestCarCopy = new Car(actualTestRegistrationNumber,
-                actualTestRentalPricePerDay,
-                actualTestBrand,
-                actualTestFuelType);
+        // GIVEN
+        Car identicalCar = new Car(expectedRegistrationNumber,
+                expectedRentalPricePerDay,
+                expectedBrand,
+                expectedFuelType);
 
-        // WHEN actualTestCar object created in setUp();
-        int actualTestCarHashCode = actualTestCar.hashCode();
-        int expectedTestCarCopyHashCode = expectedTestCarCopy.hashCode();
+        // WHEN
+        int actualCarHashCode = actualTestCar.hashCode();
+        int identicalCarHashCode = identicalCar.hashCode();
 
         // THEN
-        assertThat(actualTestCarHashCode).as("If cars are equal, their hash codes must be equal")
-                .isEqualTo(expectedTestCarCopyHashCode);
+        assertThat(actualCarHashCode).as("If cars are equal, their hash codes must be equal")
+                .isEqualTo(identicalCarHashCode);
 
     }
 
     @Test
     void hashCodeCanCheckEqualityWhenRegistrationNumbersAreIdentical() {
 
-        // GIVEN expectedTestCarWithSameRegistrationNumber
-        Car expectedTestCarWithSameRegistrationNumber = new Car(actualTestRegistrationNumber,
+        // GIVEN
+        Car carWithSameRegistrationNumber = new Car(expectedRegistrationNumber,
                 new BigDecimal("79.00"),
                 Brand.BMW,
                 FuelType.GASOLINE);
 
-        // WHEN actualTestCar object created in setUp();
-        int actualTestCarHashCode = actualTestCar.hashCode();
-        int expectedTestCarCopyHashCode = expectedTestCarWithSameRegistrationNumber.hashCode();
+        // WHEN
+        int actualCarHashCode = actualTestCar.hashCode();
+        int identicalCarHashCode = carWithSameRegistrationNumber.hashCode();
 
         // THEN
-        assertThat(actualTestCarHashCode).as("if cars are equal by registration number, even if their attributes are different, then their hash codes must be equal")
-                .isEqualTo(expectedTestCarCopyHashCode);
+        assertThat(actualCarHashCode).as("if cars are equal by registration number, even if their attributes are different, then their hash codes must be equal")
+                .isEqualTo(identicalCarHashCode);
 
     }
 
     @Test
     void hashCodeCanCheckInequalityWhenRegistrationNumbersAreDifferent() {
 
-        // GIVEN expectedDifferentCar
-        Car expectedDifferentCar = new Car("123_2",
-                actualTestRentalPricePerDay,
-                actualTestBrand,
-                actualTestFuelType);
+        // GIVEN
+        Car differentCar = new Car("123_2",
+                expectedRentalPricePerDay,
+                expectedBrand,
+                expectedFuelType);
 
         // WHEN
-        int actualTestCarHashCode = actualTestCar.hashCode();
-        int expectedTestCarCopyHashCode = expectedDifferentCar.hashCode();
+        int actualCarHashCode = actualTestCar.hashCode();
+        int differentCarHashCode = differentCar.hashCode();
 
         // THEN
-        assertThat(actualTestCarHashCode).as("If cars are not equal by registration number, and their attributes are identical, their hash codes should be different")
-                .isNotEqualTo(expectedTestCarCopyHashCode);
+        assertThat(actualCarHashCode).as("If cars are not equal by registration number, and their attributes are identical, their hash codes should be different")
+                .isNotEqualTo(differentCarHashCode);
 
     }
 
@@ -280,7 +218,7 @@ public class CarTest {
     @Test
     void setBookedCanUpdateIsBookedStatusToNotBooked() {
 
-        // GIVEN: actualTestCar is currently booked (true)
+        // GIVEN: A car is initialized as not booked
         actualTestCar.setCarBooked(true);
 
         // WHEN

@@ -189,7 +189,7 @@ public class CLIFormatUtility {
         bookingDetailsFormatted.append(indentation).append("Booking active:         ").append(booking.isBookingActive()).append("\n").append("\n");
 
         bookingDetailsFormatted.append(indentation).append("User ID:                ").append(booking.getUser().getUserId()).append("\n");
-        bookingDetailsFormatted.append(indentation).append("Name:                   ").append(booking.getUser().getName()).append("\n");
+        bookingDetailsFormatted.append(indentation).append("Name:                   ").append(booking.getUser().getFirstName()).append("\n");
         bookingDetailsFormatted.append(indentation).append("Last Name:              ").append(booking.getUser().getLastName()).append("\n").append("\n");
 
         bookingDetailsFormatted.append(indentation).append("Registration Number:    ").append(booking.getCar().getRegistrationNumber()).append("\n");
@@ -213,7 +213,7 @@ public class CLIFormatUtility {
         userDetailsFormatted.append("\n");
         userDetailsFormatted.append(indentation).append("User ID:     ").append(user.getUserId()).append("\n");
         userDetailsFormatted.append("\t".repeat(TAB_COUNT + 4) + "-".repeat(CLI_WIDTH / 4) + "\n");
-        userDetailsFormatted.append(indentation).append("Name:        ").append(user.getName()).append("\n");
+        userDetailsFormatted.append(indentation).append("Name:        ").append(user.getFirstName()).append("\n");
         userDetailsFormatted.append(indentation).append("Last Name:   ").append(user.getLastName()).append("\n").append("\n");
         System.out.println(userDetailsFormatted);
     }

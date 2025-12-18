@@ -80,7 +80,7 @@ public class CarBookingCLI {
             // Display booking success message
             displayResultsByMenuTitle(TITLE_BOOKING_SUCCESS_MENU);
             displayFormattedMessage("✅", "Booking created for " +
-                    user.getName() + " with booking id: " + userBookingID);
+                    user.getFirstName() + " with booking id: " + userBookingID);
 
         }  catch (UserNotFoundException e) {
 

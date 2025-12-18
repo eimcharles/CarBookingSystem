@@ -26,127 +26,75 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookingTest {
 
+    // The result we are testing (ACTUAL)
     private Booking actualTestBooking;
 
-    private UUID actualTestUserBookingID;
-    private User actualTestUser;
-    private Car actualTestCar;
-    private LocalDateTime actualTestBookingTime;
+    // The data we use to compare (EXPECTED)
+    private UUID expectedUserBookingID;
+    private User expectedUser;
+    private Car expectedCar;
+    private LocalDateTime expectedBookingTime;
 
     @BeforeEach
     void setUp(){
 
-        // GIVEN
-        actualTestUserBookingID = UUID.randomUUID();
+        // GIVEN: Set up the expected data
+        expectedUserBookingID = UUID.randomUUID();
 
-        actualTestUser = new User(UUID.randomUUID(), "Jerry", "LeBlond");
+        expectedUser = new User(UUID.randomUUID(), "Jerry", "LeBlond");
 
-        actualTestCar = new Car("123_1",
+        expectedCar = new Car("123_1",
                 new BigDecimal("89.00"),
                 Brand.BMW,
                 FuelType.ELECTRIC);
 
-        actualTestBookingTime = LocalDateTime.now();
+        expectedBookingTime = LocalDateTime.now();
 
-        actualTestBooking = new Booking(actualTestUserBookingID,
-                actualTestUser,
-                actualTestCar,
-                actualTestBookingTime);
+        // ACT: Construct the actual booking
+        actualTestBooking = new Booking(expectedUserBookingID,
+                expectedUser,
+                expectedCar,
+                expectedBookingTime);
 
     }
 
     @Test
-    void constructorCanInitializeCarObject() {
-
-        // WHEN actualTestBooking object created in setUp();
+    void constructorCanCorrectlyInitializeAllFields() {
+        // GIVEN & WHEN handled in setUp()
 
         // THEN
-        assertThat(actualTestBooking).isNotNull();
-
+        assertThat(actualTestBooking)
+                .as("The Booking object should correctly initialized")
+                .isNotNull()
+                .returns(expectedUserBookingID, Booking::getUserBookingID)
+                .returns(expectedUser, Booking::getUser)
+                .returns(expectedCar, Booking::getCar)
+                .returns(expectedBookingTime, Booking::getBookingTime)
+                .returns(true, Booking::isBookingActive);
     }
 
     @Test
-    void constructorCanInitializeUserBookingID() {
+    void equalsCanCheckEqualityWhenBookingsAreIdentical() {
 
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
-        assertThat(actualTestBooking).as("The userBookingID attribute must be initialized correctly by the constructor.")
-                .extracting(Booking::getUserBookingID)                  // Extracts the value of the 'getUserBookingID' attribute
-                .isEqualTo(actualTestUserBookingID);
-
-    }
-
-    @Test
-    void constructorCanInitializeUser() {
-
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
-        assertThat(actualTestBooking).as("The user object must be initialized correctly by the constructor.")
-                .extracting(Booking::getUser)                   // Extracts the value of the 'getUser' object
-                .isEqualTo(actualTestUser);
-
-    }
-
-    @Test
-    void constructorCanInitializeCar() {
-
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
-        assertThat(actualTestBooking).as("The car object must be initialized correctly by the constructor.")
-                .extracting(Booking::getCar)                    // Extracts the value of the 'getCar' object
-                .isEqualTo(actualTestCar);
-
-    }
-
-    @Test
-    void constructorCanInitializeLocalDateTime() {
-
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
-        assertThat(actualTestBooking).as("The local date and time object must be initialized correctly by the constructor.")
-                .extracting(Booking::getBookingTime)            // Extracts the value of the 'getBookingTime' object
-                .isEqualTo(actualTestBookingTime);
-
-    }
-
-    @Test
-    void constructorCanInitializeBookingStatus() {
-
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
-        assertThat(actualTestBooking).as("The isBookingActive attribute must be initialized correctly by the constructor.")
-                .extracting(Booking::isBookingActive)           // Extracts the value of the 'isBookingActive' attribute
-                .isEqualTo(true);
-
-    }
-
-    @Test
-    void equalsCanCheckEqualityWhenAttributesAreIdentical() {
-
-        // GIVEN expectedTestBookingCopy
-        Booking expectedTestBookingCopy = new Booking(actualTestUserBookingID,
-                actualTestUser,
-                actualTestCar,
-                actualTestBookingTime);
+        // GIVEN
+        Booking identicalBooking = new Booking(expectedUserBookingID,
+                expectedUser,
+                expectedCar,
+                expectedBookingTime);
 
         // WHEN actualTestBooking object created in setUp();
 
         // THEN
         assertThat(actualTestBooking).as("Bookings with identical attributes are equal")
-                .isEqualTo(expectedTestBookingCopy);
+                .isEqualTo(identicalBooking);
 
     }
 
     @Test
     void equalsCanCheckEqualityWhenBookingIdsAreIdentical() {
 
-        // GIVEN expectedTestBookingWithIdenticalBookingId
-        Booking expectedTestBookingWithIdenticalBookingId = new Booking(actualTestUserBookingID,
+        // GIVEN
+        Booking bookingWithIdenticalBookingId = new Booking(expectedUserBookingID,
 
                 new User(UUID.randomUUID(), "Barry", "LeWhite"),
 
@@ -157,80 +105,72 @@ public class BookingTest {
 
                 LocalDateTime.now());
 
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestBooking).as("Bookings with identical userBookingID are equal, even if other attributes are not identical")
-                .isEqualTo(expectedTestBookingWithIdenticalBookingId);
+                .isEqualTo(bookingWithIdenticalBookingId);
 
     }
 
     @Test
-    void equalsCanCheckInequalityWhenComparingDifferentBookingIds() {
+    void equalsCanCheckInequalityWhenBookingIdsAreDifferent() {
 
-        // GIVEN expectedTestBookingWithDifferentBookingId
-        Booking expectedTestBookingWithDifferentBookingId = new Booking(UUID.randomUUID(),
-                actualTestUser,
-                actualTestCar,
-                actualTestBookingTime);
+        // GIVEN
+        Booking bookingWithDifferentBookingId = new Booking(UUID.randomUUID(),
+                expectedUser,
+                expectedCar,
+                expectedBookingTime);
 
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestBooking).as("Bookings with different userBookingID are not equal, even if other attributes are identical")
-                .isNotEqualTo(expectedTestBookingWithDifferentBookingId);
+                .isNotEqualTo(bookingWithDifferentBookingId);
 
     }
 
     @Test
     void equalsCanCheckEqualityWhenComparingABookingToItself() {
 
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestBooking).as("Identical bookings are equal to each other")
                 .isEqualTo(actualTestBooking);
 
     }
 
     @Test
-    void equalsCanCheckInequalityWhenComparingABookingToNull() {
+    void equalsCanCheckInequalityWhenABookingIsNull() {
 
-        // GIVEN expectedTestNullBooking
-        Booking expectedTestNullBooking = null;
+        // GIVEN
+        Booking nullBooking = null;
 
-        // WHEN actualTestBooking object created in setUp();
-
-        // THEN
+        // WHEN & THEN
         assertThat(actualTestBooking).as("A booking is not equal to a null booking object")
-                .isNotEqualTo(expectedTestNullBooking);
+                .isNotEqualTo(nullBooking);
 
     }
 
     @Test
-    void hashCodeCanCheckEqualityWhenAttributesAreIdentical() {
+    void hashCodeCanCheckEqualityWhenBookingsAreIdentical() {
 
-        // GIVEN expectedTestBookingCopy
-        Booking expectedTestBookingCopy = new Booking(actualTestUserBookingID,
-                actualTestUser,
-                actualTestCar,
-                actualTestBookingTime);
+        // GIVEN
+        Booking identicalBooking = new Booking(expectedUserBookingID,
+                expectedUser,
+                expectedCar,
+                expectedBookingTime);
 
-        // WHEN actualTestBooking object created in setUp();
-        int actualTestBookingHashCode = actualTestBooking.hashCode();
-        int expectedTestBookingHashCode = expectedTestBookingCopy.hashCode();
+        // WHEN
+        int actualBookingHashCode = actualTestBooking.hashCode();
+        int identicalBookingHashCode = identicalBooking.hashCode();
 
         // THEN
-        assertThat(actualTestBookingHashCode).as("If bookings are equal, their hash codes must be equal")
-                .isEqualTo(expectedTestBookingHashCode);
+        assertThat(actualBookingHashCode).as("If bookings are equal, their hash codes must be equal")
+                .isEqualTo(identicalBookingHashCode);
 
     }
 
     @Test
     void hashCodeCanCheckEqualityWhenBookingIdsAreIdentical() {
 
-        // GIVEN expectedTestBookingWithIdenticalBookingId
-        Booking expectedTestBookingWithIdenticalBookingId = new Booking(actualTestUserBookingID,
+        // GIVEN
+        Booking bookingWithIdenticalBookingId = new Booking(expectedUserBookingID,
 
                 new User(UUID.randomUUID(), "Barry", "LeWhite"),
 
@@ -241,40 +181,40 @@ public class BookingTest {
 
                 LocalDateTime.now());
 
-        // WHEN actualTestBooking object created in setUp();
-        int actualTestBookingHashCode = actualTestBooking.hashCode();
-        int expectedTestBookingHashCode = expectedTestBookingWithIdenticalBookingId.hashCode();
+        // WHEN
+        int actualBookingHashCode = actualTestBooking.hashCode();
+        int differentBookingHashCode = bookingWithIdenticalBookingId.hashCode();
 
         // THEN
-        assertThat(actualTestBookingHashCode).as("If bookings are equal by userBookingID, even if their attributes are different, then their hash codes must be equal")
-                .isEqualTo(expectedTestBookingHashCode);
+        assertThat(actualBookingHashCode).as("If bookings are equal by userBookingID, even if their attributes are different, then their hash codes must be equal")
+                .isEqualTo(differentBookingHashCode);
 
     }
 
     @Test
-    void hashCodeCanCheckInequalityWhenComparingDifferentBookingIds() {
+    void hashCodeCanCheckInequalityWhenBookingIdsAreDifferent() {
 
-        // GIVEN expectedTestBookingWithIdenticalBookingId
-        Booking expectedTestBookingWithDifferentBookingId = new Booking(UUID.randomUUID(),
-                actualTestUser,
-                actualTestCar,
-                actualTestBookingTime);
+        // GIVEN
+        Booking bookingWithDifferentBookingId = new Booking(UUID.randomUUID(),
+                expectedUser,
+                expectedCar,
+                expectedBookingTime);
 
 
-        // WHEN actualTestBooking object created in setUp();
-        int actualTestBookingHashCode = actualTestBooking.hashCode();
-        int expectedTestBookingHashCode = expectedTestBookingWithDifferentBookingId.hashCode();
+        // WHEN
+        int actualBookingHashCode = actualTestBooking.hashCode();
+        int differentBookingHashCode = bookingWithDifferentBookingId.hashCode();
 
         // THEN
-        assertThat(actualTestBookingHashCode).as("If bookings are not equal by userBookingID, even if their attributes are identical, then their hash codes must be different")
-                .isNotEqualTo(expectedTestBookingHashCode);
+        assertThat(actualBookingHashCode).as("If bookings are not equal by userBookingID, even if their attributes are identical, then their hash codes must be different")
+                .isNotEqualTo(differentBookingHashCode);
 
     }
 
     @Test
     void cancelBookingCanUpdateIsBookingActiveStatus() {
 
-        // GIVEN: actualTestBooking object created in setUp();
+        // GIVEN: A booking is initialized as active
 
         // WHEN
         actualTestBooking.cancelBooking();
