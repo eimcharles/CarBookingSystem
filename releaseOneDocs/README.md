@@ -68,7 +68,7 @@ Layered architecture using an array based approach to store data.</br>
 ### Test results
 **Domain and DAO testing** is done using **AssertJ** testing library.</br>
 
-<img width="1111" height="581" alt="Screenshot 2025-12-16 at 3 21 01 PM" src="https://github.com/user-attachments/assets/1ba1783a-791f-4a18-82cc-9e7f4a4cb073" /></br>
+<img width="1216" height="606" alt="Screenshot 2025-12-18 at 3 06 57 PM" src="https://github.com/user-attachments/assets/3b488dbf-1af7-417a-8af8-5cffe5717347" /></br>
 ---
 
 ## How to Run
@@ -80,6 +80,7 @@ Layered architecture using an array based approach to store data.</br>
 ```
 
 1. Run the Application
+<img width="1046" height="585" alt="Screenshot 2025-12-18 at 3 06 42 PM" src="https://github.com/user-attachments/assets/03e8da34-bba9-45df-bec4-4ef6437217bb" />
 
  ```bash 
     Execute the JAR file using the java -jar car-booking-cli.jar
