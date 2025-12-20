@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CLIFormatUtility {
 
-    private static final int CLI_WIDTH = 240;
+    private static final int CLI_WIDTH = 230;
     private static final int TAB_COUNT = 18;
 
     public static final String TITLE_ALL_CARS = "ALL AVAILABLE CARS";
