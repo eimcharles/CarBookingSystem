@@ -18,16 +18,16 @@ public class CLIFormatUtility {
     private static final int CLI_WIDTH = 240;
     private static final int TAB_COUNT = 18;
 
-    public static final String TITLE_ALL_CARS = "AVAILABLE CARS";
-    public static final String TITLE_GAS_CARS = "AVAILABLE GAS CARS";
-    public static final String TITLE_ELECTRIC_CARS = "AVAILABLE ELECTRIC CARS";
+    public static final String TITLE_ALL_CARS = "ALL AVAILABLE CARS";
+    public static final String TITLE_GAS_CARS = "ALL AVAILABLE GAS CARS";
+    public static final String TITLE_ELECTRIC_CARS = "ALL AVAILABLE ELECTRIC CARS";
 
     public static final String TITLE_MAKE_BOOKING = "MAKE A CAR BOOKING BY USER ID AND REGISTRATION NUMBER";
     public static final String TITLE_CANCEL_BOOKING = "CANCEL A CAR BOOKING BY BOOKING ID";
-    public static final String TITLE_USER_BOOKED_CARS = "CARS BOOKED BY USER ID";
+    public static final String TITLE_USER_BOOKED_CARS = "ALL CARS BOOKED BY USER ID";
 
-    public static final String TITLE_ACTIVE_BOOKINGS = "ACTIVE BOOKINGS";
-    public static final String TITLE_REGISTERED_USERS = "REGISTERED USERS";
+    public static final String TITLE_ACTIVE_BOOKINGS = "ALL ACTIVE BOOKINGS";
+    public static final String TITLE_REGISTERED_USERS = "ALL REGISTERED USERS";
 
     public static final String TITLE_GREETING_MENU = "🚗 WELCOME TO THE CAR BOOKING MANAGEMENT SYSTEM 🚗";
     public static final String TITLE_MAIN_MENU = "MAIN MENU";
@@ -59,16 +59,16 @@ public class CLIFormatUtility {
 
     public static void displayMainMenu() {
         displayCenteredMenuTitles(TITLE_MAIN_MENU);
-        displayFormattedMessage("➡️","1 To Make a Car Booking (By User ID and Car Registration Number)");
-        displayFormattedMessage("➡️","2 To Cancel a Car Booking (By Booking ID)");
-        displayFormattedMessage("➡️","3 To Display All Available Cars");
-        displayFormattedMessage("➡️", "4 To Display Available Gasoline Cars");
-        displayFormattedMessage("➡️", "5 To Display Available Electric Cars");
-        displayFormattedMessage("➡️","6 To Display All Active Bookings");
-        displayFormattedMessage("➡️", "7 To Display Cars Booked by User (By User ID)");
-        displayFormattedMessage("➡️", "8 To Display All Registered Users");
-        displayFormattedMessage("➡️", "9 To View Main Menu");
-        displayFormattedMessage("➡️", "0 To Exit Application");
+        displayFormattedMessage("➡️","1 To Make a Car Booking (By User ID and Car Registration Number).");
+        displayFormattedMessage("➡️","2 To Cancel a Car Booking (By Booking ID).");
+        displayFormattedMessage("➡️","3 To Display All Available Cars for booking.");
+        displayFormattedMessage("➡️", "4 To Display All Available Gasoline Cars for booking.");
+        displayFormattedMessage("➡️", "5 To Display All Available Electric Cars for booking.");
+        displayFormattedMessage("➡️","6 To Display All Active Bookings.");
+        displayFormattedMessage("➡️", "7 To Display All Cars Booked by a User (By User ID).");
+        displayFormattedMessage("➡️", "8 To Display All Registered Users.");
+        displayFormattedMessage("➡️", "9 To View Main Menu.");
+        displayFormattedMessage("➡️", "0 To Exit Application.");
     }
 
     /**
@@ -93,7 +93,7 @@ public class CLIFormatUtility {
         System.out.println();
         System.out.println(displayMenuBorder());
         displayCenteredMenuTitles(USER_INPUT_MENU);
-        displayFormattedUserInput("➡️","Please enter your choice (To view MAIN MENU options press 9 or 0 to EXIT.): ");
+        displayFormattedUserInput("➡️","Please enter the number for the option selected (To view MAIN MENU options press 9 or 0 to EXIT): ");
     }
 
     /**
@@ -107,8 +107,8 @@ public class CLIFormatUtility {
 
     public static void displaySystemGuidelines() {
         displayCenteredMenuTitles(SYSTEM_GUIDELINES_MENU);
-        displayFormattedMessage("➡️","Enter the number for a menu option (1 to 9) and press ENTER.");
-        displayFormattedMessage("➡️","Follow the prompts for specific inputs (i.e. creating a Car Booking, canceling a Car Booking).");
+        displayFormattedMessage("➡️","Select an option from the MAIN MENU below and press ENTER.");
+        displayFormattedMessage("➡️","Follow the prompts for specific inputs (i.e. creating a car booking, canceling a car booking).");
         System.out.println();
     }
 
@@ -124,7 +124,7 @@ public class CLIFormatUtility {
      * */
 
     public static void displayCarsBookedByUserIdGuidelines() {
-        displayFormattedMessage("✅️","Please enter a user id from the registered users to display the cars booked by the user.");
+        displayFormattedMessage("✅️","Please enter the user id from the registered users to display the cars booked by the user.");
     }
 
     /**
@@ -138,7 +138,40 @@ public class CLIFormatUtility {
      * */
 
     public static void displayUserIdBookingGuidelines() {
-        displayFormattedMessage("✅️","Please enter a user id from the registered users to make a car booking.");
+        displayFormattedMessage("✅️","Please enter the user id from the registered users to make a car booking.");
+    }
+
+    /**
+     *       Displays error message to the user
+     *       and prompts user to input
+     *       a valid format for a
+     *       user id.
+     * */
+
+    public static void displayUserIdErrorGuidelines() {
+        displayFormattedMessage("⚠️","Please enter a valid user id.");
+    }
+
+    /**
+     *       Displays error message to the user
+     *       and prompts user to input
+     *       a valid format for a
+     *       booking id.
+     * */
+
+    public static void displayBookingIdErrorGuidelines() {
+        displayFormattedMessage("⚠️","Please enter a valid booking id.");
+    }
+
+    /**
+     *       Displays error message to the user
+     *       and prompts user to input
+     *       a valid format for a
+     *       registration number.
+     * */
+
+    public static void displayRegistrationNumberErrorGuidelines() {
+        displayFormattedMessage("⚠️","Please enter a valid registration number.");
     }
 
     /**
@@ -146,14 +179,10 @@ public class CLIFormatUtility {
      *       when navigating the booking
      *       menu.
      *
-     *       Guides the user to input the
-     *       correct format for a Car
-     *       registration number to complete
-     *       the Car Booking.
      * */
 
     public static void displayRegistrationNumberBookingGuidelines() {
-        displayFormattedMessage("✅","Please enter a registration number from the available cars menu to complete a booking.");
+        displayFormattedMessage("✅","Please enter the registration number from the available cars to complete a booking.");
     }
 
     /**
@@ -161,13 +190,10 @@ public class CLIFormatUtility {
      *       when navigating the cancel booking
      *       by booking id menu.
      *
-     *       Guides the user to input the
-     *       correct format for a booking
-     *       id number to cancel a booking.
      * */
 
     public static void displayCancelBookingByBookingIdGuidelines() {
-        displayFormattedMessage("✅","Please enter a booking id from the active bookings menu to cancel a booking.");
+        displayFormattedMessage("✅","Please enter a booking id from the active bookings to cancel a booking.");
     }
 
     /**

@@ -69,7 +69,7 @@ public class ArrayBookingDAO implements BookingDAO {
 
         // Checks if index of numberOfBookings has reached MAX_CAPACITY
         if (this.numberOfBookings >= this.bookingsDao.length) {
-            throw new IllegalStateException(String.format("No space available to add bookings - total bookings space available:  %d", this.bookingsDao.length));
+            throw new IllegalStateException(String.format("The system has no more available space to add bookings - total space available: %d", this.bookingsDao.length));
         }
 
         // Adds the carBooking into the index that numberOfBookings points to
