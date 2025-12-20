@@ -10,7 +10,7 @@
 ## Demo (Coming soon 🚀)</br>
 --- 
  
-<img width="1067" height="667" alt="Screenshot 2025-12-03 at 2 52 09 PM" src="https://github.com/user-attachments/assets/2df1e683-423b-4d17-a5db-9a0d6a194fb5" />
+<img width="1148" height="716" alt="Screenshot 2025-12-20 at 4 32 11 PM" src="https://github.com/user-attachments/assets/7946aaad-8cce-4f23-b979-d9e8ad60d673" />
 
 # Car Booking System Documentation 
 
@@ -19,10 +19,10 @@
 ## Features </br>
 - **Make a Car Booking** (By User ID and Car Registration Number)
 - **Cancel a Car Booking** (By Booking ID)
-- **Display All Available Cars**
-- **To Display Available Gasoline Cars**
-- **To Display Available Electric Cars**
-- **Display Cars Booked by User** (By User ID)
+- **Display All Available Cars for booking**
+- **To Display All Available Gasoline Cars for booking**
+- **To Display All Available Electric Cars for booking**
+- **Display All Cars Booked by User** (By User ID)
 - **Display All Registered Users**
 - **View Main Menu**
   
