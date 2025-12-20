@@ -41,7 +41,7 @@ public class CLIInputUtility {
 
             // Handles empty input
             if (userIdInput.isEmpty()) {
-                displayFormattedMessage("⚠️", "User id cannot be empty - Please try again.");
+                displayFormattedMessage("⚠️", "The input for the user id cannot be empty - Please try again.");
 
                 // Empty input: Skip the rest of the loop
                 continue;
@@ -61,7 +61,7 @@ public class CLIInputUtility {
             } catch (IllegalArgumentException e) {
 
                 // Bad UUID format
-                displayFormattedMessage("❌","Invalid user id format: "  + userIdInput);
+                displayFormattedMessage("❌","Invalid user id format: "  + userIdInput + " - Please try again.");
 
             } catch (UserNotFoundException e) {
 
@@ -79,7 +79,7 @@ public class CLIInputUtility {
             if (!isValidInput){
                 displayResultsByMenuTitle(TITLE_REGISTERED_USERS);
                 displayAllRegisteredUsers(userService);
-                displayUserIdBookingGuidelines();
+                displayUserIdErrorGuidelines();
             }
 
         } while (!isValidInput);
@@ -103,7 +103,7 @@ public class CLIInputUtility {
 
             // Handles empty input
             if (userRegistrationInput.isEmpty()) {
-                displayFormattedMessage("⚠️", "Car registration number cannot be empty - Please try again.");
+                displayFormattedMessage("⚠️", "The input for the car registration number cannot be empty - Please try again.");
 
                 // Empty input: Skip the rest of the loop
                 continue;
@@ -138,7 +138,7 @@ public class CLIInputUtility {
             if (!isValidInput){
                 displayResultsByMenuTitle(TITLE_ALL_CARS);
                 displayAllAvailableCars(bookingService);
-                displayRegistrationNumberBookingGuidelines();
+                displayRegistrationNumberErrorGuidelines();
             }
 
         } while (!isValidInput);
@@ -165,7 +165,7 @@ public class CLIInputUtility {
 
                 // Handles empty input
                 if (bookingIdInput.isEmpty()) {
-                    displayFormattedMessage("⚠️", "Booking id cannot be empty - Please try again.");
+                    displayFormattedMessage("⚠️", "The input for the booking id cannot be empty - Please try again.");
 
                     // Empty input: Skip the rest of the loop
                     continue;
@@ -185,7 +185,7 @@ public class CLIInputUtility {
                 } catch (IllegalArgumentException e){
 
                     // Bad UUID format
-                    displayFormattedMessage("❌", "Invalid booking id format: " + bookingIdInput);
+                    displayFormattedMessage("❌", "Invalid booking id format: " + bookingIdInput + " - Please try again.");
 
                 } catch (BookingNotFoundException e) {
 
@@ -202,7 +202,7 @@ public class CLIInputUtility {
                 if (!isValidInput){
                     displayResultsByMenuTitle(TITLE_ACTIVE_BOOKINGS);
                     displayAllActiveBookings(bookingService);
-                    displayCancelBookingByBookingIdGuidelines();
+                    displayBookingIdErrorGuidelines();
                 }
 
             } while (!isValidInput);

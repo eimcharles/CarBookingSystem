@@ -28,7 +28,7 @@ public class CLIDisplayUtility {
         User[] registeredUsers = userService.getUsers();
 
         if (registeredUsers == null || registeredUsers.length == 0){
-            displayFormattedMessage("❌", "No users currently registered in the system");
+            displayFormattedMessage("❌", "The system has no users currently registered.");
             return;
         }
 
@@ -50,7 +50,7 @@ public class CLIDisplayUtility {
         Car[] allAvailableCars = bookingService.getAllAvailableCars();
 
         if (allAvailableCars == null || allAvailableCars.length == 0) {
-            displayFormattedMessage("❌", "No cars currently available for booking");
+            displayFormattedMessage("❌", "The system has no cars currently available for booking.");
             return;
         }
 
@@ -72,7 +72,7 @@ public class CLIDisplayUtility {
         Car[] availableGasCars = bookingService.getAllAvailableGasCars();
 
         if (availableGasCars == null || availableGasCars.length == 0) {
-            displayFormattedMessage("❌", "No gas cars currently available for booking");
+            displayFormattedMessage("❌", "The system has no gas cars currently available for booking.");
             return;
         }
 
@@ -94,7 +94,7 @@ public class CLIDisplayUtility {
         Car[] availableElectricCars = bookingService.getAllAvailableElectricCars();
 
         if (availableElectricCars == null || availableElectricCars.length == 0) {
-            displayFormattedMessage("❌", "No electric cars currently available for booking");
+            displayFormattedMessage("❌", "The system has no electric cars currently available for booking.");
             return;
         }
 
@@ -114,7 +114,7 @@ public class CLIDisplayUtility {
         Booking[] allActiveBookings = bookingService.getAllActiveBookings();
 
         if (allActiveBookings == null || allActiveBookings.length == 0){
-            displayFormattedMessage("❌", "No active bookings currently registered in the system");
+            displayFormattedMessage("❌", "The system has no active bookings currently registered.");
             return;
         }
 
@@ -136,7 +136,7 @@ public class CLIDisplayUtility {
 
             // No bookings for the given user id
             displayResultsByMenuTitle(TITLE_USER_BOOKED_CARS);
-            displayFormattedMessage("❌", "User ID '" + validatedUserId + "' has no active car bookings.");
+            displayFormattedMessage("❌", "The user with user ID '" + validatedUserId + " has no cars currently booked.");
 
         } else {
 

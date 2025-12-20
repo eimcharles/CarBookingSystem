@@ -43,7 +43,7 @@ public class CarBookingCLI {
 
         // if no available car exist - return
         if (!bookingService.hasAvailableCarsForBooking()){
-            displayFormattedMessage("❌", "No car available for booking in the system");
+            displayFormattedMessage("❌", "The system has no cars currently available for booking.");
             return;
         }
 
@@ -79,8 +79,8 @@ public class CarBookingCLI {
 
             // Display booking success message
             displayResultsByMenuTitle(TITLE_BOOKING_SUCCESS_MENU);
-            displayFormattedMessage("✅", "Booking created for " +
-                    user.getFirstName() + " with booking id: " + userBookingID);
+            displayFormattedMessage("✅", "Successfully created a car booking for " +
+                    user.getFirstName() + " with booking id: " + userBookingID + ".");
 
         }  catch (UserNotFoundException e) {
 
@@ -124,7 +124,7 @@ public class CarBookingCLI {
 
         // if no active bookings exist - return
         if (!bookingService.hasActiveBookings()){
-            displayFormattedMessage("❌", "No active bookings currently registered in the system");
+            displayFormattedMessage("❌", "The system has no active bookings currently registered.");
             return;
         }
 
@@ -146,7 +146,7 @@ public class CarBookingCLI {
                 // Attempt to cancel the booking
                 bookingService.cancelActiveBookingByBookingId(validatedBookingId);
                 displayResultsByMenuTitle(TITLE_CANCELLATION_SUCCESS_MENU);
-                displayFormattedMessage("✅", "Booking with booking id: " + validatedBookingId + " cancelled");
+                displayFormattedMessage("✅", "Successfully cancelled the booking with booking id: " + validatedBookingId + ".");
 
             } catch (BookingNotFoundException e) {
 

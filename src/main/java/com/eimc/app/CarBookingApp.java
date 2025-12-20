@@ -31,8 +31,8 @@ public class CarBookingApp {
 
         // Display greeting, main menu and explain system interactions
         displayCarBookingGreeting();
-        displayMainMenu();
         displaySystemGuidelines();
+        displayMainMenu();
 
         // Application Loop (The Menu)
         while (true) {
@@ -89,12 +89,12 @@ public class CarBookingApp {
                         break;
                     case "0":
                         // To Exit Application
-                        displayFormattedMessage("👋","Thank you for using the Car Booking System. Goodbye!");
+                        displayFormattedMessage("👋","Thank you for using the Car Booking System - Goodbye!");
                         scanner.close();
                         return;
                     default:
                         // For invalid user inputs
-                        displayFormattedMessage("❌","Invalid option. Please enter a number between 1 and 8.");
+                        displayFormattedMessage("❌","Invalid option - please enter a number between 1 to 9 or 0 to EXIT.");
                         break;
                 }
 
