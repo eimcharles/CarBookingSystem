@@ -69,16 +69,3 @@ Layered architecture using an array based approach to store data.</br>
 #### **Domain and DAO testing** is done using the **AssertJ** testing library.</br>
 <img width="1412" height="583" alt="Screenshot 2025-12-18 at 4 28 42 PM" src="https://github.com/user-attachments/assets/6e2dd05a-482e-43ee-8035-348d7e4e03c3" /></br>
 ---
-
-## How to Run
-
-1. Navigate to the JAR Location
-
- ```bash 
-    car-booking-cli.jar file.
-```
-
-1. Run the Application
- ```bash 
-    Execute the JAR file using the java -jar car-booking-cli.jar
-```
