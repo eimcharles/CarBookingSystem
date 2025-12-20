@@ -62,7 +62,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.eimc.Main</mainClass>
+                            <mainClass>com.eimc.app.CarBookingApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
