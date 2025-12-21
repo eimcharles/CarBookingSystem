@@ -2,7 +2,7 @@
 
 ---
 ### [Release 1](https://github.com/eimcharles/CarBookingSystem/releases/tag/v1.0.0)</br>
-#### [CLI Maven application that serves as a system for managing the car booking lifecycle.](releaseOneDocs/README.md) </br>
+#### [Maven CLI application that serves as a system for managing the car booking lifecycle.](releaseOneDocs/README.md) </br>
 ####  Demo 1 (Coming soon) 🚀 <br>
 <img width="1148" height="716" alt="Screenshot 2025-12-20 at 4 32 11 PM" src="https://github.com/user-attachments/assets/7946aaad-8cce-4f23-b979-d9e8ad60d673" /></br>
 
