@@ -15,13 +15,10 @@
 ### 🚫 Release 2 (In Progress 🚀)
 #### Spring boot API that serves as a system for managing the car booking lifecycle. <br>
 
-
 ## Features </br>
 - Single Sign-On / Sign-up (SSO)
 - Role-Based Access Control
 - Asynchronous Email Notifications
-- Integrated Payment Processing
-
 
 ## Learning Outcomes: </br>
 - Spring Boot to manage project's configurations.
