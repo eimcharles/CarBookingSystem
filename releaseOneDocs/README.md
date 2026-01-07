@@ -20,8 +20,8 @@
 - **Make a Car Booking** (By User ID and Car Registration Number)
 - **Cancel a Car Booking** (By Booking ID)
 - **Display All Available Cars for booking**
-- **To Display All Available Gasoline Cars for booking**
-- **To Display All Available Electric Cars for booking**
+- **Display All Available Gasoline Cars for booking**
+- **Display All Available Electric Cars for booking**
 - **Display All Cars Booked by User** (By User ID)
 - **Display All Registered Users**
 - **View Main Menu**
@@ -32,15 +32,15 @@
 ✅ **Maven** to manage project's dependencies and build lifecycle.</br>
 ✅ **Dependency Injection** to ensure decoupled components.</br>
 ✅ **Exception Handling** for custom exceptions.</br>
-✅ **Arrays** for storing all data.</br>
-✅ **Defensive Copying** for all data access objects.</br>
-✅ **Interfaces** for dependency inversion for data access objects.</br>
+✅ **Arrays** for storing all data and simulating database interactions.</br>
+✅ **Defensive Copying** for all data access objects to maintain immutability and protect domain layer objects internal state.</br>
+✅ **Interfaces** for dependency inversion for data access objects and ensuring business logic is decoupled from storage implementation.</br>
 ✅ **Unit testing using AssertJ** for correctness in domain classes and data access classes.</br>
 
 ---
 
 ## System Architecture </br>
-Layered architecture using an array based approach to store data.</br>
+**Layered Architecture:** Organized into **Presentation (CLI)**, **Service (Business Logic)**, and **Data Access (DAO)** layers to ensure a clean separation of concerns and ease of refactoring. </br>
   
 ---
 
