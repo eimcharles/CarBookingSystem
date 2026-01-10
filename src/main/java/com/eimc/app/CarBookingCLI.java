@@ -7,6 +7,7 @@ import com.eimc.exception.*;
 import com.eimc.user.User;
 import com.eimc.user.UserService;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -178,7 +179,7 @@ public class CarBookingCLI {
         UUID validatedUserId = promptAndValidateUserID(userService, scanner);
 
         // Array of user booked cars for the validated user id.
-        Car[] bookedCars = bookingService.getAllBookedCarsByUserId(validatedUserId);
+        List<Car> bookedCars = bookingService.getAllBookedCarsByUserId(validatedUserId);
 
         // Format and display the user booked cars
         displayUserBookedCars(bookedCars, validatedUserId.toString());
