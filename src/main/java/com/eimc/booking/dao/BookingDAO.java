@@ -2,6 +2,7 @@ package com.eimc.booking.dao;
 
 import com.eimc.booking.Booking;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,12 +12,11 @@ import java.util.UUID;
 
 public interface BookingDAO {
 
-    Booking[] getBookings();
-
     void addBooking(Booking carBooking);
 
     void removeBooking(Booking carBookingToUpdate);
 
     Booking getBookingById(UUID bookingId);
 
+    List<Booking> getBookings();
 }

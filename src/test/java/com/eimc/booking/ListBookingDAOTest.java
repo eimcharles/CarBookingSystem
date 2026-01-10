@@ -1,6 +1,6 @@
 package com.eimc.booking;
 
-import com.eimc.booking.dao.ArrayBookingDAO;
+import com.eimc.booking.dao.ListBookingDAO;
 import com.eimc.car.Brand;
 import com.eimc.car.Car;
 import com.eimc.car.FuelType;
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,9 +28,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  *      3. THEN (Assert): Verify the result using assertions (AssertJ).
  */
 
-public class ArrayBookingDAOTest {
+public class ListBookingDAOTest {
 
-    private ArrayBookingDAO actualTestArrayBookingDAO;
+    private ListBookingDAO actualTestListBookingDAO;
 
     private Booking expectedTestBookingOne;
 
@@ -37,7 +38,7 @@ public class ArrayBookingDAOTest {
     void setUp(){
 
         // GIVEN
-        actualTestArrayBookingDAO = new ArrayBookingDAO();
+        actualTestListBookingDAO = new ListBookingDAO();
 
         expectedTestBookingOne = new Booking(UUID.fromString("8e397f1e-e7a4-4c39-8331-968a9ab3faef"),
                 new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "LeBlond"),
@@ -52,14 +53,14 @@ public class ArrayBookingDAOTest {
         // GIVEN actualTestArrayBookingDAO object created in setUp();
 
         // WHEN
-        Booking[] actualTestBookings = actualTestArrayBookingDAO.getBookings();
+        List<Booking> actualTestBookings = actualTestListBookingDAO.getBookings();
 
         // THEN
         assertThat(actualTestBookings)
                 .as("The getBookings() method must return an array of 3 booking with the correct contents.")
                 .isNotNull()
-                .hasSize(3)
-                .containsExactly(expectedTestBookingOne, null, null);
+                .hasSize(1)
+                .containsExactly(expectedTestBookingOne);
 
     }
 
@@ -69,12 +70,12 @@ public class ArrayBookingDAOTest {
         // GIVEN actualTestArrayBookingDAO object created in setUp();
 
         // WHEN
-        Booking[] actualTestBookings = actualTestArrayBookingDAO.getBookings();
-        actualTestBookings[0] = null;
-        Booking[] actualTestBookingsAfterModification = actualTestArrayBookingDAO.getBookings();
+        List<Booking> actualTestBookings = actualTestListBookingDAO.getBookings();
+        actualTestBookings.set(0, null);
+        List<Booking> actualTestBookingsAfterModification = actualTestListBookingDAO.getBookings();
 
         // THEN
-        assertThat(actualTestBookingsAfterModification[0])
+        assertThat(actualTestBookingsAfterModification.get(0))
                 .as("The element at index 0 in the internal state of actualTestArrayBookingDAO state should not be null")
                 .isNotNull();
 
@@ -84,28 +85,26 @@ public class ArrayBookingDAOTest {
     void removeBookingCanSuccessfullyRemoveCanceledBooking() {
 
         // GIVEN
-        Booking[] testBookingsBeforeRemoval = actualTestArrayBookingDAO.getBookings();
+        List<Booking> testBookingsBeforeRemoval = actualTestListBookingDAO.getBookings();
 
         assertThat(testBookingsBeforeRemoval)
                 .as("The booking should exist before calling removeBooking()")
                 .isNotNull()
-                .hasSize(3)
-                .containsExactly(expectedTestBookingOne, null, null);
+                .hasSize(1)
+                .containsExactly(expectedTestBookingOne);
 
         expectedTestBookingOne.cancelBooking();
 
 
         // WHEN
-        actualTestArrayBookingDAO.removeBooking(expectedTestBookingOne);
+        actualTestListBookingDAO.removeBooking(expectedTestBookingOne);
 
         // THEN
-        Booking[] actualTestBookings = actualTestArrayBookingDAO.getBookings();
+        List<Booking> actualTestBookings = actualTestListBookingDAO.getBookings();
 
         assertThat(actualTestBookings)
                 .as("The removeBooking() method must remove an existing booking from the array")
-                .isNotNull()
-                .hasSize(3)
-                .containsExactly(null, null, null);
+                .isEmpty();
 
     }
 
@@ -113,15 +112,15 @@ public class ArrayBookingDAOTest {
     void removeBookingCanThrowIllegalStateExceptionForActiveBookings(){
 
         // GIVEN
-        actualTestArrayBookingDAO.addBooking(expectedTestBookingOne);
+        actualTestListBookingDAO.addBooking(expectedTestBookingOne);
 
         // WHEN
-        assertThatThrownBy(() -> actualTestArrayBookingDAO.removeBooking(expectedTestBookingOne))
+        assertThatThrownBy(() -> actualTestListBookingDAO.removeBooking(expectedTestBookingOne))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(expectedTestBookingOne.getUserBookingID().toString());
 
         // THEN
-        assertThat(actualTestArrayBookingDAO.getBookingById(expectedTestBookingOne.getUserBookingID()))
+        assertThat(actualTestListBookingDAO.getBookingById(expectedTestBookingOne.getUserBookingID()))
                 .isEqualTo(expectedTestBookingOne);
     }
 
@@ -145,7 +144,7 @@ public class ArrayBookingDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestArrayBookingDAO.removeBooking(bookingNotInDAO))
+        assertThatThrownBy(() -> actualTestListBookingDAO.removeBooking(bookingNotInDAO))
                 .isInstanceOf(BookingNotFoundException.class)
                 .hasMessageContaining(bookingNotInDAO.getUserBookingID().toString());
 
@@ -158,7 +157,7 @@ public class ArrayBookingDAOTest {
         UUID testTargetId = expectedTestBookingOne.getUserBookingID();
 
         // WHEN
-        Booking actualTestBookingReturnedById = actualTestArrayBookingDAO.getBookingById(testTargetId);
+        Booking actualTestBookingReturnedById = actualTestListBookingDAO.getBookingById(testTargetId);
 
         // THEN
         assertThat(actualTestBookingReturnedById).as("The getBookingById() method must return a booking with the correct booking id.")
@@ -181,7 +180,7 @@ public class ArrayBookingDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestArrayBookingDAO.getBookingById(nonExistentId))
+        assertThatThrownBy(() -> actualTestListBookingDAO.getBookingById(nonExistentId))
                 .isInstanceOf(BookingNotFoundException.class)
                 .hasMessageContaining(nonExistentId.toString());
 
