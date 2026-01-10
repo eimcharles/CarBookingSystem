@@ -1,6 +1,6 @@
 package com.eimc.car;
 
-import com.eimc.car.dao.ArrayCarDAO;
+import com.eimc.car.dao.ListCarDAO;
 import com.eimc.exception.CarNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,12 +8,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- *      Unit tests for the ArrayCarDAO class
+ *      Unit tests for the ListCarDAO class
  *
  *      Test methods follow the Arrange-Act-Assert (AAA) pattern,
  *      commonly labeled as Given-When-Then:
@@ -23,9 +24,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  *      3. THEN (Assert): Verify the result using assertions (AssertJ).
  */
 
-public class ArrayCarDAOTest {
+public class ListCarDAOTest {
 
-    private ArrayCarDAO actualTestArrayCarDAO;
+    private ListCarDAO actualTestListCarDAO;
 
     private Car expectedTestCarBMWElectric;
     private Car expectedTestCarBMWGas;
@@ -36,7 +37,7 @@ public class ArrayCarDAOTest {
     void setUp(){
 
         // GIVEN
-        actualTestArrayCarDAO = new ArrayCarDAO();
+        actualTestListCarDAO = new ListCarDAO();
 
         expectedTestCarBMWElectric =  new Car("123_1",
                 new BigDecimal("89.00"),
@@ -63,14 +64,14 @@ public class ArrayCarDAOTest {
     @Test
     void getCarsCanReturnCarsAndHasCorrectSizeAndContent(){
 
-        // GIVEN actualTestArrayCarDAO object created in setUp();
+        // GIVEN actualTestListCarDAO object created in setUp();
 
         // WHEN
-        Car[] actualTestCars = actualTestArrayCarDAO.getCars();
+        List<Car> actualTestCars = actualTestListCarDAO.getCars();
 
         // THEN
         assertThat(actualTestCars)
-                .as("The getCars() method must return an array of 4 cars with the correct contents.")
+                .as("The getCars() method must return an list of 4 cars with the correct contents.")
                 .isNotNull()
                 .hasSize(4)
                 .containsExactly(expectedTestCarBMWElectric, expectedTestCarBMWGas, expectedTestCarVWElectric, expectedTestCarHONDA);
@@ -80,16 +81,16 @@ public class ArrayCarDAOTest {
     @Test
     void getCarsCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
 
-        // GIVEN actualTestArrayCarDAO object created in setUp();
+        // GIVEN actualTestListCarDAO object created in setUp();
 
         // WHEN
-        Car[] actualTestCars = actualTestArrayCarDAO.getCars();
-        actualTestCars[0] = null;
-        Car[] actualTestCarsAfterModification = actualTestArrayCarDAO.getCars();
+        List<Car> actualTestCars = actualTestListCarDAO.getCars();
+        actualTestCars.set(0, null);
+        List<Car> actualTestCarsAfterModification = actualTestListCarDAO.getCars();
 
         // THEN
-        assertThat(actualTestCarsAfterModification[0])
-                .as("The element at index 0 in the internal state of actualTestArrayCarDAO state should not be null")
+        assertThat(actualTestCarsAfterModification.get(0))
+                .as("The element at index 0 in the internal state of actualTestListCarDAO state should not be null")
                 .isNotNull();
 
     }
@@ -124,7 +125,7 @@ public class ArrayCarDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestArrayCarDAO.updateCar(nonExistantCar))
+        assertThatThrownBy(() -> actualTestListCarDAO.updateCar(nonExistantCar))
                 .isInstanceOf(CarNotFoundException.class)
                 .hasMessageContaining(nonExistantCar.getRegistrationNumber());
 

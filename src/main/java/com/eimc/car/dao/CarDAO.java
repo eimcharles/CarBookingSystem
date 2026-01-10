@@ -2,6 +2,8 @@ package com.eimc.car.dao;
 
 import com.eimc.car.Car;
 
+import java.util.List;
+
 /**
  *      CarDAO defines the contract for all data
  *      access operations related to Car entities
@@ -9,10 +11,10 @@ import com.eimc.car.Car;
 
 public interface CarDAO {
 
-    Car[] getCars();
-
     void addCar(Car car);
 
     void updateCar(Car carToUpdate);
+
+    List<Car> getCars();
 
 }
