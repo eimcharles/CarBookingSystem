@@ -1,17 +1,18 @@
 package com.eimc.user;
 
 import com.eimc.exception.UserNotFoundException;
-import com.eimc.user.dao.ArrayUserDAO;
+import com.eimc.user.dao.ListUserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- *      Unit tests for the ArrayUserDAO class
+ *      Unit tests for the ListUserDAO class
  *
  *      Test methods follow the Arrange-Act-Assert (AAA) pattern,
  *      commonly labeled as Given-When-Then:
@@ -21,9 +22,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  *      3. THEN (Assert): Verify the result using assertions (AssertJ).
  */
 
-public class ArrayUserDAOTest {
+public class ListUserDAOTest {
 
-    private ArrayUserDAO actualTestArrayUserDAO;
+    private ListUserDAO actualTestListUserDAO;
 
     private User expectedTestUserCharles;
     private User expectedTestUserJerry;
@@ -32,7 +33,7 @@ public class ArrayUserDAOTest {
     void setUp(){
 
         // GIVEN
-        actualTestArrayUserDAO = new ArrayUserDAO();
+        actualTestListUserDAO = new ListUserDAO();
 
         expectedTestUserCharles = new User(
                 UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"),
@@ -49,13 +50,13 @@ public class ArrayUserDAOTest {
     @Test
     void getUsersCanReturnUsersAndHasCorrectSizeAndContent(){
 
-        // GIVEN actualTestArrayUserDAO object created in setUp();
+        // GIVEN actualTestListUserDAO object created in setUp();
 
         // WHEN
-        User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
+        List<User> actualTestUsers = actualTestListUserDAO.getUsers();
 
         // THEN
-        assertThat(actualTestUsers).as("The getUsers() method must return an array of 2 users with the correct contents.")
+        assertThat(actualTestUsers).as("The getUsers() method must return an list of 2 users with the correct contents.")
                 .isNotNull()
                 .hasSize(2)
                 .containsExactly(expectedTestUserCharles, expectedTestUserJerry);
@@ -65,15 +66,15 @@ public class ArrayUserDAOTest {
     @Test
     void getUsersCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
 
-        // GIVEN actualTestArrayUserDAO object created in setUp();
+        // GIVEN actualTestListUserDAO object created in setUp();
 
         // WHEN actualTestUsers
-        User[] actualTestUsers = actualTestArrayUserDAO.getUsers();
-        actualTestUsers[0] = null;
-        User[] actualTestUsersAfterModification = actualTestArrayUserDAO.getUsers();
+        List<User> actualTestUsers = actualTestListUserDAO.getUsers();
+        actualTestUsers.set(0, null);
+        List<User> actualTestUsersAfterModification = actualTestListUserDAO.getUsers();
 
         // THEN
-        assertThat(actualTestUsersAfterModification[0])
+        assertThat(actualTestUsersAfterModification.get(0))
                 .as("The element at index 0 in actualTestUsers state should not be null")
                 .isNotNull();
 
@@ -86,7 +87,7 @@ public class ArrayUserDAOTest {
         UUID testTargetId = expectedTestUserCharles.getUserId();
 
         // WHEN
-        User actualUserReturnedById = actualTestArrayUserDAO.getUserById(testTargetId);
+        User actualUserReturnedById = actualTestListUserDAO.getUserById(testTargetId);
 
         // THEN
         assertThat(actualUserReturnedById).as("The getUserById() method must return a user with the correct user id.")
@@ -109,7 +110,7 @@ public class ArrayUserDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestArrayUserDAO.getUserById(nonExistentId))
+        assertThatThrownBy(() -> actualTestListUserDAO.getUserById(nonExistentId))
                 .isInstanceOf(UserNotFoundException.class)
                 .hasMessageContaining(nonExistentId.toString());
 

@@ -1,7 +1,8 @@
 package com.eimc.user;
 
-import com.eimc.user.dao.ArrayUserDAO;
+import com.eimc.user.dao.ListUserDAO;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,79 +12,18 @@ import java.util.UUID;
 
 public class UserService {
 
-    private final ArrayUserDAO arrayUserDAO;
+    private final ListUserDAO listUserDAO;
 
-    public UserService(ArrayUserDAO arrayUserDAO) {
-        this.arrayUserDAO = arrayUserDAO;
+    public UserService(ListUserDAO listUserDAO) {
+        this.listUserDAO = listUserDAO;
     }
-
-    /**
-     *      getUserById() retrieves a specific User by its unique identifier (UUID).
-     */
 
     public User getUserById(UUID id) {
-        return this.arrayUserDAO.getUserById(id);
+        return this.listUserDAO.getUserById(id);
     }
 
-    /**
-     *      getUsers() retrieves user objects from the arrayUserDAO class, filtering
-     *      out any null references that may exist, and returns an array of Users.
-     */
-
-    public User[] getUsers() {
-
-        // Get all users from DAO
-        User[] users = this.arrayUserDAO.getUsers();
-
-        // If users is null or empty, return empty array
-        if (users == null || users.length == 0){
-            return new User[0];
-        }
-
-        // Number of non-null users
-        int nonNullUserCount = getUserCount(users);
-
-        if (nonNullUserCount == 0){
-            return new User[0];
-        }
-
-        // Create a new array with the nonNullUserCount for size
-        User[] nonNullUsers = new User[nonNullUserCount];
-
-        // Populates a pre-sized Car array with nonNullUsers
-        populateUsers(users, nonNullUsers);
-
-        return nonNullUsers;
-    }
-
-    private static int getUserCount(User[] users) {
-
-        // Count non-null users in DAO array
-        int nonNullUserCount = 0;
-        for (User user : users) {
-            if (user != null){
-                nonNullUserCount++;
-            }
-        }
-        return nonNullUserCount;
-    }
-
-    private static void populateUsers(User[] users, User[] nonNullUsers) {
-
-        // Index for the new array, avoids null gaps,
-        int index = 0;
-
-        // Look through users
-        for (int i = 0; i < users.length; i++) {
-
-            // Use the user at the current index of the source array
-            User nonNullUser = users[i];
-
-            // Add to nonNullUsers
-            if (nonNullUser != null){
-                nonNullUsers[index++] = nonNullUser;
-            }
-        }
+    public List<User> getUsers() {
+        return this.listUserDAO.getUsers();
     }
 
 }
