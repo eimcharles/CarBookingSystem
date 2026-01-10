@@ -1,6 +1,6 @@
 package com.eimc.configuration;
 
-import com.eimc.booking.dao.ArrayBookingDAO;
+import com.eimc.booking.dao.ListBookingDAO;
 import com.eimc.booking.BookingService;
 import com.eimc.car.dao.ListCarDAO;
 import com.eimc.car.CarService;
@@ -29,11 +29,11 @@ public class Configuration {
 
         ListCarDAO listCarDAO = new ListCarDAO();
         ListUserDAO listUserDAO = new ListUserDAO();
-        ArrayBookingDAO arrayBookingDAO = new ArrayBookingDAO();
+        ListBookingDAO listBookingDAO = new ListBookingDAO();
 
         this.carService = new CarService(listCarDAO);
         this.userService = new UserService(listUserDAO);
-        this.bookingService = new BookingService(arrayBookingDAO, getCarService());
+        this.bookingService = new BookingService(listBookingDAO, getCarService());
     }
 
     public CarService getCarService() {

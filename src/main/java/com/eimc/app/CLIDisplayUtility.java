@@ -34,9 +34,7 @@ public class CLIDisplayUtility {
             return;
         }
 
-        for (User user : registeredUsers) {
-            displayFormattedUserDetails(user);
-        }
+        registeredUsers.forEach(user -> displayFormattedUserDetails(user));
     }
 
     /**
@@ -56,9 +54,7 @@ public class CLIDisplayUtility {
             return;
         }
 
-        for (Car availableCar : allAvailableCars) {
-            displayFormattedCarDetails(availableCar);
-        }
+        allAvailableCars.forEach(car -> displayFormattedCarDetails(car));
     }
 
     /**
@@ -78,9 +74,7 @@ public class CLIDisplayUtility {
             return;
         }
 
-        for (Car availableGasCar : availableGasCars) {
-            displayFormattedCarDetails(availableGasCar);
-        }
+        availableGasCars.forEach(car -> displayFormattedCarDetails(car));
     }
 
     /**
@@ -100,9 +94,7 @@ public class CLIDisplayUtility {
             return;
         }
 
-        for (Car availableEelectricCar : availableElectricCars) {
-            displayFormattedCarDetails(availableEelectricCar);
-        }
+        availableElectricCars.forEach(car -> displayFormattedCarDetails(car));
     }
 
     /**
@@ -113,17 +105,15 @@ public class CLIDisplayUtility {
 
     public static void displayAllActiveBookings(BookingService bookingService){
 
-        Booking[] allActiveBookings = bookingService.getAllActiveBookings();
+        List<Booking> allActiveBookings = bookingService.getAllActiveBookings();
 
-        if (allActiveBookings == null || allActiveBookings.length == 0){
+        if (allActiveBookings.isEmpty()){
             displayFormattedMessage("❌", "The system has no active bookings currently registered.");
             return;
         }
 
+        allActiveBookings.forEach(booking -> displayFormattedBookingDetails(booking));
 
-        for (Booking allBooking : allActiveBookings) {
-            displayFormattedBookingDetails(allBooking);
-        }
     }
 
     /**
@@ -132,9 +122,9 @@ public class CLIDisplayUtility {
      *      If a user has no active bookings a corresponding message is displayed
      */
 
-    public static void displayUserBookedCars(Car[] bookedCars, String validatedUserId){
+    public static void displayUserBookedCars(List<Car> bookedCars, String validatedUserId){
 
-        if (bookedCars == null || bookedCars.length == 0){
+        if (bookedCars.isEmpty()){
 
             // No bookings for the given user id
             displayResultsByMenuTitle(TITLE_USER_BOOKED_CARS);
@@ -144,9 +134,7 @@ public class CLIDisplayUtility {
 
             // Display and format user booked car results
             displayResultsByMenuTitle(TITLE_USER_BOOKED_CARS);
-            for (Car bookedCar : bookedCars) {
-                displayFormattedCarDetails(bookedCar);
-            }
+            bookedCars.forEach(car -> displayFormattedCarDetails(car));
         }
     }
 
