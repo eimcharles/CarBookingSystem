@@ -6,6 +6,8 @@ import com.eimc.car.Car;
 import com.eimc.user.User;
 import com.eimc.user.UserService;
 
+import java.util.List;
+
 import static com.eimc.app.CLIFormatUtility.*;
 
 /**
@@ -25,9 +27,9 @@ public class CLIDisplayUtility {
 
     public static void displayAllRegisteredUsers(UserService userService){
 
-        User[] registeredUsers = userService.getUsers();
+        List<User> registeredUsers = userService.getUsers();
 
-        if (registeredUsers == null || registeredUsers.length == 0){
+        if (registeredUsers == null || registeredUsers.isEmpty()){
             displayFormattedMessage("❌", "The system has no users currently registered.");
             return;
         }
@@ -47,9 +49,9 @@ public class CLIDisplayUtility {
 
     public static void displayAllAvailableCars(BookingService bookingService) {
 
-        Car[] allAvailableCars = bookingService.getAllAvailableCars();
+        List<Car> allAvailableCars = bookingService.getAllAvailableCars();
 
-        if (allAvailableCars == null || allAvailableCars.length == 0) {
+        if (allAvailableCars.isEmpty()) {
             displayFormattedMessage("❌", "The system has no cars currently available for booking.");
             return;
         }
@@ -69,9 +71,9 @@ public class CLIDisplayUtility {
 
     public static void displayAllAvailableGasCars(BookingService bookingService) {
 
-        Car[] availableGasCars = bookingService.getAllAvailableGasCars();
+        List<Car> availableGasCars = bookingService.getAllAvailableGasCars();
 
-        if (availableGasCars == null || availableGasCars.length == 0) {
+        if (availableGasCars.isEmpty()) {
             displayFormattedMessage("❌", "The system has no gas cars currently available for booking.");
             return;
         }
@@ -91,9 +93,9 @@ public class CLIDisplayUtility {
 
     public static void displayAllAvailableElectricCars(BookingService bookingService) {
 
-        Car[] availableElectricCars = bookingService.getAllAvailableElectricCars();
+        List<Car> availableElectricCars = bookingService.getAllAvailableElectricCars();
 
-        if (availableElectricCars == null || availableElectricCars.length == 0) {
+        if (availableElectricCars.isEmpty()) {
             displayFormattedMessage("❌", "The system has no electric cars currently available for booking.");
             return;
         }
