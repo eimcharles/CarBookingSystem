@@ -13,7 +13,7 @@
 ---
 
 ### 🚫 Release 2 (In Progress 🚀)
-#### [**Release 2: Spring Boot REST API modernization to support persistent storage, security, and web-integration.**](releaseTwoDocs/README.md) </br>
+#### [**Release 2: Spring Boot modernization to support persistent storage, security, and web-integration.**](releaseTwoDocs/README.md) </br>
 
 ---
 
