@@ -3,9 +3,9 @@
 ---
 
 ## Application Overview: </br> 
-**Transactional Operations**: facilitates the creation / cancellation of car bookings. </br>
-**Inventory Management**: listing all available cars for booking, filtered by type (Gasoline or Electric). </br>
-**User Management**: displaying all registered users and cars booked for a specific user. </br>
+Transactional Operations: the creation / cancellation of car bookings. </br>
+Inventory Management: listing all available cars for booking, filtered by type (Gasoline or Electric). </br>
+User Management: displaying all registered users and cars booked for a specific user. </br>
 
 ## Demo (Coming soon 🚀)</br>
 --- 
