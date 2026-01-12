@@ -11,12 +11,12 @@ User Management: user accounts, manage profiles, and view all registered users.<
 
 ## Features </br>
 - Single Sign-On / Sign-up (SSO)
-- Self service password recovery
-- Role-Based Access Control
-- Asynchronous Email Notifications
+- Self service password recovery.
+- Role-Based Access Control.
+- Asynchronous Email Notifications.
 
 ## CRUD operations </br>
-- Create user accounts, manage profiles, and view all registered users
+- Create user accounts, manage profiles, and view all registered users.
 - Initiate a new car booking. 
 - Terminate an active booking. 
 - List all available cars based by type. 
