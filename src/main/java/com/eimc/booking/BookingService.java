@@ -145,61 +145,24 @@ public class BookingService {
                 .toList();
     }
 
-    /**
-     *      getAllAvailableCarsForBooking() retrieves an array of car objects that are available
-     *      (not associated to an active booking).
-     */
-
     public List<Car> getAllAvailableCarsForBooking(List<Car> allCars) {
 
-        // No allCars in the system
         if (allCars.isEmpty()) {
             return new ArrayList<>();
         }
 
-        // Booking that have a status of active
+        /// Bookings that have a status of active
         List<Booking> activeBookings = getAllActiveBookings();
 
-        // If activeBookings are null or empty, return passed allCars
-        if (activeBookings.isEmpty()) {
-            return new ArrayList<>(allCars);
-        }
+        /// Go through all the active bookings and get all associated booked cars
+        List<Car> bookedCars = activeBookings.stream()
+                .map(Booking::getCar)
+                .toList();
 
-        // Create a new lists
-        List<Car> availableCars = new ArrayList<>();
-
-        populateAvailableCarsForBooking(allCars, activeBookings, availableCars);
-
-        return availableCars;
-
-    }
-
-    private void populateAvailableCarsForBooking(List<Car> allCars, List<Booking> activeBookings, List<Car> availableCars){
-
-        // Check if a car is associated to any booking
-        for (Car car : allCars) {
-
-            // Assume the car is not booked initially
-            boolean isCarAssociatedToBooking = false;
-
-            // Check the current car against every existing booking.
-            for (Booking activeBooking : activeBookings) {
-
-                if (activeBooking != null && activeBooking.getCar() != null && activeBooking.getCar().equals(car)) {
-
-                    // The car is booked
-                    isCarAssociatedToBooking = true;
-
-                    // Stop checking this car against other activeBooking
-                    break;
-                }
-            }
-
-            // the car was NOT booked, it is available.
-            if (!isCarAssociatedToBooking) {
-                availableCars.add(car);
-            }
-        }
+        /// Filter all cars by excluding all booked cars
+        return allCars.stream()
+                .filter(car -> !bookedCars.contains(car))
+                .toList();
     }
 
     public List<Car> getAllAvailableCars(){
