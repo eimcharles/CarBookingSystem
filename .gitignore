@@ -1,37 +1,21 @@
+## Build and Project Metadata
+target/
+
+## Maven Wrapper
+!mvnw
+!mvnw.cmd
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
 ### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-.kotlin
 .idea
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+*.iws
+*.iml
+*.ipr
+out/
 
 ### VS Code ###
 .vscode/
 
 ### Mac OS ###
 .DS_Store
-
-### Maven Build Output ###
-target/
-
-### Car booking IML ###
-/CarBookingSystem.iml

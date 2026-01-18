@@ -1,6 +1,8 @@
 package com.eimc.app;
 
 import com.eimc.configuration.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import static com.eimc.app.CLIDisplayUtility.*;
 import static com.eimc.app.CarBookingCLI.*;
@@ -12,9 +14,12 @@ import java.util.Scanner;
  *      CarBookingApp is the entry point to start the application.
  * */
 
+@SpringBootApplication
 public class CarBookingApp {
 
     public static void main(String[] args) {
+
+        SpringApplication.run(CarBookingApp.class, args);
 
         // Initialize System
         Configuration configuration = new Configuration();
