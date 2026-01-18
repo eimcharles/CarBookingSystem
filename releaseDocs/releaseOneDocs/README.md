@@ -50,11 +50,11 @@ User Management: displaying all registered users and cars booked for a specific 
 
 | File path with clickable link | Purpose (1 line description) |
 |------|------------|
-|[../src/main/java/com/eimc/app/CarBookingCLI.java](../src/main/java/com/eimc/app/CarBookingCLI.java)|Controller to create, cancel car bookings and view user booked cars|
-|[../src/main/java/com/eimc/app/CLIDisplayUtility.java](../src/main/java/com/eimc/app/CLIDisplayUtility.java) |Data presentation layer for booking, car and user information |
-|[../src/main/java/com/eimc/booking/BookingService.java](../src/main/java/com/eimc/booking/BookingService.java) |Contains business logic related to bookings |
-|[../src/main/java/com/eimc/car/CarService.java](../src/main/java/com/eimc/car/CarService.java)|Contains business logic related to cars |
-|[../src/main/java/com/eimc/user/UserService.java](../src/main/java/com/eimc/user/UserService.java)| Contains business  logic related to users |
+|[../src/main/java/com/eimc/app/CarBookingCLI.java](../../src/main/java/com/eimc/app/CarBookingCLI.java)|Controller to create, cancel car bookings and view user booked cars|
+|[../src/main/java/com/eimc/app/CLIDisplayUtility.java](../../src/main/java/com/eimc/app/CLIDisplayUtility.java) |Data presentation layer for booking, car and user information |
+|[../src/main/java/com/eimc/booking/BookingService.java](../../src/main/java/com/eimc/booking/BookingService.java) |Contains business logic related to bookings |
+|[../src/main/java/com/eimc/car/CarService.java](../../src/main/java/com/eimc/car/CarService.java)|Contains business logic related to cars |
+|[../src/main/java/com/eimc/user/UserService.java](../../src/main/java/com/eimc/user/UserService.java)| Contains business  logic related to users |
 
 ### Top 5 Tests
 | File path with clickable link | Purpose (1 line description) |
@@ -62,8 +62,8 @@ User Management: displaying all registered users and cars booked for a specific 
 |[../src/test/java/com/eimc/booking/ArrayBookingDAOTest.java](../src/test/java/com/eimc/booking/ArrayBookingDAOTest.java)|Booking Data Access Test Class|
 |[../src/test/java/com/eimc/car/ArrayCarDAOTest.java](../src/test/java/com/eimc/car/ArrayCarDAOTest.java)|Car Data Access Test Class|
 |[../src/test/java/com/eimc/user/ArrayUserDAOTest.java](../src/test/java/com/eimc/user/ArrayUserDAOTest.java)|User Data Access Test Class|
-|[../src/test/java/com/eimc/booking/BookingTest.java](../src/test/java/com/eimc/booking/BookingTest.java)|Booking Domain Test Class|
-|[../src/test/java/com/eimc/car/CarTest.java](../src/test/java/com/eimc/car/CarTest.java)|Car Domain Test Class|
+|[../src/test/java/com/eimc/booking/BookingTest.java](../../src/test/java/com/eimc/booking/BookingTest.java)|Booking Domain Test Class|
+|[../src/test/java/com/eimc/car/CarTest.java](../../src/test/java/com/eimc/car/CarTest.java)|Car Domain Test Class|
 
 ### Test results
 #### **Domain and DAO testing** is done using the **AssertJ** testing library.</br>

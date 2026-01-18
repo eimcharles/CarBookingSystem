@@ -40,8 +40,8 @@ User Management: user accounts, manage profiles, and view all registered users.<
 
 | File path with clickable link | Purpose (1 line description) |
 |------|------------|
-|[../src/main/java/com/eimc/booking/BookingService.java](../src/main/java/com/eimc/booking/BookingService.java) |Contains business logic related to bookings |
-|[../src/main/java/com/eimc/car/CarService.java](../src/main/java/com/eimc/car/CarService.java)|Contains business logic related to cars |
-|[../src/main/java/com/eimc/user/UserService.java](../src/main/java/com/eimc/user/UserService.java)| Contains business  logic related to users |
+|[../src/main/java/com/eimc/booking/BookingService.java](../../src/main/java/com/eimc/booking/BookingService.java) |Contains business logic related to bookings |
+|[../src/main/java/com/eimc/car/CarService.java](../../src/main/java/com/eimc/car/CarService.java)|Contains business logic related to cars |
+|[../src/main/java/com/eimc/user/UserService.java](../../src/main/java/com/eimc/user/UserService.java)| Contains business  logic related to users |
 
 
