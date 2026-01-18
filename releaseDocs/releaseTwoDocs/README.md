@@ -25,7 +25,7 @@ User Management: user accounts, manage profiles, and view all registered users.<
 --- 
 
 ## Learning Outcomes: </br>
-**Spring Boot** to manage project's configurations.</br>
+✅**Spring Boot** to manage project's configurations.</br>
 **Spring Data JPA** with MySQL database for persistent storage and retrieval of application data.</br>
 **Spring Security Core** User authentication and single sign on.</br>
 **Spring Boot Mail Starter** for notifications.</br>
