@@ -15,6 +15,12 @@
 ### 🚫 Release 2 (In Progress 🚀)
 #### [**Release 2: Spring Boot modernization to support persistent storage, security, and web-integration.**](releaseDocs/releaseTwoDocs/README.md) </br>
 
+![Java](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white)
+![Java Streams](https://img.shields.io/badge/Java-Streams_API-FFD166?logo=openjdk&logoColor=black)
+![Maven](https://img.shields.io/badge/Maven-4.0-C71A36?logo=apache-maven&logoColor=white)
+![AssertJ](https://img.shields.io/badge/Assertions-AssertJ-FFD166?logo=assertj&logoColor=black)
+![Spring Boot](https://img.shields.io/badge/Framework-Spring%20Boot-6DB33F?logo=spring&logoColor=white)
+
 ---
 
 
