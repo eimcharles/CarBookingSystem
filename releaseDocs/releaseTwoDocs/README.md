@@ -25,14 +25,14 @@ User Management: user accounts, manage profiles, and view all registered users.<
 --- 
 
 ## Learning Outcomes: </br>
-✅**Spring Boot** to manage project's configurations.</br>
-**Spring Data JPA** with MySQL database for persistent storage and retrieval of application data.</br>
-**Spring Security Core** User authentication and single sign on.</br>
-**Spring Boot Mail Starter** for notifications.</br>
+✅ **Spring Boot** to manage project's configurations.</br>
+❌ **Spring Data JPA** with MySQL database for persistent storage and retrieval of application data.</br>
+❌ **Spring Security Core** User authentication and single sign on.</br>
+❌ **Spring Boot Mail Starter** for notifications.</br>
 ✅ **Streams** for functional programming.</br>
-**Generics** for type-safe API response mapping.</br>
-**Mocking** using Mockito for testing component interactions.</br>
-**Java Test Containers** to for isolated database environments for integration tests.</br>
+❌ **Generics** for type-safe API response mapping.</br>
+❌ **Mocking** using Mockito for testing component interactions.</br>
+❌ **Java Test Containers** to for isolated database environments for integration tests.</br>
 
 --- 
 
