@@ -12,8 +12,9 @@ User Management: user accounts, manage profiles, and view all registered users.<
 ## Features </br>
 - Single Sign-On / Sign-up (SSO)
 - Self service password recovery.
-- Role-Based Access Control.
+- Role-Based Access Control with JSON Web Tokens.
 - Asynchronous Email Notifications.
+- Payment Processing with Stripe API
 
 ## CRUD operations </br>
 - Create user accounts, manage profiles, and view all registered users.
@@ -27,8 +28,9 @@ User Management: user accounts, manage profiles, and view all registered users.<
 ## Learning Outcomes: </br>
 ✅ **Spring Boot** to manage project's configurations.</br>
 ❌ **Spring Data JPA** with MySQL database for persistent storage and retrieval of application data.</br>
-❌ **Spring Security Core** User authentication and single sign on.</br>
-❌ **Spring Boot Mail Starter** for notifications.</br>
+❌ **Spring Security with JSON Web Tokens** for user authentication, role based access control and single sign on.</br>
+❌ **Spring Boot Mail Starter** for notifications and booking confirmations.</br>
+❌ **Stripe API** for payment processing and real-time reservation updates. </br>
 ✅ **Streams** for functional programming.</br>
 ❌ **Generics** for type-safe API response mapping.</br>
 ❌ **Mocking** using Mockito for testing component interactions.</br>
