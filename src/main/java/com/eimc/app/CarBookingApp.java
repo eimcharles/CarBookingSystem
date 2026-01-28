@@ -11,7 +11,7 @@ import com.eimc.exception.CarUnavailableException;
 import com.eimc.exception.UserNotFoundException;
 import com.eimc.user.User;
 import com.eimc.user.UserService;
-import com.eimc.user.dao.UserRepository;
+import com.eimc.user.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

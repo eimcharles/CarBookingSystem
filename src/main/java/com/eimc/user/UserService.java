@@ -1,7 +1,5 @@
 package com.eimc.user;
 
-import com.eimc.user.dao.UserRepository;
-
 import java.util.List;
 import java.util.UUID;
 

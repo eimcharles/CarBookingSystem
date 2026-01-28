@@ -1,7 +1,6 @@
-package com.eimc.user.dao;
+package com.eimc.user;
 
 import com.eimc.exception.UserNotFoundException;
-import com.eimc.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
