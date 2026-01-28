@@ -1,7 +1,7 @@
 package com.eimc.app;
 
 import com.eimc.booking.BookingService;
-import com.eimc.booking.dao.ListBookingDAO;
+import com.eimc.booking.BookingRepository;
 import com.eimc.car.Car;
 import com.eimc.car.CarService;
 import com.eimc.car.CarRepository;
@@ -31,11 +31,11 @@ public class CarBookingApp {
 
         ///  Dependency injection
         CarRepository carRepository = new CarRepository();
-        ListBookingDAO listBookingDAO = new ListBookingDAO();
+        BookingRepository bookingRepository = new BookingRepository();
         UserRepository userRepository = new UserRepository();
 
         CarService carService = new CarService(carRepository);
-        BookingService bookingService = new BookingService(listBookingDAO, carService);
+        BookingService bookingService = new BookingService(bookingRepository, carService);
         UserService userService = new UserService(userRepository);
 
         ///  Make a car booking for Jerry

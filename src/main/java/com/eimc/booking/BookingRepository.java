@@ -1,6 +1,4 @@
-package com.eimc.booking.dao;
-
-import com.eimc.booking.Booking;
+package com.eimc.booking;
 
 import com.eimc.exception.BookingNotFoundException;
 
@@ -9,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ListBookingDAO implements BookingDAO {
+public class BookingRepository {
 
     private final List<Booking> bookingsDao = new ArrayList<>();
 
-    public ListBookingDAO() {}
+    public BookingRepository() {}
 
-    @Override
     public void addBooking(Booking carBooking) {
 
         ///  Check if null
@@ -26,7 +23,6 @@ public class ListBookingDAO implements BookingDAO {
         bookingsDao.add(carBooking);
     }
 
-    @Override
     public void removeBooking(Booking carBookingToUpdate) {
 
         ///  Target booking to be removed
@@ -49,7 +45,6 @@ public class ListBookingDAO implements BookingDAO {
 
     }
 
-    @Override
     public Booking getBookingById(UUID bookingId) {
         if (bookingId == null){
             throw new IllegalArgumentException(String.format("bookingId: %s cannot be null",bookingId));
@@ -62,7 +57,6 @@ public class ListBookingDAO implements BookingDAO {
                 .orElseThrow( () -> new BookingNotFoundException(bookingId));
     }
 
-    @Override
     public List<Booking> getBookings() {
         return new ArrayList<>(this.bookingsDao);
     }

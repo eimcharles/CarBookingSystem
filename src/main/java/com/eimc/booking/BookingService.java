@@ -1,6 +1,5 @@
 package com.eimc.booking;
 
-import com.eimc.booking.dao.ListBookingDAO;
 import com.eimc.car.Car;
 import com.eimc.car.CarService;
 import com.eimc.exception.BookingNotFoundException;
@@ -23,11 +22,11 @@ import java.util.UUID;
 
 public class BookingService {
 
-    private final ListBookingDAO listBookingDAO;
+    private final BookingRepository bookingRepository;
     private final CarService carService;
 
-    public BookingService(ListBookingDAO listBookingDAO, CarService carService) {
-        this.listBookingDAO = listBookingDAO;
+    public BookingService(BookingRepository bookingRepository, CarService carService) {
+        this.bookingRepository = bookingRepository;
         this.carService = carService;
     }
 
@@ -45,7 +44,7 @@ public class BookingService {
         UUID bookingId = UUID.fromString("8e397f1e-e7a4-4c39-8331-968a9ab3faef");
 
         /// Create and save the new booking
-        this.listBookingDAO.addBooking(
+        this.bookingRepository.addBooking(
 
                 new Booking(
                         bookingId,
@@ -104,16 +103,16 @@ public class BookingService {
         bookingToCancel.cancelBooking();
 
         ///  Update the state change
-        this.listBookingDAO.removeBooking(bookingToCancel);
+        this.bookingRepository.removeBooking(bookingToCancel);
 
     }
 
     public Booking getBookingByBookingId(UUID bookingId){
-        return this.listBookingDAO.getBookingById(bookingId);
+        return this.bookingRepository.getBookingById(bookingId);
     }
 
     public List<Booking> getBookings() {
-        return this.listBookingDAO.getBookings();
+        return this.bookingRepository.getBookings();
     }
 
     public List<Booking> getAllActiveBookings() {

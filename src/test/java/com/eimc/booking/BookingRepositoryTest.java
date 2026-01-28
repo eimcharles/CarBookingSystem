@@ -1,6 +1,5 @@
 package com.eimc.booking;
 
-import com.eimc.booking.dao.ListBookingDAO;
 import com.eimc.car.Brand;
 import com.eimc.car.Car;
 import com.eimc.car.FuelType;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,9 +26,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  *      3. THEN (Assert): Verify the result using assertions (AssertJ).
  */
 
-public class ListBookingDAOTest {
+public class BookingRepositoryTest {
 
-    private ListBookingDAO actualTestListBookingDAO;
+    private BookingRepository actualTestBookingRepository;
 
     private Booking expectedTestBookingOne;
 
@@ -38,7 +36,7 @@ public class ListBookingDAOTest {
     void setUp(){
 
         // GIVEN
-        actualTestListBookingDAO = new ListBookingDAO();
+        actualTestBookingRepository = new BookingRepository();
 
         expectedTestBookingOne = new Booking(UUID.fromString("8e397f1e-e7a4-4c39-8331-968a9ab3faef"),
                 new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "LeBlond"),
@@ -52,15 +50,15 @@ public class ListBookingDAOTest {
     void removeBookingCanThrowIllegalStateExceptionForActiveBookings(){
 
         // GIVEN
-        actualTestListBookingDAO.addBooking(expectedTestBookingOne);
+        actualTestBookingRepository.addBooking(expectedTestBookingOne);
 
         // WHEN
-        assertThatThrownBy(() -> actualTestListBookingDAO.removeBooking(expectedTestBookingOne))
+        assertThatThrownBy(() -> actualTestBookingRepository.removeBooking(expectedTestBookingOne))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(expectedTestBookingOne.getUserBookingID().toString());
 
         // THEN
-        assertThat(actualTestListBookingDAO.getBookingById(expectedTestBookingOne.getUserBookingID()))
+        assertThat(actualTestBookingRepository.getBookingById(expectedTestBookingOne.getUserBookingID()))
                 .isEqualTo(expectedTestBookingOne);
     }
 
@@ -84,7 +82,7 @@ public class ListBookingDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestListBookingDAO.removeBooking(bookingNotInDAO))
+        assertThatThrownBy(() -> actualTestBookingRepository.removeBooking(bookingNotInDAO))
                 .isInstanceOf(BookingNotFoundException.class)
                 .hasMessageContaining(bookingNotInDAO.getUserBookingID().toString());
 
@@ -104,7 +102,7 @@ public class ListBookingDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestListBookingDAO.getBookingById(nonExistentId))
+        assertThatThrownBy(() -> actualTestBookingRepository.getBookingById(nonExistentId))
                 .isInstanceOf(BookingNotFoundException.class)
                 .hasMessageContaining(nonExistentId.toString());
 
