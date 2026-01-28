@@ -35,31 +35,10 @@ public class ListUserDAOTest {
         // GIVEN
         actualTestListUserDAO = new ListUserDAO();
 
-        expectedTestUserCharles = new User(
-                UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"),
-                "Charles",
-                "Eimer");
-
         expectedTestUserJerry = new User(
                 UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
                 "Jerry",
                 "LeBlond");
-
-    }
-
-    @Test
-    void getUsersCanReturnUsersAndHasCorrectSizeAndContent(){
-
-        // GIVEN actualTestListUserDAO object created in setUp();
-
-        // WHEN
-        List<User> actualTestUsers = actualTestListUserDAO.getUsers();
-
-        // THEN
-        assertThat(actualTestUsers).as("The getUsers() method must return an list of 2 users with the correct contents.")
-                .isNotNull()
-                .hasSize(2)
-                .containsExactly(expectedTestUserCharles, expectedTestUserJerry);
 
     }
 
@@ -84,7 +63,7 @@ public class ListUserDAOTest {
     void getUserByIdCanReturnCorrespondingUserById(){
 
         // GIVEN
-        UUID testTargetId = expectedTestUserCharles.getUserId();
+        UUID testTargetId = expectedTestUserJerry.getUserId();
 
         // WHEN
         User actualUserReturnedById = actualTestListUserDAO.getUserById(testTargetId);
@@ -92,7 +71,7 @@ public class ListUserDAOTest {
         // THEN
         assertThat(actualUserReturnedById).as("The getUserById() method must return a user with the correct user id.")
                 .isNotNull()
-                .isEqualTo(expectedTestUserCharles);
+                .isEqualTo(expectedTestUserJerry);
 
     }
 

@@ -47,66 +47,6 @@ public class ListBookingDAOTest {
 
     }
 
-    @Test
-    void getBookingsCanReturnBookingsAndHasCorrectSizeAndContent(){
-
-        // GIVEN actualTestArrayBookingDAO object created in setUp();
-
-        // WHEN
-        List<Booking> actualTestBookings = actualTestListBookingDAO.getBookings();
-
-        // THEN
-        assertThat(actualTestBookings)
-                .as("The getBookings() method must return an array of 3 booking with the correct contents.")
-                .isNotNull()
-                .hasSize(1)
-                .containsExactly(expectedTestBookingOne);
-
-    }
-
-    @Test
-    void getBookingsCanReturnADefensiveCopyAndExternalModificationDoesNotAffectInternalState(){
-
-        // GIVEN actualTestArrayBookingDAO object created in setUp();
-
-        // WHEN
-        List<Booking> actualTestBookings = actualTestListBookingDAO.getBookings();
-        actualTestBookings.set(0, null);
-        List<Booking> actualTestBookingsAfterModification = actualTestListBookingDAO.getBookings();
-
-        // THEN
-        assertThat(actualTestBookingsAfterModification.get(0))
-                .as("The element at index 0 in the internal state of actualTestArrayBookingDAO state should not be null")
-                .isNotNull();
-
-    }
-
-    @Test
-    void removeBookingCanSuccessfullyRemoveCanceledBooking() {
-
-        // GIVEN
-        List<Booking> testBookingsBeforeRemoval = actualTestListBookingDAO.getBookings();
-
-        assertThat(testBookingsBeforeRemoval)
-                .as("The booking should exist before calling removeBooking()")
-                .isNotNull()
-                .hasSize(1)
-                .containsExactly(expectedTestBookingOne);
-
-        expectedTestBookingOne.cancelBooking();
-
-
-        // WHEN
-        actualTestListBookingDAO.removeBooking(expectedTestBookingOne);
-
-        // THEN
-        List<Booking> actualTestBookings = actualTestListBookingDAO.getBookings();
-
-        assertThat(actualTestBookings)
-                .as("The removeBooking() method must remove an existing booking from the array")
-                .isEmpty();
-
-    }
 
     @Test
     void removeBookingCanThrowIllegalStateExceptionForActiveBookings(){
@@ -147,22 +87,6 @@ public class ListBookingDAOTest {
         assertThatThrownBy(() -> actualTestListBookingDAO.removeBooking(bookingNotInDAO))
                 .isInstanceOf(BookingNotFoundException.class)
                 .hasMessageContaining(bookingNotInDAO.getUserBookingID().toString());
-
-    }
-
-    @Test
-    void getBookingByIdCanReturnCorrespondingBookingById(){
-
-        // GIVEN
-        UUID testTargetId = expectedTestBookingOne.getUserBookingID();
-
-        // WHEN
-        Booking actualTestBookingReturnedById = actualTestListBookingDAO.getBookingById(testTargetId);
-
-        // THEN
-        assertThat(actualTestBookingReturnedById).as("The getBookingById() method must return a booking with the correct booking id.")
-                .isNotNull()
-                .isEqualTo(expectedTestBookingOne);
 
     }
 

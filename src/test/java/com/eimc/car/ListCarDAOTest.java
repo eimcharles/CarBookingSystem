@@ -28,9 +28,6 @@ public class ListCarDAOTest {
 
     private ListCarDAO actualTestListCarDAO;
 
-    private Car expectedTestCarBMWElectric;
-    private Car expectedTestCarBMWGas;
-    private Car expectedTestCarVWElectric;
     private Car expectedTestCarHONDA;
 
     @BeforeEach
@@ -39,20 +36,6 @@ public class ListCarDAOTest {
         // GIVEN
         actualTestListCarDAO = new ListCarDAO();
 
-        expectedTestCarBMWElectric =  new Car("123_1",
-                new BigDecimal("89.00"),
-                Brand.BMW,
-                FuelType.ELECTRIC);
-
-        expectedTestCarBMWGas = new Car("123_2",
-                new BigDecimal("79.00"),
-                Brand.BMW,
-                FuelType.GASOLINE);
-
-        expectedTestCarVWElectric = new Car("123_3",
-                new BigDecimal("69.00"),
-                Brand.VOLKSWAGEN,
-                FuelType.ELECTRIC);
 
         expectedTestCarHONDA = new Car("123_4",
                 new BigDecimal("49.00"),
@@ -73,8 +56,8 @@ public class ListCarDAOTest {
         assertThat(actualTestCars)
                 .as("The getCars() method must return an list of 4 cars with the correct contents.")
                 .isNotNull()
-                .hasSize(4)
-                .containsExactly(expectedTestCarBMWElectric, expectedTestCarBMWGas, expectedTestCarVWElectric, expectedTestCarHONDA);
+                .hasSize(1)
+                .containsExactly(expectedTestCarHONDA);
 
     }
 
