@@ -11,7 +11,7 @@ import com.eimc.exception.CarUnavailableException;
 import com.eimc.exception.UserNotFoundException;
 import com.eimc.user.User;
 import com.eimc.user.UserService;
-import com.eimc.user.dao.ListUserDAO;
+import com.eimc.user.dao.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -32,11 +32,11 @@ public class CarBookingApp {
         ///  Dependency injection
         ListCarDAO listCarDAO = new ListCarDAO();
         ListBookingDAO listBookingDAO = new ListBookingDAO();
-        ListUserDAO listUserDAO = new ListUserDAO();
+        UserRepository userRepository = new UserRepository();
 
         CarService carService = new CarService(listCarDAO);
         BookingService bookingService = new BookingService(listBookingDAO, carService);
-        UserService userService = new UserService(listUserDAO);
+        UserService userService = new UserService(userRepository);
 
         ///  Make a car booking for Jerry
         System.out.println();

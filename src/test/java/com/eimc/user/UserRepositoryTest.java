@@ -1,7 +1,7 @@
 package com.eimc.user;
 
 import com.eimc.exception.UserNotFoundException;
-import com.eimc.user.dao.ListUserDAO;
+import com.eimc.user.dao.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +22,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  *      3. THEN (Assert): Verify the result using assertions (AssertJ).
  */
 
-public class ListUserDAOTest {
+public class UserRepositoryTest {
 
-    private ListUserDAO actualTestListUserDAO;
+    private UserRepository actualTestUserRepository;
 
     private User expectedTestUserCharles;
     private User expectedTestUserJerry;
@@ -33,7 +33,7 @@ public class ListUserDAOTest {
     void setUp(){
 
         // GIVEN
-        actualTestListUserDAO = new ListUserDAO();
+        actualTestUserRepository = new UserRepository();
 
         expectedTestUserJerry = new User(
                 UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
@@ -48,9 +48,9 @@ public class ListUserDAOTest {
         // GIVEN actualTestListUserDAO object created in setUp();
 
         // WHEN actualTestUsers
-        List<User> actualTestUsers = actualTestListUserDAO.getUsers();
+        List<User> actualTestUsers = actualTestUserRepository.getUsers();
         actualTestUsers.set(0, null);
-        List<User> actualTestUsersAfterModification = actualTestListUserDAO.getUsers();
+        List<User> actualTestUsersAfterModification = actualTestUserRepository.getUsers();
 
         // THEN
         assertThat(actualTestUsersAfterModification.get(0))
@@ -66,7 +66,7 @@ public class ListUserDAOTest {
         UUID testTargetId = expectedTestUserJerry.getUserId();
 
         // WHEN
-        User actualUserReturnedById = actualTestListUserDAO.getUserById(testTargetId);
+        User actualUserReturnedById = actualTestUserRepository.getUserById(testTargetId);
 
         // THEN
         assertThat(actualUserReturnedById).as("The getUserById() method must return a user with the correct user id.")
@@ -89,7 +89,7 @@ public class ListUserDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestListUserDAO.getUserById(nonExistentId))
+        assertThatThrownBy(() -> actualTestUserRepository.getUserById(nonExistentId))
                 .isInstanceOf(UserNotFoundException.class)
                 .hasMessageContaining(nonExistentId.toString());
 

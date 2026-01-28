@@ -1,6 +1,6 @@
 package com.eimc.user;
 
-import com.eimc.user.dao.ListUserDAO;
+import com.eimc.user.dao.UserRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,18 +15,18 @@ import java.util.UUID;
 
 public class UserService {
 
-    private final ListUserDAO listUserDAO;
+    private final UserRepository userRepository;
 
-    public UserService(ListUserDAO listUserDAO) {
-        this.listUserDAO = listUserDAO;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public User getUserById(UUID id) {
-        return this.listUserDAO.getUserById(id);
+        return this.userRepository.getUserById(id);
     }
 
     public List<User> getUsers() {
-        return this.listUserDAO.getUsers();
+        return this.userRepository.getUsers();
     }
 
 }
