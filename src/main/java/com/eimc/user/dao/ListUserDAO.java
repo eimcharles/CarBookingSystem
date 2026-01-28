@@ -7,21 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *      ListUserDAO is a Data Access Object (DAO)
- *      class for managing User objects,
- *      it implements the UserDAO contract.
- */
 
 public class ListUserDAO implements UserDAO {
 
     private final List<User> userDAO = new ArrayList<>();
 
     public ListUserDAO() {
-
-        addUser(new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"),
-                "Charles",
-                "Eimer"));
 
         addUser(new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
                 "Jerry",

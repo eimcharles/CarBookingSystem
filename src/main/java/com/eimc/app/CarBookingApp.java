@@ -1,14 +1,22 @@
 package com.eimc.app;
 
-import com.eimc.configuration.Configuration;
+import com.eimc.booking.BookingService;
+import com.eimc.booking.dao.ListBookingDAO;
+import com.eimc.car.Car;
+import com.eimc.car.CarService;
+import com.eimc.car.dao.ListCarDAO;
+import com.eimc.exception.BookingNotFoundException;
+import com.eimc.exception.CarNotFoundException;
+import com.eimc.exception.CarUnavailableException;
+import com.eimc.exception.UserNotFoundException;
+import com.eimc.user.User;
+import com.eimc.user.UserService;
+import com.eimc.user.dao.ListUserDAO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static com.eimc.app.CLIDisplayUtility.*;
-import static com.eimc.app.CarBookingCLI.*;
-import static com.eimc.app.CLIFormatUtility.*;
-
-import java.util.Scanner;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *      CarBookingApp is the entry point to start the application.
@@ -21,94 +29,78 @@ public class CarBookingApp {
 
         SpringApplication.run(CarBookingApp.class, args);
 
-        // Initialize System
-        Configuration configuration = new Configuration();
-        Scanner scanner = new Scanner(System.in);
+        ///  Dependency injection
+        ListCarDAO listCarDAO = new ListCarDAO();
+        ListBookingDAO listBookingDAO = new ListBookingDAO();
+        ListUserDAO listUserDAO = new ListUserDAO();
 
-        // CarBookingApplication
-        runCarBookingApp(scanner, configuration);
+        CarService carService = new CarService(listCarDAO);
+        BookingService bookingService = new BookingService(listBookingDAO, carService);
+        UserService userService = new UserService(listUserDAO);
+
+        ///  Make a car booking for Jerry
+        System.out.println();
+        makeACarBookingByUser(bookingService);
+        System.out.println();
+
+        ///  Display the car that Jerry booked
+        displayCarsBookedByUserByUserId(bookingService);
+        System.out.println();
+
+        ///  Cancel the booking for Jerry
+        cancelCarBookingByBookingId(bookingService);
+        System.out.println();
+
+        ///  Display all available cars after the booking is canceled
+        carService.getAllAvailableCars().forEach(System.out::println);
+        System.out.println();
 
     }
 
-    private static void runCarBookingApp(Scanner scanner, Configuration configuration) {
+    public static void makeACarBookingByUser(BookingService bookingService) {
 
-        String userInput;
+        try {
 
-        // Display greeting, main menu and explain system interactions
-        displayCarBookingGreeting();
-        displaySystemGuidelines();
-        displayMainMenu();
+            User user =  new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
+                    "Jerry",
+                    "LeBlond");
 
-        // Application Loop (The Menu)
-        while (true) {
+            // Attempt to create the booking by associating the user and car registration
+            UUID userBookingID = bookingService.addCarBookingByUserAndRegistrationNumber(user, "123_4");
+            // Display booking success message
+            System.out.println("Successfully created a car booking for " + user.getFirstName() + " with booking id: " + userBookingID + ".");
 
-            try {
-
-                displayUserInput();
-                userInput = scanner.nextLine().trim();
-
-                switch (userInput) {
-                    case "1":
-                        // To Make a Car Booking (By User ID and Car Registration Number)
-                        displayResultsByMenuTitle(TITLE_MAKE_BOOKING);
-                        makeACarBookingByUserIdAndRegistrationNumber(configuration.getUserService(), configuration.getBookingService(), scanner);
-                        break;
-                    case "2":
-                        // To Cancel a Car Booking (By Booking ID)
-                        displayResultsByMenuTitle(TITLE_CANCEL_BOOKING);
-                        cancelCarBookingByBookingId(configuration.getBookingService(), scanner);
-                        break;
-                    case "3":
-                        // To Display All Available Cars
-                        displayResultsByMenuTitle(TITLE_ALL_CARS);
-                        displayAllAvailableCars(configuration.getBookingService());
-                        break;
-                    case "4":
-                        // To Display Available Gasoline Cars
-                        displayResultsByMenuTitle(TITLE_GAS_CARS);
-                        displayAllAvailableGasCars(configuration.getBookingService());
-                        break;
-                    case "5":
-                        // To Display Available Electric Cars
-                        displayResultsByMenuTitle(TITLE_ELECTRIC_CARS);
-                        displayAllAvailableElectricCars(configuration.getBookingService());
-                        break;
-                    case "6":
-                        // To Display All Active Bookings
-                        displayResultsByMenuTitle(TITLE_ACTIVE_BOOKINGS);
-                        displayAllActiveBookings(configuration.getBookingService());
-                        break;
-                    case "7":
-                        // To Display Cars Booked by User (By User ID)
-                        displayResultsByMenuTitle(TITLE_USER_BOOKED_CARS);
-                        displayCarsBookedByUserByUserId(configuration.getUserService(), configuration.getBookingService(), scanner);
-                        break;
-                    case "8":
-                        // To Display All Registered Users
-                        displayResultsByMenuTitle(TITLE_REGISTERED_USERS);
-                        displayAllRegisteredUsers(configuration.getUserService());
-                        break;
-                    case "9":
-                        // To View Main Menu
-                        displayMainMenu();
-                        break;
-                    case "0":
-                        // To Exit Application
-                        displayFormattedMessage("👋","Thank you for using the Car Booking System - Goodbye!");
-                        scanner.close();
-                        return;
-                    default:
-                        // For invalid user inputs
-                        displayFormattedMessage("❌","Invalid option - please enter a number between 1 to 9 or 0 to EXIT.");
-                        break;
-                }
-
-            } catch (Exception e) {
-                // For all uncaught exceptions
-                displayFormattedMessage("🚨","Unexpected error occurred: " + e.getMessage());
-
-            }
+        }  catch (UserNotFoundException e) {
+            // User does not found
+            System.out.println(e.getMessage());
+        } catch (CarNotFoundException e) {
+            // Car does not found
+            System.out.println(e.getMessage());
+        } catch (CarUnavailableException e) {
+            // Car is unavailable (booked)
+            System.out.println(e.getMessage());
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Booking attempt failed - Please try again.");
         }
+    }
+
+    public static void cancelCarBookingByBookingId(BookingService bookingService) {
+
+        try {
+            bookingService.cancelActiveBookingByBookingId(UUID.fromString("8e397f1e-e7a4-4c39-8331-968a9ab3faef"));
+            System.out.println("Successfully cancelled the booking with booking id: 8e397f1e-e7a4-4c39-8331-968a9ab3faef.");
+        } catch (BookingNotFoundException e) {
+            System.out.println(e.getMessage());
+        }  catch (Exception e) {
+            System.out.println("No bookings currently registered in the system");
+        }
+    }
+
+    public static void displayCarsBookedByUserByUserId(BookingService bookingService) {
+        List<Car> bookedCars = bookingService.getAllBookedCarsByUserId(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"));
+        bookedCars.forEach(System.out::println);
     }
 
 }

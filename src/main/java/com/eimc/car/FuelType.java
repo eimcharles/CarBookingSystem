@@ -1,12 +1,7 @@
 package com.eimc.car;
 
 /**
- *      The FuelType enum represents a list
- *      of supported fuel types.
- *
- *      It defines a fixed set of constant
- *      values that can be used to specify
- *      the FuelType of a car within the application.
+ *      TODO fix FuelType Enum for Spring Boot
  */
 
 public enum FuelType {

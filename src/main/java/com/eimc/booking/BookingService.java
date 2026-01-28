@@ -16,6 +16,9 @@ import java.util.UUID;
 /**
  *      Service class for managing Booking objects.
  *      Contains business logic related to bookings.
+ *
+ *      TODO fix Booking Service business logic for Spring Boot
+ *
  */
 
 public class BookingService {
@@ -39,7 +42,7 @@ public class BookingService {
         Car carToBook = getAvailableCarForBookingByRegistrationNumber(registrationNumber);
 
         ///  Car is available - create a new bookingId
-        UUID bookingId = UUID.randomUUID();
+        UUID bookingId = UUID.fromString("8e397f1e-e7a4-4c39-8331-968a9ab3faef");
 
         /// Create and save the new booking
         this.listBookingDAO.addBooking(
@@ -109,14 +112,6 @@ public class BookingService {
         return this.listBookingDAO.getBookingById(bookingId);
     }
 
-    public boolean hasAvailableCarsForBooking() {
-        return !getAllAvailableCars().isEmpty();
-    }
-
-    public boolean hasActiveBookings(){
-        return !getAllActiveBookings().isEmpty();
-    }
-
     public List<Booking> getBookings() {
         return this.listBookingDAO.getBookings();
     }
@@ -170,10 +165,10 @@ public class BookingService {
     }
 
     public List<Car> getAllAvailableGasCars(){
-        return getAllAvailableCarsForBooking(carService.getAllGasolineCars());
+        return getAllAvailableCarsForBooking(carService.getGasolineCars());
     }
 
     public List<Car> getAllAvailableElectricCars(){
-        return getAllAvailableCarsForBooking(carService.getAllElectricCars());
+        return getAllAvailableCarsForBooking(carService.getElectricCars());
     }
 }

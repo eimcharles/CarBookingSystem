@@ -2,6 +2,9 @@ package com.eimc.car;
 
 /**
  *      Domain class for Car Object
+ *
+ *      TODO fix Car entity model for Spring Boot
+
  * */
 
 import java.math.BigDecimal;

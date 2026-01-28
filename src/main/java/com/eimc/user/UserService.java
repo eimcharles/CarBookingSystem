@@ -8,6 +8,9 @@ import java.util.UUID;
 /**
  *      Service class for managing User objects.
  *      Contains business logic related to users.
+ *
+ *      TODO fix User Service business logic for Spring Boot
+ *
  */
 
 public class UserService {

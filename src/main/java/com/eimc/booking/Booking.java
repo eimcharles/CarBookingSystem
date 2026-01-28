@@ -2,6 +2,9 @@ package com.eimc.booking;
 
 /**
  *      Domain class for Booking Object
+ *
+ *      TODO fix Booking entity model for Spring Boot
+ *
  * */
 
 import com.eimc.car.Car;

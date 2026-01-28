@@ -1,44 +1,19 @@
 package com.eimc.booking.dao;
 
 import com.eimc.booking.Booking;
-import com.eimc.car.Brand;
-import com.eimc.car.Car;
-import com.eimc.car.FuelType;
-import com.eimc.exception.BookingNotFoundException;
-import com.eimc.user.User;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import com.eimc.exception.BookingNotFoundException;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *      ListBookingDAO is a Data Access Object (DAO)
- *      class for managing Car Booking objects,
- *      it implements BookingDAO contract.
- *
- *      This implementation stores and manages Car Bookings using arrays.
- */
-
 public class ListBookingDAO implements BookingDAO {
 
-    private final List<Booking> bookingsDao = new ArrayList<>(MAX_CAPACITY);
+    private final List<Booking> bookingsDao = new ArrayList<>();
 
-    /// Defines a maximum capacity for bookings in system.
-    private static final int MAX_CAPACITY = 3;
-
-    public ListBookingDAO() {
-
-        Booking initialBooking =  new Booking(UUID.fromString("8e397f1e-e7a4-4c39-8331-968a9ab3faef"),
-                new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jerry", "LeBlond"),
-                new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC),
-                LocalDateTime.now());
-
-        /// Total Bookings in system: 1 (bookings slots available: 2)
-        addBooking(initialBooking);
-
-    }
+    public ListBookingDAO() {}
 
     @Override
     public void addBooking(Booking carBooking) {
@@ -46,10 +21,6 @@ public class ListBookingDAO implements BookingDAO {
         ///  Check if null
         if (carBooking == null)
             throw new IllegalArgumentException("Booking cannot be null");
-
-        ///  Check if there is space in bookings DA0
-        if (bookingsDao.size() >= MAX_CAPACITY)
-            throw new IllegalStateException(String.format("The system has no more available space to add bookings - total space available: %d", MAX_CAPACITY));
 
         ///  Add booking
         bookingsDao.add(carBooking);

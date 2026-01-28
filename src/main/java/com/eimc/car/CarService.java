@@ -8,6 +8,9 @@ import java.util.List;
 /**
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
+ *
+ *      TODO fix Car Service business logic for Spring Boot
+ *
  */
 
 public class CarService {
@@ -58,11 +61,12 @@ public class CarService {
                 .toList();
     }
 
-    public List<Car> getAllElectricCars() {
+    public List<Car> getElectricCars() {
         return getAllAvailableCarsByFuelType(FuelType.ELECTRIC);
     }
 
-    public List<Car> getAllGasolineCars() {
+    public List<Car> getGasolineCars() {
         return getAllAvailableCarsByFuelType(FuelType.GASOLINE);
     }
+
 }

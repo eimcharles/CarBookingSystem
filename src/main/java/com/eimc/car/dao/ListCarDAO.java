@@ -9,11 +9,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *      ListCarDAO is a Data Access Object (DAO)
- *      class for managing Car objects,
- *      it implements the CarDAO contract.
- */
 
 public class ListCarDAO implements CarDAO {
 
@@ -21,21 +16,18 @@ public class ListCarDAO implements CarDAO {
 
     public ListCarDAO() {
 
-        // Available for booking
-        addCar(new Car("123_1", new BigDecimal("89.00"), Brand.BMW, FuelType.ELECTRIC));
-        addCar(new Car("123_2", new BigDecimal("79.00"), Brand.BMW, FuelType.GASOLINE));
-        addCar(new Car("123_3", new BigDecimal("69.00"), Brand.VOLKSWAGEN, FuelType.ELECTRIC));
-
-        // Car booked in system
+        // Car available for booking
         addCar(new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC));
 
     }
 
     @Override
     public void addCar(Car car) {
+
         if (car == null)
             throw new IllegalStateException("Car cannot be null");
         carDAO.add(car);
+
 
     }
 

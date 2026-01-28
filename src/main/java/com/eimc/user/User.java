@@ -1,11 +1,14 @@
 package com.eimc.user;
 
-/**
- *      Domain class for User Object
- * */
-
 import java.util.Objects;
 import java.util.UUID;
+
+/**
+ *      Domain class for User Object
+ *
+ *      TODO fix User entity model for Spring Boot
+ *
+ * */
 
 public class User {
 
