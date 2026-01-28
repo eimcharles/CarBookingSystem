@@ -1,8 +1,5 @@
-package com.eimc.car.dao;
+package com.eimc.car;
 
-import com.eimc.car.Brand;
-import com.eimc.car.Car;
-import com.eimc.car.FuelType;
 import com.eimc.exception.CarNotFoundException;
 
 import java.math.BigDecimal;
@@ -10,18 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ListCarDAO implements CarDAO {
+public class CarRepository {
 
     private final List<Car> carDAO = new ArrayList<>();
 
-    public ListCarDAO() {
+    public CarRepository() {
 
         // Car available for booking
         addCar(new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC));
 
     }
 
-    @Override
     public void addCar(Car car) {
 
         if (car == null)
@@ -31,7 +27,6 @@ public class ListCarDAO implements CarDAO {
 
     }
 
-    @Override
     public void updateCar(Car carToUpdate) {
 
         // Car to be canceled registration number
@@ -56,7 +51,6 @@ public class ListCarDAO implements CarDAO {
         throw new CarNotFoundException(registrationNumber);
     }
 
-    @Override
     public List<Car> getCars() {
         return new ArrayList<>(this.carDAO);
     }

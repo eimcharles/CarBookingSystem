@@ -1,6 +1,5 @@
 package com.eimc.car;
 
-import com.eimc.car.dao.ListCarDAO;
 import com.eimc.exception.CarNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,9 +23,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  *      3. THEN (Assert): Verify the result using assertions (AssertJ).
  */
 
-public class ListCarDAOTest {
+public class CarRepositoryTest {
 
-    private ListCarDAO actualTestListCarDAO;
+    private CarRepository actualTestCarRepository;
 
     private Car expectedTestCarHONDA;
 
@@ -34,7 +33,7 @@ public class ListCarDAOTest {
     void setUp(){
 
         // GIVEN
-        actualTestListCarDAO = new ListCarDAO();
+        actualTestCarRepository = new CarRepository();
 
 
         expectedTestCarHONDA = new Car("123_4",
@@ -50,7 +49,7 @@ public class ListCarDAOTest {
         // GIVEN actualTestListCarDAO object created in setUp();
 
         // WHEN
-        List<Car> actualTestCars = actualTestListCarDAO.getCars();
+        List<Car> actualTestCars = actualTestCarRepository.getCars();
 
         // THEN
         assertThat(actualTestCars)
@@ -67,9 +66,9 @@ public class ListCarDAOTest {
         // GIVEN actualTestListCarDAO object created in setUp();
 
         // WHEN
-        List<Car> actualTestCars = actualTestListCarDAO.getCars();
+        List<Car> actualTestCars = actualTestCarRepository.getCars();
         actualTestCars.set(0, null);
-        List<Car> actualTestCarsAfterModification = actualTestListCarDAO.getCars();
+        List<Car> actualTestCarsAfterModification = actualTestCarRepository.getCars();
 
         // THEN
         assertThat(actualTestCarsAfterModification.get(0))
@@ -108,7 +107,7 @@ public class ListCarDAOTest {
          * */
 
         // WHEN & THEN
-        assertThatThrownBy(() -> actualTestListCarDAO.updateCar(nonExistantCar))
+        assertThatThrownBy(() -> actualTestCarRepository.updateCar(nonExistantCar))
                 .isInstanceOf(CarNotFoundException.class)
                 .hasMessageContaining(nonExistantCar.getRegistrationNumber());
 

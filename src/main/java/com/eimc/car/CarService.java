@@ -1,6 +1,5 @@
 package com.eimc.car;
 
-import com.eimc.car.dao.ListCarDAO;
 import com.eimc.exception.CarNotFoundException;
 
 import java.util.List;
@@ -15,10 +14,10 @@ import java.util.List;
 
 public class CarService {
 
-    private final ListCarDAO listCarDAO;
+    private final CarRepository carRepository;
 
-    public CarService(ListCarDAO listCarDAO) {
-        this.listCarDAO = listCarDAO;
+    public CarService(CarRepository carRepository) {
+        this.carRepository = carRepository;
     }
 
     public void cancelAssociatedCarToActiveBookingByRegistrationNumber(String registrationNumber){
@@ -30,7 +29,7 @@ public class CarService {
         carToRelease.setCarBooked(false);
 
         /// Update the state change
-        this.listCarDAO.updateCar(carToRelease);
+        this.carRepository.updateCar(carToRelease);
 
     }
 
@@ -43,7 +42,7 @@ public class CarService {
     }
 
     public List<Car> getCars() {
-        return this.listCarDAO.getCars();
+        return this.carRepository.getCars();
     }
 
     public List<Car> getAllAvailableCars() {

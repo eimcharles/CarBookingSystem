@@ -4,7 +4,7 @@ import com.eimc.booking.BookingService;
 import com.eimc.booking.dao.ListBookingDAO;
 import com.eimc.car.Car;
 import com.eimc.car.CarService;
-import com.eimc.car.dao.ListCarDAO;
+import com.eimc.car.CarRepository;
 import com.eimc.exception.BookingNotFoundException;
 import com.eimc.exception.CarNotFoundException;
 import com.eimc.exception.CarUnavailableException;
@@ -30,11 +30,11 @@ public class CarBookingApp {
         SpringApplication.run(CarBookingApp.class, args);
 
         ///  Dependency injection
-        ListCarDAO listCarDAO = new ListCarDAO();
+        CarRepository carRepository = new CarRepository();
         ListBookingDAO listBookingDAO = new ListBookingDAO();
         UserRepository userRepository = new UserRepository();
 
-        CarService carService = new CarService(listCarDAO);
+        CarService carService = new CarService(carRepository);
         BookingService bookingService = new BookingService(listBookingDAO, carService);
         UserService userService = new UserService(userRepository);
 
