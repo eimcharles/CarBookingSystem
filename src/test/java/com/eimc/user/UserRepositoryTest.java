@@ -1,6 +1,5 @@
 package com.eimc.user;
 
-import com.eimc.exception.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

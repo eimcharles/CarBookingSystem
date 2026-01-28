@@ -1,7 +1,5 @@
 package com.eimc.car;
 
-import com.eimc.exception.CarNotFoundException;
-
 import java.util.List;
 
 /**

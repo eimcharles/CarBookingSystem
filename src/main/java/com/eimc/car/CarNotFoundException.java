@@ -1,4 +1,4 @@
-package com.eimc.exception;
+package com.eimc.car;
 
 /**
  *      CarNotFoundException class throws

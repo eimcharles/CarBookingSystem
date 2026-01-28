@@ -1,7 +1,5 @@
 package com.eimc.car;
 
-import com.eimc.exception.CarNotFoundException;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.eimc.exception;
+package com.eimc.common;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

@@ -1,7 +1,5 @@
 package com.eimc.booking;
 
-import com.eimc.exception.BookingNotFoundException;
-
 
 import java.util.ArrayList;
 import java.util.List;

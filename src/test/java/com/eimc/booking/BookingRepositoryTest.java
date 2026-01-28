@@ -3,7 +3,6 @@ package com.eimc.booking;
 import com.eimc.car.Brand;
 import com.eimc.car.Car;
 import com.eimc.car.FuelType;
-import com.eimc.exception.BookingNotFoundException;
 import com.eimc.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

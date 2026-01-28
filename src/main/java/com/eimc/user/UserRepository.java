@@ -1,7 +1,5 @@
 package com.eimc.user;
 
-import com.eimc.exception.UserNotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
