@@ -1,0 +1,29 @@
+
+services:
+  # Database mySQL container
+  database:
+    image: mysql:${MYSQL_VERSION}
+    container_name: ${DB_CONTAINER_NAME}
+    ports:
+      - "${HOST_DB_PORT}:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # Spring Boot application container and its connection to the SQL database.
+  app:
+    build: src/main/java
+    container_name: ${APP_CONTAINER_NAME}
+    ports:
+      - "${HOST_APP_PORT}:8080"
+    depends_on:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+volumes:
+  db_data:
