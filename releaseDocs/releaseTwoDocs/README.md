@@ -27,13 +27,14 @@ User Management: user accounts, manage profiles, and view all registered users.<
 
 ## Learning Outcomes: </br>
 ✅ **Spring Boot** to manage project's configurations.</br>
-❌ **Spring Data JPA** with MySQL database for persistent storage and retrieval of application data.</br>
+✅ **Spring Data JPA** with MySQL database for persistent storage and retrieval of application data.</br>
 ❌ **Spring Security with JSON Web Tokens** for user authentication, role based access control and single sign on.</br>
 ❌ **Spring Boot Mail Starter** for notifications and booking confirmations.</br>
 ❌ **Stripe API** for payment processing and real-time reservation updates. </br>
 ✅ **Streams** for functional programming.</br>
 ❌ **Generics** for type-safe API response mapping.</br>
 ❌ **Mocking** using Mockito for testing component interactions.</br>
+✅ **Docker** for containerizing and optimizing build contexts for efficient deployment.</br>
 ❌ **Java Test Containers** to for isolated database environments for integration tests.</br>
 
 --- 
