@@ -61,9 +61,15 @@ public class CarBookingApp {
 
         try {
 
-            User user =  new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"),
+            User user = new User(
                     "Jerry",
-                    "LeBlond");
+                    "LeBlond",
+                    "jerry@email.com",
+                    "securePass123",
+                    "+1-555-0199"
+            );
+
+            user.setUserId(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"));
 
             // Attempt to create the booking by associating the user and car registration
             UUID userBookingID = bookingService.addCarBookingByUserAndRegistrationNumber(user, "123_4");

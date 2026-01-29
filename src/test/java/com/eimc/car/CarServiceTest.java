@@ -1,7 +1,7 @@
 package com.eimc.car;
 
 /**
- *      Unit tests for the ListCarDAO class
+ *      Unit tests for the Car Service class
  *
  *      Test methods follow the Arrange-Act-Assert (AAA) pattern,
  *      commonly labeled as Given-When-Then:

@@ -1,7 +1,7 @@
 package com.eimc.booking;
 
 /**
- *      Unit tests for the ArrayBookingDAO class
+ *      Unit tests for the Booking Service class
  *
  *      Test methods follow the Arrange-Act-Assert (AAA) pattern,
  *      commonly labeled as Given-When-Then:
