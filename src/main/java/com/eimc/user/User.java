@@ -1,8 +1,10 @@
 package com.eimc.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -27,6 +29,8 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createdAt;
 
     public User() {}
@@ -56,7 +60,8 @@ public class User {
             this.userRole = UserRole.ROLE_USER;
         }
 
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+
     }
 
     public void setId(Long id) {
