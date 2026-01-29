@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CarRepository {
 
     private final List<Car> carDAO = new ArrayList<>();
@@ -52,4 +51,5 @@ public class CarRepository {
     public List<Car> getCars() {
         return new ArrayList<>(this.carDAO);
     }
+
 }

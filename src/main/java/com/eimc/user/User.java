@@ -150,4 +150,5 @@ public class User {
         return "User { userId = %s, userRole = %s, firstName = '%s', lastName = '%s', email = '%s', phoneNumber = '%s'}"
                 .formatted(userId, userRole, firstName, lastName, email, phoneNumber);
     }
+
 }

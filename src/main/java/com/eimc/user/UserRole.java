@@ -1,6 +1,5 @@
 package com.eimc.user;
 
-
 public enum UserRole {
 
     ROLE_USER,
