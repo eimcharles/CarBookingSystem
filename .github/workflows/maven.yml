@@ -22,8 +22,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+      # 1. Run unit tests
     - name: Build with Maven Wrapper
       run: chmod +x mvnw && ./mvnw -B package
+
+      # 2. Verify Dockerfile, successfully package the JAR
+    - name: Docker Build Check
+      run: docker build . -t maven-to-spring-migration:latest
 
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@v4
