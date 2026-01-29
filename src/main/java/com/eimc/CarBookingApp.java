@@ -10,8 +10,6 @@ import com.eimc.car.CarNotFoundException;
 import com.eimc.car.CarUnavailableException;
 import com.eimc.user.UserNotFoundException;
 import com.eimc.user.User;
-import com.eimc.user.UserService;
-import com.eimc.user.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -32,11 +30,9 @@ public class CarBookingApp {
         ///  Dependency injection
         CarRepository carRepository = new CarRepository();
         BookingRepository bookingRepository = new BookingRepository();
-        UserRepository userRepository = new UserRepository();
 
         CarService carService = new CarService(carRepository);
         BookingService bookingService = new BookingService(bookingRepository, carService);
-        UserService userService = new UserService(userRepository);
 
         ///  Make a car booking for Jerry
         System.out.println();
@@ -66,7 +62,7 @@ public class CarBookingApp {
                     "LeBlond",
                     "jerry@email.com",
                     "securePass123",
-                    "+1-555-0199"
+                    "514-555-5555"
             );
 
             user.setUserId(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"));
