@@ -1,12 +1,17 @@
 package com.eimc.user.controller;
 
+import com.eimc.common.HttpResponse;
 import com.eimc.user.dto.UserRequestDTO;
 import com.eimc.user.dto.UserResponseDTO;
 import com.eimc.user.model.User;
 import com.eimc.user.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -20,9 +25,23 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO request) {
-        /// TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> createUser(@RequestBody UserRequestDTO request) {
+
+        User userEntity = request.toEntity();
+        User createdUser = userService.createUser(userEntity);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .data(Map.of("user", UserResponseDTO.from(createdUser)))
+                        .message("User created successfully")
+                        .status(HttpStatus.CREATED)
+                        .statusCode(HttpStatus.CREATED.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.POST.name())
+                        .build()
+        );
+
     }
 
     @GetMapping
