@@ -21,7 +21,7 @@ public class UserService {
 
     public User getUserById(UUID userId) {
         return this.userRepository.findByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
     }
 
