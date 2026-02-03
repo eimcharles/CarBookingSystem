@@ -51,9 +51,22 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable UUID userId) {
-        ///  TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> getUserById(@PathVariable UUID userId) {
+
+        User user = userService.getUserById(userId);
+
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("user", UserResponseDTO.from(user)))
+                        .message("User retrieved successfully")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.GET.name())
+                        .build()
+        );
+
     }
 
     @PutMapping("/{userId}")
