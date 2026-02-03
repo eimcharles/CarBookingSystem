@@ -1,9 +1,11 @@
 package com.eimc.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.experimental.SuperBuilder;
 import org.springframework.http.HttpStatus;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
@@ -15,7 +17,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 @JsonInclude(NON_DEFAULT)
 public class HttpResponse {
 
-    protected String timeStamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    protected LocalDateTime timeStamp;
     protected Map<?,?> data;
     protected String message;
     protected HttpStatus status;
@@ -27,7 +30,7 @@ public class HttpResponse {
 
     public HttpResponse() {}
 
-    public HttpResponse(String timeStamp,
+    public HttpResponse(LocalDateTime timeStamp,
                         Map<?, ?> data,
                         String message,
                         HttpStatus status,
@@ -46,7 +49,7 @@ public class HttpResponse {
         this.developerMessage = developerMessage;
     }
 
-    public String getTimeStamp() {
+    public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
 
@@ -78,7 +81,7 @@ public class HttpResponse {
         return developerMessage;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
     }
 
