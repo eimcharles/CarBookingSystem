@@ -1,5 +1,7 @@
 package com.eimc.user.controller;
 
+import com.eimc.user.dto.UserRequestDTO;
+import com.eimc.user.dto.UserResponseDTO;
 import com.eimc.user.model.User;
 import com.eimc.user.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user) {
+    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO request) {
         /// TODO: Implement Logic
         return null;
     }
