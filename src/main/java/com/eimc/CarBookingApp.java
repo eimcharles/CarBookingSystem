@@ -8,8 +8,8 @@ import com.eimc.car.CarRepository;
 import com.eimc.booking.BookingNotFoundException;
 import com.eimc.car.CarNotFoundException;
 import com.eimc.car.CarUnavailableException;
-import com.eimc.user.UserNotFoundException;
-import com.eimc.user.User;
+import com.eimc.user.exception.UserNotFoundException;
+import com.eimc.user.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
