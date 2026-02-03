@@ -1,24 +1,48 @@
 package com.eimc.user;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1/users")
 public class UserController {
 
-    /**
-     *    TODO implement User Controller
-     *
-     *     UserController Class
-     *
-     *     CRUD ENDPOINT - CREATE USERS
-     *
-     *     CRUD ENDPOINT - UPDATE USERS
-     *
-     *     CRUD ENDPOINT - DELETE USERS
-     *
-     *     CRUD ENDPOINT - GET USERS
-     *
-     *     CRUD ENDPOINT - GET USER BY ID
-     */
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createUser(@RequestBody User user) {
+        /// TODO: Implement Logic
+        return null;
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getUsers() {
+        /// TODO: Implement Logic
+        return null;
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable UUID userId) {
+        /// TODO: Implement Logic
+        return null;
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateUser(@PathVariable UUID userId, @RequestBody User user) {
+        ///  TODO: Implement Logic
+        return null;
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
+        /// TODO: Implement Logic
+        return null;
+    }
 
 }
