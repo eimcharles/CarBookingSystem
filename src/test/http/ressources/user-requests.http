@@ -22,4 +22,13 @@ Content-Type: application/json
   "phoneNumber": "514-555-5555"
 }
 
+### Get Charles Eimer by ID
+GET http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
+Accept: application/json
+
+### Get Sam Samson by ID
+GET http://localhost:8080/api/v1/users/d8e9f88e-1850-40d6-9bf1-7551979b17e8
+Accept: application/json
+
+
 
