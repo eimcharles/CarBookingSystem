@@ -1,4 +1,4 @@
-package com.eimc.common;
+package com.eimc.common.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
