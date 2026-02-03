@@ -1,5 +1,8 @@
 package com.eimc.user;
 
+import com.eimc.user.exception.UserNotFoundException;
+import com.eimc.user.model.User;
+import com.eimc.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
