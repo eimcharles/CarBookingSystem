@@ -32,7 +32,7 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 HttpResponse.builder()
-                        .timeStamp(LocalDateTime.now().toString())
+                        .timeStamp(LocalDateTime.now())
                         .data(Map.of("user", UserResponseDTO.from(createdUser)))
                         .message("User created successfully")
                         .status(HttpStatus.CREATED)
@@ -52,7 +52,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable UUID userId) {
-        /// TODO: Implement Logic
+        ///  TODO: Implement Logic
         return null;
     }
 
