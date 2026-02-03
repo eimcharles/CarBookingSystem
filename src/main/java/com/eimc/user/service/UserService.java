@@ -1,4 +1,4 @@
-package com.eimc.user;
+package com.eimc.user.service;
 
 import com.eimc.user.exception.UserNotFoundException;
 import com.eimc.user.model.User;

@@ -1,5 +1,7 @@
-package com.eimc.user;
+package com.eimc.user.controller;
 
+import com.eimc.user.model.User;
+import com.eimc.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

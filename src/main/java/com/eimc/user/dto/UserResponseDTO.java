@@ -1,4 +1,4 @@
-package com.eimc.user;
+package com.eimc.user.dto;
 
 import com.eimc.user.model.User;
 import com.eimc.user.model.UserRole;

@@ -1,4 +1,4 @@
-package com.eimc.user;
+package com.eimc.user.exception;
 
 import java.util.UUID;
 
