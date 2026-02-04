@@ -4,6 +4,8 @@ import com.eimc.car.model.Car;
 import com.eimc.car.exception.CarNotFoundException;
 import com.eimc.car.repository.CarRepository;
 import com.eimc.car.model.enums.FuelType;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,10 +13,9 @@ import java.util.UUID;
 /**
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
- *
- *      TODO fix Car Service business logic for Spring Boot
  */
 
+@Service
 public class CarService {
 
     private final CarRepository carRepository;
@@ -23,29 +24,28 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public void cancelAssociatedCarToActiveBookingByRegistrationNumber(UUID registrationNumber){
+    @Transactional
+    public void releaseCarFromBooking(UUID carId){
 
         /// Fetch Car to be put back in inventory
-        Car carToRelease = getCarByRegistrationNumber(registrationNumber);
+        Car carToRelease = getCarByCarId(carId);
 
         /// State change to the Car object - remove the car from booking.
         carToRelease.setCarBooked(false);
 
-        /// Update the state change
-        this.carRepository.updateCar(carToRelease);
+        ///  @Transactional manages the entity, to remove.
+        this.carRepository.save(carToRelease);
 
     }
 
-    public Car getCarByRegistrationNumber(UUID registrationNumber) {
+    public Car getCarByCarId(UUID carId) {
         ///  Retrieves car with matching registration number, throws CarNotFoundException if not found
-        return getCars().stream()
-                .filter(car -> car.getCarId().equals(registrationNumber))
-                .findFirst()
-                .orElseThrow(() -> new CarNotFoundException(registrationNumber));
+        return carRepository.findByCarId(carId)
+                .orElseThrow(() -> new CarNotFoundException(carId));
     }
 
     public List<Car> getCars() {
-        return this.carRepository.getCars();
+        return this.carRepository.findAll();
     }
 
     public List<Car> getAllAvailableCars() {

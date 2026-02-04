@@ -27,6 +27,8 @@ public class CarBookingApp {
 
         SpringApplication.run(CarBookingApp.class, args);
 
+        /**
+
         ///  Dependency injection
         CarRepository carRepository = new CarRepository();
         BookingRepository bookingRepository = new BookingRepository();
@@ -50,6 +52,8 @@ public class CarBookingApp {
         ///  Display all available cars after the booking is canceled
         carService.getAllAvailableCars().forEach(System.out::println);
         System.out.println();
+
+         */
 
     }
 

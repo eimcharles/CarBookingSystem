@@ -72,7 +72,7 @@ public class BookingService {
     public Car getAvailableCarForBookingByRegistrationNumber(UUID registrationNumber) {
 
         /// Get the car by registration number
-        Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
+        Car carToBook = this.carService.getCarByCarId(registrationNumber);
 
         ///  Check if car is booked
         if (carToBook.isCarBooked()) {
@@ -96,7 +96,7 @@ public class BookingService {
         Booking bookingToCancel = getBookingByBookingId(validatedBookingId);
 
         /// Release the car
-        this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getCarId());
+        this.carService.releaseCarFromBooking(bookingToCancel.getCar().getCarId());
 
         ///  Change the booking state to inactive
         bookingToCancel.cancelBooking();

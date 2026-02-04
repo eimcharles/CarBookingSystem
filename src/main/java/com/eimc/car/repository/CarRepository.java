@@ -1,60 +1,15 @@
 package com.eimc.car.repository;
 
-import com.eimc.car.exception.CarNotFoundException;
 import com.eimc.car.model.Car;
-import com.eimc.car.model.enums.Model;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public class CarRepository {
+@Repository
+public interface CarRepository extends JpaRepository<Car, Long> {
 
-    private final List<Car> carDAO = new ArrayList<>();
-
-    public CarRepository() {
-
-        // Car available for booking
-        addCar(new Car(UUID.fromString("a6079ab3-06ff-4983-af48-78b3ee4e2962"), Model.TIGUAN, new BigDecimal("49.00")));
-
-    }
-
-    public void addCar(Car car) {
-
-        if (car == null)
-            throw new IllegalStateException("Car cannot be null");
-        carDAO.add(car);
-
-
-    }
-
-    public void updateCar(Car carToUpdate) {
-
-        // Car to be canceled registration number
-        UUID registrationNumber = carToUpdate.getCarId();
-
-        for (int i = 0; i < this.carDAO.size(); i++) {
-
-            Car currentCar = this.carDAO.get(i);
-
-            // Match the current car with the registration number
-            if (currentCar != null && currentCar.getCarId().equals(registrationNumber)) {
-
-                // Replace the old object reference with the new
-                this.carDAO.set(i, carToUpdate);
-
-                // Stop searching once update is complete
-                return;
-            }
-        }
-
-        // Car not found
-        throw new CarNotFoundException(registrationNumber);
-    }
-
-    public List<Car> getCars() {
-        return new ArrayList<>(this.carDAO);
-    }
+    Optional<Car> findByCarId(UUID carId);
 
 }
