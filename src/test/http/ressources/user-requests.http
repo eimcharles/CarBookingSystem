@@ -39,7 +39,7 @@ GET http://localhost:8080/api/v1/users
 Accept: application/json
 
 ### Update Charles Eimer to Barry White
-PUT http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
+PATCH http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
 Content-Type: application/json
 
 {
@@ -50,7 +50,7 @@ Content-Type: application/json
 }
 
 ### Update Barry White email adress
-PUT http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
+PATCH http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
 Content-Type: application/json
 
 {
@@ -61,7 +61,7 @@ Content-Type: application/json
 }
 
 ### Doesn't update Barry White given empty feilds
-PUT http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
+PATCH http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
 Content-Type: application/json
 
 {
@@ -72,7 +72,7 @@ Content-Type: application/json
 }
 
 ### Partial Update only to Barry White phone number
-PUT http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
+PATCH http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
 Content-Type: application/json
 
 {
@@ -80,7 +80,7 @@ Content-Type: application/json
 }
 
 ### Partial Update only to Barry White email
-PUT http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
+PATCH http://localhost:8080/api/v1/users/a6079ab3-06ff-4983-af48-78b3ee4e2962
 Content-Type: application/json
 
 {

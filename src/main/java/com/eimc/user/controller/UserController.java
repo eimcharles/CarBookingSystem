@@ -84,7 +84,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/{userId}")
+    @PatchMapping("/{userId}")
     public ResponseEntity<HttpResponse> updateUserById(
             @PathVariable UUID userId,
             @RequestBody UserUpdateDTO request) {
@@ -100,7 +100,7 @@ public class UserController {
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
-                        .requestMethod(RequestMethod.PUT.name())
+                        .requestMethod(RequestMethod.PATCH.name())
                         .build()
         );
 
