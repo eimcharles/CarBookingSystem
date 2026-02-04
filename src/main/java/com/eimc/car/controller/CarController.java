@@ -29,6 +29,8 @@ public class CarController {
         Car car = request.toEntity();
         Car createdCar = carService.createCar(car);
 
+        /// TODO add a location header for newly created resource
+
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now())
