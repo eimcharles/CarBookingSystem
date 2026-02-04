@@ -59,9 +59,22 @@ public class CarController {
     }
 
     @GetMapping("/{carId}")
-    public ResponseEntity<?> getCarById(@PathVariable UUID carId){
-        ///  TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> getCarById(@PathVariable UUID carId){
+
+        Car car = carService.getCarByCarId(carId);
+
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("car", CarDTO.fromEntity(car)))
+                        .message("Car successfully retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequestUri().toUriString())
+                        .requestMethod(RequestMethod.GET.name())
+                        .build()
+        );
+
     }
 
     @PatchMapping("/{carId}")
