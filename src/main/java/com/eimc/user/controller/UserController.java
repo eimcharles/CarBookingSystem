@@ -1,11 +1,13 @@
 package com.eimc.user.controller;
 
 import com.eimc.common.domain.HttpResponse;
+import com.eimc.user.dto.UserPasswordUpdateDTO;
 import com.eimc.user.dto.UserRequestDTO;
 import com.eimc.user.dto.UserResponseDTO;
 import com.eimc.user.dto.UserUpdateDTO;
 import com.eimc.user.model.User;
 import com.eimc.user.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -104,6 +106,25 @@ public class UserController {
                         .build()
         );
 
+    }
+
+    @PatchMapping("/{userId}/password")
+    public ResponseEntity<HttpResponse> updatePasswordById(
+            @PathVariable UUID userId,
+            @RequestBody UserPasswordUpdateDTO request) {
+
+        userService.updatePassword(userId, request.oldPassword(), request.newPassword());
+
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .message("Password updated successfully")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.PATCH.name())
+                        .build()
+        );
     }
 
     @DeleteMapping("/{userId}")

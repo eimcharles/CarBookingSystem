@@ -1,5 +1,6 @@
 package com.eimc.user.service;
 
+import com.eimc.user.exception.PasswordMismatchException;
 import com.eimc.user.exception.UserNotFoundException;
 import com.eimc.user.model.User;
 import com.eimc.user.repository.UserRepository;
@@ -67,10 +68,27 @@ public class UserService {
                     Optional.ofNullable(user.getPhoneNumber()).filter(s -> !s.isBlank())
                             .ifPresent(existingUser::setPhoneNumber);
 
+                    ///  @Transactional manages the entity, to remove.
                     return userRepository.save(existingUser);
                 })
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
+    }
+
+    @Transactional
+    public void updatePassword(UUID userId, String oldPassword, String newPassword) {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        if (!user.getPassword().equals(oldPassword)) {
+            throw new PasswordMismatchException(userId);
+        }
+
+        ///  TODO: re- hash with Spring Security
+        user.setPassword(newPassword);
+
+        ///  @Transactional manages the entity, to remove.
+        userRepository.save(user);
     }
 
     @Transactional
