@@ -24,6 +24,30 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
+    public Car createCar(Car car) {
+        ///  TODO Add car validation
+        return carRepository.save(car);
+    }
+
+    public List<Car> getCars() {
+        return this.carRepository.findAll();
+    }
+
+    public Car getCarByCarId(UUID carId) {
+        return carRepository.findByCarId(carId)
+                .orElseThrow(() -> new CarNotFoundException(carId));
+    }
+
+    public Car updateCarById(){
+        ///  TODO: Implement Logic
+        return null;
+    }
+
+    public Car deleteCarById(UUID carId){
+        ///  TODO: Implement Logic
+        return null;
+    }
+
     @Transactional
     public void releaseCarFromBooking(UUID carId){
 
@@ -36,16 +60,6 @@ public class CarService {
         ///  @Transactional manages the entity, to remove.
         this.carRepository.save(carToRelease);
 
-    }
-
-    public Car getCarByCarId(UUID carId) {
-        ///  Retrieves car with matching registration number, throws CarNotFoundException if not found
-        return carRepository.findByCarId(carId)
-                .orElseThrow(() -> new CarNotFoundException(carId));
-    }
-
-    public List<Car> getCars() {
-        return this.carRepository.findAll();
     }
 
     public List<Car> getAllAvailableCars() {
