@@ -45,9 +45,23 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getUsers() {
-        /// TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> getUsers() {
+
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("users" ,userService.getUsers()
+                                .stream()
+                                .map(UserResponseDTO::from)
+                                .toList()))
+                        .message("Users retrieved successfully")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.GET.name())
+                        .build()
+        );
+
     }
 
     @GetMapping("/{userId}")
