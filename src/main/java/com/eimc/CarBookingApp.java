@@ -2,12 +2,12 @@ package com.eimc;
 
 import com.eimc.booking.BookingService;
 import com.eimc.booking.BookingRepository;
-import com.eimc.car.Car;
-import com.eimc.car.CarService;
-import com.eimc.car.CarRepository;
+import com.eimc.car.model.Car;
+import com.eimc.car.service.CarService;
+import com.eimc.car.repository.CarRepository;
 import com.eimc.booking.BookingNotFoundException;
-import com.eimc.car.CarNotFoundException;
-import com.eimc.car.CarUnavailableException;
+import com.eimc.car.exception.CarNotFoundException;
+import com.eimc.car.exception.CarUnavailableException;
 import com.eimc.user.exception.UserNotFoundException;
 import com.eimc.user.model.User;
 import org.springframework.boot.SpringApplication;

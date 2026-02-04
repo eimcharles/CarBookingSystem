@@ -1,4 +1,4 @@
-package com.eimc.car;
+package com.eimc.car.exception;
 
 import java.util.UUID;
 

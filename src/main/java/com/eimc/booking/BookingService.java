@@ -1,9 +1,9 @@
 package com.eimc.booking;
 
-import com.eimc.car.Car;
-import com.eimc.car.CarService;
-import com.eimc.car.CarNotFoundException;
-import com.eimc.car.CarUnavailableException;
+import com.eimc.car.model.Car;
+import com.eimc.car.service.CarService;
+import com.eimc.car.exception.CarNotFoundException;
+import com.eimc.car.exception.CarUnavailableException;
 import com.eimc.user.model.User;
 
 import java.time.LocalDateTime;

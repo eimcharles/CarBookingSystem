@@ -1,4 +1,4 @@
-package com.eimc.car;
+package com.eimc.car.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

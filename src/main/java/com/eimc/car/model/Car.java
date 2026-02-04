@@ -1,9 +1,10 @@
-package com.eimc.car;
+package com.eimc.car.model;
 
 /**
  *      Domain class for Car Object
  * */
 
+import com.eimc.car.model.enums.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 

@@ -1,4 +1,9 @@
-package com.eimc.car;
+package com.eimc.car.service;
+
+import com.eimc.car.model.Car;
+import com.eimc.car.exception.CarNotFoundException;
+import com.eimc.car.repository.CarRepository;
+import com.eimc.car.model.enums.FuelType;
 
 import java.util.List;
 import java.util.UUID;

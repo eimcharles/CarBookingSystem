@@ -1,4 +1,4 @@
-package com.eimc.car;
+package com.eimc.car.model.enums;
 
 public enum Model {
 

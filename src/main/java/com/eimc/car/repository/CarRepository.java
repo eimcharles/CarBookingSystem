@@ -1,4 +1,8 @@
-package com.eimc.car;
+package com.eimc.car.repository;
+
+import com.eimc.car.exception.CarNotFoundException;
+import com.eimc.car.model.Car;
+import com.eimc.car.model.enums.Model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

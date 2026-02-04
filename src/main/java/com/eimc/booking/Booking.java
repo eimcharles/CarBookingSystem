@@ -7,7 +7,7 @@ package com.eimc.booking;
  *
  * */
 
-import com.eimc.car.Car;
+import com.eimc.car.model.Car;
 import com.eimc.user.model.User;
 
 import java.time.LocalDateTime;
