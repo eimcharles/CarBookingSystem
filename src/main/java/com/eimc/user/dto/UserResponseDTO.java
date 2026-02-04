@@ -20,7 +20,9 @@ public record UserResponseDTO (
         LocalDateTime createdAt
 
 ) {
+
     public static UserResponseDTO from(User user) {
+
         return new UserResponseDTO(
 
                 user.getUserId(),

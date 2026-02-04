@@ -8,8 +8,4 @@ public class PasswordMismatchException extends RuntimeException {
         super(String.format("Current password does not match for user: %s", userId));
     }
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
 }

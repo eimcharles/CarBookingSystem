@@ -26,6 +26,7 @@ public class UserService {
     }
 
     public User createUser(User user) {
+        ///  TODO: Hash with Spring Security
         return userRepository.save(user);
     }
 
@@ -36,12 +37,10 @@ public class UserService {
     public User getUserById(UUID userId) {
         return this.userRepository.findByUserId(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
-
     }
 
     @Transactional
     public User updateUserById(UUID userId, User user){
-
         return userRepository.findByUserId(userId)
                 .map(existingUser -> {
 
@@ -72,7 +71,6 @@ public class UserService {
                     return userRepository.save(existingUser);
                 })
                 .orElseThrow(() -> new UserNotFoundException(userId));
-
     }
 
     @Transactional
@@ -84,9 +82,8 @@ public class UserService {
             throw new PasswordMismatchException(userId);
         }
 
-        ///  TODO: re- hash with Spring Security
+        ///  TODO: re-hash with Spring Security
         user.setPassword(newPassword);
-
         ///  @Transactional manages the entity, to remove.
         userRepository.save(user);
     }
@@ -98,4 +95,5 @@ public class UserService {
 
         userRepository.delete(user);
     }
+
 }

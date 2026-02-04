@@ -7,7 +7,6 @@ import com.eimc.user.dto.UserResponseDTO;
 import com.eimc.user.dto.UserUpdateDTO;
 import com.eimc.user.model.User;
 import com.eimc.user.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    ///  TODO add @Valid notation for UserRequestDTO payload
     @PostMapping
     public ResponseEntity<HttpResponse> createUser(@RequestBody UserRequestDTO request) {
 
@@ -86,6 +86,7 @@ public class UserController {
 
     }
 
+    ///  TODO add @Valid notation for UserUpdateDTO payload
     @PatchMapping("/{userId}")
     public ResponseEntity<HttpResponse> updateUserById(
             @PathVariable UUID userId,
@@ -108,6 +109,7 @@ public class UserController {
 
     }
 
+    ///  TODO add @Valid notation for UserPasswordUpdateDTO payload
     @PatchMapping("/{userId}/password")
     public ResponseEntity<HttpResponse> updatePasswordById(
             @PathVariable UUID userId,
