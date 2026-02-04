@@ -1,10 +1,16 @@
 package com.eimc.car.controller;
 
 import com.eimc.car.dto.CarDTO;
+import com.eimc.car.model.Car;
 import com.eimc.car.service.CarService;
+import com.eimc.common.domain.HttpResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -18,9 +24,23 @@ public class CarController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createCar(@RequestBody CarDTO request) {
-        ///  TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> createCar(@RequestBody CarDTO request) {
+
+        Car car = request.toEntity();
+        Car createdCar = carService.createCar(car);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("car" , CarDTO.fromEntity(createdCar)))
+                        .message("Car created successfully")
+                        .status(HttpStatus.CREATED)
+                        .statusCode(HttpStatus.CREATED.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.POST.name())
+                        .build()
+        );
+
     }
 
     @GetMapping

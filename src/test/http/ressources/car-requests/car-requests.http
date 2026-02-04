@@ -1,0 +1,13 @@
+### Create Volkswagen
+POST http://localhost:8080/api/v1/cars
+Content-Type: application/json
+
+{
+  "model": "TIGUAN",
+  "year": 2024,
+  "color": "Deep Black Pearl",
+  "horsepower": 184,
+  "transmission": "AUTOMATIC",
+  "fuelType": "GASOLINE",
+  "rentalPricePerDay": 85.00
+}
