@@ -33,6 +33,8 @@ public class UserController {
         User user = request.toEntity();
         User createdUser = userService.createUser(user);
 
+        /// TODO add a location header for newly created resource
+
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now())
