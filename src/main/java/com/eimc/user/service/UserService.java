@@ -27,6 +27,7 @@ public class UserService {
 
     public User createUser(User user) {
         ///  TODO: Hash with Spring Security
+        ///  TDOD: Add user validation
         return userRepository.save(user);
     }
 
