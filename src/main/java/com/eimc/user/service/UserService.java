@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -38,8 +39,38 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(){
-        ///  TODO: Implement Logic
+    public User updateUserById(UUID userId, User user){
+
+        return userRepository.findByUserId(userId)
+                .map(existingUser -> {
+
+                    /**
+                     *      Performs partial or full updates on the user entity.
+                     *
+                     *      Only updates the fields that are present in the request
+                     *      and not blank:
+                     *
+                     *      - Check if the field is present in the JSON object,
+                     *      - Ensure the value to be updated is not an empty String or blank,
+                     *      - if both conditions are met, update the given field
+                     * */
+
+                    Optional.ofNullable(user.getFirstName()).filter(s -> !s.isBlank())
+                            .ifPresent(existingUser::setFirstName);
+
+                    Optional.ofNullable(user.getLastName()).filter(s -> !s.isBlank())
+                            .ifPresent(existingUser::setLastName);
+
+                    Optional.ofNullable(user.getEmail()).filter(s -> !s.isBlank())
+                            .ifPresent(existingUser::setEmail);
+
+                    Optional.ofNullable(user.getPhoneNumber()).filter(s -> !s.isBlank())
+                            .ifPresent(existingUser::setPhoneNumber);
+
+                    return userRepository.save(existingUser);
+                })
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
     }
 
     @Transactional

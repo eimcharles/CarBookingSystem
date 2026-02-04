@@ -3,6 +3,7 @@ package com.eimc.user.controller;
 import com.eimc.common.domain.HttpResponse;
 import com.eimc.user.dto.UserRequestDTO;
 import com.eimc.user.dto.UserResponseDTO;
+import com.eimc.user.dto.UserUpdateDTO;
 import com.eimc.user.model.User;
 import com.eimc.user.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<HttpResponse> createUser(@RequestBody UserRequestDTO request) {
 
-        User userEntity = request.toEntity();
-        User createdUser = userService.createUser(userEntity);
+        User user = request.toEntity();
+        User createdUser = userService.createUser(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 HttpResponse.builder()
@@ -50,7 +51,7 @@ public class UserController {
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("users" ,userService.getUsers()
+                        .data(Map.of("users" , userService.getUsers()
                                 .stream()
                                 .map(UserResponseDTO::from)
                                 .toList()))
@@ -84,9 +85,25 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<?> updateUser(@PathVariable UUID userId, @RequestBody User user) {
-        ///  TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> updateUserById(
+            @PathVariable UUID userId,
+            @RequestBody UserUpdateDTO request) {
+
+        User user = request.toEntity();
+        User updatedUser = userService.updateUserById(userId, user);
+
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("user", UserResponseDTO.from(updatedUser)))
+                        .message("User updated successfully")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.PUT.name())
+                        .build()
+        );
+
     }
 
     @DeleteMapping("/{userId}")
