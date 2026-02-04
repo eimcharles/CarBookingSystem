@@ -1,6 +1,6 @@
 package com.eimc.user.controller;
 
-import com.eimc.common.HttpResponse;
+import com.eimc.common.domain.HttpResponse;
 import com.eimc.user.dto.UserRequestDTO;
 import com.eimc.user.dto.UserResponseDTO;
 import com.eimc.user.model.User;
@@ -76,9 +76,21 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
-        /// TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> deleteUserById(@PathVariable UUID userId) {
+
+        userService.deleteUserById(userId);
+
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .message("User deleted successfully")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.DELETE.name())
+                        .build()
+        );
+
     }
 
 }
