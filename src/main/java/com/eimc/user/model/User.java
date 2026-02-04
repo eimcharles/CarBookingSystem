@@ -1,5 +1,6 @@
 package com.eimc.user.model;
 
+import com.eimc.user.model.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 

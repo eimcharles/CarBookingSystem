@@ -1,7 +1,7 @@
 package com.eimc.user.dto;
 
 import com.eimc.user.model.User;
-import com.eimc.user.model.UserRole;
+import com.eimc.user.model.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;

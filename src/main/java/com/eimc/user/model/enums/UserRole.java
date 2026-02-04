@@ -1,4 +1,4 @@
-package com.eimc.user.model;
+package com.eimc.user.model.enums;
 
 public enum UserRole {
 
