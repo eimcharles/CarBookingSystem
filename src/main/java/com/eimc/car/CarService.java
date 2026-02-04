@@ -1,13 +1,13 @@
 package com.eimc.car;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  *      Service class for managing Car objects.
  *      Contains business logic related to cars.
  *
  *      TODO fix Car Service business logic for Spring Boot
- *
  */
 
 public class CarService {
@@ -18,7 +18,7 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public void cancelAssociatedCarToActiveBookingByRegistrationNumber(String registrationNumber){
+    public void cancelAssociatedCarToActiveBookingByRegistrationNumber(UUID registrationNumber){
 
         /// Fetch Car to be put back in inventory
         Car carToRelease = getCarByRegistrationNumber(registrationNumber);
@@ -31,10 +31,10 @@ public class CarService {
 
     }
 
-    public Car getCarByRegistrationNumber(String registrationNumber) {
+    public Car getCarByRegistrationNumber(UUID registrationNumber) {
         ///  Retrieves car with matching registration number, throws CarNotFoundException if not found
         return getCars().stream()
-                .filter(car -> car.getRegistrationNumber().equals(registrationNumber))
+                .filter(car -> car.getCarId().equals(registrationNumber))
                 .findFirst()
                 .orElseThrow(() -> new CarNotFoundException(registrationNumber));
     }

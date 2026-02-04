@@ -68,7 +68,7 @@ public class CarBookingApp {
             user.setUserId(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"));
 
             // Attempt to create the booking by associating the user and car registration
-            UUID userBookingID = bookingService.addCarBookingByUserAndRegistrationNumber(user, "123_4");
+            UUID userBookingID = bookingService.addCarBookingByUserAndRegistrationNumber(user, UUID.fromString("a6079ab3-06ff-4983-af48-78b3ee4e2962"));
             // Display booking success message
             System.out.println("Successfully created a car booking for " + user.getFirstName() + " with booking id: " + userBookingID + ".");
 

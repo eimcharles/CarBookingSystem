@@ -2,89 +2,190 @@ package com.eimc.car;
 
 /**
  *      Domain class for Car Object
- *
- *      TODO fix Car entity model for Spring Boot
-
  * */
 
-import java.math.BigDecimal;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
+import java.util.UUID;
+
+@Entity
+@Table(name = "cars")
 public class Car {
 
-    private String registrationNumber;
-    private BigDecimal rentalPricePerDay;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private UUID carId;
+
+    @Enumerated(EnumType.STRING)
     private Brand brand;
+
+    @Enumerated(EnumType.STRING)
+    private Model model;
+
+    private Integer year;
+    private String color;
+    private Integer horsepower;
+
+    @Enumerated(EnumType.STRING)
+    private Transmission transmission;
+
+    @Enumerated(EnumType.STRING)
     private FuelType fuelType;
-    private boolean isCarBooked;
 
-    public Car(String registrationNumber, BigDecimal rentalPricePerDay, Brand brand, FuelType fuelType) {
-        this.registrationNumber = registrationNumber;
+    @Enumerated(EnumType.STRING)
+    private CarStatus status;
+
+    private BigDecimal rentalPricePerDay;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime createdAt;
+
+    public Car() {}
+
+    public Car(UUID carId, Model model, BigDecimal rentalPricePerDay) {
+        this.carId = carId;
+        this.setModel(model);
         this.rentalPricePerDay = rentalPricePerDay;
-        this.brand = brand;
-        this.fuelType = fuelType;
-        this.isCarBooked = false;
+        this.status = CarStatus.AVAILABLE;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
+    @PrePersist
+    public void prePersist() {
+        if (this.carId == null) this.carId = UUID.randomUUID();
+        this.createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+    public void setModel(Model model) {
+        this.model = model;
+        if (model != null) {
+            this.brand = model.getBrand();
+        }
     }
 
-    public BigDecimal getRentalPricePerDay() {
-        return rentalPricePerDay;
+    public boolean isCarBooked() {
+        return this.status.isBooked();
+    }
+
+    public void setCarBooked(boolean carBooked) {
+        if (carBooked) {
+            this.status = CarStatus.BOOKED;
+        } else {
+            this.status = CarStatus.AVAILABLE;
+        }
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCarId(UUID carId) {
+        this.carId = carId;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setHorsepower(Integer horsepower) {
+        this.horsepower = horsepower;
+    }
+
+    public void setTransmission(Transmission transmission) {
+        this.transmission = transmission;
+    }
+
+    public void setStatus(CarStatus status) {
+        this.status = status;
     }
 
     public void setRentalPricePerDay(BigDecimal rentalPricePerDay) {
         this.rentalPricePerDay = rentalPricePerDay;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UUID getCarId() {
+        return carId;
+    }
+
     public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public Model getModel() {
+        return model;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Integer getHorsepower() {
+        return horsepower;
+    }
+
+    public Transmission getTransmission() {
+        return transmission;
     }
 
     public FuelType getFuelType() {
         return fuelType;
     }
 
+    public CarStatus getStatus() {
+        return status;
+    }
+
+    public BigDecimal getRentalPricePerDay() {
+        return rentalPricePerDay;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
-    }
-
-    public boolean isElectric() { return this.fuelType == FuelType.ELECTRIC; }
-
-    public boolean isGasoline() { return this.fuelType == FuelType.GASOLINE; }
-
-    public boolean isCarBooked() {
-        return isCarBooked;
-    }
-
-    public void setCarBooked(boolean carBooked) {
-        this.isCarBooked = carBooked;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(registrationNumber, car.registrationNumber);
+        return Objects.equals(carId, car.carId);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNumber);
+        return Objects.hash(carId);
     }
 
     @Override
     public String toString() {
-        return "Car { registrationNumber = '%s' , rentalPricePerDay = %s , manufacturer = %s, fuelType = %s, isCarBooked = %b}".formatted(registrationNumber, rentalPricePerDay, brand, fuelType, isCarBooked);
+        return "Car {id = %d, carId = %s, model = %s %s}"
+                .formatted(id, carId, brand, model);
     }
 }

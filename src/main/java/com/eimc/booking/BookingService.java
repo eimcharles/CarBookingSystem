@@ -34,7 +34,7 @@ public class BookingService {
      *      number sets its state to active.
      */
 
-    public UUID addCarBookingByUserAndRegistrationNumber(User user, String registrationNumber) {
+    public UUID addCarBookingByUserAndRegistrationNumber(User user, UUID registrationNumber) {
 
         /// Check if the car is available for booking by registration number
         Car carToBook = getAvailableCarForBookingByRegistrationNumber(registrationNumber);
@@ -69,7 +69,7 @@ public class BookingService {
      *      @throws CarUnavailableException if the car does not exist in the system.
      */
 
-    public Car getAvailableCarForBookingByRegistrationNumber(String registrationNumber) {
+    public Car getAvailableCarForBookingByRegistrationNumber(UUID registrationNumber) {
 
         /// Get the car by registration number
         Car carToBook = this.carService.getCarByRegistrationNumber(registrationNumber);
@@ -96,7 +96,7 @@ public class BookingService {
         Booking bookingToCancel = getBookingByBookingId(validatedBookingId);
 
         /// Release the car
-        this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getRegistrationNumber());
+        this.carService.cancelAssociatedCarToActiveBookingByRegistrationNumber(bookingToCancel.getCar().getCarId());
 
         ///  Change the booking state to inactive
         bookingToCancel.cancelBooking();

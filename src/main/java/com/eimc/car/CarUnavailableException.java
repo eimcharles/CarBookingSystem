@@ -1,28 +1,12 @@
 package com.eimc.car;
 
-/**
- *      CarUnavailableException class throws
- *      a custom exception when a
- *      request is made for a Car that
- *      is currently booked.
- * */
+import java.util.UUID;
 
 public class CarUnavailableException extends RuntimeException {
 
-    /**
-     *   Constructs a new CarUnavailableException
-     *   with a detailed message indicating
-     *   the registration number for the car
-     *   that is currently booked.
-     * */
-
-    public CarUnavailableException(String registrationNumber) {
-        super(String.format("Car with registration number '%s' is currently booked and unavailable.", registrationNumber));
+    public CarUnavailableException(UUID carId) {
+        super(String.format("Car with registration number '%s' is currently booked and unavailable.", carId));
     }
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
 }
 

@@ -3,6 +3,7 @@ package com.eimc.car;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CarRepository {
 
@@ -11,7 +12,7 @@ public class CarRepository {
     public CarRepository() {
 
         // Car available for booking
-        addCar(new Car("123_4", new BigDecimal("49.00"), Brand.HONDA, FuelType.ELECTRIC));
+        addCar(new Car(UUID.fromString("a6079ab3-06ff-4983-af48-78b3ee4e2962"), Model.TIGUAN, new BigDecimal("49.00")));
 
     }
 
@@ -27,14 +28,14 @@ public class CarRepository {
     public void updateCar(Car carToUpdate) {
 
         // Car to be canceled registration number
-        String registrationNumber = carToUpdate.getRegistrationNumber();
+        UUID registrationNumber = carToUpdate.getCarId();
 
         for (int i = 0; i < this.carDAO.size(); i++) {
 
             Car currentCar = this.carDAO.get(i);
 
             // Match the current car with the registration number
-            if (currentCar != null && currentCar.getRegistrationNumber().equals(registrationNumber)) {
+            if (currentCar != null && currentCar.getCarId().equals(registrationNumber)) {
 
                 // Replace the old object reference with the new
                 this.carDAO.set(i, carToUpdate);
