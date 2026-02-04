@@ -1,28 +1,59 @@
 package com.eimc.car.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.eimc.car.dto.CarDTO;
+import com.eimc.car.service.CarService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1/cars")
 public class CarController {
 
+    private final CarService carService;
+
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createCar(@RequestBody CarDTO request) {
+        ///  TODO: Implement Logic
+        return null;
+    }
+
+    @GetMapping
+
     /**
-     *      TODO implement Car Controller
-     *
-     *      CarController Class
-     *
-     *      CRUD ENDPOINT - CREATE CAR
-     *
-     *      CRUD ENDPOINT - UPDATE CAR
-     *
-     *      CRUD ENDPOINT - DELETE CAR
-     *
-     *      CRUD ENDPOINT - GET CARS
-     *
-     *      CRUD ENDPOINT - GET CAR BY ID
-     *
-     *      CRUD ENDPOINT - GET GAS CARS
-     *
-     *      CRUD ENDPOINT - GET ELECTRIC CARS
-     */
+     *      Use requestParams
+     *      to get the cars by
+     *      fuel type (Gas, Electric)
+     * */
+
+    public ResponseEntity<?> getCars(){
+        ///  TODO: Implement Logic
+        return null;
+    }
+
+    @GetMapping("/{carId}")
+    public ResponseEntity<?> getCarById(@PathVariable UUID carId){
+        ///  TODO: Implement Logic
+        return null;
+    }
+
+    @PatchMapping("/{carId}")
+    public ResponseEntity<?> updateCarById(
+            @PathVariable UUID carId,
+            @RequestBody CarDTO request){
+        ///  TODO: Implement Logic
+        return null;
+    }
+
+    @DeleteMapping("/{carId}")
+    public ResponseEntity<?> deleteCarById(@PathVariable UUID carId){
+        ///  TODO: Implement Logic
+        return null;
+    }
 
 }
