@@ -39,8 +39,13 @@ public class CarService {
                 .orElseThrow(() -> new CarNotFoundException(carId));
     }
 
-    public void updateCarById(){
-        ///  TODO: Implement Logic
+    @Transactional
+    public void updateCarById(UUID carId, Car car){
+        ///  TODO: check the user role, if admin can update
+        ///  TODO: check if the car exists, if exist move to state check
+        ///  TODO: check if the car is reserved or booked, if reserved cannot update
+        ///  TODO: if car is not booked or reserved, can update all fields.
+        ///  TODO: finalize update
     }
 
     @Transactional
