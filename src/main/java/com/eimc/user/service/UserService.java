@@ -91,8 +91,10 @@ public class UserService {
 
     @Transactional
     public void deleteUserById(UUID userId) {
-        User user = userRepository.findByUserId(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+        User user = getUserById(userId);
+
+        ///  TODO check if the user is an admin
+        ///  TODO check if the user has active bookings
 
         userRepository.delete(user);
     }
