@@ -26,7 +26,10 @@ public class CarService {
     }
 
     public Car createCar(Car car) {
-        ///  TODO Add car validation
+        ///  TODO: check the user role, if admin can create
+        ///  TODO: validate incoming data for creation
+        ///  TODO: check existence (internal id)
+        ///  TODO: create car
         return carRepository.save(car);
     }
 
