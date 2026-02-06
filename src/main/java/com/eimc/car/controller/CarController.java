@@ -86,9 +86,21 @@ public class CarController {
     }
 
     @DeleteMapping("/{carId}")
-    public ResponseEntity<?> deleteCarById(@PathVariable UUID carId){
-        ///  TODO: Implement Logic
-        return null;
+    public ResponseEntity<HttpResponse> deleteCarById(@PathVariable UUID carId){
+
+        carService.deleteCarById(carId);
+
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .message("Car deleted successfully")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.DELETE.name())
+                        .build()
+        );
+
     }
 
 }
