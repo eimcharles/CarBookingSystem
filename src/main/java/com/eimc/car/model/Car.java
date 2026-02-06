@@ -30,6 +30,7 @@ public class Car {
     private Brand brand;
 
     @Enumerated(EnumType.STRING)
+    /// TODO: look at potentially changing the model from enum to string
     private Model model;
 
     private Integer year;
