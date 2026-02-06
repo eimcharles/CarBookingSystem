@@ -42,36 +42,34 @@ public class UserService {
 
     @Transactional
     public User updateUserById(UUID userId, User user){
-        return userRepository.findByUserId(userId)
-                .map(existingUser -> {
+        User existingUser = getUserById(userId);
 
-                    /**
-                     *      Performs partial or full updates on the user entity.
-                     *
-                     *      Only updates the fields that are present in the request
-                     *      and not blank:
-                     *
-                     *      - Check if the field is present in the JSON object,
-                     *      - Ensure the value to be updated is not an empty String or blank,
-                     *      - if both conditions are met, update the given field
-                     * */
+        /**
+         *      Performs partial or full updates on the user entity.
+         *
+         *      Only updates the fields that are present in the request
+         *      and not blank:
+         *
+         *      - Check if the field is present in the JSON object,
+         *      - Ensure the value to be updated is not an empty String or blank,
+         *      - if both conditions are met, update the given field
+         * */
 
-                    Optional.ofNullable(user.getFirstName()).filter(s -> !s.isBlank())
-                            .ifPresent(existingUser::setFirstName);
+        Optional.ofNullable(user.getFirstName()).filter(s -> !s.isBlank())
+                .ifPresent(existingUser::setFirstName);
 
-                    Optional.ofNullable(user.getLastName()).filter(s -> !s.isBlank())
-                            .ifPresent(existingUser::setLastName);
+        Optional.ofNullable(user.getLastName()).filter(s -> !s.isBlank())
+                .ifPresent(existingUser::setLastName);
 
-                    Optional.ofNullable(user.getEmail()).filter(s -> !s.isBlank())
-                            .ifPresent(existingUser::setEmail);
+        Optional.ofNullable(user.getEmail()).filter(s -> !s.isBlank())
+                .ifPresent(existingUser::setEmail);
 
-                    Optional.ofNullable(user.getPhoneNumber()).filter(s -> !s.isBlank())
-                            .ifPresent(existingUser::setPhoneNumber);
+        Optional.ofNullable(user.getPhoneNumber()).filter(s -> !s.isBlank())
+                .ifPresent(existingUser::setPhoneNumber);
 
-                    ///  @Transactional manages the entity, to remove.
-                    return userRepository.save(existingUser);
-                })
-                .orElseThrow(() -> new UserNotFoundException(userId));
+        ///  @Transactional manages the entity, to remove.
+        return userRepository.save(existingUser);
+
     }
 
     @Transactional
