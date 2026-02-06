@@ -2,8 +2,7 @@
 
 ---
 ### [Release 1](https://github.com/eimcharles/CarBookingSystem/releases/tag/v1.0.0)</br>
-#### [**Release 1: Maven CLI application focused on core business logic, layered architecture, and dependency injection.**](releaseDocs/releaseOneDocs/README.md) </br>
-####  Demo 1 (Coming soon) 🚀 <br>
+#### [**Maven CLI application focused on core business logic, layered architecture, and dependency injection.**](releaseDocs/releaseOneDocs/README.md) </br>
 <img width="1148" height="716" alt="Screenshot 2025-12-20 at 4 32 11 PM" src="https://github.com/user-attachments/assets/7946aaad-8cce-4f23-b979-d9e8ad60d673" /></br>
 
 ![Java](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white)
@@ -12,8 +11,8 @@
 
 ---
 
-### 🚫 Release 2 (In Progress 🚀)
-#### [**Release 2: Spring Boot modernization to support persistent storage, security, and web-integration.**](releaseDocs/releaseTwoDocs/README.md) </br>
+### Release 2 (In Progress 🚀)
+#### [**Spring Boot modernization to support persistent storage, security, and web-integration.**](releaseDocs/releaseTwoDocs/README.md) </br>
 
 ![Java](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white)
 ![Java Streams](https://img.shields.io/badge/Java-Streams_API-FFD166?logo=openjdk&logoColor=black)
