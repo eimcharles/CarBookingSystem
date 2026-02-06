@@ -76,8 +76,7 @@ public class UserService {
 
     @Transactional
     public void updatePassword(UUID userId, String oldPassword, String newPassword) {
-        User user = userRepository.findByUserId(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+        User user = getUserById(userId);
 
         if (!user.getPassword().equals(oldPassword)) {
             throw new PasswordMismatchException(userId);
