@@ -46,16 +46,27 @@ public class CarController {
     }
 
     @GetMapping
+    public ResponseEntity<HttpResponse> getCars(){
 
-    /**
-     *      Use requestParams
-     *      to get the cars by
-     *      fuel type (Gas, Electric)
-     * */
+        ///  TODO: Implement Logic for filtering using request
+        ///  TODO: Look into pagination as fleet grows
 
-    public ResponseEntity<?> getCars(){
-        ///  TODO: Implement Logic
-        return null;
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("cars" , carService.getCars()
+                                .stream()
+                                .map(CarDTO::fromEntity)
+                                .toList()))
+                        .message("Cars retrieved successfully")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .path(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())
+                        .requestMethod(RequestMethod.GET.name())
+                        .build()
+
+        );
+
     }
 
     @GetMapping("/{carId}")
