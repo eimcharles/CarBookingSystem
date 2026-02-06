@@ -1,5 +1,6 @@
 package com.eimc.car.service;
 
+import com.eimc.car.exception.CarCurrentlyBookedException;
 import com.eimc.car.model.Car;
 import com.eimc.car.exception.CarNotFoundException;
 import com.eimc.car.repository.CarRepository;
@@ -38,14 +39,18 @@ public class CarService {
                 .orElseThrow(() -> new CarNotFoundException(carId));
     }
 
-    public Car updateCarById(){
+    public void updateCarById(){
         ///  TODO: Implement Logic
-        return null;
     }
 
-    public Car deleteCarById(UUID carId){
-        ///  TODO: Implement Logic
-        return null;
+    @Transactional
+    public void deleteCarById(UUID carId){
+        Car car = getCarByCarId(carId);
+
+        if (car.isCarBooked())
+            throw new CarCurrentlyBookedException(carId);
+
+        carRepository.delete(car);
     }
 
     @Transactional
