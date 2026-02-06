@@ -33,8 +33,10 @@ User Management: user accounts, manage profiles, and view all registered users.<
 ## Important Files Release 2
 | File path with clickable link | Purpose (1 line description) |
 |------|------------|
-|[../src/main/java/com/eimc/booking/BookingService.java](../../src/main/java/com/eimc/booking/BookingService.java) |Contains business logic related to bookings |
-|[../src/main/java/com/eimc/car/CarService.java](../../src/main/java/com/eimc/car/CarService.java)|Contains business logic related to cars |
-|[../src/main/java/com/eimc/user/UserService.java](../../src/main/java/com/eimc/user/UserService.java)| Contains business  logic related to users |
+|[../src/main/java/com/eimc/car/controller/CarController.java](../../src/main/java/com/eimc/car/controller/CarController.java)|Handles car inventory and operations|
+|[../src/main/java/com/eimc/user/controller/UserController.java](../../src/main/java/com/eimc/user/controller/UserController.java)|Handles user registration and profile management|
+|[../src/main/java/com/eimc/booking/BookingService.java](../../src/main/java/com/eimc/booking/BookingService.java) | Manages business logic for creating and updating reservations |
+|[../src/main/java/com/eimc/car/CarService.java](../../src/main/java/com/eimc/car/CarService.java)|Manages business logic for car availability |
+|[../src/main/java/com/eimc/user/UserService.java](../../src/main/java/com/eimc/user/UserService.java)| Manages business logic for user authentication |
 
 
