@@ -1,4 +1,7 @@
-package com.eimc.booking;
+package com.eimc.booking.repository;
+
+import com.eimc.booking.exception.BookingNotFoundException;
+import com.eimc.booking.model.Booking;
 
 import java.util.ArrayList;
 import java.util.List;

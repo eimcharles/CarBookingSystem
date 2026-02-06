@@ -1,4 +1,4 @@
-package com.eimc.booking;
+package com.eimc.booking.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

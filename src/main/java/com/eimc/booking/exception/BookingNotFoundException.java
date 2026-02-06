@@ -1,4 +1,4 @@
-package com.eimc.booking;
+package com.eimc.booking.exception;
 
 import java.util.UUID;
 

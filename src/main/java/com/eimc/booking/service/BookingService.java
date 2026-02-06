@@ -1,5 +1,8 @@
-package com.eimc.booking;
+package com.eimc.booking.service;
 
+import com.eimc.booking.exception.BookingNotFoundException;
+import com.eimc.booking.model.Booking;
+import com.eimc.booking.repository.BookingRepository;
 import com.eimc.car.model.Car;
 import com.eimc.car.service.CarService;
 import com.eimc.car.exception.CarNotFoundException;

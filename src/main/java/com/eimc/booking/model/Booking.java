@@ -1,4 +1,4 @@
-package com.eimc.booking;
+package com.eimc.booking.model;
 
 /**
  *      Domain class for Booking Object

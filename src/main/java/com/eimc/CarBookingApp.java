@@ -1,11 +1,8 @@
 package com.eimc;
 
-import com.eimc.booking.BookingService;
-import com.eimc.booking.BookingRepository;
+import com.eimc.booking.service.BookingService;
 import com.eimc.car.model.Car;
-import com.eimc.car.service.CarService;
-import com.eimc.car.repository.CarRepository;
-import com.eimc.booking.BookingNotFoundException;
+import com.eimc.booking.exception.BookingNotFoundException;
 import com.eimc.car.exception.CarNotFoundException;
 import com.eimc.car.exception.CarUnavailableException;
 import com.eimc.user.exception.UserNotFoundException;
