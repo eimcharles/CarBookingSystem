@@ -22,6 +22,9 @@ public class User {
     private Long id;
     private UUID userId;
 
+    /// TODO: add an imageUrl for the user profile
+    /// TODO: add a bookings list for user
+
     private String firstName;
     private String lastName;
     private String email;
