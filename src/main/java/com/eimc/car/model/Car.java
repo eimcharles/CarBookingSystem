@@ -24,6 +24,8 @@ public class Car {
 
     private UUID carId;
 
+    /// TODO: add an imageUrl for the car profile
+
     @Enumerated(EnumType.STRING)
     private Brand brand;
 
